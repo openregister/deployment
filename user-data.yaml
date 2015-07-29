@@ -12,6 +12,46 @@ packages:
 
 package_upgrade: true
 
+write_files:
+- path: /etc/docker-compose.yml.template
+  content: |
+    zookeeper:
+      image: wurstmeister/zookeeper:latest
+      ports:
+        - "2181:2181"
+        - "2888:2888"
+        - "3888:3888"
+
+    kafka:
+      restart: always
+      image: wurstmeister/kafka
+      ports:
+        - "9092:9092"
+      links:
+        - zookeeper
+      environment:
+        BROKER_ID: 1
+        PORT: 9092
+        KAFKA_ADVERTISED_HOST_NAME: __KAFKA_ADVERTISED_HOST_NAME__
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper
+        KAFKA_CREATE_TOPICS: "register:1:1"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+
+- path: /usr/local/bin/start-docker
+  permissions: '0755'
+  content: |
+    #!/bin/bash
+
+    export cip="$(ifconfig |egrep -C1 'eth0[ \t]' | tail -1 | sed 's/[ \t]\{1,\}/|/g'|cut -d\| -f3 | cut -d\: -f2)"
+    cat /etc/docker-compose.yml.template | \
+      sed -e 's/__KAFKA_ADVERTISED_HOST_NAME__/'$cip'/g' \
+      > /etc/docker-compose.yml
+
+    /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d
+
 runcmd:
   - [ service, docker, start ]
   - [ pip, install, docker-compose ]
+  - [ /usr/local/bin/start-docker ]
+  - [ usermod, -aG, docker, philandstuff ]
