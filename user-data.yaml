@@ -6,7 +6,10 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsYvhPkvKma2RwWVwUNJ2fcoNjlObibUka0fl5WcctTokz8RISDkOAPjz+L0QmGsq/Dhgn/mbspKFyNKvQsujeooEpaO+cjYPXoUF1NTxhbUrMEu2uE+CPoj4zPbAZ9A6LdxkL13F3gJwZi9k8K9+6AnJeB4IrCLS5KHRiL+tBZMLPvKnn54M6PCfkWJH6zVO92plFTpRX1W4GanUwYGTemFX0qUwFgZu9OJvGiR+ZQKJMQ2Y3O+IMHv1KusfBrO+Q4iWn+A5VcJRoxml3lr0fYlbaetCpszkaY5HbQsLPDGtvsN1jXj2ghVe2ZbK8SKe13g+LSqYxmIX5qCAoEi+J philip.potter@digital.cabinet-office.gov.uk
     sudo: ALL=(ALL) NOPASSWD:ALL
-
+  - name: saqib
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfZisVyptJmSpLcHEA2Rgg/+WdDSpSkJObD0duOsU95bbFONZ6KEtaClDqpEKiM2lv/gWNG71rkH9Bx+AgJWsmKGVTipacCjPEpfXSvsFPauPVuCY8K+UWxgWxo2Ny34Zu684r1SSR9hmJX/7rtExtEcZKL8NxGWvIhwoXWC20pkp4BCd4o6YxAWTSdXodJXlsHrqu2iEZeAcYPUSg5eBrKyAAoQ8QLbkcmZ05HVhHjDal9mjDMwPq67t9/TpH6/1Rg5kt9TXaSHTRqi1pFk0iXBlNBvWjx7evxhFZVmsgpI+Xz+3lChcNpCKpO9feNx5rb/kMvuQu9p8EK8Xlk/BG+SWbCy20vpUzbB6o4rGnYm3PbQCWoQ3DsZgdW9n6YVTpZXYxjZ7dyA9WSL6/W4NgXfDrSkc4NwNyy+xzBo6+BOup32iTiCkXsTzX1XPcQjWLAeseX+F+zniv0BTZyvtfpWbkkljJuT7AHNKjr/QKjUNQt6V1pW44CNBmMjxXRdDd/vBVLxsJWEOD2k7/IkPA7xFhUUHfTpPrhcxDAsmXXHmFqWd+JE5YAS/DSH3IMCypSXooapxAEWe/WrcPGxuBZCDvZfosXUudbO20aF3sN/AWuHbhaNnfLaZAG/fkBZ0yOJCYeSa73O7e7emcG3q49ehOpBOjrOjj+JD7FoN+YQ== ssaleem@equalexperts.com
+    sudo: ALL=(ALL) NOPASSWD:ALL
 packages:
   - docker
 
