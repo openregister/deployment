@@ -13,6 +13,15 @@ on it, then ssh to it and run:
         --link etc_kafka_1:kafka \
         jstepien/openjdk8 java -jar /srv/mint/mint.jar
 
+
+To deploy presentation to this environment, first copy presentation.jar to /srv/presentation
+on it, then ssh to it and run:
+    docker run --volume /home/saqib:/srv/presentation \
+        --link etc_kafka_1:kafka \
+        --link etc_zookeeper_1:zookeeper \
+        --link etc_postgres_1:postgres \
+        jstepien/openjdk8 java -jar /srv/presentation/presentation.jar server /srv/presentation/config.yaml
+
 ## Requirements
 
 This depends on the [AWS CLI][].
