@@ -45,6 +45,7 @@ write_files:
     postgres:
       image: postgres:9.4
       environment:
+        POSTGRES_USER: postgres
         POSTGRES_PASSWORD: '%PGPASSWD%'
 
 - path: /usr/local/bin/start-docker
