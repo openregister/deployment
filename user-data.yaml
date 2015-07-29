@@ -8,7 +8,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
   - name: saqib
     ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfZisVyptJmSpLcHEA2Rgg/+WdDSpSkJObD0duOsU95bbFONZ6KEtaClDqpEKiM2lv/gWNG71rkH9Bx+AgJWsmKGVTipacCjPEpfXSvsFPauPVuCY8K+UWxgWxo2Ny34Zu684r1SSR9hmJX/7rtExtEcZKL8NxGWvIhwoXWC20pkp4BCd4o6YxAWTSdXodJXlsHrqu2iEZeAcYPUSg5eBrKyAAoQ8QLbkcmZ05HVhHjDal9mjDMwPq67t9/TpH6/1Rg5kt9TXaSHTRqi1pFk0iXBlNBvWjx7evxhFZVmsgpI+Xz+3lChcNpCKpO9feNx5rb/kMvuQu9p8EK8Xlk/BG+SWbCy20vpUzbB6o4rGnYm3PbQCWoQ3DsZgdW9n6YVTpZXYxjZ7dyA9WSL6/W4NgXfDrSkc4NwNyy+xzBo6+BOup32iTiCkXsTzX1XPcQjWLAeseX+F+zniv0BTZyvtfpWbkkljJuT7AHNKjr/QKjUNQt6V1pW44CNBmMjxXRdDd/vBVLxsJWEOD2k7/IkPA7xFhUUHfTpPrhcxDAsmXXHmFqWd+JE5YAS/DSH3IMCypSXooapxAEWe/WrcPGxuBZCDvZfosXUudbO20aF3sN/AWuHbhaNnfLaZAG/fkBZ0yOJCYeSa73O7e7emcG3q49ehOpBOjrOjj+JD7FoN+YQ== ssaleem@equalexperts.com
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD5aDi2lDkt+iDrlfcGEZqeky1b6S5fMOyignwkcELq3IHZp8xtXrdhYiYHaLXL01ty4WVZcN50b4Mzj9AR7pI9ndjzvleBMsz7CSz15xoabgpt+4b2a/9bF24wm1bD57LKgoMUZwgpCX/8oHHXPSm6hO15CqZ9F006lRgaYfptclpNSrsXpTpUwTRmFDe4RdB32ORWdxzNeXWT+Uzepgi4f/bbs3cKsTJ8d+XZPlGMwaB3vTXpUxSERk4ZZSub37UKjIEqK7DcD2SjA2NAcngCvgL3iUIY/+o0J0/lm6B3rGID92piAmSr6OI4ixRcJ9168aqWGhy0QhWQMngP6HPUT9mehP/BL+h7ut+VVrEQVGVTf1xHGvojcwyq6JTL+jE093xK8FqwgPU2H2Vefo5vHGfcajGWJWDgFwwRQUeb62c4YQhePjIsgG2Eq/KZbjqBqnxmdXhkbj+C6XSy1EPD38sPriF4jmA7FB/Iaold2w3lSQcg0usxoaCT4AQ+7Ou7dgtRvNXZvzmrQcLIzRLelW+iVFFHv4RB/4KqIk69CfEf8YV4yzdiTZlZrg2+y1QDWK1+kjcyy6eOFvcemoYLJuPu+bgpwOlPVPvkTnttumlRNnX/PGBPK5lgPlPHXLruUVRziTWCxO+vJtGtrvGi9qj1VmSX7QHY/jO+3hhTow== saqib@peregrine
     sudo: ALL=(ALL) NOPASSWD:ALL
 packages:
   - docker
@@ -20,6 +20,7 @@ write_files:
   permissions: '0600'
   content: |
     zookeeper:
+      name: zookeeper
       image: wurstmeister/zookeeper:latest
       ports:
         - "2181:2181"
@@ -28,6 +29,7 @@ write_files:
 
     kafka:
       restart: always
+      name: kafka
       image: wurstmeister/kafka
       ports:
         - "9092:9092"
@@ -43,6 +45,8 @@ write_files:
         - /var/run/docker.sock:/var/run/docker.sock
 
     postgres:
+      restart: always
+      name: postgres
       image: postgres:9.4
       environment:
         POSTGRES_USER: postgres
@@ -65,3 +69,4 @@ runcmd:
   - [ pip, install, docker-compose ]
   - [ /usr/local/bin/start-docker ]
   - [ usermod, -aG, docker, philandstuff ]
+  - [ usermod, -aG, docker, saqib ]
