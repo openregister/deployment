@@ -17,6 +17,7 @@ package_upgrade: true
 
 write_files:
 - path: /etc/docker-compose.yml.template
+  permissions: '0600'
   content: |
     zookeeper:
       image: wurstmeister/zookeeper:latest
