@@ -6,10 +6,13 @@ ENV=$1
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
+PORTS="22 80 4567"
 
 aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
-aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port 22 --cidr 80.194.77.90/32
-aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port 22 --cidr 80.194.77.100/32
+for PORT in $PORTS; do
+    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.90/32
+    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.100/32
+done
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
 
