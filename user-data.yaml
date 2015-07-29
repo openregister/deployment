@@ -11,3 +11,7 @@ packages:
   - docker
 
 package_upgrade: true
+
+runcmd:
+  - [ service, docker, start ]
+  - [ pip, install, docker-compose ]
