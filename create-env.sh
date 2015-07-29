@@ -19,7 +19,7 @@ USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
 INSTANCE_ID=$(aws ec2 run-instances \
     --image-id ami-a10897d6 \
     --count 1 \
-    --instance-type t2.micro \
+    --instance-type t2.medium \
     --user-data "${USER_DATA}" \
     --security-groups "$SG" \
     --query 'Instances[0].InstanceId' \
