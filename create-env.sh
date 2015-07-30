@@ -7,6 +7,22 @@ SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
 PORTS="22 4567"
+ZONE=openregister.org
+DOMAIN=beta.${ZONE}
+DNS_NAME=${ENV}.${DOMAIN}
+DNS_PROFILES="old-dns default"
+TTL=300
+
+# ensure aws CLI is set up with needed profiles
+for DNS_PROFILE in $DNS_PROFILES; do
+    set +e
+    aws --profile "$DNS_PROFILE" configure get region > /dev/null 2>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Please run 'aws --profile ${DNS_PROFILE} configure' to set up this aws profile"
+        exit 1
+    fi
+    set -e
+done
 
 aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
 for PORT in $PORTS; do
@@ -45,4 +61,27 @@ done
 # in the ec2 console
 aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}"
 
-echo "Instance launched at ${PUBLIC_IP}"
+DNS_CHANGES=$(cat <<EOF
+{"Changes":
+  [{
+    "Action":"CREATE",
+    "ResourceRecordSet":{
+      "Name":"${DNS_NAME}",
+      "Type":"A",
+      "ResourceRecords":[{"Value":"${PUBLIC_IP}"}],
+      "TTL":${TTL}
+    }
+  }]
+}
+EOF
+)
+
+for DNS_PROFILE in $DNS_PROFILES; do
+    ZONE_ID=$(aws --profile "$DNS_PROFILE" route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
+
+    aws --profile "$DNS_PROFILE" route53 change-resource-record-sets \
+        --hosted-zone-id "$ZONE_ID" \
+        --change-batch "$DNS_CHANGES"
+done
+
+echo "Instance launched at ${DNS_NAME}"
