@@ -3,9 +3,10 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 environment-name"
-    echo
-    echo "Creates an EC2 instance, security group and route 53 entry for environment-name"
+    echo "Usage: $0 <environment-name> <instance-profile-name>"
+    echo ""
+    echo "Creates an EC2 instance, security group and route 53 entry for environment-name and attaches "
+    echo "IAM instance profile instance-profile-name."
 }
 
 check_aws_profiles_exist() {
@@ -49,11 +50,9 @@ set_up_security_group() {
 
 create_instance() {
     ENV=$1
-    ZONE=$2
-    SG=$3
-    USER_DATA=$4
-
-    IAM_ROLE=CodeDeployerRole
+    SG=$2
+    USER_DATA=$3
+    IAM_ROLE=$4
 
     INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
 
@@ -118,18 +117,17 @@ EOF
             --hosted-zone-id "$ZONE_ID" \
             --change-batch "$DNS_CHANGES"
     done
-
-
 }
 
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
-
 ENV=$1
+INSTANCE_PROFILE_NAME=$2
+
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
@@ -147,8 +145,9 @@ set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
 
-PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA")
+PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA" "$INSTANCE_PROFILE_NAME")
 
 create_dns_records "$DNS_NAME" "$ZONE" "$PUBLIC_IP" "$DNS_PROFILES"
 
 echo "Instance launched at ${DNS_NAME}"
+

@@ -72,22 +72,20 @@ write_files:
 
     /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d
 
+- path: /usr/local/bin/setup-cdagent.sh
+  permissions: '0755'
+  content: |
+    #!/bin/bash
+     
+    aws s3 cp s3://aws-codedeploy-eu-west-1/latest/install /tmp/install --region eu-west-1
+    chmod +x /tmp/install
+    /tmp/install auto
+
 runcmd:
   - [ service, docker, start ]
-  - [ mkdir, -p, /srv/presentation ]
-  - [ mkdir, -p, /srv/mint ]
-  - [ mkdir, -p, /etc/presentation ]
-  - [ mkdir, -p, /etc/mint ]
-  - [ chgrp, users, /srv/presentation ]
-  - [ chgrp, users, /srv/mint ]
-  - [ chgrp, users, /etc/presentation ]
-  - [ chgrp, users, /etc/mint ]
-  - [ chmod, g+wrx, /srv/presentation ]
-  - [ chmod, g+wrx, /srv/mint ]
-  - [ chmod, g+wrx, /etc/presentation ]
-  - [ chmod, g+wrx, /etc/mint ]
   - [ pip, install, docker-compose ]
   - [ /usr/local/bin/start-docker ]
   - [ usermod, -aG, docker, philandstuff ]
   - [ usermod, -aG, docker, saqib ]
   - [ usermod, -aG, docker, omsharma ]
+  - [ /usr/local/bin/setup-cdagent.sh ]
