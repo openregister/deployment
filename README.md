@@ -16,6 +16,7 @@ on it, then ssh to it and run:
 
 To deploy presentation to this environment, first copy presentation.jar to /srv/presentation
 on it, then ssh to it and run:
+
     docker run --volume /home/saqib:/srv/presentation \
         --link etc_kafka_1:kafka \
         --link etc_zookeeper_1:zookeeper \
