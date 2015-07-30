@@ -10,8 +10,7 @@ PORTS="22 80 4567"
 
 aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
 for PORT in $PORTS; do
-    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.90/32
-    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.100/32
+    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.64/26
 done
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
