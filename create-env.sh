@@ -84,7 +84,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --iam-instance-profile Arn=${INSTANCE_PROFILE_ARN} \
     --security-groups "$SG" \
     --query 'Instances[0].InstanceId' \
-    | tr -d '"')
+    --output text)
 
 # the instance won't immediately exist; this retry loop keeps trying
 # until we get the public ip or we've tried 5 times.
