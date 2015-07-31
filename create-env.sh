@@ -8,6 +8,20 @@ usage() {
     echo "Creates an EC2 instance, security group and route 53 entry for environment-name"
 }
 
+check_aws_profiles_exist() {
+    AWS_PROFILES=$1
+    for AWS_PROFILE in $AWS_PROFILES; do
+        set +e
+        aws --profile "$AWS_PROFILE" configure get region > /dev/null 2>/dev/null
+        if [ $? -ne 0 ]; then
+            echo "AWS profile ${AWS_PROFILE} not found"
+            echo "Please run 'aws --profile ${AWS_PROFILE} configure' to set up this aws profile"
+            exit 1
+        fi
+        set -e
+    done
+}
+
 if [ "$#" -ne 1 ]; then
     echo "Wrong number of arguments"
     usage; exit
@@ -27,15 +41,7 @@ TTL=300
 IAM_ROLE=CodeDeployDemo
 
 # ensure aws CLI is set up with needed profiles
-for DNS_PROFILE in $DNS_PROFILES; do
-    set +e
-    aws --profile "$DNS_PROFILE" configure get region > /dev/null 2>/dev/null
-    if [ $? -ne 0 ]; then
-        echo "Please run 'aws --profile ${DNS_PROFILE} configure' to set up this aws profile"
-        exit 1
-    fi
-    set -e
-done
+check_aws_profiles_exist "$DNS_PROFILES"
 
 aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
 for PORT in $PORTS; do
