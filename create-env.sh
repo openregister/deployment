@@ -12,6 +12,7 @@ DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
 TTL=300
+IAM_ROLE=CodeDeployDemo
 
 # ensure aws CLI is set up with needed profiles
 for DNS_PROFILE in $DNS_PROFILES; do
@@ -33,11 +34,14 @@ aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --por
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
 
+INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
+
 INSTANCE_ID=$(aws ec2 run-instances \
     --image-id ami-a10897d6 \
     --count 1 \
     --instance-type t2.medium \
     --user-data "${USER_DATA}" \
+    --iam-instance-profile Arn=${INSTANCE_PROFILE_ARN} \
     --security-groups "$SG" \
     --query 'Instances[0].InstanceId' \
     | tr -d '"')
