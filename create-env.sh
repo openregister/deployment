@@ -49,8 +49,9 @@ set_up_security_group() {
 
 create_instance() {
     ENV=$1
-    SG=$2
-    USER_DATA=$3
+    ZONE=$2
+    SG=$3
+    USER_DATA=$4
 
     IAM_ROLE=CodeDeployDemo
 
@@ -68,10 +69,7 @@ create_instance() {
     # The `Name` tag is special and shows up as the instance name column
     # in the ec2 console
     aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}" > /dev/null
-    echo $INSTANCE_ID
-}
 
-get_instance_ip() {
     tries=0
     PUBLIC_IP=
     # the instance won't immediately exist; this retry loop keeps trying
@@ -142,17 +140,15 @@ DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
 
-# ensure aws CLI is set up with needed profiles
+# ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
 set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
 
-INSTANCE_ID=$(create_instance "$ENV" "$SG" "$USER_DATA")
+PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA")
 
-PUBLIC_IP=$(get_instance_ip "$INSTANCE_ID")
-
-create_dns_records "$DNS_NAME" "$PUBLIC_IP" "$DNS_PROFILES"
+create_dns_records "$DNS_NAME" "$ZONE" "$PUBLIC_IP" "$DNS_PROFILES"
 
 echo "Instance launched at ${DNS_NAME}"
