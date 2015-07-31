@@ -22,6 +22,13 @@ check_aws_profiles_exist() {
     done
 }
 
+allow_access_to_sg_port() {
+    SG=$1
+    PORT=$2
+    CIDR=$3
+    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr "$CIDR"
+}
+
 if [ "$#" -ne 1 ]; then
     echo "Wrong number of arguments"
     usage; exit
@@ -40,15 +47,19 @@ DNS_PROFILES="old-dns default"
 TTL=300
 IAM_ROLE=CodeDeployDemo
 
+AH=80.194.77.64/26
+ANYWHERE=0.0.0.0/0
+
 # ensure aws CLI is set up with needed profiles
 check_aws_profiles_exist "$DNS_PROFILES"
 
 aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
 for PORT in $PORTS; do
-    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr 80.194.77.64/26
+    allow_access_to_sg_port "$SG" "$PORT" "$AH"
 done
 # allow port 80 from anywhere
-aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port 80 --cidr 0.0.0.0/0
+allow_access_to_sg_port "$SG" 80 "$ANYWHERE"
+
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
 
