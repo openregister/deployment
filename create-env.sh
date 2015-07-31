@@ -29,6 +29,25 @@ allow_access_to_sg_port() {
     aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr "$CIDR"
 }
 
+set_up_security_group() {
+    SG=$1
+    ENV=$2
+    RESTRICTED_PORTS=$3
+    PUBLIC_PORTS=$4
+
+    AH=80.194.77.64/26
+    ANYWHERE=0.0.0.0/0
+
+    aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
+    for PORT in $RESTRICTED_PORTS; do
+        allow_access_to_sg_port "$SG" "$PORT" "$AH"
+    done
+    for PORT in $PUBLIC_PORTS; do
+        allow_access_to_sg_port "$SG" "$PORT" "$ANYWHERE"
+    done
+}
+
+
 if [ "$#" -ne 1 ]; then
     echo "Wrong number of arguments"
     usage; exit
@@ -39,7 +58,8 @@ ENV=$1
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
-PORTS="22 4567"
+RESTRICTED_PORTS="22 4567"
+PUBLIC_PORTS="80"
 ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
@@ -47,19 +67,10 @@ DNS_PROFILES="old-dns default"
 TTL=300
 IAM_ROLE=CodeDeployDemo
 
-AH=80.194.77.64/26
-ANYWHERE=0.0.0.0/0
-
 # ensure aws CLI is set up with needed profiles
 check_aws_profiles_exist "$DNS_PROFILES"
 
-aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
-for PORT in $PORTS; do
-    allow_access_to_sg_port "$SG" "$PORT" "$AH"
-done
-# allow port 80 from anywhere
-allow_access_to_sg_port "$SG" 80 "$ANYWHERE"
-
+set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
 
