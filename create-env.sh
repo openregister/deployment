@@ -47,6 +47,52 @@ set_up_security_group() {
     done
 }
 
+create_instance() {
+    ENV=$1
+    SG=$2
+    USER_DATA=$3
+
+    IAM_ROLE=CodeDeployDemo
+
+    INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
+
+    INSTANCE_ID=$(aws ec2 run-instances \
+        --image-id ami-a10897d6 \
+        --count 1 \
+        --instance-type t2.medium \
+        --user-data "$USER_DATA" \
+        --iam-instance-profile Arn=${INSTANCE_PROFILE_ARN} \
+        --security-groups "$SG" \
+        --query 'Instances[0].InstanceId' \
+        --output text)
+    # The `Name` tag is special and shows up as the instance name column
+    # in the ec2 console
+    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}" > /dev/null
+    echo $INSTANCE_ID
+}
+
+get_instance_ip() {
+    tries=0
+    PUBLIC_IP=
+    # the instance won't immediately exist; this retry loop keeps trying
+    # until we get the public ip or we've tried 5 times.
+    until [ $tries -ge 5 ]; do
+        sleep 5
+        echo -n .
+        PUBLIC_IP=$(aws ec2 describe-instances \
+            --instance-ids "${INSTANCE_ID}" \
+            --query 'Reservations[0].Instances[0].PublicIpAddress' \
+            --output text)
+        [ -n "$PUBLIC_IP" ] && break
+        tries=$[$tries+1]
+    done
+    if [ -z "$PUBLIC_IP" ]; then
+        echo "Timed out waiting for instance $INSTANCE_ID to appear"
+        exit 1
+    fi
+    echo $PUBLIC_IP
+}
+
 
 if [ "$#" -ne 1 ]; then
     echo "Wrong number of arguments"
@@ -65,45 +111,17 @@ DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
 TTL=300
-IAM_ROLE=CodeDeployDemo
 
 # ensure aws CLI is set up with needed profiles
 check_aws_profiles_exist "$DNS_PROFILES"
 
 set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 
-USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" ${USER_DATA_FILE} | base64)
+USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
 
-INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
+INSTANCE_ID=$(create_instance "$ENV" "$SG" "$USER_DATA")
 
-INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id ami-a10897d6 \
-    --count 1 \
-    --instance-type t2.medium \
-    --user-data "${USER_DATA}" \
-    --iam-instance-profile Arn=${INSTANCE_PROFILE_ARN} \
-    --security-groups "$SG" \
-    --query 'Instances[0].InstanceId' \
-    --output text)
-
-# the instance won't immediately exist; this retry loop keeps trying
-# until we get the public ip or we've tried 5 times.
-PUBLIC_IP=
-tries=0
-until [ $tries -ge 5 ]; do
-    sleep 5
-    echo -n .
-    PUBLIC_IP=$(aws ec2 describe-instances \
-        --instance-ids "${INSTANCE_ID}" \
-        --query 'Reservations[0].Instances[0].PublicIpAddress' \
-        --output text)
-    [ -n "$PUBLIC_IP" ] && break
-    tries=$[$tries+1]
-done
-
-# The `Name` tag is special and shows up as the instance name column
-# in the ec2 console
-aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}"
+PUBLIC_IP=$(get_instance_ip "$INSTANCE_ID")
 
 DNS_CHANGES=$(cat <<EOF
 {"Changes":
