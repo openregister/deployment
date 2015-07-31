@@ -78,7 +78,6 @@ get_instance_ip() {
     # until we get the public ip or we've tried 5 times.
     until [ $tries -ge 5 ]; do
         sleep 5
-        echo -n .
         PUBLIC_IP=$(aws ec2 describe-instances \
             --instance-ids "${INSTANCE_ID}" \
             --query 'Reservations[0].Instances[0].PublicIpAddress' \
@@ -91,6 +90,38 @@ get_instance_ip() {
         exit 1
     fi
     echo $PUBLIC_IP
+}
+
+create_dns_records() {
+    DNS_NAME=$1
+    PUBLIC_IP=$2
+    DNS_PROFILES=$3
+    TTL=300
+
+    DNS_CHANGES=$(cat <<EOF
+{"Changes":
+  [{
+    "Action":"CREATE",
+    "ResourceRecordSet":{
+      "Name":"${DNS_NAME}",
+      "Type":"A",
+      "ResourceRecords":[{"Value":"${PUBLIC_IP}"}],
+      "TTL":${TTL}
+    }
+  }]
+}
+EOF
+    )
+
+    for DNS_PROFILE in $DNS_PROFILES; do
+        ZONE_ID=$(aws --profile "$DNS_PROFILE" route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
+
+        aws --profile "$DNS_PROFILE" route53 change-resource-record-sets \
+            --hosted-zone-id "$ZONE_ID" \
+            --change-batch "$DNS_CHANGES"
+    done
+
+
 }
 
 
@@ -110,7 +141,6 @@ ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
-TTL=300
 
 # ensure aws CLI is set up with needed profiles
 check_aws_profiles_exist "$DNS_PROFILES"
@@ -123,27 +153,6 @@ INSTANCE_ID=$(create_instance "$ENV" "$SG" "$USER_DATA")
 
 PUBLIC_IP=$(get_instance_ip "$INSTANCE_ID")
 
-DNS_CHANGES=$(cat <<EOF
-{"Changes":
-  [{
-    "Action":"CREATE",
-    "ResourceRecordSet":{
-      "Name":"${DNS_NAME}",
-      "Type":"A",
-      "ResourceRecords":[{"Value":"${PUBLIC_IP}"}],
-      "TTL":${TTL}
-    }
-  }]
-}
-EOF
-)
-
-for DNS_PROFILE in $DNS_PROFILES; do
-    ZONE_ID=$(aws --profile "$DNS_PROFILE" route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
-
-    aws --profile "$DNS_PROFILE" route53 change-resource-record-sets \
-        --hosted-zone-id "$ZONE_ID" \
-        --change-batch "$DNS_CHANGES"
-done
+create_dns_records "$DNS_NAME" "$PUBLIC_IP" "$DNS_PROFILES"
 
 echo "Instance launched at ${DNS_NAME}"
