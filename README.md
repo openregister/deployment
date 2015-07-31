@@ -17,11 +17,13 @@ on it, then ssh to it and run:
 To deploy presentation to this environment, first copy presentation.jar to /srv/presentation
 on it, then ssh to it and run:
 
-    docker run --volume /home/saqib:/srv/presentation \
+    docker run -d -p 80:8080 \
+        --volume /srv/presentation:/srv/presentation \
         --link etc_kafka_1:kafka \
         --link etc_zookeeper_1:zookeeper \
         --link etc_postgres_1:postgres \
-        jstepien/openjdk8 java -jar /srv/presentation/presentation.jar server /srv/presentation/config.yaml
+        jstepien/openjdk8 \
+        java -jar /srv/presentation/presentation.jar server /srv/presentation/config.yaml
 
 ## Requirements
 
