@@ -2,6 +2,18 @@
 
 set -eu
 
+usage() {
+    echo "Usage: $0 environment-name"
+    echo
+    echo "Creates an EC2 instance, security group and route 53 entry for environment-name"
+}
+
+if [ "$#" -ne 1 ]; then
+    echo "Wrong number of arguments"
+    usage; exit
+fi
+
+
 ENV=$1
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
