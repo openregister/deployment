@@ -53,7 +53,7 @@ create_instance() {
     SG=$3
     USER_DATA=$4
 
-    IAM_ROLE=CodeDeployDemo
+    IAM_ROLE=CodeDeployerRole
 
     INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
 
