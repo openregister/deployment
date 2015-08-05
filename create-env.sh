@@ -91,8 +91,9 @@ create_instance() {
 
 create_dns_records() {
     DNS_NAME=$1
-    PUBLIC_IP=$2
-    DNS_PROFILES=$3
+    ZONE=$2
+    PUBLIC_IP=$3
+    DNS_PROFILES=$4
     TTL=300
 
     DNS_CHANGES=$(cat <<EOF
