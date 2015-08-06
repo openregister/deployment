@@ -66,6 +66,8 @@ create_instance() {
     # The `Name` tag is special and shows up as the instance name column
     # in the ec2 console
     aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}" > /dev/null
+    # the Environment tag controls where CodeDeploy will deploy to.
+    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Environment,Value=preview" > /dev/null
 
     tries=0
     PUBLIC_IP=

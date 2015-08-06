@@ -3,8 +3,7 @@
 APPLICATION_NAME=$1
 DEPLOYMENT_GROUP_NAME=$2
 INSTANCE_PROFILE_NAME=$3
-INSTANCE_NAMES=$4
-BUCKET_NAME=$5
+BUCKET_NAME=$4
 
 
 fetchInstanceProfile(){
@@ -27,8 +26,7 @@ createApplication(){
 
 createDeploymentGroup(){
     CODE_DEPLOYER_PROFILE_ARN=$1
-    INSTANCE_TAG_FILTERS=""
-    for instance_name in `echo "$INSTANCE_NAMES" | tr "," " "`; do  INSTANCE_TAG_FILTERS="${INSTANCE_TAG_FILTERS} Key=Name,Value=${instance_name},Type=KEY_AND_VALUE"; done
+    INSTANCE_TAG_FILTERS="Key=Environment,Value=preview,Type=KEY_AND_VALUE"
 
     DEPLOYMENT_GROUP_ID=$(aws deploy create-deployment-group \
             --application-name $APPLICATION_NAME \
@@ -49,12 +47,12 @@ createBucket(){
 
 
 usage() {
-    echo "Usage: ./setup-code-deploy-application.sh $1 application-name $2 deployment-group-name $3 instance-propfile-name $4 comma-separated-instance-names $5 s3-bucket-name"
+    echo "Usage: ./setup-code-deploy-application.sh $1 application-name $2 deployment-group-name $3 instance-propfile-name $5 s3-bucket-name"
     echo
     echo "Creates an application with deployment group at code-deploy"
 }
 
-if [ "$#" -ne 5 ]; then
+if [ "$#" -ne 4 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
