@@ -2,7 +2,7 @@
 
 To deploy an environment:
 
-    ./create-env.sh $ENV_NAME
+    ./create-env.sh <environment-name> <instance-profile-name>
 
 To deploy mint to this environment, first copy mint.jar to /srv/mint
 on it, then ssh to it and run:
