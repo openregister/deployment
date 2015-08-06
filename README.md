@@ -1,9 +1,5 @@
 # Deployment
 
-To create an IAM Instance Profile with the required permissions:
-
-    ./create-instance-profile.sh <profile_name>
-
 To deploy an environment:
 
     ./create-env.sh <environment-name> <instance-profile-name>
