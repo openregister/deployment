@@ -54,14 +54,12 @@ create_instance() {
     USER_DATA=$3
     IAM_ROLE=$4
 
-    INSTANCE_PROFILE_ARN=$(aws iam get-instance-profile --instance-profile-name ${IAM_ROLE} --query InstanceProfile.Arn --output text)
-
     INSTANCE_ID=$(aws ec2 run-instances \
         --image-id ami-a10897d6 \
         --count 1 \
         --instance-type t2.medium \
         --user-data "$USER_DATA" \
-        --iam-instance-profile Arn=${INSTANCE_PROFILE_ARN} \
+        --iam-instance-profile Name=${IAM_ROLE} \
         --security-groups "$SG" \
         --query 'Instances[0].InstanceId' \
         --output text)
