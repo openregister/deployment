@@ -35,6 +35,7 @@ set_up_security_group() {
     ENV=$2
     RESTRICTED_PORTS=$3
     PUBLIC_PORTS=$4
+    DB_SG=$5
 
     AH=80.194.77.64/26
     ANYWHERE=0.0.0.0/0
@@ -46,6 +47,10 @@ set_up_security_group() {
     for PORT in $PUBLIC_PORTS; do
         allow_access_to_sg_port "$SG" "$PORT" "$ANYWHERE"
     done
+
+    # allow access to RDS instance
+    aws ec2 authorize-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+
 }
 
 create_instance() {
@@ -126,8 +131,11 @@ if [ "$#" -ne 2 ]; then
     usage; exit
 fi
 
+
 ENV=$1
 INSTANCE_PROFILE_NAME=$2
+# hardcoded for now
+RDS_INSTANCE_NAME=rds-test
 
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
@@ -138,11 +146,12 @@ ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
+DB_SG=${RDS_INSTANCE_NAME}-db-sg
 
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
-set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
+set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS" "$DB_SG"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
 
