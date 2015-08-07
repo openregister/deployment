@@ -3,10 +3,11 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 <environment-name> <instance-profile-name>"
+    echo "Usage: $0 <environment-name> <instance-profile-name> <rds-instance-name>"
     echo ""
-    echo "Creates an EC2 instance, security group and route 53 entry for environment-name and attaches "
-    echo "IAM instance profile instance-profile-name."
+    echo "* Creates an EC2 instance, security group and route 53 entry for environment-name."
+    echo "* Attaches IAM instance profile to the instance."
+    echo "* Grants permissions for instance to access rds."
 }
 
 check_aws_profiles_exist() {
@@ -126,7 +127,7 @@ EOF
 }
 
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
@@ -134,8 +135,7 @@ fi
 
 ENV=$1
 INSTANCE_PROFILE_NAME=$2
-# hardcoded for now
-RDS_INSTANCE_NAME=rds-test
+RDS_INSTANCE_NAME=$3
 
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
