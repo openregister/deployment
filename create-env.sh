@@ -135,7 +135,7 @@ fi
 ENV=$1
 INSTANCE_PROFILE_NAME=$2
 # hardcoded for now
-RDS_ENV=rds-test
+RDS_INSTANCE_NAME=rds-test
 
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
@@ -146,7 +146,7 @@ ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
 DNS_PROFILES="old-dns default"
-DB_SG=${RDS_ENV}-db-sg
+DB_SG=${RDS_INSTANCE_NAME}-db-sg
 
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
