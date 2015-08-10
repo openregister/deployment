@@ -2,18 +2,31 @@
 
 set -eu
 
-ENV=$1
-SG=${ENV}-sg
+usage() {
+    echo "Usage: ./destroy-env.sh instance-name"
+    echo
+    echo "Deletes an instance and its dependent objects"
+}
+
+if [ "$#" -ne 1 ]; then
+    echo "Wrong number of arguments"
+    usage; exit
+fi
+
+
+
+INSTANCE_NAME=$1
+SG=${INSTANCE_NAME}-sg
 ZONE=openregister.org
 DOMAIN=beta.${ZONE}
-DNS_NAME=${ENV}.${DOMAIN}
+DNS_NAME=${INSTANCE_NAME}.${DOMAIN}
 DNS_PROFILES="old-dns default"
 TTL=300
 
-INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${ENV} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
+INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${INSTANCE_NAME} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
 
 if [ "$INSTANCE_ID" = "None" ]; then
-    echo "Couldn't find an instance tagged with Name = ${ENV}"
+    echo "Couldn't find an instance tagged with Name = ${INSTANCE_NAME}"
     exit 1
 fi
 
@@ -69,6 +82,11 @@ until [ $tries -ge 10 ]; do
     [ "$STATE" = "terminated" ] && break
     tries=$[$tries+1]
 done
+
+
+# revoke security group ingress hardcoded for now,
+DB_SG="preview-mint-db-sg"
+aws ec2 revoke-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
 
 # delete security group
 aws ec2 delete-security-group --group-name "$SG"
