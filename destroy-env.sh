@@ -36,6 +36,8 @@ PUBLIC_IP=$(aws ec2 describe-instances \
     --query 'Reservations[0].Instances[0].PublicIpAddress' \
     --output text)
 
+aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
+
 # terminate instance
 aws ec2 terminate-instances --instance-ids "$INSTANCE_ID" > /dev/null
 
