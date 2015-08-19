@@ -81,6 +81,4 @@ runcmd:
   - [ pip, install, docker-compose ]
   - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
   - [ /usr/local/bin/start-docker ]
-  - [ usermod, -aG, docker, philandstuff ]
-  - [ usermod, -aG, docker, omsharma ]
   - [ /usr/local/bin/setup-cdagent.sh ]
