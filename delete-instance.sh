@@ -3,7 +3,7 @@
 set -eu
 
 usage() {
-    echo "Usage: ./destroy-env.sh instance-name"
+    echo "Usage: $0 instance-name"
     echo
     echo "Deletes an instance and its dependent objects"
 }
@@ -23,6 +23,8 @@ DNS_NAME=${INSTANCE_NAME}.${DOMAIN}
 DNS_PROFILES="old-dns default"
 TTL=300
 
+
+
 INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${INSTANCE_NAME} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
 
 if [ "$INSTANCE_ID" = "None" ]; then
@@ -36,13 +38,8 @@ PUBLIC_IP=$(aws ec2 describe-instances \
     --query 'Reservations[0].Instances[0].PublicIpAddress' \
     --output text)
 
-aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
-
-# terminate instance
-aws ec2 terminate-instances --instance-ids "$INSTANCE_ID" > /dev/null
 
 # remove DNS records
-
 ZONE_ID=$(aws route53 list-hosted-zones-by-name --dns-name openregister.org --query "HostedZones[0].Id" --output text)
 
 # it's really hard to get this info via the API without parsing and
@@ -72,6 +69,15 @@ for DNS_PROFILE in $DNS_PROFILES; do
         --change-batch "$DNS_CHANGES" || true # don't bail if it fails
 done
 
+aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
+
+# revoke security group ingress hardcoded for now,
+DB_SG="preview-mint-db-sg"
+aws ec2 revoke-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+
+# terminate instance
+aws ec2 terminate-instances --instance-ids "$INSTANCE_ID" > /dev/null
+
 # wait until instance is terminated
 tries=0
 until [ $tries -ge 10 ]; do
@@ -84,11 +90,6 @@ until [ $tries -ge 10 ]; do
     [ "$STATE" = "terminated" ] && break
     tries=$[$tries+1]
 done
-
-
-# revoke security group ingress hardcoded for now,
-DB_SG="preview-mint-db-sg"
-aws ec2 revoke-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
 
 # delete security group
 aws ec2 delete-security-group --group-name "$SG"
