@@ -47,7 +47,7 @@ createBucket(){
 
 
 usage() {
-    echo "Usage: ./setup-code-deploy-application.sh $1 application-name $2 deployment-group-name $3 instance-propfile-name $5 s3-bucket-name"
+    echo "Usage: $0 application-name deployment-group-name instance-propfile-name s3-bucket-name"
     echo
     echo "Creates an application with deployment group at code-deploy"
 }
