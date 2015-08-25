@@ -80,22 +80,39 @@ runScript(){
         ]
     }"
 
-    echo "putting policy PreviewApplicationConfigurationAccess to $ROLE_NAME"
+    echo "putting policy PreviewConfigMintAccess to $ROLE_NAME"
     aws iam put-role-policy \
     --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewApplicationConfigurationAccess" \
+    --policy-name "PreviewConfigMintAccess" \
+    --policy-document "{
+    \"Version\": \"2012-10-17\",
+    \"Statement\": [
+        {
+            \"Action\": [
+                \"s3:GetObject\"
+            ],
+            \"Resource\": [
+                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\"
+            ],
+            \"Effect\": \"Allow\"
+        }
+    ]
+}
+"
+
+    echo "putting policy DescribeTags to $ROLE_NAME"
+    aws iam put-role-policy \
+    --role-name "${ROLE_NAME}" \
+    --policy-name "DescribeTags" \
     --policy-document '{
     "Version": "2012-10-17",
     "Statement": [
         {
             "Action": [
-                "s3:GetObject"
+                "ec2:DescribeTags"
             ],
-            "Resource": [
-                "arn:aws:s3:::preview.config/mint/*",
-                "arn:aws:s3:::preview.config/indexer/indexer.properties"
-            ],
-            "Effect": "Allow"
+            "Effect": "Allow",
+            "Resource": ["*"]
         }
     ]
 }
@@ -118,7 +135,7 @@ deleteAllResources(){
     aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "DeployableArtifactBucketsPolicy"
 
     echo "Deleting role policy PreviewConfigMintAccess"
-    aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewApplicationConfigurationAccess"
+    aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigMintAccess"
 
     echo "Detaching policy arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
     aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
