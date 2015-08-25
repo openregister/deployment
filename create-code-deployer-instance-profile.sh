@@ -83,17 +83,35 @@ runScript(){
     aws iam put-role-policy \
     --role-name "${ROLE_NAME}" \
     --policy-name "PreviewConfigMintAccess" \
+    --policy-document "{
+    \"Version\": \"2012-10-17\",
+    \"Statement\": [
+        {
+            \"Action\": [
+                \"s3:GetObject\"
+            ],
+            \"Resource\": [
+                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\"
+            ],
+            \"Effect\": \"Allow\"
+        }
+    ]
+}
+"
+
+    echo "putting policy DescribeTags to $ROLE_NAME"
+    aws iam put-role-policy \
+    --role-name "${ROLE_NAME}" \
+    --policy-name "DescribeTags" \
     --policy-document '{
     "Version": "2012-10-17",
     "Statement": [
         {
             "Action": [
-                "s3:GetObject"
+                "ec2:DescribeTags"
             ],
-            "Resource": [
-                "arn:aws:s3:::preview.config/mint/*"
-            ],
-            "Effect": "Allow"
+            "Effect": "Allow",
+            "Resource": ["*"]
         }
     ]
 }
