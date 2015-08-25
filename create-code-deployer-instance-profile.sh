@@ -34,44 +34,9 @@ runScript(){
       ]
     }"
 
-    echo "putting policy CodeDeployAgentPolicy to $ROLE_NAME"
-    aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "CodeDeployAgentPolicy" \
-    --policy-document "{
-        \"Version\": \"2012-10-17\",
-        \"Statement\": [
-            {
-                \"Action\": [
-                    \"s3:Get*\",
-                    \"s3:List*\"
-                ],
-                \"Effect\": \"Allow\",
-                \"Resource\": \"arn:aws:s3:::aws-codedeploy-eu-west-1/*\"
-            }
-        ]
-    }"
-
-    echo "putting policy DeployableArtifactBucketsPolicy to $ROLE_NAME"
-    aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "DeployableArtifactBucketsPolicy" \
-    --policy-document "{
-        \"Version\": \"2012-10-17\",
-        \"Statement\": [
-            {
-                \"Action\": [
-                    \"s3:*\"
-                ],
-                \"Effect\": \"Allow\",
-                \"Resource\": [
-                    \"arn:aws:s3:::presentation.app.artifacts/*\",
-                    \"arn:aws:s3:::mint.app.artifacts/*\",
-                    \"arn:aws:s3:::indexer.app.artifacts/*\"
-                ]
-            }
-        ]
-    }"
+    echo "attaching RegisterAppServer policy to $ROLE_NAME"
+    aws iam attach-role-policy --role-name "${ROLE_NAME}" \
+        --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
 
     echo "putting policy PreviewIndexerConfigAccess to $ROLE_NAME"
     aws iam put-role-policy \
@@ -113,24 +78,6 @@ runScript(){
 }
 "
 
-    echo "putting policy DescribeTags to $ROLE_NAME"
-    aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "DescribeTags" \
-    --policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "ec2:DescribeTags"
-            ],
-            "Effect": "Allow",
-            "Resource": ["*"]
-        }
-    ]
-}
-'
-
     echo "Create instance profile with name INSTANCE_PROFILE_NAME"
     aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}"
 
@@ -141,20 +88,14 @@ runScript(){
 
 deleteAllResources(){
     echo "Cleaning up all resources"
-    echo "Deleting role policy CodeDeployAgentPolicy"
-    aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "CodeDeployAgentPolicy"
-
-    echo "Deleting role policy DeployableArtifactBucketsPolicy"
-    aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "DeployableArtifactBucketsPolicy"
-
     echo "Deleting role policy PreviewConfigMintAccess"
     aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigMintAccess"
 
     echo "Deleting role policy PreviewIndexerConfigAccess"
     aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewIndexerConfigAccess"
 
-    echo "Detaching policy arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
-    aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
+    echo "Detaching policy RegisterAppServer"
+    aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
 
     echo "Deleting role from instance profile"
     aws iam remove-role-from-instance-profile --instance-profile-name "${ROLE_NAME}" --role-name "${ROLE_NAME}"
