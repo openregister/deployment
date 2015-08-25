@@ -18,6 +18,7 @@ packages:
 
 package_upgrade: true
 
+write_files:
 - path: /usr/local/bin/setup-cdagent.sh
   permissions: '0755'
   content: |
