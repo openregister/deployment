@@ -15,7 +15,6 @@ fi
 
 ROLE_NAME=$1
 INSTANCE_PROFILE_NAME=$1
-AWS_CODE_DEPLOY_ROLE_POLICY_ARN="arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
 
 runScript(){
     echo "Creating role $ROLE_NAME"
@@ -34,12 +33,6 @@ runScript(){
         }
       ]
     }"
-
-    echo "Attaching policy $AWS_CODE_DEPLOY_ROLE_POLICY_ARN to $ROLE_NAME"
-    aws iam attach-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-arn "${AWS_CODE_DEPLOY_ROLE_POLICY_ARN}"
-
 
     echo "putting policy CodeDeployAgentPolicy to $ROLE_NAME"
     aws iam put-role-policy \
