@@ -73,11 +73,32 @@ runScript(){
                 \"Effect\": \"Allow\",
                 \"Resource\": [
                     \"arn:aws:s3:::presentation.app.artifacts/*\",
-                    \"arn:aws:s3:::mint.app.artifacts/*\"
+                    \"arn:aws:s3:::mint.app.artifacts/*\",
+                    \"arn:aws:s3:::indexer.app.artifacts/*\"
                 ]
             }
         ]
     }"
+
+    echo "putting policy PreviewIndexerConfigAccess to $ROLE_NAME"
+    aws iam put-role-policy \
+    --role-name "${ROLE_NAME}" \
+    --policy-name "PreviewIndexerConfigAccess" \
+    --policy-document '{
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "s3:GetObject"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::preview.config/indexer/indexer.properties"
+                    ],
+                    "Effect": "Allow"
+                }
+            ]
+        }
+    '
 
     echo "putting policy PreviewConfigMintAccess to $ROLE_NAME"
     aws iam put-role-policy \
@@ -135,6 +156,9 @@ deleteAllResources(){
 
     echo "Deleting role policy PreviewConfigMintAccess"
     aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigMintAccess"
+
+    echo "Deleting role policy PreviewIndexerConfigAccess"
+    aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewIndexerConfigAccess"
 
     echo "Detaching policy arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
     aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"

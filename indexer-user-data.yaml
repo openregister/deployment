@@ -1,0 +1,34 @@
+#cloud-config
+
+users:
+  - default
+  - name: philandstuff
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsYvhPkvKma2RwWVwUNJ2fcoNjlObibUka0fl5WcctTokz8RISDkOAPjz+L0QmGsq/Dhgn/mbspKFyNKvQsujeooEpaO+cjYPXoUF1NTxhbUrMEu2uE+CPoj4zPbAZ9A6LdxkL13F3gJwZi9k8K9+6AnJeB4IrCLS5KHRiL+tBZMLPvKnn54M6PCfkWJH6zVO92plFTpRX1W4GanUwYGTemFX0qUwFgZu9OJvGiR+ZQKJMQ2Y3O+IMHv1KusfBrO+Q4iWn+A5VcJRoxml3lr0fYlbaetCpszkaY5HbQsLPDGtvsN1jXj2ghVe2ZbK8SKe13g+LSqYxmIX5qCAoEi+J philip.potter@digital.cabinet-office.gov.uk
+    sudo: ALL=(ALL) NOPASSWD:ALL
+  - name: omsharma
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcntQbymoWmb4l2xztDMu+6KAa9+ykyarqxFhkejGXNy0fgUlm0P8Td7vI5/AU4YAGiOgLjq38B/OADhv40x0L66Zi5TkHAL+XWgQ+yKPjsc170WCJy6nv5gInPhPZ794H6v0JT+9i1/f7Cs5PiVrWfIF9oj4ZtUpDUjSPzsk86b07n+384thSO6gB5fugCkIYan7Uyk05v8yAoHpkelyNTzLdRWtIqOQvtt1vQnC6ZBV7M6JAQQAzXnJnhTaPjY6Dy7a3co5HQonhjsDSo151dcfngyEmdbs4yRB4ZHBsyno26bSNKzKv2ltKrVr+/NKgtbyIDdUXaopuT9drKvM3 foromsharma@gmail.com
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+packages:
+  - docker
+
+package_upgrade: true
+
+write_files:
+- path: /usr/local/bin/setup-cdagent.sh
+  permissions: '0755'
+  content: |
+    #!/bin/bash
+     
+    aws s3 cp s3://aws-codedeploy-eu-west-1/latest/install /tmp/install --region eu-west-1
+    chmod +x /tmp/install
+    /tmp/install auto
+
+runcmd:
+  - [ service, docker, start ]
+  - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
+  - [ /usr/local/bin/setup-cdagent.sh ]
