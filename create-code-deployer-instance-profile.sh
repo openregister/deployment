@@ -3,7 +3,7 @@
 
 
 usage() {
-    echo "Usage: ./create-code-deployer-instance-profile.sh $1 role-name"
+    echo "Usage: $0 role-name"
     echo
     echo "Creates an instance-profile with role and its permission for code deploy"
 }
