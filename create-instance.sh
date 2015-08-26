@@ -3,7 +3,7 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 <environment-name> <instance-profile-name> <rds-instance-name>"
+    echo "Usage: $0 <environment-name> <rds-instance-name>"
     echo ""
     echo "* Creates an EC2 instance, security group and route 53 entry for environment-name."
     echo "* Attaches IAM instance profile to the instance."
@@ -51,6 +51,72 @@ set_up_security_group() {
 
     # allow access to RDS instance
     aws ec2 authorize-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+
+}
+
+create_instance_profile() {
+    ROLE_NAME=$1
+
+    aws iam create-role --role "${ROLE_NAME}" --assume-role-policy-document "{
+      \"Version\": \"2012-10-17\",
+      \"Statement\": [
+        {
+          \"Effect\": \"Allow\",
+          \"Principal\": {
+            \"Service\": [
+              \"ec2.amazonaws.com\"
+            ]
+          },
+          \"Action\": \"sts:AssumeRole\"
+        }
+      ]
+    }" > /dev/null
+
+    aws iam attach-role-policy --role-name "${ROLE_NAME}" \
+        --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
+
+    aws iam put-role-policy \
+    --role-name "${ROLE_NAME}" \
+    --policy-name "PreviewIndexerConfigAccess" \
+    --policy-document '{
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "s3:GetObject"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::preview.config/indexer/indexer.properties"
+                    ],
+                    "Effect": "Allow"
+                }
+            ]
+        }
+    '
+
+    aws iam put-role-policy \
+    --role-name "${ROLE_NAME}" \
+    --policy-name "PreviewConfigMintAccess" \
+    --policy-document "{
+    \"Version\": \"2012-10-17\",
+    \"Statement\": [
+        {
+            \"Action\": [
+                \"s3:GetObject\"
+            ],
+            \"Resource\": [
+                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\"
+            ],
+            \"Effect\": \"Allow\"
+        }
+    ]
+}
+"
+
+    INSTANCE_PROFILE_NAME=$ROLE_NAME
+    aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}" > /dev/null
+
+    aws iam add-role-to-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}" --role-name "${ROLE_NAME}"
 
 }
 
@@ -127,16 +193,16 @@ EOF
 }
 
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
 
 ENV=$1
-INSTANCE_PROFILE_NAME=$2
-RDS_INSTANCE_NAME=$3
+RDS_INSTANCE_NAME=$2
 
+INSTANCE_PROFILE_NAME=$ENV
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
@@ -151,9 +217,14 @@ DB_SG=${RDS_INSTANCE_NAME}-db-sg
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
+create_instance_profile "$INSTANCE_PROFILE_NAME"
+
 set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS" "$DB_SG"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
+
+# it takes a while for the instance profile to be usable by create_instance, so pause a moment
+sleep 5
 
 PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA" "$INSTANCE_PROFILE_NAME")
 
