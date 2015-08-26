@@ -25,7 +25,6 @@ runScript(){
           \"Effect\": \"Allow\",
           \"Principal\": {
             \"Service\": [
-              \"codedeploy.eu-west-1.amazonaws.com\",
               \"ec2.amazonaws.com\"
             ]
           },
