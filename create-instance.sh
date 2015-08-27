@@ -3,34 +3,12 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 <environment-name>"
+    echo "Usage: $0 <environment-name> <rds-instance-name>"
     echo ""
     echo "* Creates an EC2 instance, security group and route 53 entry for environment-name."
     echo "* Attaches IAM instance profile to the instance."
     echo "* Grants permissions for instance to access rds."
 }
-
-
-if [ "$#" -ne 1 ]; then
-    echo "Wrong number of arguments"
-    usage; exit
-fi
-
-
-ENV=$1
-INSTANCE_PROFILE_NAME=$ENV
-
-SG=${ENV}-sg
-USER_DATA_FILE=user-data.yaml
-PG_PASSWORD=$(pwgen -s 20)
-RESTRICTED_PORTS="22 4567"
-PUBLIC_PORTS="80"
-ZONE=openregister.org
-DOMAIN=beta.${ZONE}
-DNS_NAME=${ENV}.${DOMAIN}
-DNS_PROFILES="old-dns default"
-MINT_DB_SG=preview-mint-db-sg
-PRESENTATION_DB_SG=preview-presentation-db-sg
 
 check_aws_profiles_exist() {
     AWS_PROFILES=$1
@@ -47,41 +25,47 @@ check_aws_profiles_exist() {
 }
 
 allow_access_to_sg_port() {
-    PORT=$1
-    CIDR=$2
+    SG=$1
+    PORT=$2
+    CIDR=$3
     aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr "$CIDR"
 }
 
 set_up_security_group() {
-    RESTRICTED_PORTS=$1
-    PUBLIC_PORTS=$2
+    SG=$1
+    ENV=$2
+    RESTRICTED_PORTS=$3
+    PUBLIC_PORTS=$4
+    DB_SG=$5
 
     AH=80.194.77.64/26
     ANYWHERE=0.0.0.0/0
 
     aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
     for PORT in $RESTRICTED_PORTS; do
-        allow_access_to_sg_port "$PORT" "$AH"
+        allow_access_to_sg_port "$SG" "$PORT" "$AH"
     done
     for PORT in $PUBLIC_PORTS; do
-        allow_access_to_sg_port  "$PORT" "$ANYWHERE"
+        allow_access_to_sg_port "$SG" "$PORT" "$ANYWHERE"
     done
 
     # allow access to RDS instance
-    aws ec2 authorize-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
-    aws ec2 authorize-security-group-ingress --group-name "$PRESENTATION_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+    aws ec2 authorize-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
 
 }
 
 create_instance() {
-    USER_DATA=$1
+    ENV=$1
+    SG=$2
+    USER_DATA=$3
+    IAM_ROLE=$4
 
     INSTANCE_ID=$(aws ec2 run-instances \
         --image-id ami-a10897d6 \
         --count 1 \
         --instance-type t2.medium \
         --user-data "$USER_DATA" \
-        --iam-instance-profile Name=${INSTANCE_PROFILE_NAME} \
+        --iam-instance-profile Name=${IAM_ROLE} \
         --security-groups "$SG" \
         --query 'Instances[0].InstanceId' \
         --output text)
@@ -142,19 +126,41 @@ EOF
     done
 }
 
+
+if [ "$#" -ne 2 ]; then
+    echo "Wrong number of arguments"
+    usage; exit
+fi
+
+
+ENV=$1
+RDS_INSTANCE_NAME=$2
+
+INSTANCE_PROFILE_NAME=$ENV
+SG=${ENV}-sg
+USER_DATA_FILE=user-data.yaml
+PG_PASSWORD=$(pwgen -s 20)
+RESTRICTED_PORTS="22 4567"
+PUBLIC_PORTS="80"
+ZONE=openregister.org
+DOMAIN=beta.${ZONE}
+DNS_NAME=${ENV}.${DOMAIN}
+DNS_PROFILES="old-dns default"
+DB_SG=${RDS_INSTANCE_NAME}-db-sg
+
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
 ./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME"
 
-set_up_security_group "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
+set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS" "$DB_SG"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
 
 # it takes a while for the instance profile to be usable by create_instance, so pause a moment
 sleep 5
 
-PUBLIC_IP=$(create_instance "$USER_DATA")
+PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA" "$INSTANCE_PROFILE_NAME")
 
 create_dns_records "$DNS_NAME" "$ZONE" "$PUBLIC_IP" "$DNS_PROFILES"
 
