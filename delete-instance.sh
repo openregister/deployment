@@ -93,3 +93,6 @@ done
 
 # delete security group
 aws ec2 delete-security-group --group-name "$SG"
+
+# delete instance profile and associated role
+./delete-appserver-instance-profile.sh "$INSTANCE_NAME"
