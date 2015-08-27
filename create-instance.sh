@@ -54,72 +54,6 @@ set_up_security_group() {
 
 }
 
-create_instance_profile() {
-    ROLE_NAME=$1
-
-    aws iam create-role --role "${ROLE_NAME}" --assume-role-policy-document "{
-      \"Version\": \"2012-10-17\",
-      \"Statement\": [
-        {
-          \"Effect\": \"Allow\",
-          \"Principal\": {
-            \"Service\": [
-              \"ec2.amazonaws.com\"
-            ]
-          },
-          \"Action\": \"sts:AssumeRole\"
-        }
-      ]
-    }" > /dev/null
-
-    aws iam attach-role-policy --role-name "${ROLE_NAME}" \
-        --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
-
-    aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewIndexerConfigAccess" \
-    --policy-document '{
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Action": [
-                        "s3:GetObject"
-                    ],
-                    "Resource": [
-                        "arn:aws:s3:::preview.config/indexer/indexer.properties"
-                    ],
-                    "Effect": "Allow"
-                }
-            ]
-        }
-    '
-
-    aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewConfigMintAccess" \
-    --policy-document "{
-    \"Version\": \"2012-10-17\",
-    \"Statement\": [
-        {
-            \"Action\": [
-                \"s3:GetObject\"
-            ],
-            \"Resource\": [
-                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\"
-            ],
-            \"Effect\": \"Allow\"
-        }
-    ]
-}
-"
-
-    INSTANCE_PROFILE_NAME=$ROLE_NAME
-    aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}" > /dev/null
-
-    aws iam add-role-to-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}" --role-name "${ROLE_NAME}"
-
-}
-
 create_instance() {
     ENV=$1
     SG=$2
@@ -217,7 +151,7 @@ DB_SG=${RDS_INSTANCE_NAME}-db-sg
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
-create_instance_profile "$INSTANCE_PROFILE_NAME"
+./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME"
 
 set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS" "$DB_SG"
 

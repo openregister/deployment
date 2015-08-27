@@ -95,12 +95,4 @@ done
 aws ec2 delete-security-group --group-name "$SG"
 
 # delete instance profile and associated role
-ROLE_NAME=$INSTANCE_NAME
-INSTANCE_PROFILE_NAME=$INSTANCE_NAME
-aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigMintAccess"
-aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewIndexerConfigAccess"
-aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
-aws iam remove-role-from-instance-profile --instance-profile-name "${ROLE_NAME}" --role-name "${ROLE_NAME}"
-aws iam delete-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}"
-aws iam delete-role --role-name "${ROLE_NAME}"
-
+./delete-appserver-instance-profile.sh "$INSTANCE_NAME"
