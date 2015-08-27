@@ -3,7 +3,7 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 <environment-name> <instance-profile-name> <rds-instance-name>"
+    echo "Usage: $0 <environment-name> <rds-instance-name>"
     echo ""
     echo "* Creates an EC2 instance, security group and route 53 entry for environment-name."
     echo "* Attaches IAM instance profile to the instance."
@@ -127,16 +127,16 @@ EOF
 }
 
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
 
 ENV=$1
-INSTANCE_PROFILE_NAME=$2
-RDS_INSTANCE_NAME=$3
+RDS_INSTANCE_NAME=$2
 
+INSTANCE_PROFILE_NAME=$ENV
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
 PG_PASSWORD=$(pwgen -s 20)
@@ -151,9 +151,14 @@ DB_SG=${RDS_INSTANCE_NAME}-db-sg
 # ensure aws CLI is set up with needed profiles before continuing
 check_aws_profiles_exist "$DNS_PROFILES"
 
+./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME"
+
 set_up_security_group "$SG" "$ENV" "$RESTRICTED_PORTS" "$PUBLIC_PORTS" "$DB_SG"
 
 USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
+
+# it takes a while for the instance profile to be usable by create_instance, so pause a moment
+sleep 5
 
 PUBLIC_IP=$(create_instance "$ENV" "$SG" "$USER_DATA" "$INSTANCE_PROFILE_NAME")
 
