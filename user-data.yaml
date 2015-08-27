@@ -19,56 +19,6 @@ packages:
 package_upgrade: true
 
 write_files:
-- path: /etc/docker-compose.yml.template
-  permissions: '0600'
-  content: |
-    zookeeper:
-      name: zookeeper
-      image: wurstmeister/zookeeper:latest
-      ports:
-        - "2181:2181"
-        - "2888:2888"
-        - "3888:3888"
-
-    kafka:
-      restart: always
-      name: kafka
-      image: wurstmeister/kafka
-      ports:
-        - "9092:9092"
-      links:
-        - zookeeper
-      environment:
-        BROKER_ID: 1
-        PORT: 9092
-        KAFKA_ADVERTISED_HOST_NAME: __KAFKA_ADVERTISED_HOST_NAME__
-        KAFKA_ZOOKEEPER_CONNECT: zookeeper
-        KAFKA_CREATE_TOPICS: "register:1:1"
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-
-    postgres:
-      restart: always
-      name: postgres
-      image: postgres:9.4
-      environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: '%PGPASSWD%'
-
-- path: /usr/local/bin/start-docker
-  permissions: '0755'
-  content: |
-    #!/bin/bash
-
-    umask 0077
-    
-    export cip="$(ifconfig |egrep -C1 'eth0[ \t]' | tail -1 | sed 's/[ \t]\{1,\}/|/g'|cut -d\| -f3 | cut -d\: -f2)"
-    cat /etc/docker-compose.yml.template | \
-      sed -e 's/__KAFKA_ADVERTISED_HOST_NAME__/'$cip'/g' \
-      > /etc/docker-compose.yml
-
-    /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d
-
 - path: /usr/local/bin/setup-cdagent.sh
   permissions: '0755'
   content: |
@@ -80,7 +30,5 @@ write_files:
 
 runcmd:
   - [ service, docker, start ]
-  - [ pip, install, docker-compose==1.3.3 ] # docker-compose 1.4.0 requires docker >=1.7.1
   - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
-  - [ /usr/local/bin/start-docker ]
   - [ /usr/local/bin/setup-cdagent.sh ]
