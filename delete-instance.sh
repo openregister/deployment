@@ -72,8 +72,11 @@ done
 aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
 
 # revoke security group ingress hardcoded for now,
-DB_SG="preview-mint-db-sg"
-aws ec2 revoke-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+MINT_DB_SG="preview-mint-db-sg"
+aws ec2 revoke-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+PRESENTATION_DB_SG="preview-mint-db-sg"
+aws ec2 revoke-security-group-ingress --group-name "$PRESENTATION_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+
 
 # terminate instance
 aws ec2 terminate-instances --instance-ids "$INSTANCE_ID" > /dev/null
@@ -93,6 +96,3 @@ done
 
 # delete security group
 aws ec2 delete-security-group --group-name "$SG"
-
-# delete instance profile and associated role
-./delete-appserver-instance-profile.sh "$INSTANCE_NAME"
