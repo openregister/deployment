@@ -6,7 +6,7 @@ INSTANCE_PROFILE_NAME=indexer-instance-profile
 
 echo "Cleaning up all resources"
 
-echo "Detachin role policy RegisterAppServer"
+echo "Detaching role policy RegisterAppServer"
 aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
 
 echo "Deleting role policy IndexerConfigAccess"
