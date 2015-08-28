@@ -42,7 +42,7 @@ aws iam put-role-policy \
     }
 '
 
-echo "Create instance profile with name INSTANCE_PROFILE_NAME"
+echo "Create instance profile with name $INSTANCE_PROFILE_NAME"
 aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}"
 
 echo "adding role to instance profile"
