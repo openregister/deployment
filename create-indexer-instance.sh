@@ -8,8 +8,8 @@ INSTANCE_PROFILE_NAME=indexer-instance-profile
 
 SG=${INSTANCE_NAME}-sg
 
-#mint rds security group
 MINT_DB_SG='preview-mint-db-sg'
+PRESENTATION_DB_SG='preview-presentation-db-sg'
 
 USER_DATA_FILE=user-data.yaml
 USER_DATA=$(cat "$USER_DATA_FILE" | base64)
@@ -28,6 +28,9 @@ set_up_security_group() {
 
     echo "Allow access to mint RDS instance"
     aws ec2 authorize-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+
+    echo "Allow access to presentation RDS instance"
+    aws ec2 authorize-security-group-ingress --group-name "$PRESENTATION_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
 
 }
 
