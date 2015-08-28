@@ -22,7 +22,6 @@ INSTANCE_PROFILE_NAME=$ENV
 
 SG=${ENV}-sg
 USER_DATA_FILE=user-data.yaml
-PG_PASSWORD=$(pwgen -s 20)
 RESTRICTED_PORTS="22 4567"
 PUBLIC_PORTS="80"
 ZONE=openregister.org
@@ -149,7 +148,7 @@ check_aws_profiles_exist "$DNS_PROFILES"
 
 set_up_security_group "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 
-USER_DATA=$(sed -e "s/%PGPASSWD%/${PG_PASSWORD}/" "${USER_DATA_FILE}" | base64)
+USER_DATA=$(cat "${USER_DATA_FILE}" | base64)
 
 # it takes a while for the instance profile to be usable by create_instance, so pause a moment
 sleep 5
