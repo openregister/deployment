@@ -36,25 +36,7 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" \
 
 aws iam put-role-policy \
     --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewIndexerConfigAccess" \
-    --policy-document '{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Action": [
-                    "s3:GetObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::preview.config/indexer/indexer.properties"
-                ],
-                "Effect": "Allow"
-            }
-        ]
-    }'
-
-aws iam put-role-policy \
-    --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewConfigMintAccess" \
+    --policy-name "PreviewConfigAccess" \
     --policy-document "{
     \"Version\": \"2012-10-17\",
     \"Statement\": [
@@ -63,7 +45,8 @@ aws iam put-role-policy \
                 \"s3:GetObject\"
             ],
             \"Resource\": [
-                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\"
+                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\",
+                \"arn:aws:s3:::preview.config/${ROLE_NAME}/presentation/*\"
             ],
             \"Effect\": \"Allow\"
         }

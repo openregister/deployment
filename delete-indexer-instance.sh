@@ -4,7 +4,8 @@ set -eu
 
 INSTANCE_NAME=Indexer
 SG=${INSTANCE_NAME}-sg
-DB_SG="preview-mint-db-sg"
+MINT_DB_SG="preview-mint-db-sg"
+
 
 INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${INSTANCE_NAME} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
 
@@ -14,7 +15,7 @@ if [ "$INSTANCE_ID" = "None" ]; then
 fi
 
 # revoke security group ingress hardcoded for now,
-aws ec2 revoke-security-group-ingress --group-name "$DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+aws ec2 revoke-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
 
 aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Name
 

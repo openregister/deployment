@@ -16,8 +16,7 @@ fi
 ROLE_NAME=$1
 INSTANCE_PROFILE_NAME=$1
 
-aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigMintAccess"
-aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewIndexerConfigAccess"
+aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "PreviewConfigAccess"
 aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam::022990953738:policy/RegisterAppServer"
 
 aws iam remove-role-from-instance-profile --instance-profile-name "${ROLE_NAME}" --role-name "${ROLE_NAME}"
