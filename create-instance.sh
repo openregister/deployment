@@ -78,7 +78,7 @@ create_instance() {
     INSTANCE_ID=$(aws ec2 run-instances \
         --image-id ami-a10897d6 \
         --count 1 \
-        --instance-type t2.medium \
+        --instance-type t2.micro \
         --user-data "$USER_DATA" \
         --iam-instance-profile Name=${INSTANCE_PROFILE_NAME} \
         --security-groups "$SG" \
