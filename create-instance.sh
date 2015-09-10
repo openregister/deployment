@@ -27,23 +27,8 @@ PUBLIC_PORTS="80"
 ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${ENV}.${DOMAIN}
-DNS_PROFILES="old-dns default"
 MINT_DB_SG=preview-mint-db-sg
 PRESENTATION_DB_SG=preview-presentation-db-sg
-
-check_aws_profiles_exist() {
-    AWS_PROFILES=$1
-    for AWS_PROFILE in $AWS_PROFILES; do
-        set +e
-        aws --profile "$AWS_PROFILE" configure get region > /dev/null 2>/dev/null
-        if [ $? -ne 0 ]; then
-            echo "AWS profile ${AWS_PROFILE} not found"
-            echo "Please run 'aws --profile ${AWS_PROFILE} configure' to set up this aws profile"
-            exit 1
-        fi
-        set -e
-    done
-}
 
 allow_access_to_sg_port() {
     PORT=$1
@@ -114,7 +99,6 @@ create_dns_records() {
     DNS_NAME=$1
     ZONE=$2
     PUBLIC_IP=$3
-    DNS_PROFILES=$4
     TTL=300
 
     DNS_CHANGES=$(cat <<EOF
@@ -132,17 +116,12 @@ create_dns_records() {
 EOF
     )
 
-    for DNS_PROFILE in $DNS_PROFILES; do
-        ZONE_ID=$(aws --profile "$DNS_PROFILE" route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
+    ZONE_ID=$(aws route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
 
-        aws --profile "$DNS_PROFILE" route53 change-resource-record-sets \
-            --hosted-zone-id "$ZONE_ID" \
-            --change-batch "$DNS_CHANGES"
-    done
+    aws route53 change-resource-record-sets \
+        --hosted-zone-id "$ZONE_ID" \
+        --change-batch "$DNS_CHANGES"
 }
-
-# ensure aws CLI is set up with needed profiles before continuing
-check_aws_profiles_exist "$DNS_PROFILES"
 
 ./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME"
 
@@ -155,7 +134,7 @@ sleep 5
 
 PUBLIC_IP=$(create_instance "$USER_DATA")
 
-create_dns_records "$DNS_NAME" "$ZONE" "$PUBLIC_IP" "$DNS_PROFILES"
+create_dns_records "$DNS_NAME" "$ZONE" "$PUBLIC_IP"
 
 echo "Instance launched at ${DNS_NAME}"
 
