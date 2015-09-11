@@ -20,7 +20,6 @@ SG=${INSTANCE_NAME}-sg
 ZONE=openregister.org
 DOMAIN=beta.${ZONE}
 DNS_NAME=${INSTANCE_NAME}.${DOMAIN}
-DNS_PROFILES="old-dns default"
 TTL=300
 
 
@@ -60,14 +59,12 @@ DNS_CHANGES=$(cat <<EOF
 EOF
 )
 
-for DNS_PROFILE in $DNS_PROFILES; do
-    echo "Attempting to delete DNS record from ${DNS_PROFILE}"
-    ZONE_ID=$(aws --profile "$DNS_PROFILE" route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
+echo "Attempting to delete DNS record"
+ZONE_ID=$(aws route53 list-hosted-zones-by-name --dns-name "$ZONE" --query 'HostedZones[0].Id' --output text)
 
-    aws --profile "$DNS_PROFILE" route53 change-resource-record-sets \
-        --hosted-zone-id "$ZONE_ID" \
-        --change-batch "$DNS_CHANGES" || true # don't bail if it fails
-done
+aws route53 change-resource-record-sets \
+    --hosted-zone-id "$ZONE_ID" \
+    --change-batch "$DNS_CHANGES" || true # don't bail if it fails
 
 aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
 
