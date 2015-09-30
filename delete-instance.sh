@@ -18,7 +18,7 @@ fi
 INSTANCE_NAME=$1
 SG=${INSTANCE_NAME}-sg
 ZONE=openregister.org
-DOMAIN=beta.${ZONE}
+DOMAIN=preview.${ZONE}
 DNS_NAME=${INSTANCE_NAME}.${DOMAIN}
 TTL=300
 
