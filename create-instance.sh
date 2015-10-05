@@ -3,37 +3,62 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 <environment-name>"
+    echo "Usage: $0 <register-name> <environment>"
     echo ""
-    echo "* Creates an EC2 instance, security group and route 53 entry for environment-name."
+    echo "* Creates an EC2 instance, security group and route 53 entry for register-name"
+    echo "  in the given environment."
     echo "* Attaches IAM instance profile to the instance."
     echo "* Grants permissions for instance to access rds."
 }
 
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
 
-ENV=$1
-INSTANCE_PROFILE_NAME=$ENV
+REGISTER=$1
+ENV=$2
+INSTANCE_PROFILE_NAME=${ENV}-${REGISTER}
 
-SG=${ENV}-sg
+SG=${ENV}-${REGISTER}
 USER_DATA_FILE=user-data.yaml
 RESTRICTED_PORTS="22 4567"
 PUBLIC_PORTS="80"
 ZONE=openregister.org
-DOMAIN=preview.${ZONE}
-DNS_NAME=${ENV}.${DOMAIN}
-MINT_DB_SG=preview-mint-db-sg
-PRESENTATION_DB_SG=preview-presentation-db-sg
+MINT_DB_SG=${ENV}-mint-db-sg
+PRESENTATION_DB_SG=${ENV}-presentation-db-sg
+
+case $ENV in
+    preview)
+        DOMAIN=preview.${ZONE}
+        ;;
+    prod)
+        # eventually this will be plain ${ZONE} once we start
+        # switching the alpha off
+        DOMAIN=prod.${ZONE}
+        ;;
+    *)
+        echo "Unrecognized environment: $ENV"
+        usage; exit 1
+        ;;
+esac
+
+DNS_NAME=${REGISTER}.${DOMAIN}
+
+MINT_SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${MINT_DB_SG}  --query 'SecurityGroups[0].GroupId' --output text)
+PRESENTATION_SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${PRESENTATION_DB_SG}  --query 'SecurityGroups[0].GroupId' --output text)
+
+VPC_ID=$(aws ec2 describe-vpcs --filter Name=tag:Name,Values=${ENV} --query 'Vpcs[0].VpcId' --output text)
+# There are multiple subnets but we don't actually care which one we use
+SUBNET_ID=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=${VPC_ID} --query 'Subnets[0].SubnetId' --output text)
+
 
 allow_access_to_sg_port() {
     PORT=$1
     CIDR=$2
-    aws ec2 authorize-security-group-ingress --group-name "$SG" --protocol tcp --port "$PORT" --cidr "$CIDR"
+    aws ec2 authorize-security-group-ingress --group-id "$SG_ID" --protocol tcp --port "$PORT" --cidr "$CIDR"
 }
 
 set_up_security_group() {
@@ -43,7 +68,7 @@ set_up_security_group() {
     AH=80.194.77.64/26
     ANYWHERE=0.0.0.0/0
 
-    aws ec2 create-security-group --group-name "$SG" --description "security group for $ENV" > /dev/null
+    SG_ID=$(aws ec2 create-security-group --group-name "$SG" --vpc-id "$VPC_ID" --description "security group for $REGISTER" --query 'GroupId' --output text)
     for PORT in $RESTRICTED_PORTS; do
         allow_access_to_sg_port "$PORT" "$AH"
     done
@@ -51,9 +76,9 @@ set_up_security_group() {
         allow_access_to_sg_port  "$PORT" "$ANYWHERE"
     done
 
-    # allow access to RDS instance
-    aws ec2 authorize-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
-    aws ec2 authorize-security-group-ingress --group-name "$PRESENTATION_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+    # allow access to RDS instances
+    aws ec2 authorize-security-group-ingress --group-id "$MINT_SG_ID" --protocol tcp --port 5432 --source-group "$SG_ID"
+    aws ec2 authorize-security-group-ingress --group-id "$PRESENTATION_SG_ID" --protocol tcp --port 5432 --source-group "$SG_ID"
 
 }
 
@@ -66,14 +91,16 @@ create_instance() {
         --instance-type t2.micro \
         --user-data "$USER_DATA" \
         --iam-instance-profile Name=${INSTANCE_PROFILE_NAME} \
-        --security-groups "$SG" \
+        --subnet-id "$SUBNET_ID" \
+        --associate-public-ip-address \
+        --security-group-ids "$SG_ID" \
         --query 'Instances[0].InstanceId' \
         --output text)
     # The `Name` tag is special and shows up as the instance name column
     # in the ec2 console
-    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${ENV}" > /dev/null
+    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${REGISTER}" > /dev/null
     # the Environment tag controls where CodeDeploy will deploy to.
-    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Environment,Value=preview" > /dev/null
+    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Environment,Value=${ENV}" > /dev/null
 
     tries=0
     PUBLIC_IP=
