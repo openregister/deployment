@@ -3,12 +3,12 @@
 set -eu
 
 usage() {
-    echo "Usage: $0 instance-name"
+    echo "Usage: $0 instance-name env"
     echo
-    echo "Deletes an instance and its dependent objects"
+    echo "Deletes an instance and its dependent objects from the given environment"
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
@@ -16,18 +16,36 @@ fi
 
 
 INSTANCE_NAME=$1
-SG=${INSTANCE_NAME}-sg
+ENV=$2
+SG=${ENV}-${INSTANCE_NAME}
+SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${SG}  --query 'SecurityGroups[0].GroupId' --output text)
+
 ZONE=openregister.org
-DOMAIN=preview.${ZONE}
+
+case $ENV in
+    preview)
+        DOMAIN=preview.${ZONE}
+        ;;
+    prod)
+        # eventually this will be plain ${ZONE} once we start
+        # switching the alpha off
+        DOMAIN=prod.${ZONE}
+        ;;
+    *)
+        echo "Unrecognized environment: $ENV"
+        usage; exit 1
+        ;;
+esac
+
+
 DNS_NAME=${INSTANCE_NAME}.${DOMAIN}
 TTL=300
 
 
-
-INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${INSTANCE_NAME} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
+INSTANCE_ID=$(aws ec2 describe-instances --filters Name=tag:Name,Values=${INSTANCE_NAME} Name=tag:Environment,Values=${ENV} Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)
 
 if [ "$INSTANCE_ID" = "None" ]; then
-    echo "Couldn't find an instance tagged with Name = ${INSTANCE_NAME}"
+    echo "Couldn't find an instance tagged with Name = ${INSTANCE_NAME} and Environment = ${ENV}"
     exit 1
 fi
 
@@ -66,13 +84,13 @@ aws route53 change-resource-record-sets \
     --hosted-zone-id "$ZONE_ID" \
     --change-batch "$DNS_CHANGES" || true # don't bail if it fails
 
-aws ec2 delete-tags --resources "${INSTANCE_ID}" --tags Key=Environment
-
-# revoke security group ingress hardcoded for now,
-MINT_DB_SG="preview-mint-db-sg"
-aws ec2 revoke-security-group-ingress --group-name "$MINT_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
-PRESENTATION_DB_SG="preview-mint-db-sg"
-aws ec2 revoke-security-group-ingress --group-name "$PRESENTATION_DB_SG" --protocol tcp --port 5432 --source-group "$SG"
+# revoke security group ingress hardcoded for now
+MINT_DB_SG="${ENV}-mint-db-sg"
+MINT_SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${MINT_DB_SG}  --query 'SecurityGroups[0].GroupId' --output text)
+aws ec2 revoke-security-group-ingress --group-id "$MINT_SG_ID" --protocol tcp --port 5432 --source-group "$SG_ID"
+PRESENTATION_DB_SG="${ENV}-presentation-db-sg"
+PRESENTATION_SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${PRESENTATION_DB_SG}  --query 'SecurityGroups[0].GroupId' --output text)
+aws ec2 revoke-security-group-ingress --group-id "$PRESENTATION_SG_ID" --protocol tcp --port 5432 --source-group "$SG_ID"
 
 
 # terminate instance
@@ -92,4 +110,4 @@ until [ $tries -ge 10 ]; do
 done
 
 # delete security group
-aws ec2 delete-security-group --group-name "$SG"
+aws ec2 delete-security-group --group-id "$SG_ID"
