@@ -3,18 +3,21 @@
 
 
 usage() {
-    echo "Usage: $0 role-name"
+    echo "Usage: $0 role-name environment"
     echo
     echo "Creates an instance-profile with role and its permission for code deploy"
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
 ROLE_NAME=$1
 INSTANCE_PROFILE_NAME=$1
+ENV=$2
+
+CONFIG_BUCKET=openregister.${ENV}.config
 
 aws iam create-role --role "${ROLE_NAME}" --assume-role-policy-document "{
   \"Version\": \"2012-10-17\",
@@ -36,7 +39,7 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" \
 
 aws iam put-role-policy \
     --role-name "${ROLE_NAME}" \
-    --policy-name "PreviewConfigAccess" \
+    --policy-name "${ENV}ConfigAccess" \
     --policy-document "{
     \"Version\": \"2012-10-17\",
     \"Statement\": [
@@ -45,8 +48,8 @@ aws iam put-role-policy \
                 \"s3:GetObject\"
             ],
             \"Resource\": [
-                \"arn:aws:s3:::preview.config/${ROLE_NAME}/mint/*\",
-                \"arn:aws:s3:::preview.config/${ROLE_NAME}/presentation/*\"
+                \"arn:aws:s3:::${CONFIG_BUCKET}/${ROLE_NAME}/mint/*\",
+                \"arn:aws:s3:::${CONFIG_BUCKET}/${ROLE_NAME}/presentation/*\"
             ],
             \"Effect\": \"Allow\"
         }
