@@ -150,7 +150,7 @@ EOF
         --change-batch "$DNS_CHANGES"
 }
 
-./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME"
+./create-appserver-instance-profile.sh "$INSTANCE_PROFILE_NAME" "$ENV"
 
 set_up_security_group "$RESTRICTED_PORTS" "$PUBLIC_PORTS"
 

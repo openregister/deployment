@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 
+usage() {
+    echo "Usage: $0 environment"
+    echo
+    echo "Creates an instance-profile for the indexer in a given environment"
+}
+
+if [ "$#" -ne 1 ]; then
+    echo "Wrong number of arguments"
+    usage; exit
+fi
+
+ENV=$1
 ROLE_NAME=indexer-instance-role
 INSTANCE_PROFILE_NAME=indexer-instance-profile
+
+
+CONFIG_BUCKET=openregister.${ENV}.config
 
 echo "Creating role $ROLE_NAME"
 aws iam create-role --role "${ROLE_NAME}" --assume-role-policy-document "{
@@ -34,7 +49,7 @@ aws iam put-role-policy \
                     "s3:GetObject"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::preview.config/indexer/indexer.properties"
+                    "arn:aws:s3:::${CONFIG_BUCKET}/indexer/indexer.properties"
                 ],
                 "Effect": "Allow"
             }
