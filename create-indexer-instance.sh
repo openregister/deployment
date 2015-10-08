@@ -18,7 +18,7 @@ VPC=$1
 
 INSTANCE_NAME=indexer
 
-INSTANCE_PROFILE_NAME=indexer-instance-profile
+INSTANCE_PROFILE_NAME=${VPC}-indexer
 
 SG=${VPC}-${INSTANCE_NAME}-sg
 
