@@ -3,19 +3,20 @@
 
 
 usage() {
-    echo "Usage: $0 role-name environment"
+    echo "Usage: $0 role-name register-name environment"
     echo
     echo "Creates an instance-profile with role and its permission for code deploy"
 }
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
 
 ROLE_NAME=$1
 INSTANCE_PROFILE_NAME=$1
-ENV=$2
+REGISTER_NAME=$2
+ENV=$3
 
 CONFIG_BUCKET=openregister.${ENV}.config
 
@@ -48,8 +49,8 @@ aws iam put-role-policy \
                 \"s3:GetObject\"
             ],
             \"Resource\": [
-                \"arn:aws:s3:::${CONFIG_BUCKET}/${ROLE_NAME}/mint/*\",
-                \"arn:aws:s3:::${CONFIG_BUCKET}/${ROLE_NAME}/presentation/*\"
+                \"arn:aws:s3:::${CONFIG_BUCKET}/${REGISTER_NAME}/mint/*\",
+                \"arn:aws:s3:::${CONFIG_BUCKET}/${REGISTER_NAME}/presentation/*\"
             ],
             \"Effect\": \"Allow\"
         }
