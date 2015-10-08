@@ -3,6 +3,7 @@
 APPLICATION_NAME=$1
 DEPLOYMENT_GROUP_NAME=$2
 BUCKET_NAME=$3
+ENVIRONMENT=$4
 
 CODE_DEPLOYER_ROLE_ARN=arn:aws:iam::022990953738:role/code-deploy-role
 
@@ -16,7 +17,7 @@ createApplication(){
 }
 
 createDeploymentGroup(){
-    INSTANCE_TAG_FILTERS="Key=Environment,Value=preview,Type=KEY_AND_VALUE"
+    INSTANCE_TAG_FILTERS="Key=Environment,Value=$ENVIRONMENT,Type=KEY_AND_VALUE"
 
     DEPLOYMENT_GROUP_ID=$(aws deploy create-deployment-group \
             --application-name $APPLICATION_NAME \
@@ -35,12 +36,12 @@ createBucket(){
 
 
 usage() {
-    echo "Usage: $0 application-name deployment-group-name s3-bucket-name"
+    echo "Usage: $0 application-name deployment-group-name s3-bucket-name environment(prod|preview)"
     echo
     echo "Creates an application with deployment group at code-deploy"
 }
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 4 ]; then
     echo "Wrong number of arguments"
     usage; exit
 fi
