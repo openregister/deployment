@@ -17,7 +17,7 @@ createApplication(){
 }
 
 createDeploymentGroup(){
-    INSTANCE_TAG_FILTERS="Key=Environment,Value=$ENVIRONMENT,Type=KEY_AND_VALUE"
+    INSTANCE_TAG_FILTERS="Key=AppServer,Value=${ENVIRONMENT}-register,Type=KEY_AND_VALUE"
 
     DEPLOYMENT_GROUP_ID=$(aws deploy create-deployment-group \
             --application-name $APPLICATION_NAME \
