@@ -63,6 +63,7 @@ create_instance() {
         --user-data "$USER_DATA" \
         --iam-instance-profile Name=${INSTANCE_PROFILE_NAME} \
         --subnet-id "$SUBNET_ID" \
+        --associate-public-ip-address \
         --security-group-ids "$SECURITY_GROUP_ID" \
         --query 'Instances[0].InstanceId' \
         --output text)
