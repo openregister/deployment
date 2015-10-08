@@ -57,6 +57,27 @@ aws iam put-role-policy \
     }
 '
 
+echo "putting policy CloudSearchDataExport to $ROLE_NAME"
+aws iam put-role-policy \
+--role-name "${ROLE_NAME}" \
+--policy-name "CloudSearchDataExport" \
+--policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "cloudsearch:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:cloudsearch:eu-west-1:022990953738:domain/address",
+                "arn:aws:cloudsearch:eu-west-1:022990953738:domain/address-high-watermark"
+            ]
+        }
+    ]
+}
+'
+
 echo "Create instance profile with name $INSTANCE_PROFILE_NAME"
 aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}"
 

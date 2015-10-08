@@ -12,6 +12,9 @@ aws iam detach-role-policy --role-name "${ROLE_NAME}" --policy-arn "arn:aws:iam:
 echo "Deleting role policy IndexerConfigAccess"
 aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "IndexerConfigAccess"
 
+echo "Deleting role policy CloudSearchDataExport"
+aws iam delete-role-policy --role-name "${ROLE_NAME}" --policy-name "CloudSearchDataExport"
+
 echo "Deleting role from instance profile"
 aws iam remove-role-from-instance-profile --instance-profile-name "${ROLE_NAME}" --role-name "${ROLE_NAME}"
 
