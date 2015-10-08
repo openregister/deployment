@@ -70,6 +70,7 @@ create_instance() {
     echo "Tagging instance"
     aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Name,Value=${INSTANCE_NAME}" > /dev/null
     aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=Environment,Value=${VPC}" > /dev/null
+    aws ec2 create-tags --resources "$INSTANCE_ID" --tags "Key=AppServer,Value=${VPC}-indexer" > /dev/null
 }
 
 set_up_security_group
