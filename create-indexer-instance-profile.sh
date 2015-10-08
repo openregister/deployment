@@ -12,8 +12,8 @@ if [ "$#" -ne 1 ]; then
 fi
 
 ENV=$1
-ROLE_NAME=indexer-instance-role
-INSTANCE_PROFILE_NAME=indexer-instance-profile
+ROLE_NAME=$ENV-indexer
+INSTANCE_PROFILE_NAME=$ROLE_NAME
 
 
 CONFIG_BUCKET=openregister.${ENV}.config
