@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 usage() {
     echo "Usage: $0 environment"
     echo
@@ -41,21 +43,21 @@ echo "putting policy IndexerConfigAccess to $ROLE_NAME"
 aws iam put-role-policy \
 --role-name "${ROLE_NAME}" \
 --policy-name "IndexerConfigAccess" \
---policy-document '{
-        "Version": "2012-10-17",
-        "Statement": [
+--policy-document "{
+        \"Version\": \"2012-10-17\",
+        \"Statement\": [
             {
-                "Action": [
-                    "s3:GetObject"
+                \"Action\": [
+                    \"s3:GetObject\"
                 ],
-                "Resource": [
-                    "arn:aws:s3:::${CONFIG_BUCKET}/indexer/indexer.properties"
+                \"Resource\": [
+                    \"arn:aws:s3:::${CONFIG_BUCKET}/indexer/indexer.properties\"
                 ],
-                "Effect": "Allow"
+                \"Effect\": \"Allow\"
             }
         ]
     }
-'
+"
 
 echo "putting policy CloudSearchDataExport to $ROLE_NAME"
 aws iam put-role-policy \
