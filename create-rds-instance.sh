@@ -30,6 +30,7 @@ DB_SG_ID=$(aws ec2 create-security-group --group-name "$DB_SG" --vpc-id "$VPC_ID
 
 aws rds create-db-instance \
     --db-instance-identifier "$INSTANCE_NAME" \
+    --db-parameter-group-name "postgresrdsgroup" \
     --allocated-storage "$SIZE_GB" \
     --db-instance-class "$INSTANCE_CLASS" \
     --no-publicly-accessible \
