@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eu
 
@@ -28,14 +28,12 @@ CURRENT_WORKING_DIR=`pwd`
 
 CONFIG_FILE_DIRECTORY=${CURRENT_WORKING_DIR}/register-configurations
 
-LOCAL_PASSWORD_STORE_DIR=~/.registers-pass
-
 INDEXER_CONFIG_LOCATION=/tmp/indexer.properties
 
-export PASSWORD_STORE_DIR=$LOCAL_PASSWORD_STORE_DIR
+export PASSWORD_STORE_DIR=~/.registers-pass
 
 function createDatabaseAndUsers(){
-  cd $LOCAL_PASSWORD_STORE_DIR
+  cd $PASSWORD_STORE_DIR
 
   BRANCH_NAME=adding_password_for_${ENV}_${REGISTER_NAME}
 
@@ -210,7 +208,7 @@ function deployApp(){
 }
 
 function grantReadOnlyUserAccess(){
-  cd $LOCAL_PASSWORD_STORE_DIR
+  cd $PASSWORD_STORE_DIR
 
   sh grant-access-to-read-only-users.sh ${REGISTER_DB_NAME} ${ENV}
 }
