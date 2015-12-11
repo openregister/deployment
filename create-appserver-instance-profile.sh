@@ -50,7 +50,9 @@ aws iam put-role-policy \
             ],
             \"Resource\": [
                 \"arn:aws:s3:::${CONFIG_BUCKET}/${REGISTER_NAME}/mint/*\",
-                \"arn:aws:s3:::${CONFIG_BUCKET}/${REGISTER_NAME}/presentation/*\"
+		\"arn:aws:s3:::${CONFIG_BUCKET}/${REGISTER_NAME}/presentation/*\",
+		\"arn:aws:s3:::${CONFIG_BUCKET}/fields.yaml\",
+		\"arn:aws:s3:::${CONFIG_BUCKET}/registers.yaml\"
             ],
             \"Effect\": \"Allow\"
         }
