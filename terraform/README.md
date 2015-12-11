@@ -67,7 +67,6 @@ State path: terraform.tfstate
 
 ```
 $ terraform destroy
-```
 Do you really want to destroy?
   Terraform will delete all your managed infrastructure.
   There is no undo. Only 'yes' will be accepted to confirm.
