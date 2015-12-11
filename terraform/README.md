@@ -63,6 +63,50 @@ use the `terraform show` command.
 State path: terraform.tfstate
 ```
 
+## Tear-down
+
+```
+$ terraform destroy
+```
+Do you really want to destroy?
+  Terraform will delete all your managed infrastructure.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+aws_vpc.coreos-vpc-tf: Refreshing state... (ID: vpc-965508f3)
+aws_internet_gateway.coreos-vpc-gw-tf: Refreshing state... (ID: igw-3356c856)
+aws_subnet.coreos-subnet-tf: Refreshing state... (ID: subnet-6774303e)
+aws_security_group.coreos-tf: Refreshing state... (ID: sg-d66307b2)
+aws_route_table.coreos-rt-tf: Refreshing state... (ID: rtb-f15c6294)
+aws_route_table_association.coreos-rta-tf: Refreshing state... (ID: rtbassoc-c75b40a2)
+aws_instance.coreos-tf-example.0: Refreshing state... (ID: i-514bd4dc)
+aws_instance.coreos-tf-example.1: Refreshing state... (ID: i-564bd4db)
+aws_instance.coreos-tf-example.2: Refreshing state... (ID: i-c44ad549)
+aws_route_table_association.coreos-rta-tf: Destroying...
+aws_instance.coreos-tf-example.1: Destroying...
+aws_instance.coreos-tf-example.0: Destroying...
+aws_instance.coreos-tf-example.2: Destroying...
+aws_route_table_association.coreos-rta-tf: Destruction complete
+aws_route_table.coreos-rt-tf: Destroying...
+aws_route_table.coreos-rt-tf: Destruction complete
+aws_internet_gateway.coreos-vpc-gw-tf: Destroying...
+aws_internet_gateway.coreos-vpc-gw-tf: Destruction complete
+aws_instance.coreos-tf-example.1: Destruction complete
+aws_instance.coreos-tf-example.2: Destruction complete
+aws_instance.coreos-tf-example.0: Destruction complete
+aws_subnet.coreos-subnet-tf: Destroying...
+aws_security_group.coreos-tf: Destroying...
+aws_security_group.coreos-tf: Destruction complete
+aws_subnet.coreos-subnet-tf: Destruction complete
+aws_vpc.coreos-vpc-tf: Destroying...
+aws_vpc.coreos-vpc-tf: Destruction complete
+
+Apply complete! Resources: 0 added, 0 changed, 9 destroyed.
+```
+
 ## Notes
 
 The state file records all the things that Terraform created and knows about. Terraform [recommend that you place this into source control](https://www.terraform.io/intro/getting-started/build.html) to ensure everyone has the same copy.
+
+Items created outside of Terraform (eg not registed inside the tfstate file) will be ignored.
