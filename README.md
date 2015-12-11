@@ -17,3 +17,7 @@ To deploy an environment:
 ```
 ./create-instance.sh <environment-name>
 ```
+
+## Terraform
+
+See the Terraform subdirectory.
