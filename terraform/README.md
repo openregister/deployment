@@ -108,4 +108,4 @@ Apply complete! Resources: 0 added, 0 changed, 9 destroyed.
 
 The state file records all the things that Terraform created and knows about. Terraform [recommend that you place this into source control](https://www.terraform.io/intro/getting-started/build.html) to ensure everyone has the same copy.
 
-Items created outside of Terraform (eg not registed inside the tfstate file) will be ignored.
+Items created outside of Terraform (eg not registered in the tfstate file) will be ignored.
