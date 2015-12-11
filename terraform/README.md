@@ -62,3 +62,7 @@ use the `terraform show` command.
 
 State path: terraform.tfstate
 ```
+
+## Notes
+
+The state file records all the things that Terraform created and knows about. Terraform [recommend that you place this into source control](https://www.terraform.io/intro/getting-started/build.html) to ensure everyone has the same copy.
