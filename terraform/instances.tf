@@ -1,4 +1,4 @@
-resource "aws_instance" "coreos-tf-example" {
+resource "aws_instance" "coreos-instances-tf" {
     count = 3
     ami = "ami-fd6ccd8e"
     instance_type = "t1.micro"
