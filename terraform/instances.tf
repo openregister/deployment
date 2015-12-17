@@ -17,7 +17,7 @@ resource "aws_instance" "coreos-certificate-transparency-docker-tf" {
     instance_type = "t1.micro"
     user_data = "${file("certificate-transparency.yml")}"
     subnet_id = "${aws_subnet.coreos-subnet-tf.id}"
-    vpc_security_group_ids = [ "${aws_security_group.coreos-tf.id}" ]
+    vpc_security_group_ids = [ "${aws_security_group.coreos-tf.id}", "${aws_security_group.coreos-ct-tf.id}" ]
 
     tags {
       Name = "CT (coreos) (tf)"

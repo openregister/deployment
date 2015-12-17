@@ -28,7 +28,7 @@ coreos:
         [Service]
         TimeoutStartSec=0
         ExecStartPre=-/usr/bin/docker pull openregister/certificate-transparency
-        ExecStart=/usr/bin/docker run -d -p 80:8080 openregister/certificate-transparency
+        ExecStart=/usr/bin/docker run -it -p 80:8080 openregister/certificate-transparency
         Restart=always
 
         [Install]
