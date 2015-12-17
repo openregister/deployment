@@ -27,7 +27,7 @@ coreos:
         [Service]
         TimeoutStartSec=0
         ExecStartPre=-/usr/bin/docker pull openregister/certificate-transparency
-        ExecStart=/usr/bin/docker run -d openregister/certificate-transparency /bin/sh -c "while true; do echo hello world; sleep 5; done"
+        ExecStart=/usr/bin/docker run -d -p 80:8080 openregister/certificate-transparency
         Restart=always
 
         [Install]
@@ -41,3 +41,9 @@ users:
       - docker
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCW+YYupls/+vc2phpLrZkaSOQsDCfss/Uh0RlYBjle4zz5VO4ZbV23CmwnQwtJZumGl6NguCiuHuQw++BaNyuFK/N3mHyM3qr3leMRFBLp5cQl665SydfOdxxMWt2nKmqtoA9algpKNoF5cRBI5mo968/FHhk4zNNa1gplgAEctXvu2xyRxZUkRZCq7ZheamDdw1/vpjG/mLdcSyjlYBy/iG1tgCc2iYcA2ZFLlisY7+cErNUMRcZJ0hEb/Bm0cZSEYaxRy48lhQmfsHCgcLmB6JfJ2s0T+EKOaC1ZE0gBtAjh9Z/UFZB/LJZpxp3Hqa1WdxVOzfbpyN6X5Xx3dEjv andrewg
+  - name: omsharma
+    groups:
+      - sudo
+      - docker
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcntQbymoWmb4l2xztDMu+6KAa9+ykyarqxFhkejGXNy0fgUlm0P8Td7vI5/AU4YAGiOgLjq38B/OADhv40x0L66Zi5TkHAL+XWgQ+yKPjsc170WCJy6nv5gInPhPZ794H6v0JT+9i1/f7Cs5PiVrWfIF9oj4ZtUpDUjSPzsk86b07n+384thSO6gB5fugCkIYan7Uyk05v8yAoHpkelyNTzLdRWtIqOQvtt1vQnC6ZBV7M6JAQQAzXnJnhTaPjY6Dy7a3co5HQonhjsDSo151dcfngyEmdbs4yRB4ZHBsyno26bSNKzKv2ltKrVr+/NKgtbyIDdUXaopuT9drKvM3 omsharma
