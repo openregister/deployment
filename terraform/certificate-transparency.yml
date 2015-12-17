@@ -18,6 +18,7 @@ coreos:
     #- name: fleet.service
     #  command: start
     - name: "certificate-transparency-docker.service"
+      command: start
       content: |
         [Unit]
         Description=Certificate Transparency image
