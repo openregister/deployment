@@ -11,6 +11,14 @@ resource "aws_instance" "coreos-instances-tf" {
     }
 }
 
+output "etcd-dns-internal" {
+  value = "${join(",", aws_instance.coreos-instances-tf.*.private_dns)}"
+}
+
+output "etcd-dns-external" {
+  value = "${join(",", aws_instance.coreos-instances-tf.*.public_dns)}"
+}
+
 resource "aws_instance" "coreos-certificate-transparency-docker-tf" {
     depends_on = ["aws_instance.coreos-instances-tf"]
     ami = "ami-fd6ccd8e"
@@ -22,4 +30,8 @@ resource "aws_instance" "coreos-certificate-transparency-docker-tf" {
     tags {
       Name = "CT (coreos) (tf)"
     }
+}
+
+output "ct-dns-external" {
+  value = "${aws_instance.coreos-certificate-transparency-docker-tf.public_dns}"
 }
