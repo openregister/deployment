@@ -28,11 +28,24 @@ VPC_ID=$(aws ec2 describe-vpcs --filter Name=tag:Name,Values=${VPC} --query 'Vpc
 
 DB_SG_ID=$(aws ec2 create-security-group --group-name "$DB_SG" --vpc-id "$VPC_ID" --description "$VPC $NAME RDS" --query GroupId --output text)
 
+case $VPC in
+      prod)
+          MULTI_AZ=true
+          BACKUP_RETENTION_PERIOD=14
+          ;;
+      *)
+          MULTI_AZ=false
+	  BACKUP_RETENTION_PERIOD=1
+          ;;
+esac
+
 aws rds create-db-instance \
     --db-instance-identifier "$INSTANCE_NAME" \
     --db-parameter-group-name "postgresrdsgroup" \
     --allocated-storage "$SIZE_GB" \
     --db-instance-class "$INSTANCE_CLASS" \
+    --multi-az "$MULTI_AZ" \
+    --backup-retention-period "$BACKUP_RETENTION_PERIOD" \
     --no-publicly-accessible \
     --engine postgres \
     --engine-version 9.4.1 \
