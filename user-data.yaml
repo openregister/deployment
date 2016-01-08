@@ -10,7 +10,7 @@ users:
   - name: omsharma
     groups: users
     ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcntQbymoWmb4l2xztDMu+6KAa9+ykyarqxFhkejGXNy0fgUlm0P8Td7vI5/AU4YAGiOgLjq38B/OADhv40x0L66Zi5TkHAL+XWgQ+yKPjsc170WCJy6nv5gInPhPZ794H6v0JT+9i1/f7Cs5PiVrWfIF9oj4ZtUpDUjSPzsk86b07n+384thSO6gB5fugCkIYan7Uyk05v8yAoHpkelyNTzLdRWtIqOQvtt1vQnC6ZBV7M6JAQQAzXnJnhTaPjY6Dy7a3co5HQonhjsDSo151dcfngyEmdbs4yRB4ZHBsyno26bSNKzKv2ltKrVr+/NKgtbyIDdUXaopuT9drKvM3 foromsharma@gmail.com
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbmN0cE32F4+otpZp7Usr4ZtB6L8KwLV6kRupHC5wJlOkGFteK7Qgq0fmsbZlE3/vMyjw3ad03rByzVwBFBRuENq2t94P7ejiSlax0YyPdd/jGz+8qFuhnd0ppOahtoQ63BQF/SKylvhcWkFKc73hsZhoySrwKtmwRe11G7sGrh8k1sT2Iu2j5JD4vgJmzCFy/k/qIUHKwuV+7r+vNw7yobrKHX6Rj0oU4+KqKIR7ntwX/+Hmgz6MgLxCj2sFFJKYRyErh4MZdr3W3ibp/sW+XMeUZMKF0Ms76j6CZfgo5LX1YPnxQKdtkYMlIpjA7B4zDZFiDM+X2Z/uHxqFlqgmH OmSharma
     sudo: ALL=(ALL) NOPASSWD:ALL
 
 packages:
