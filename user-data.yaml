@@ -12,6 +12,11 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbmN0cE32F4+otpZp7Usr4ZtB6L8KwLV6kRupHC5wJlOkGFteK7Qgq0fmsbZlE3/vMyjw3ad03rByzVwBFBRuENq2t94P7ejiSlax0YyPdd/jGz+8qFuhnd0ppOahtoQ63BQF/SKylvhcWkFKc73hsZhoySrwKtmwRe11G7sGrh8k1sT2Iu2j5JD4vgJmzCFy/k/qIUHKwuV+7r+vNw7yobrKHX6Rj0oU4+KqKIR7ntwX/+Hmgz6MgLxCj2sFFJKYRyErh4MZdr3W3ibp/sW+XMeUZMKF0Ms76j6CZfgo5LX1YPnxQKdtkYMlIpjA7B4zDZFiDM+X2Z/uHxqFlqgmH OmSharma
     sudo: ALL=(ALL) NOPASSWD:ALL
+  - name: andrewg
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCW+YYupls/+vc2phpLrZkaSOQsDCfss/Uh0RlYBjle4zz5VO4ZbV23CmwnQwtJZumGl6NguCiuHuQw++BaNyuFK/N3mHyM3qr3leMRFBLp5cQl665SydfOdxxMWt2nKmqtoA9algpKNoF5cRBI5mo968/FHhk4zNNa1gplgAEctXvu2xyRxZUkRZCq7ZheamDdw1/vpjG/mLdcSyjlYBy/iG1tgCc2iYcA2ZFLlisY7+cErNUMRcZJ0hEb/Bm0cZSEYaxRy48lhQmfsHCgcLmB6JfJ2s0T+EKOaC1ZE0gBtAjh9Z/UFZB/LJZpxp3Hqa1WdxVOzfbpyN6X5Xx3dEjv andrewg
+    sudo: ALL=(ALL) NOPASSWD:ALL
 
 packages:
   - docker
