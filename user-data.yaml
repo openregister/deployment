@@ -5,7 +5,7 @@ users:
   - name: philandstuff
     groups: users
     ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsYvhPkvKma2RwWVwUNJ2fcoNjlObibUka0fl5WcctTokz8RISDkOAPjz+L0QmGsq/Dhgn/mbspKFyNKvQsujeooEpaO+cjYPXoUF1NTxhbUrMEu2uE+CPoj4zPbAZ9A6LdxkL13F3gJwZi9k8K9+6AnJeB4IrCLS5KHRiL+tBZMLPvKnn54M6PCfkWJH6zVO92plFTpRX1W4GanUwYGTemFX0qUwFgZu9OJvGiR+ZQKJMQ2Y3O+IMHv1KusfBrO+Q4iWn+A5VcJRoxml3lr0fYlbaetCpszkaY5HbQsLPDGtvsN1jXj2ghVe2ZbK8SKe13g+LSqYxmIX5qCAoEi+J philip.potter@digital.cabinet-office.gov.uk
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDpD0Wc0pfD5NrV0D7alwOZDIqC9id+RroF2BQ59wLqxvF4wvlgtab0VHiIylSeN4K2bK5ikugy6/rwhWWdoQ3raMXIgOWP6ukSh/OLUioxCeop04IlF4JgUo3uNoInkUegnLw42sg/cKX+pbv/1Rc4GEO6J0Wy6YylyeieAWiy2rwgO/nr/49Tyiw1C66embmglhv7OaZEthpKyM3u6rlJeeU0H2K/bsc9yU/Utpek0hx/nih8qlVEPG7/3welWUNb/LwFC4EpJKiU72mRcjWGh9l5MjCJ2SR/wimY1AHQ4YES3VeAQvcaTKMCnaBET/RhnashxMr0f3V7IDkg56tZ cardno:000603815000
     sudo: ALL=(ALL) NOPASSWD:ALL
   - name: omsharma
     groups: users
