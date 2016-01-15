@@ -12,6 +12,16 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcntQbymoWmb4l2xztDMu+6KAa9+ykyarqxFhkejGXNy0fgUlm0P8Td7vI5/AU4YAGiOgLjq38B/OADhv40x0L66Zi5TkHAL+XWgQ+yKPjsc170WCJy6nv5gInPhPZ794H6v0JT+9i1/f7Cs5PiVrWfIF9oj4ZtUpDUjSPzsk86b07n+384thSO6gB5fugCkIYan7Uyk05v8yAoHpkelyNTzLdRWtIqOQvtt1vQnC6ZBV7M6JAQQAzXnJnhTaPjY6Dy7a3co5HQonhjsDSo151dcfngyEmdbs4yRB4ZHBsyno26bSNKzKv2ltKrVr+/NKgtbyIDdUXaopuT9drKvM3 foromsharma@gmail.com
     sudo: ALL=(ALL) NOPASSWD:ALL
+  - name: slawekm
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCgjBGOBq7B1nRKO4TlJlNk/dyS2IpvrMaRw8+SAhdmgVQo8jqZkwFhS5gjnqT7IOAlPqptlHrhW28cr5HrvSY7LN9lv5mmzjFt4nHg2Fdro8v13mHToAp0ySWj1G7yf+1mviXj2kF3EIz6ScZLn2J/W3Glg9vYz/sHd9bHgPBpARo0MKmCoZHL0gEsWEwqEDYhY2AOLbPUN1qwG3Ofn4kRbGoLumz1vBnRzQeF/V9th+b6dTx/V6H8+d3An5AoXmYmbHdb4LBWtkqP577st8zl0JVOYwAoSmFxaTS2/fFVcq0v57RwF82igkg6aLQPIIPcyOzsSJTh5jl/uHYP7WMgIljksHFzTVF7YQS0REIbcP0rtIrEyf4lL3smEFdoUCKeHIcWuIS7FPlduKWV4Z/OZfzqgVDbDuPTOfjr4hXbYKXqGYx75SVGtwCE8BmeaIkUEOW/LsbPEueIQu35uc5tiQfFrXdxEQDw/xRJWMuz7REwQjZ1CthBRtrg5wu8r2OXtTUl2gvUPV3HQ8/T80ENnwLK/kVWkbM1bBZn8QlcF3JbMMJU1Y4EjTWgTH1gGPy7a9uvdE8F4suhVcrSTiCJu6WqaegsnJtsAjMGmMONtBRhVkipA9PGWCoCumN1grO8xBHxNr0oENeAX6C218dzVyY+tER8V/prV0nTEUZ1lw== slawekm
+    sudo: ALL=(ALL) NOPASSWD:ALL
+  - name: andrewg
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDYe5kyPAPj8pLNAwa/VXzZP2I7/PsiErQ0dabRt3teHMa8bkuEASUc0KsSb3cTNLnAhoJ+KHBPXCGw7d7fgRtjgaGihfpNTPq10swOMqFSnW4NrOpqcINgoETNfdrRbvl3hxPfj8ZRFMFjs+yM74kG0r/aBjb5u8Q6b3IAx/jyouD28kWHAXZBeM6dEevsC5bpGLpcdrWUKGAoH7WM8FQvCkwkBFYIdD/LPu6sNUMcuNvyUtADCV1GpyZcFGp/mFyLxuZ8/lex9GkEh6PhOxNFeOOrQ57AlT3ShpUSE4MN3oQlQeSj6nGXrxsWKsxZ9wrFKxlNVoyB/YxkzrS3DcY46rrdpFI9MM+D/dxG7+1QWaEBYje5A4c9eABQTU4xTTJQJkAKRASLC1ZCd03JY5ialM7vlf7Q8fEh349Ztfj+HXvl+KwHNilEy9728etXoZ5lYpjcmq/ZgAfwGj7r1dMReEUm+JJZ4dQLrzGyXTRFRh+LAnc1zFhWV0BP0RGEFoyPy+PWcXh9BblcUbncfAbYKC9ZtBPK3HBE1uA98Z40egjQ6Mb/KNgq+e4SF4i9SIamLQqbXdkYE3OBoaxZ0Ysox+Xh0E1EfRKGnqqum5mBCRhZyo2xT5XjZlfMFRwkGuJgAbwiyM9AtYgKHJuSLULW5bqXEfyqM8r5zLfwQ8nsnQ== andrewg
+    sudo: ALL=(ALL) NOPASSWD:ALL
 
 packages:
   - docker
@@ -23,7 +33,7 @@ write_files:
   permissions: '0755'
   content: |
     #!/bin/bash
-     
+
     aws s3 cp s3://aws-codedeploy-eu-west-1/latest/install /tmp/install --region eu-west-1
     chmod +x /tmp/install
     /tmp/install auto
