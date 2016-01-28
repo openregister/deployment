@@ -1,0 +1,7 @@
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/*.tfvars
+.DS_Store
+.terraform
+env/*
+*.swp
