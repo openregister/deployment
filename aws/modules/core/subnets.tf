@@ -39,6 +39,15 @@ resource "aws_route_table" "private" {
   }
 }
 
+// Endpoint to access S3
+
+resource "aws_vpc_endpoint" "private-s3" {
+  vpc_id = "${aws_vpc.registers.id}"
+  service_name = "com.amazonaws.eu-west-1.s3"
+  route_table_ids = ["${aws_route_table.private.id}"]
+  # do we want to add a policy restricting access to particular buckets?
+}
+
 // Set as default route
 resource "aws_main_route_table_association" "private" {
   vpc_id = "${aws_vpc.registers.id}"
