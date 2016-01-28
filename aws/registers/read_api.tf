@@ -22,3 +22,21 @@ module "presentation_db" {
   username = "${var.read_api_rds_username}"
   password = "${var.read_api_rds_password}"
 }
+
+resource "aws_security_group_rule" "outbound_postgres" {
+  security_group_id = "${module.presentation.security_group_id}"
+  type = "egress"
+  from_port = 5432
+  to_port = 5432
+  protocol = "tcp"
+  source_security_group_id = "${module.presentation_db.security_group_id}"
+}
+
+resource "aws_security_group_rule" "inbound_presentation" {
+  security_group_id = "${module.presentation_db.security_group_id}"
+  type = "ingress"
+  from_port = 5432
+  to_port = 5432
+  protocol = "tcp"
+  source_security_group_id = "${module.presentation.security_group_id}"
+}
