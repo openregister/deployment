@@ -23,6 +23,8 @@ module "mint_db" {
 
   cidr_block = "${var.write_api_database_cidr_block}"
 
+  allow_from = "${var.write_api_mint_cidr_block}"
+
   username = "${var.read_api_rds_username}"
   password = "${var.read_api_rds_password}"
 }
@@ -35,6 +37,9 @@ module "mint" {
   vpc_id = "${module.core.vpc_id}"
 
   cidr_block = "${var.write_api_mint_cidr_block}"
+
+  // not implemented yet, but we'll need it for mint to access RDS
+  // db_cidr_block = "${var.write_api_database_cidr_block}"
 
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
