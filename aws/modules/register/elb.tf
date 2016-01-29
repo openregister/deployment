@@ -28,4 +28,14 @@ resource "aws_elb" "register" {
     lb_port = 80
     lb_protocol = "http"
   }
+
+  instances = ["${aws_instance.register.*.id}"]
+
+  health_check {
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
+    target = "HTTP:80/robots.txt" // in future, should we use dropwizard healthchecks?
+    interval = 30
+  }
 }
