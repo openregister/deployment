@@ -39,3 +39,10 @@ output "s3_bucket_id" {
 output "s3_bucket_name" {
   value = "${aws_s3_bucket.register.name}"
 }
+/*
+ * subnets.tf exports
+*/
+output "public_route_table_id" {
+  value = "${aws_route_table.public.id}"
+}
+
