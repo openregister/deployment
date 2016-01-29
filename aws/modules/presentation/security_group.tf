@@ -19,6 +19,15 @@ resource "aws_security_group_rule" "inbound_ssh" {
   cidr_blocks = ["${var.nat_private_ip}/32"]
 }
 
+resource "aws_security_group_rule" "inbound_http_from_local_subnet" {
+  security_group_id = "${aws_security_group.presentation.id}"
+  type = "ingress"
+  from_port = 80
+  to_port = 80
+  protocol = "tcp"
+  cidr_blocks = ["${aws_subnet.presentation.*.cidr_block}"]
+}
+
 // Egress Rules
 resource "aws_security_group_rule" "outbound_dns" {
   security_group_id = "${aws_security_group.presentation.id}"

@@ -8,6 +8,7 @@ module "presentation" {
   cidr_block = "${var.read_api_cidr_block}"
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
+  public_route_table_id = "${module.core.public_route_table_id}"
 }
 
 module "presentation_db" {
