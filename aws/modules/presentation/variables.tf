@@ -3,6 +3,7 @@ variable "vpc_name" {}
 variable "vpc_id" {}
 
 variable "cidr_block" {}
+variable "db_cidr_block" {}
 
 variable "public_route_table_id" {}
 

@@ -14,6 +14,8 @@ variable "count" {
 variable "password" {}
 variable "username" {}
 
+variable "allow_from" {}
+
 variable "multi_az" {
   default = "false"
 }
