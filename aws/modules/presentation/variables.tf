@@ -3,6 +3,9 @@ variable "vpc_name" {}
 variable "vpc_id" {}
 
 variable "cidr_block" {}
+variable "db_cidr_block" {}
+
+variable "public_route_table_id" {}
 
 variable "instance_ami" {
   default = "ami-a10897d6"

@@ -32,7 +32,7 @@ variable "security_group_ids" {}
 */
 
 variable "elb_instance_port" {
-  default = "8080"
+  default = "80"
 }
 
 /*

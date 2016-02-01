@@ -12,5 +12,11 @@ resource "aws_subnet" "presentation" {
     Name = "${var.vpc_name}-presentation-app-${count.index + 1}"
     Environment = "${var.vpc_name}"
   }
+}
 
+resource "aws_route_table_association" "public" {
+  count = "${length(split(" ", var.cidr_block))}"
+
+  subnet_id = "${element(aws_subnet.presentation.*.id, count.index)}"
+  route_table_id = "${var.public_route_table_id}"
 }
