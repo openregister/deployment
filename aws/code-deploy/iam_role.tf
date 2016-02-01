@@ -19,6 +19,7 @@ resource "aws_iam_role" "code_deploy_role" {
 EOF
 }
 
+
 resource "aws_iam_role_policy" "code_deploy_role_policy" {
   name = "code_deploy_role_policy"
   role = "${aws_iam_role.code_deploy_role.id}"
@@ -45,34 +46,4 @@ resource "aws_iam_role_policy" "code_deploy_role_policy" {
     ]
 }
 EOF
-}
-
-resource "aws_codedeploy_app" "presentation_deployment_application" {
-  name = "presentation_app"
-}
-
-resource "aws_codedeploy_app" "mint_deployment_application" {
-  name = "mint_app"
-}
-
-resource "aws_codedeploy_app" "indexer_deployment_application" {
-  name = "indexer_app"
-}
-
-module "presentation_app_codedeploy_group" {
-  source = "../modules/codedeploy"
-  code_deploy_application_name = "presentation_app"
-  codedeploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
-}
-
-module "indexer_app_codedeploy" {
-  source = "../modules/codedeploy"
-  code_deploy_application_name = "indexer_app"
-  codedeploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
-}
-
-module "mint_app_codedeploy" {
-  source = "../modules/codedeploy"
-  code_deploy_application_name = "mint_app"
-  codedeploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
 }

@@ -5,6 +5,6 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
   ec2_tag_filter {
     key = "AppServer"
     type = "KEY_AND_VALUE"
-    value = "omsharma-sandbox-register"
+    value = "${var.deploy_tag_name}"
   }
 }
