@@ -1,6 +1,6 @@
 
 resource "aws_iam_role_policy" "policy_mint_app_server" {
-    name = "${format("%s_%s_RegisterAppServer", var.vpc_name, var.register_name)}"
+    name = "${format("%s_%s_RegisterAppServer", var.vpc_name, var.register)}"
   role = "${aws_iam_role.mint_role.id}"
   policy = <<POLICY
 {

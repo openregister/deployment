@@ -35,7 +35,7 @@ module "mint_db" {
 module "mint" {
   source = "../modules/mint"
   id = "${module.core.vpc_name}-mint-app"
-  register_name = "country"
+  register = "country"
 
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"

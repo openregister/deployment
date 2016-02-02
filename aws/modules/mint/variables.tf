@@ -30,4 +30,4 @@ variable "user_data" {}
 variable "nat_gateway_id" {}
 variable "nat_private_ip" {}
 
-variable "register_name" {}
+variable "register" {}

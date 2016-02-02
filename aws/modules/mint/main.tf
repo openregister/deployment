@@ -9,7 +9,7 @@ resource "aws_instance" "mint" {
 
   tags = {
     Name = "${var.id}-${count.index + 1}"
-    Register_Name = "${var.register_name}"
+    Register = "${var.register}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-mint"
   }
