@@ -4,7 +4,6 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
-
 resource "aws_codedeploy_app" "presentation_deployment_application" {
   name = "presentation_app"
 }
@@ -12,7 +11,6 @@ resource "aws_codedeploy_app" "presentation_deployment_application" {
 resource "aws_codedeploy_app" "mint_deployment_application" {
   name = "mint_app"
 }
-
 
 module "presentation_app_codedeploy_group" {
   source = "../modules/codedeploy"
