@@ -19,7 +19,6 @@ resource "aws_iam_role" "code_deploy_role" {
 EOF
 }
 
-
 resource "aws_iam_role_policy" "code_deploy_role_policy" {
   name = "code_deploy_role_policy"
   role = "${aws_iam_role.code_deploy_role.id}"
