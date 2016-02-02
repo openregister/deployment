@@ -17,13 +17,13 @@ resource "aws_codedeploy_app" "mint_deployment_application" {
 module "presentation_app_codedeploy_group" {
   source = "../modules/codedeploy"
   code_deploy_application_name = "presentation_app"
-  codedeploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
+  code_deploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
   deploy_tag_name = "omsharma-sandbox-register"
 }
 
 module "mint_app_codedeploy" {
   source = "../modules/codedeploy"
   code_deploy_application_name = "mint_app"
-  codedeploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
+  code_deploy_role_arn = "arn:aws:iam::022990953738:role/code_deploy_role"
   deploy_tag_name = "omsharma-sandbox-mint"
 }
