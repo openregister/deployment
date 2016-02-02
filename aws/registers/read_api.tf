@@ -23,7 +23,7 @@ module "presentation_db" {
 
   cidr_block = "${var.read_api_database_cidr_block}"
 
-  allow_from = "${var.read_api_cidr_block}"
+  allow_from = "${var.read_api_cidr_block} ${var.write_api_indexer_cidr_block}"
 
   username = "${var.read_api_rds_username}"
   password = "${var.read_api_rds_password}"
