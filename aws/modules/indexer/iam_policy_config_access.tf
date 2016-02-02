@@ -10,9 +10,7 @@ resource "aws_iam_role_policy" "policy_config_access" {
         "s3:GetObject"
       ],
       "Resource": [
-        "arn:aws:s3:::openregister.${var.vpc_name}.config/indexer/indexer.properties",
-        "arn:aws:s3:::indexer.app.artifacts/*",
-        "arn:aws:s3:::aws-codedeploy-eu-west-1/latest/install"
+        "arn:aws:s3:::openregister.${var.vpc_name}.config/indexer/indexer.properties"
       ],
       "Effect": "Allow"
     }

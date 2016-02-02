@@ -1,6 +1,6 @@
 
 resource "aws_iam_role" "indexer_role" {
-  name = "${format("%s-%s", var.vpc_name, var.id)}"
+  name = "${format("%s_%s_role", var.vpc_name, var.id)}"
   path = "/"
   assume_role_policy = <<POLICY
 {
@@ -19,7 +19,7 @@ POLICY
 }
 
 resource "aws_iam_instance_profile" "indexer_instance_profile" {
-  name = "${format("%s-%s", var.vpc_name, var.id)}"
+  name = "${format("%s_%s_instance_profile", var.vpc_name, var.id)}"
   path = "/"
   roles = [ "${aws_iam_role.indexer_role.name}" ]
 }
