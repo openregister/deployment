@@ -7,6 +7,9 @@ module "indexer" {
 
   cidr_block = "${var.write_api_indexer_cidr_block}"
 
+  mint_db_cidr_block = "${var.write_api_database_cidr_block}"
+  presentation_db_cidr_block = "${var.read_api_database_cidr_block}"
+
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
 
