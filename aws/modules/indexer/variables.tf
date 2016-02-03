@@ -4,6 +4,9 @@ variable "vpc_name" {}
 
 variable "cidr_block" {}
 
+variable "presentation_db_cidr_block" {}
+variable "mint_db_cidr_block" {}
+
 variable "instance_ami" {
   default = "ami-a10897d6"
 }

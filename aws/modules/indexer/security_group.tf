@@ -46,3 +46,20 @@ resource "aws_security_group_rule" "outbound_https" {
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
+
+resource "aws_security_group_rule" "outbound_postgres" {
+  security_group_id = "${aws_security_group.indexer.id}"
+
+  type = "egress"
+  from_port = 5432
+  to_port = 5432
+  protocol = "tcp"
+  cidr_blocks = ["${split(" ", var.mint_db_cidr_block)}"]
+
+  type = "egress"
+  from_port = 5432
+  to_port = 5432
+  protocol = "tcp"
+  cidr_blocks = ["${split(" ", var.presentation_db_cidr_block)}"]
+
+}
