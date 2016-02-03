@@ -25,7 +25,7 @@ resource "aws_security_group" "register_elb" {
 
 resource "aws_elb" "register" {
   name = "${var.vpc_name}-${var.id}-elb"
-  subnets = [ "${split(" ", var.subnet_ids)}" ]
+  subnets = [ "${split(" ", var.elb_subnet_ids)}" ]
 
   security_groups = ["${aws_security_group.register_elb.id}"]
 

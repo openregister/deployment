@@ -35,6 +35,8 @@ variable "elb_instance_port" {
   default = "80"
 }
 
+variable "elb_subnet_ids" {}
+
 /*
  *  dns.tf
  */

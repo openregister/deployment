@@ -10,6 +10,6 @@ resource "aws_internet_gateway" "igw" {
 /*
 resource "aws_nat_gateway" "natgw" {
   allocation_id = "${aws_eip.nat.id}"
-  subnet_id = "${aws_subnet.public.id}"
+  subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
 }
 */
