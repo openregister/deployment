@@ -3,6 +3,7 @@ variable "vpc_id" {}
 variable "vpc_name" {}
 
 variable "cidr_block" {}
+variable "db_cidr_block" {}
 
 variable "instance_ami" {
   default = "ami-a10897d6"
@@ -28,3 +29,5 @@ variable "user_data" {}
 
 variable "nat_gateway_id" {}
 variable "nat_private_ip" {}
+
+variable "register" {}
