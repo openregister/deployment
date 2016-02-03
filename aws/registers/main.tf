@@ -10,7 +10,7 @@ module "core" {
   source = "../modules/core"
   vpc_name = "${var.vpc_name}"
   vpc_cidr_block = "${var.vpc_cidr_block}"
-  public_cidr_block = "${var.management_cidr_block}"
+  public_cidr_block = "${var.public_cidr_block}"
   nat_user_data = "${template_file.user_data.rendered}"
 }
 

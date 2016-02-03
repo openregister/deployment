@@ -5,10 +5,10 @@ module "indexer" {
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  cidr_block = "${var.write_api_indexer_cidr_block}"
+  cidr_block = "${var.indexer_cidr_block}"
 
-  mint_db_cidr_block = "${var.write_api_database_cidr_block}"
-  presentation_db_cidr_block = "${var.read_api_database_cidr_block}"
+  mint_db_cidr_block = "${var.mint_database_cidr_block}"
+  presentation_db_cidr_block = "${var.presentation_database_cidr_block}"
 
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
@@ -24,9 +24,9 @@ module "mint_db" {
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  cidr_block = "${var.write_api_database_cidr_block}"
+  cidr_block = "${var.mint_database_cidr_block}"
 
-  allow_from = "${var.write_api_mint_cidr_block} ${var.write_api_indexer_cidr_block}"
+  allow_from = "${var.mint_cidr_block} ${var.indexer_cidr_block}"
 
   username = "${var.read_api_rds_username}"
   password = "${var.read_api_rds_password}"
@@ -40,8 +40,8 @@ module "mint" {
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  cidr_block = "${var.write_api_mint_cidr_block}"
-  db_cidr_block = "${var.write_api_database_cidr_block}"
+  cidr_block = "${var.mint_cidr_block}"
+  db_cidr_block = "${var.mint_database_cidr_block}"
 
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"

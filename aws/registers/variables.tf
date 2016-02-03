@@ -25,14 +25,14 @@ variable "read_api_rds_password" {}
  * Subnets
 */
 
-// NAT network
-variable "management_cidr_block" {}
+// Public network used by ELBs and NAT instance
+variable "public_cidr_block" {}
 
-// Read API
-variable "read_api_cidr_block" {}
-variable "read_api_database_cidr_block" {}
+// Read APIs
+variable "presentation_cidr_block" {}
+variable "presentation_database_cidr_block" {}
 
-// Write API
-variable "write_api_database_cidr_block" {}
-variable "write_api_indexer_cidr_block" {}
-variable "write_api_mint_cidr_block" {}
+// Write APIs
+variable "indexer_cidr_block" {}
+variable "mint_cidr_block" {}
+variable "mint_database_cidr_block" {}
