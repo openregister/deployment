@@ -11,5 +11,6 @@ resource "aws_instance" "indexer" {
     Name = "${var.id}-${count.index + 1}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-indexer"
+    Role = "indexer_app"
   }
 }

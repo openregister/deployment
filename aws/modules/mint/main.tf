@@ -12,5 +12,6 @@ resource "aws_instance" "mint" {
     Register = "${var.register}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-mint"
+    Role = "mint_app"
   }
 }
