@@ -27,7 +27,7 @@ module "mint_db" {
   allow_from = "${var.mint_cidr_block} ${var.indexer_cidr_block}"
 
   username = "${var.read_api_rds_username}"
-  password = "${var.read_api_rds_password}"
+  password = "${var.mint_database_master_password}"
 }
 
 module "mint" {

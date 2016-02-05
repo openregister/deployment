@@ -31,8 +31,10 @@ variable "public_cidr_block" {}
 // Read APIs
 variable "presentation_cidr_block" {}
 variable "presentation_database_cidr_block" {}
+variable "presentation_database_master_password" {}
 
 // Write APIs
 variable "indexer_cidr_block" {}
 variable "mint_cidr_block" {}
 variable "mint_database_cidr_block" {}
+variable "mint_database_master_password" {}
