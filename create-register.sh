@@ -93,6 +93,8 @@ echo "database:
   properties:
     charSet: UTF-8
 
+register: $REGISTER_NAME
+
 server:
   applicationConnectors:
   - type: http
@@ -217,11 +219,11 @@ function loadRegisterData(){
   DATA_FILE_LOCATION=$1
   DATA_FILE_TYPE=$2
 
-  cd $CURRENT_WORKING_DIR/../mint
+  cd $CURRENT_WORKING_DIR/../loader
 
   LOAD_DATA_RESULT_FILE=/tmp/loadDataResult.txt
 
-  ./gradlew bulkLoad -PmintUrl=http://${REGISTER_NAME}.${ENV}.openregister.org:4567/load  -Ptype=${DATA_FILE_TYPE} -Pdatafile=${DATA_FILE_LOCATION} > $LOAD_DATA_RESULT_FILE
+  ./gradlew bulkLoad -Pminturl=http://${REGISTER_NAME}.${ENV}.openregister.org:4567/load  -Ptype=${DATA_FILE_TYPE} -Pdatasource=${DATA_FILE_LOCATION} > $LOAD_DATA_RESULT_FILE
 
   BUILD_RESULT=`cat $LOAD_DATA_RESULT_FILE | grep 'BUILD SUCCESSFUL'`
 
