@@ -8,8 +8,10 @@ resource "aws_instance" "mint" {
   iam_instance_profile = "${aws_iam_instance_profile.mint_instance_profile.id}"
 
   tags = {
-    Name = "${var.id}-${count.index + 1}"
-    Register = "${var.register}"
+    // should be this once we've fixed the app startup script to use the Register tag:
+    // Name = "${var.vpc_name}-${var.id}-${count.index +1}"
+    Name = "${var.register}"
+    Register = "${var.id}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-mint"
     Role = "mint_app"
