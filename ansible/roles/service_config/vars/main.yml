@@ -1,0 +1,4 @@
+workdir: config
+
+s3_bucket_prefix: "openregister"
+s3_bucket_suffix: "config"

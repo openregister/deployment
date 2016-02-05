@@ -1,0 +1,8 @@
+registers:
+  - country
+  - datatype
+  - field
+  - public_body
+  - register
+
+pass_store_location: '~/.registers-pass'

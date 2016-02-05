@@ -1,0 +1,11 @@
+---
+- name: Install python depedencies
+  yum: name="{{ item }}" state=installed
+  become: true
+  become_user: 'root'
+  with_items:
+    - 'python27-psycopg2'
+
+- include: databases.yml
+- include: write_user.yml
+- include: read_user.yml

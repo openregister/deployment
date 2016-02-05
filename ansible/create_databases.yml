@@ -1,0 +1,26 @@
+---
+- name: Create databases
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_indexer_app'
+
+  environment:
+    PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
+
+  vars:
+    master_user: 'postgres'
+
+  roles:
+    - { role: database,
+          inventory_group_name: '{{ vpc }}-presentation-db',
+          read_user: 'presentation',
+          write_user: 'indexer',
+          master_password: "{{ lookup('pass', '{{ vpc }}/rds/presentation/master') }}"
+      }
+
+    - { role: database,
+        inventory_group_name: '{{ vpc }}-mint-db',
+        read_user: 'indexer',
+        write_user: 'mint',
+        master_password: "{{ lookup('pass', '{{ vpc }}/rds/mint/master') }}"
+      }
