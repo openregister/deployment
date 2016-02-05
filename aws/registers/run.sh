@@ -4,6 +4,7 @@ set -e
 
 action="$1"
 vpc="${TF_VPC:-$2}"
+opts="${TF_OPTS}"
 
 usage() {
 cat <<EOT
@@ -16,6 +17,7 @@ Actions:
 
 System Variables:
   TF_VPC=<environment>
+  TF_OPTS=<options>
   
 EOT
 exit 1
@@ -30,4 +32,4 @@ export TF_VAR_mint_database_master_password=$(pass ${vpc}/rds/mint/master)
 
 echo "Selected VPC: ${vpc}"
 
-terraform $action -var-file=environments/${vpc}.tfvars -state=states/${vpc}.tfstate
+terraform $action -var-file=environments/${vpc}.tfvars -state=states/${vpc}.tfstate $opts
