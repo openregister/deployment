@@ -5,7 +5,7 @@ resource "aws_instance" "indexer" {
   subnet_id = "${aws_subnet.indexer.id}"
   user_data = "${var.user_data}"
   security_groups = [ "${aws_security_group.indexer.id}" ]
-  iam_instance_profile = "${aws_iam_instance_profile.indexer_instance_profile.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.indexer.id}"
 
   tags = {
     // should be this once we've fixed the app startup script to use the Register tag:
@@ -14,5 +14,6 @@ resource "aws_instance" "indexer" {
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-indexer"
     Role = "indexer_app"
+    DeploymentGroup = "${var.vpc_name}-indexer"
   }
 }

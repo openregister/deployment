@@ -1,3 +1,4 @@
+/*
 resource "aws_instance" "mint" {
   ami = "${var.instance_ami}"
   instance_type = "${var.instance_type}"
@@ -17,3 +18,4 @@ resource "aws_instance" "mint" {
     Role = "mint_app"
   }
 }
+*/

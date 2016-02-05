@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "policy_config_access" {
   name = "${format("%s_ConfigAccess", var.vpc_name)}"
-  role = "${aws_iam_role.indexer_role.id}"
+  role = "${aws_iam_role.indexer.id}"
   policy = <<POLICY
 {
   "Version": "2012-10-17",

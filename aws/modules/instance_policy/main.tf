@@ -1,5 +1,5 @@
-resource "aws_iam_role" "indexer" {
-  name = "${var.vpc_name}-indexer"
+resource "aws_iam_role" "instance_policy" {
+  name = "${var.vpc_name}-${var.id}"
   path = "/"
   assume_role_policy = <<POLICY
 {
@@ -17,8 +17,8 @@ resource "aws_iam_role" "indexer" {
 POLICY
 }
 
-resource "aws_iam_instance_profile" "indexer" {
-  name = "${var.vpc_name}-indexer"
+resource "aws_iam_instance_profile" "instance_policy" {
+  name = "${var.vpc_name}-${var.id}"
   path = "/"
-  roles = [ "${aws_iam_role.indexer.name}" ]
+  roles = [ "${aws_iam_role.instance_policy.name}" ]
 }

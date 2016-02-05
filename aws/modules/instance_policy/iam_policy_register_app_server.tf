@@ -1,7 +1,6 @@
-
-resource "aws_iam_role_policy" "policy_indexer_app_server" {
-  name = "${var.vpc_name}_RegisterAppServer"
-  role = "${aws_iam_role.indexer.id}"
+resource "aws_iam_role_policy" "instance_policy" {
+  name = "${var.vpc_name}RegisterAppServer"
+  role = "${aws_iam_role.instance_policy.id}"
   policy = <<POLICY
 {
     "Version": "2012-10-17",
@@ -14,6 +13,8 @@ resource "aws_iam_role_policy" "policy_indexer_app_server" {
             ],
             "Resource": [
                 "arn:aws:s3:::aws-codedeploy-eu-west-1/*",
+                "arn:aws:s3:::presentation.app.artifacts/*",
+                "arn:aws:s3:::mint.app.artifacts/*",
                 "arn:aws:s3:::indexer.app.artifacts/*"
             ]
         },
