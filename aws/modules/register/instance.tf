@@ -14,5 +14,6 @@ resource "aws_instance" "register" {
     Register = "${var.id}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-register"
+    Role = "presentation_app"
   }
 }
