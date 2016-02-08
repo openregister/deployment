@@ -38,20 +38,20 @@
       src_data: '../../registry-data/data/register',
     }
 
-#- name: Public body data
-#  hosts:
-#    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
-#    - '&tag_Role_mint_app'
-#    - '&tag_Register_public_body'
-#  tags: public_body
-#
-#  roles:
-#    - { role: service_data,
-#      id: 'public-body',
-#      src_data: '../../organisations/public-bodies/data/public-body.tsv',
-#      file: 'public-body.tsv',
-#      file_type: 'tsv',
-#    }
+- name: Public body data
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_mint_app'
+    - '&tag_Register_public_body'
+  tags: public_body
+
+  roles:
+    - { role: service_data,
+      id: 'public-body',
+      src_data: '../../organisations/public-bodies/data/public-body.tsv',
+      file: 'public-body.tsv',
+      file_type: 'tsv',
+    }
 
 - name: Load country data
   hosts:
