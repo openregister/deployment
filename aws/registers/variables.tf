@@ -31,6 +31,9 @@ variable "public_cidr_block" {}
 // Read APIs
 variable "presentation_cidr_block" {}
 variable "presentation_database_cidr_block" {}
+variable "presentation_database_class_instance" {
+  default = "db.t2.micro"
+}
 variable "presentation_database_master_password" {}
 
 // Write APIs
