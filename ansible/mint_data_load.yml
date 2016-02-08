@@ -1,0 +1,69 @@
+---
+- name: Load datatype data
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_mint_app'
+    - '&tag_Register_datatype'
+  tags: datatype
+
+  roles:
+    - { role: service_data,
+      id: 'datatype',
+      src_data: '../../registry-data/data/datatype',
+    }
+
+- name: Load field data
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_mint_app'
+    - '&tag_Register_field'
+  tags: field
+
+  roles:
+    - { role: service_data,
+      id: 'field',
+      src_data: '../../registry-data/data/field',
+    }
+
+- name: Load register data
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_mint_app'
+    - '&tag_Register_register'
+  tags: register
+
+  roles:
+    - { role: service_data,
+      id: 'register',
+      src_data: '../../registry-data/data/register',
+    }
+
+#- name: Public body data
+#  hosts:
+#    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+#    - '&tag_Role_mint_app'
+#    - '&tag_Register_public_body'
+#  tags: public_body
+#
+#  roles:
+#    - { role: service_data,
+#      id: 'public-body',
+#      src_data: '../../organisations/public-bodies/data/public-body.tsv',
+#      file: 'public-body.tsv',
+#      file_type: 'tsv',
+#    }
+
+- name: Load country data
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_mint_app'
+    - '&tag_Register_country'
+  tags: country
+
+  roles:
+    - { role: service_data,
+      id: 'country',
+      src_data: '../../country-data/data/country/countries.tsv',
+      file: 'countries.tsv',
+      file_type: 'tsv',
+    }
