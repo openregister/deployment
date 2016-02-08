@@ -2,7 +2,7 @@ registers:
   - country
   - datatype
   - field
-  - public_body
+  - public-body
   - register
 
 pass_store_location: '~/.registers-pass'

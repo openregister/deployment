@@ -1,6 +1,6 @@
-module "public_body_presentation" {
+module "public-body_presentation" {
   source = "../modules/instance"
-  id = "public_body"
+  id = "public-body"
   role = "presentation_app"
 
   vpc_name = "${var.vpc_name}"
@@ -10,14 +10,14 @@ module "public_body_presentation" {
   security_group_ids = "${module.presentation.security_group_id}"
 
   instance_count = 1
-  iam_instance_profile = "${module.public_body_policy.profile_name}"
+  iam_instance_profile = "${module.public-body_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
 }
 
-module "public_body_mint" {
+module "public-body_mint" {
   source = "../modules/instance"
-  id = "public_body"
+  id = "public-body"
   role = "mint_app"
 
   vpc_name = "${var.vpc_name}"
@@ -27,26 +27,26 @@ module "public_body_mint" {
   security_group_ids = "${module.mint.security_group_id}"
 
   instance_count = 1
-  iam_instance_profile = "${module.public_body_policy.profile_name}"
+  iam_instance_profile = "${module.public-body_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
 }
 
-module "public_body_elb" {
+module "public-body_elb" {
   source = "../modules/load_balancer"
-  id = "public_body"
+  id = "public-body"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  instance_ids = "${module.public_body_presentation.instance_ids}"
+  instance_ids = "${module.public-body_presentation.instance_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
   subnet_ids = "${module.core.public_subnet_ids}"
 }
 
-module "public_body_policy" {
+module "public-body_policy" {
   source = "../modules/instance_policy"
-  id = "public_body"
+  id = "public-body"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
