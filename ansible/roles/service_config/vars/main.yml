@@ -1,6 +1,4 @@
 workdir: config
 
-register_domain: "openregister.org"
-
 s3_bucket_prefix: "openregister"
 s3_bucket_suffix: "config"

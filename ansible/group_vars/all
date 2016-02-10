@@ -6,3 +6,5 @@ registers:
   - register
 
 pass_store_location: '~/.registers-pass'
+
+register_domain: openregister.org

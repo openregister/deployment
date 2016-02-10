@@ -1,4 +1,10 @@
 ---
+- stat: path="group_vars/tag_Environment_{{ vpc }}"
+  register: overrides
+
+- include_vars: "group_vars/tag_Environment_{{ vpc }}"
+  when: overrides.stat.exists
+
 - name: Create config directories
   file: name="{{ item }}" state=directory mode=0700
   with_items:
