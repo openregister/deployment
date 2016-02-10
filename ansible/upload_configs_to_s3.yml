@@ -4,6 +4,7 @@
   connection: local
   environment:
     PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
+
   vars:
     services:
       mint: 'mint-config.yaml'
@@ -21,4 +22,4 @@
      register: "{{ lookup('pass', '{{ vpc }}/rds/indexer/register') }}"
 
   roles:
-  - service_config
+    - service_config
