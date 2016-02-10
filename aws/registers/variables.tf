@@ -19,8 +19,6 @@ variable "read_api_rds_username" {
   default = "postgres"
 }
 
-variable "read_api_rds_password" {}
-
 /*
  * Subnets
 */
