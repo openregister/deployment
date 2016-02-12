@@ -3,8 +3,7 @@ workdir: '/tmp/mint-uploads'
 mint_user: 'openregister'
 mint_url: 'localhost:4567/load'
 
-#loader_jar: '../../loader/build/libs/loader.jar'
-loader_jar: 'loader.jar'
+loader_jar: '../../loader/build/libs/loader.jar'
 
 pattern: '*.yaml'
 type: 'yaml'
