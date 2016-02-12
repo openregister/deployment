@@ -1,0 +1,8 @@
+---
+- name: Generate terraform config
+  hosts: localhost
+  connection: local
+  vars:
+    workdir: '../aws/registers/environments'
+  roles:
+    - terraform_config

@@ -1,0 +1,2 @@
+- name: Generate tfvars configuration
+  template: src="templates/environment.tfvars.j2" dest="{{ workdir }}/{{ vpc }}.tfvars"
