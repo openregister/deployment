@@ -69,6 +69,11 @@ On OSX you can install via brew:
 
 ### Terraform setup
 
+Update terraform module list
+
+        cd aws/registers
+        terraform get
+
 Preparing new environment
 
 	cd aws/registers
