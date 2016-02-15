@@ -14,6 +14,12 @@ On OSX you can install via brew:
 
 	brew install ansible
 
+### [terraform](https://www.terraform.io) installed
+
+On OSX you can install via brew:
+
+	brew install terraform
+
 # Bootstrapping
 
 ## System variables
