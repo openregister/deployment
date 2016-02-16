@@ -6,6 +6,6 @@ output "vpc_id" {
   value = "${module.core.vpc_id}"
 }
 
-output "nat_public_ip" {
-  value = "${module.core.nat_public_ip}"
+output "gateway" {
+  value = "${module.core.nat_fqdn_address}"
 }

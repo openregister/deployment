@@ -25,6 +25,10 @@ output "nat_public_ip" {
   value = "${aws_instance.natgw.public_ip}"
 }
 
+output "nat_fqdn_address" {
+  value = "${aws_route53_record.natgw.fqdn}"
+}
+
 output "sg_natsg_id" {
   value = "${aws_security_group.natsg.id}"
 }
