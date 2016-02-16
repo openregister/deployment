@@ -69,15 +69,26 @@ On OSX you can install via brew:
 
 ### Terraform setup
 
-Update terraform module list
+Updating terraform module links
 
-        cd aws/registers
-        terraform get
+	cd aws/registers
+	terraform get
 
 Preparing new environment
 
 	cd aws/registers
 	make config -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
+
+Using an existing environment
+
+	cd aws/registers
+	make pull-config -e vpc=<name>
+
+Pushing local changes
+
+	cd aws/registers
+	make push-config -e vpc=<name>
+	make push-state -e vpc=<name>
 
 ## Terraforming
 
@@ -88,7 +99,7 @@ with basic output
 	cd aws/registers
 	make plan -e vpc=myenv
 
-or with detailed plan
+or with detailed plan (optional)
 
 	cd aws/registers
 	make plan -e module_depth=1 -e vpc=myenv
