@@ -10,5 +10,6 @@ resource "aws_instance" "natgw" {
   tags = {
     Name = "${var.vpc_name}-nat-gateway"
     Environment = "${var.vpc_name}"
+    Role = "nat-gateway"
   }
 }
