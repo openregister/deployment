@@ -7,6 +7,8 @@
 	destroy \
 	plan \
 	purge-remote-state-cache \
+	pull-config \
+	push-config \
 	push-state
 
 # Default AWS region
@@ -51,6 +53,12 @@ configure-state: check-variables check-for-local-state purge-remote-state-cache
           -backend-config="encrypt=true" \
           -backend-config="key=$(vpc).tfstate" \
           -backend-config="region=$(AWS_DEFAULT_REGION)"
+
+pull-config:
+	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars
+
+push-config:
+	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
 
 push-state:
 	terraform remote push
