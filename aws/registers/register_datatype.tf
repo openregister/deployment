@@ -9,7 +9,7 @@ module "datatype_presentation" {
   subnet_ids = "${module.presentation.subnet_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
 
-  instance_count = 1
+  instance_count = "${var.register_datatype_presentation_instance_count}"
   iam_instance_profile = "${module.datatype_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
@@ -26,7 +26,7 @@ module "datatype_mint" {
   subnet_ids = "${module.mint.subnet_ids}"
   security_group_ids = "${module.mint.security_group_id}"
 
-  instance_count = 1
+  instance_count = "${var.register_datatype_mint_instance_count}"
   iam_instance_profile = "${module.datatype_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"

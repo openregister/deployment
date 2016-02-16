@@ -39,3 +39,22 @@ variable "indexer_cidr_block" {}
 variable "mint_cidr_block" {}
 variable "mint_database_cidr_block" {}
 variable "mint_database_master_password" {}
+
+/*
+ * Registers
+*/
+
+variable "register_country_presentation_instance_count" { default = 1 }
+variable "register_country_mint_instance_count" { default = 1 }
+
+variable "register_datatype_presentation_instance_count" { default = 1 }
+variable "register_datatype_mint_instance_count" { default = 1 }
+
+variable "register_field_presentation_instance_count" { default = 1 }
+variable "register_field_mint_instance_count" { default = 1 }
+
+variable "register_public_body_presentation_instance_count" { default = 1 }
+variable "register_public_body_mint_instance_count" { default = 1 }
+
+variable "register_register_presentation_instance_count" { default = 1 }
+variable "register_register_mint_instance_count" { default = 1 }
