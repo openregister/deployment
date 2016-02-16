@@ -24,3 +24,21 @@ variable "nat_instance_type" {
 }
 
 variable "nat_user_data" {}
+
+variable "admin_ips" {}
+
+/*
+ * route53.tf
+*/
+
+variable "dns_zone_id" {
+  default = "Z1QBBZW8ZAZIDC"
+}
+
+variable "dns_ttl" {
+  default = "300"
+}
+
+variable "dns_domain" {
+  default = "openregister.org"
+}

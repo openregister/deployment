@@ -10,6 +10,7 @@ module "core" {
   vpc_cidr_block = "${var.vpc_cidr_block}"
   public_cidr_block = "${var.public_cidr_block}"
   nat_user_data = "${template_file.user_data.rendered}"
+  admin_ips = "${var.admin_ips}"
 }
 
 resource "template_file" "user_data" {
