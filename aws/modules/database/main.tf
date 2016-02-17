@@ -9,6 +9,7 @@ resource "aws_db_instance" "db" {
   allocated_storage = "${var.allocated_storage}"
   backup_retention_period = "${var.backup_retention_period}"
   maintenance_window = "${var.maintenance_window}"
+  apply_immediately = "${var.apply_immediately}"
 
   engine = "${var.engine}"
   engine_version = "${var.engine_version}"

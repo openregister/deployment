@@ -26,6 +26,8 @@ module "mint_db" {
 
   allow_from = "${var.mint_cidr_block} ${var.indexer_cidr_block}"
 
+  apply_immediately = "${var.mint_database_apply_immediately}"
+
   username = "${var.read_api_rds_username}"
   password = "${var.mint_database_master_password}"
 }

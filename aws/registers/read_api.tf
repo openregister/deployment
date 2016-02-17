@@ -28,4 +28,6 @@ module "presentation_db" {
 
   username = "${var.read_api_rds_username}"
   password = "${var.presentation_database_master_password}"
+
+  apply_immediately = "${var.presentation_database_apply_immediately}"
 }

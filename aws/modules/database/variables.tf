@@ -56,6 +56,10 @@ variable "parameter_group_name" {
   default = "postgresrdsgroup"
 }
 
+variable "apply_immediately" {
+  default = false
+}
+
 variable "zones" {
   default = {
     "0" = "eu-west-1a"
