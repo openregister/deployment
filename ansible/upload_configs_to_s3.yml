@@ -1,0 +1,25 @@
+---
+- name: Upload register configs
+  hosts: localhost
+  connection: local
+  environment:
+    PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
+
+  vars:
+    services:
+      mint: 'mint-config.yaml'
+      presentation: 'config.yaml'
+
+    rds_mint_instance_name: "{{ vpc }}-mint-db"
+    rds_presentation_instance_name: "{{ vpc }}-presentation-db"
+
+    # FIXME: build this dict dynamically 
+    indexer_passwords:
+     country: "{{ lookup('pass', '{{ vpc }}/rds/indexer/country') }}"
+     datatype: "{{ lookup('pass', '{{ vpc }}/rds/indexer/datatype') }}"
+     field: "{{ lookup('pass', '{{ vpc }}/rds/indexer/field') }}"
+     public-body: "{{ lookup('pass', '{{ vpc }}/rds/indexer/public-body') }}"
+     register: "{{ lookup('pass', '{{ vpc }}/rds/indexer/register') }}"
+
+  roles:
+    - service_config

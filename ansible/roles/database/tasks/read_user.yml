@@ -1,0 +1,26 @@
+- name: Create a read user
+  postgresql_user: >
+    state=present
+    db="{{ item }}"
+    name="{{ item }}_{{ read_user }}"
+    priv=CONNECT
+    role_attr_flags=NOCREATEROLE,NOCREATEUSER,NOCREATEDB,INHERIT,LOGIN,NOREPLICATION
+    password="{{ lookup('pass', '{{ vpc }}/rds/{{ read_user }}/{{ item }}') }}"
+    no_password_changes=yes
+    login_host="{{ groups[inventory_group_name][0] }}"
+    login_user="{{ master_user }}"
+    login_password="{{ master_password }}"
+  with_items: registers
+  when: create_db
+
+- name: Set privileges for read user
+  postgresql_privs:
+    state=present
+    db="{{ item }}"
+    roles="{{ item }}_{{ read_user }}"
+    objs=ALL_IN_SCHEMA
+    privs=SELECT
+    login_host="{{ groups[inventory_group_name][0] }}"
+    login_user="{{ item }}_{{ write_user }}"
+    login_password="{{ lookup('pass', '{{ vpc }}/rds/{{ write_user }}/{{ item }}') }}"
+  with_items: registers

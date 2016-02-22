@@ -1,0 +1,11 @@
+- name: Create database
+  postgresql_db: >
+    state=present
+    encoding='UTF-8'
+    name="{{ item }}"
+    login_host="{{ groups[inventory_group_name][0] }}"
+    login_password="{{ master_password }}"
+    login_user="{{ master_user }}"
+  with_items: registers
+  register: create_db
+  run_once: true
