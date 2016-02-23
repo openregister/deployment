@@ -2,3 +2,5 @@
 {{db}}.source.postgres.db.connectionString=jdbc:postgresql://{{src_host}}:5432/{{db}}?user={{db}}_indexer&password={{ password[db] }}
 {{db}}.destination.postgres.db.connectionString=jdbc:postgresql://{{dst_host}}:5432/{{db}}?user={{db}}_indexer&password={{ password[db] }}
 {% endfor %}
+
+cloudwatch.environment.name={{ vpc }}
