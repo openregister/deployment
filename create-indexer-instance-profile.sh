@@ -80,9 +80,29 @@ aws iam put-role-policy \
 }
 '
 
+echo "putting policy CloudWatchPutMetricData to $ROLE_NAME"
+aws iam put-role-policy \
+--role-name "${ROLE_NAME}" \
+--policy-name "CloudWatchPutMetricData" \
+--policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1456223097000",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+'
+
 echo "Create instance profile with name $INSTANCE_PROFILE_NAME"
 aws iam create-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}"
 
 echo "adding role to instance profile"
 aws iam add-role-to-instance-profile --instance-profile-name "${INSTANCE_PROFILE_NAME}" --role-name "${ROLE_NAME}"
-
