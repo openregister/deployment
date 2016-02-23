@@ -1,4 +1,4 @@
-resource "aws_iam_role_policy" "policy_cloudwatch_putmetricdata" {
+resource "aws_iam_role_policy" "iam_policy_cloudwatch_access" {
   name = "${format("%s_CloudWatch_PutMetricData", var.vpc_name)}"
   role = "${aws_iam_role.indexer.id}"
   policy = <<POLICY
