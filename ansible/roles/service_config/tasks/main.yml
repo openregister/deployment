@@ -40,6 +40,7 @@
     register_name: "{{ item.0 }}"
     app_user: 'openregister'
     app_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ item.0 }}') }}"
+    settings: "{{ register_settings[item.0] | default({}) }}"
 
   with_nested:
     - registers

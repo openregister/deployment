@@ -8,3 +8,7 @@ registers:
 pass_store_location: '~/.registers-pass'
 
 register_domain: openregister.org
+
+register_settings:
+  address:
+    enable_download_resource: false
