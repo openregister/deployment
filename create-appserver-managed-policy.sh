@@ -24,6 +24,16 @@ aws iam create-policy --policy-name 'RegisterAppServer' --policy-document '{
                 "ec2:DescribeTags"
             ],
             "Resource": ["*"]
+        },
+        {
+            "Sid": "Stmt1456223097000",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": [
+                "*"
+            ]
         }
     ]
 }

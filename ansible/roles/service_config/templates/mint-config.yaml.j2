@@ -22,3 +22,6 @@ register: {{ register_name }}
 credentials:
   user: {{ app_user }}
   password: {{ app_password }}
+
+  # If set, heartbeat to CloudWatch under this namespace
+  cloudWatchEnvironmentName: {{ vpc }}
