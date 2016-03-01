@@ -26,7 +26,7 @@ On OSX you can install via brew:
 
 * password store location:
 
-		export PASSWORD_STORE_DIR=~/.register-pass
+		export PASSWORD_STORE_DIR=~/.registers-pass
 
 * set AWS CLI variables:
 
@@ -42,23 +42,11 @@ On OSX you can install via brew:
 
 ### Ansible configuration
 
-#### defaults
-
-`cat ansible/group_vars/all`
-
-	registers:
-	  - country
-	  - datatype
-	  - field
-	  - public-body
-	  - register
-
-	register_domain: openregister.org
-	pass_store_location: '~/.registers-pass'
-
 #### environment overrides
 
-> customising registers list
+The `ansible/group_vars/all` file contains sensible defaults for your
+environment.  However you will probably want to override at least the
+`registers` and `register_domain` variables:
 
 `vi ansible/group_vars/tag_Environment_<vpc>`
 
@@ -66,15 +54,17 @@ On OSX you can install via brew:
 	  - country
 	  - other-register
 	  - another-register
+    
+    register_domain: my-environment.openregister.org
 
 ### Terraform setup
 
-Updating terraform module links
+Updating terraform module links:
 
 	cd aws/registers
 	terraform get
 
-Preparing new environment
+Preparing new environment (your CIDR block needs to be at least a `/16`):
 
 	cd aws/registers
 	make config -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
