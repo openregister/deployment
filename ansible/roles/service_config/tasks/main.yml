@@ -15,8 +15,8 @@
 - name: Create config register directories
   file: name="{{ workdir }}/{{ vpc }}/{{ item.0 }}/{{ item.1 }}" state=directory mode=0700
   with_nested:
-    - registers
-    - services
+    - "{{ registers }}"
+    - "{{ services }}"
 
 - name: Copy static files
   template:
@@ -43,8 +43,8 @@
     settings: "{{ register_settings[item.0] | default({}) }}"
 
   with_nested:
-    - registers
-    - services
+    - "{{ registers }}"
+    - "{{ services }}"
 
 - name: Generate indexer.properties
   template:
