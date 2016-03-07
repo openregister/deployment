@@ -6,6 +6,7 @@
 	configure-state \
 	destroy \
 	plan \
+	plan-destroy \
 	purge-remote-state-cache \
 	pull-config \
 	push-config \
@@ -19,7 +20,7 @@ export TF_VAR_presentation_database_master_password=$(shell pass $(vpc)/rds/pres
 export TF_VAR_mint_database_master_password=$(shell pass $(vpc)/rds/mint/master)
 
 # Required minimum to terraform
-defaults=-var-file=environments/$(vpc).tfvars -state=states/$(vpc).tfstate
+defaults=-var-file=environments/$(vpc).tfvars
 
 # Default terraform plan -module-depth= value
 module_depth=0
@@ -47,7 +48,6 @@ purge-remote-state-cache:
 
 configure-state: check-variables check-for-local-state purge-remote-state-cache
 	terraform remote config \
-	  -state="states/${vpc}.tfstate" \
           -backend=S3 \
           -backend-config="bucket=registers-terraform-state" \
           -backend-config="encrypt=true" \
@@ -65,6 +65,9 @@ push-state:
 
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
+
+plan-destroy: configure-state
+	terraform plan -destroy $(defaults) -module-depth=$(module_depth)
 
 apply: configure-state
 	terraform apply $(defaults)
