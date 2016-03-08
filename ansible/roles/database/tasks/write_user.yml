@@ -10,7 +10,7 @@
     login_host="{{ groups[inventory_group_name][0] }}"
     login_user="{{ master_user }}"
     login_password="{{ master_password }}"
-  with_items: registers
+  with_items: "{{ registers }}"
   when: create_db
 
 - name: Set privileges for write user
@@ -23,4 +23,4 @@
     login_host="{{ groups[inventory_group_name][0] }}"
     login_user="{{ item }}_{{ write_user }}"
     login_password="{{ lookup('pass', '{{ vpc }}/rds/{{ write_user }}/{{ item }}') }}"
-  with_items: registers
+  with_items: "{{ registers }}"
