@@ -13,7 +13,7 @@
     - name: 'admin_ips'
       prompt: 'Admin IPs - a space separated list, must include netmask (e.g. /24, /32)'
       private: no
-      default: '80.194.77.64/26'
+      default: '80.194.77.64/26 85.133.67.244/32'
 
   roles:
     - terraform_config
