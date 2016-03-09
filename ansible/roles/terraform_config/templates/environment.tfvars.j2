@@ -1,6 +1,8 @@
 vpc_name = "{{ vpc }}"
 vpc_cidr_block = "{{ vpc_cidr_block }}"
 
+admin_ips = "{{ admin_ips }}"
+
 {% set public_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 80) -%}
 {% set public_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 81) -%}
 {% set public_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 82) -%}

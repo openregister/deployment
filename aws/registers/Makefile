@@ -76,14 +76,8 @@ destroy: configure-state
 	terraform destroy $(defaults)
 
 config:
-ifndef vpc_cidr_block
-	$(error You must pass -e vpc_cidr_block=<subnet> switch)
-endif
-
 	cd ../../ansible && ansible-playbook generate_passwords.yml \
 	  -e vpc=$(vpc)
 
 	cd ../../ansible && ansible-playbook configure_terraform.yml \
-	  -e vpc=$(vpc) \
-	  -e vpc_cidr_block=$(vpc_cidr_block)
-
+	  -e vpc=$(vpc)
