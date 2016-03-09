@@ -53,3 +53,10 @@ output "public_route_table_id" {
 output "public_subnet_ids" {
   value = "${join(" ", aws_subnet.public.*.id)}"
 }
+
+/*
+ * route53.tf exports
+*/
+output "dns_zone_id" {
+  value = "${aws_route53_zone.core.zone_id}"
+}

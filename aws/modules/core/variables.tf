@@ -31,14 +31,14 @@ variable "admin_ips" {}
  * route53.tf
 */
 
-variable "dns_zone_id" {
-  default = "Z1QBBZW8ZAZIDC"
-}
-
 variable "dns_ttl" {
   default = "300"
 }
 
 variable "dns_domain" {
   default = "openregister.org"
+}
+
+variable "dns_parent_zone_id" {
+  default = "Z1QBBZW8ZAZIDC"
 }
