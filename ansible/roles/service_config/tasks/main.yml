@@ -54,7 +54,3 @@
     dst_host: "{{ groups[rds_presentation_instance_name][0] }}"
     databases: "{{ registers }}"
     password: "{{ indexer_passwords }}"
-
-- name: Upload configuration to S3 bucket
-  command: "aws s3 sync {{ workdir }}/{{ vpc }}/ s3://{{ s3_bucket_prefix }}.{{ vpc }}.{{ s3_bucket_suffix }}"
-  register: s3_output
