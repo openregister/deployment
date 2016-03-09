@@ -10,7 +10,7 @@ resource "aws_route53_record" "natgw" {
   records = [ "${aws_instance.natgw.public_ip}" ]
 }
 
-resource "aws_route53_record" "nameservers" {
+resource "aws_route53_record" "zone_delegation" {
   zone_id = "${var.dns_parent_zone_id}"
   name = "${var.vpc_name}.${var.dns_domain}"
   type = "NS"
