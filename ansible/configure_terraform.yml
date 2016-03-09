@@ -4,5 +4,16 @@
   connection: local
   vars:
     workdir: '../aws/registers/environments'
+
+  vars_prompt:
+    - name: 'vpc_cidr_block'
+      prompt: 'VPC CIDR Block - must have a /16 netmask'
+      private: no
+
+    - name: 'admin_ips'
+      prompt: 'Admin IPs - a space separated list, must include netmask (e.g. /24, /32)'
+      private: no
+      default: '80.194.77.64/26'
+
   roles:
     - terraform_config
