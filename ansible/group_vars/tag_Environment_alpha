@@ -1,0 +1,12 @@
+registers:
+  - address
+  - datatype
+  - field
+  - public-body
+  - register
+
+register_domain: alpha.openregister.org
+
+register_settings:
+  address:
+    enable_download_resource: false
