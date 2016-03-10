@@ -14,9 +14,7 @@ variable "security_group_ids" {}
  * route53.tf
 */
 
-variable "dns_zone_id" {
-  default = "Z1QBBZW8ZAZIDC"
-}
+variable "dns_zone_id" {}
 
 variable "dns_ttl" {
   default = "300"

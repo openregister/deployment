@@ -2,6 +2,8 @@ variable "id" {}
 variable "vpc_id" {}
 variable "vpc_name" {}
 
+variable "config_bucket" {}
+
 variable "instance_ami" {
   default = "ami-a10897d6"
 }
@@ -41,9 +43,7 @@ variable "elb_subnet_ids" {}
  *  dns.tf
  */
 
-variable "dns_zone_id" {
-  default = "Z1QBBZW8ZAZIDC"
-}
+variable "dns_zone_id" {}
 
 variable "dns_ttl" {
   default = "300"
@@ -52,7 +52,3 @@ variable "dns_ttl" {
 variable "dns_domain" {
   default = "openregister.org"
 }
-
-variable "config_bucket" {}
-
-//variable "rds_instance" {}
