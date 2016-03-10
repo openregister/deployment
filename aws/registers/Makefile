@@ -23,7 +23,7 @@ export TF_VAR_mint_database_master_password=$(shell pass $(vpc)/rds/mint/master)
 defaults=-var-file=environments/$(vpc).tfvars
 
 # Default terraform plan -module-depth= value
-module_depth=0
+module_depth=-1
 
 # We don't want any local state being pushed when remote state is
 # configured, so refuse to run if it exists.
