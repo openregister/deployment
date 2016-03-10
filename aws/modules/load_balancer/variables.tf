@@ -6,6 +6,8 @@ variable "instance_port" {
   default = "80"
 }
 
+variable "enabled" { default = 1 }
+
 variable "subnet_ids" {}
 variable "instance_ids" {}
 variable "security_group_ids" {}

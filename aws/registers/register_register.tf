@@ -1,3 +1,12 @@
+module "register_policy" {
+  source = "../modules/instance_policy"
+  id = "register"
+  enabled = "${signum(lookup(var.instance_count, "register"))}"
+
+  vpc_name = "${var.vpc_name}"
+  vpc_id = "${module.core.vpc_id}"
+}
+
 module "register_presentation" {
   source = "../modules/instance"
   id = "register"
@@ -9,7 +18,7 @@ module "register_presentation" {
   subnet_ids = "${module.presentation.subnet_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
 
-  instance_count = "${var.register_register_presentation_instance_count}"
+  instance_count = "${lookup(var.instance_count, "register")}"
   iam_instance_profile = "${module.register_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
@@ -26,7 +35,7 @@ module "register_mint" {
   subnet_ids = "${module.mint.subnet_ids}"
   security_group_ids = "${module.mint.security_group_id}"
 
-  instance_count = "${var.register_register_mint_instance_count}"
+  instance_count = "${signum(lookup(var.instance_count, "register"))}"
   iam_instance_profile = "${module.register_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
@@ -35,6 +44,7 @@ module "register_mint" {
 module "register_elb" {
   source = "../modules/load_balancer"
   id = "register"
+  enabled = "${signum(lookup(var.instance_count, "register"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
@@ -44,12 +54,4 @@ module "register_elb" {
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"
-}
-
-module "register_policy" {
-  source = "../modules/instance_policy"
-  id = "register"
-
-  vpc_name = "${var.vpc_name}"
-  vpc_id = "${module.core.vpc_id}"
 }

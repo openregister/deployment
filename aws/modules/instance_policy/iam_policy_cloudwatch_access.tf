@@ -1,4 +1,5 @@
 resource "aws_iam_role_policy" "iam_policy_cloudwatch_access" {
+  count = "${var.enabled}"
   name = "${format("%s_CloudWatch_PutMetricData", var.vpc_name)}"
   role = "${aws_iam_role.instance_policy.id}"
   policy = <<POLICY

@@ -1,4 +1,6 @@
 resource "aws_elb" "load_balancer" {
+  count = "${var.enabled}"
+
   name = "${replace(format("%s-%s-elb", var.vpc_name, var.id),"_","-")}"
   subnets = [ "${split(" ", var.subnet_ids)}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]

@@ -1,7 +1,7 @@
 resource "aws_instance" "instance" {
+  count = "${var.instance_count}"
   ami = "${var.instance_ami}"
   instance_type = "${var.instance_type}"
-  count = "${var.instance_count}"
   subnet_id = "${element(split(" ", var.subnet_ids), count.index)}"
   user_data = "${var.user_data}"
   security_groups = [ "${split(" ", var.security_group_ids)}" ]

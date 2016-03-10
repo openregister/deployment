@@ -1,4 +1,5 @@
 resource "aws_iam_role_policy" "instance_policy" {
+  count = "${var.enabled}"
   name = "${var.vpc_name}RegisterAppServer"
   role = "${aws_iam_role.instance_policy.id}"
   policy = <<POLICY
