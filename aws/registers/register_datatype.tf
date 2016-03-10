@@ -42,6 +42,8 @@ module "datatype_elb" {
   instance_ids = "${module.datatype_presentation.instance_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
   subnet_ids = "${module.core.public_subnet_ids}"
+
+  dns_zone_id = "${module.core.dns_zone_id}"
 }
 
 module "datatype_policy" {
