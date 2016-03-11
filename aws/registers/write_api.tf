@@ -19,7 +19,7 @@ module "indexer_codedeploy" {
   source = "../modules/codedeploy_group"
   id = "${var.vpc_name}"
   application = "indexer-app"
-  service_role_arn = "${var.codeploy_service_role_arn}"
+  service_role_arn = "${var.codedeploy_service_role_arn}"
   tag = "${var.vpc_name}-indexer"
 }
 
@@ -62,6 +62,6 @@ module "mint_codedeploy" {
   source = "../modules/codedeploy_group"
   id = "${var.vpc_name}"
   application = "mint-app"
-  service_role_arn = "${var.codeploy_service_role_arn}"
+  service_role_arn = "${var.codedeploy_service_role_arn}"
   tag = "${var.vpc_name}-mint_app"
 }
