@@ -51,7 +51,7 @@ variable "instance_count" {
     "country" = 0
     "datatype" = 1
     "field" = 1
-    "public-body" = 1
+    "public-body" = 0
     "register" = 1
   }
 }
