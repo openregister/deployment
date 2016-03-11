@@ -1,4 +1,4 @@
-workdir: '/tmp/mint-uploads'
+workdir: '/srv/mint-data'
 
 mint_user: 'openregister'
 mint_url: 'localhost:4567/load'
