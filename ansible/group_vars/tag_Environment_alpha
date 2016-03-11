@@ -2,8 +2,14 @@ registers:
   - address
   - datatype
   - field
+  - locality
+  - postcode
   - public-body
   - register
+  - street
+  - street-classification
+  - street-surface
+  - town
 
 register_domain: alpha.openregister.org
 
