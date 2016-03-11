@@ -3,6 +3,8 @@ resource "aws_security_group" "load_balancer" {
   description = "Presentation ELB security group"
   vpc_id = "${var.vpc_id}"
 
+  count = "${var.enabled}"
+
   tags = {
     Name = "${var.vpc_name}-${var.id}-sg"
     Environment = "${var.vpc_name}"

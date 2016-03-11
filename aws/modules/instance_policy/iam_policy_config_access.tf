@@ -1,4 +1,5 @@
 resource "aws_iam_role_policy" "policy_config_access" {
+  count = "${var.enabled}"
   name = "${format("%sConfigAccess", var.vpc_name)}"
   role = "${aws_iam_role.instance_policy.id}"
   policy = <<POLICY

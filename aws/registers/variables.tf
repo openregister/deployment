@@ -45,17 +45,13 @@ variable "mint_database_apply_immediately" { default = false }
  * Registers
 */
 
-variable "register_country_presentation_instance_count" { default = 1 }
-variable "register_country_mint_instance_count" { default = 1 }
-
-variable "register_datatype_presentation_instance_count" { default = 1 }
-variable "register_datatype_mint_instance_count" { default = 1 }
-
-variable "register_field_presentation_instance_count" { default = 1 }
-variable "register_field_mint_instance_count" { default = 1 }
-
-variable "register_public_body_presentation_instance_count" { default = 1 }
-variable "register_public_body_mint_instance_count" { default = 1 }
-
-variable "register_register_presentation_instance_count" { default = 1 }
-variable "register_register_mint_instance_count" { default = 1 }
+variable "instance_count" {
+  default = {
+    "address" = 0
+    "country" = 0
+    "datatype" = 1
+    "field" = 1
+    "public-body" = 0
+    "register" = 1
+  }
+}

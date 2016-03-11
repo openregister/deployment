@@ -1,3 +1,12 @@
+module "public-body_policy" {
+  source = "../modules/instance_policy"
+  id = "public-body"
+  enabled = "${signum(lookup(var.instance_count, "public-body"))}"
+
+  vpc_name = "${var.vpc_name}"
+  vpc_id = "${module.core.vpc_id}"
+}
+
 module "public-body_presentation" {
   source = "../modules/instance"
   id = "public-body"
@@ -9,7 +18,7 @@ module "public-body_presentation" {
   subnet_ids = "${module.presentation.subnet_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
 
-  instance_count = "${var.register_public_body_presentation_instance_count}"
+  instance_count = "${lookup(var.instance_count, "public-body")}"
   iam_instance_profile = "${module.public-body_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
@@ -26,7 +35,7 @@ module "public-body_mint" {
   subnet_ids = "${module.mint.subnet_ids}"
   security_group_ids = "${module.mint.security_group_id}"
 
-  instance_count = "${var.register_public_body_mint_instance_count}"
+  instance_count = "${signum(lookup(var.instance_count, "public-body"))}"
   iam_instance_profile = "${module.public-body_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
@@ -35,6 +44,7 @@ module "public-body_mint" {
 module "public-body_elb" {
   source = "../modules/load_balancer"
   id = "public-body"
+  enabled = "${signum(lookup(var.instance_count, "public-body"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
@@ -44,12 +54,4 @@ module "public-body_elb" {
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"
-}
-
-module "public-body_policy" {
-  source = "../modules/instance_policy"
-  id = "public-body"
-
-  vpc_name = "${var.vpc_name}"
-  vpc_id = "${module.core.vpc_id}"
 }

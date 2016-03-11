@@ -1,0 +1,16 @@
+---
+- name: Generate register manifest for terraform
+  hosts: localhost
+  connection: local
+  vars:
+    workdir: '../aws/registers'
+    template: 'roles/terraform_config/templates/register_template.tf.j2'
+
+  vars_prompt:
+    - name: 'register'
+      prompt: 'Name of register'
+      private: no
+
+  tasks:
+    - name: generate template
+      template: src="{{ template }}" dest="{{ workdir }}/register_{{ register | normalize_ec2_tags }}.tf"
