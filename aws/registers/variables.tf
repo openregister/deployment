@@ -55,3 +55,8 @@ variable "instance_count" {
     "register" = 1
   }
 }
+
+// CodeDeploy
+variable "codeploy_service_role_arn" {
+  default = "arn:aws:iam::022990953738:role/code-deploy-role"
+}

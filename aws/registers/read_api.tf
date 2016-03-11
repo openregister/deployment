@@ -31,3 +31,11 @@ module "presentation_db" {
 
   apply_immediately = "${var.presentation_database_apply_immediately}"
 }
+
+module "presentation_codedeploy" {
+  source = "../modules/codedeploy_group"
+  id = "${var.vpc_name}"
+  application = "presentation-app"
+  service_role_arn = "${var.codeploy_service_role_arn}"
+  tag = "${var.vpc_name}-presentation_app"
+}
