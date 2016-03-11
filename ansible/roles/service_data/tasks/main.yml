@@ -1,22 +1,27 @@
-- name: Ensure JRE v1.8 is installed
-  yum: state=present name="java-1.8.0-openjdk.x86_64"
+- name: Deploy data loader
+  copy: src="{{ loader_jar | expanduser }}" dest="/srv/loader.jar"
   become: yes
 
 - name: Upload data files
   synchronize: src="{{ src_data }}" dest="{{ workdir }}/"
 
-- name: Upload loader
-  copy: src="{{ loader_jar | expanduser }}" dest="/srv/loader.jar"
-  become: yes
+- name: Configure docker instance
+  docker:
+    state: started
+    name: 'dataloader-{{ id }}'
+    image: 'jstepien/openjdk8'
 
-- name: Load data
-  become: yes
-  environment:
-     PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
-  vars:
-    datasource: "{{ file | default(id) }}"
-    type: "{{ file_type | default('yaml_dir') }}"
-    mint_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
-  command: "/usr/bin/java8 -jar /srv/loader.jar --minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }} --datasource={{ datasource }} --type={{ type }}"
-  args:
-    chdir: '{{ workdir }}'
+    env:
+      datasource: "{{ file | default(id) }}"
+      type: "{{ file_type | default('yaml_dir') }}"
+      mint_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
+
+    command: >
+      '/usr/bin/java8 -jar /srv/loader.jar'
+      '--type={{ type }}'
+      '--datasource={{ datasource }}'
+      '--minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }}'
+
+    volumes:
+      - '/srv/loader.jar'
+      - '{{ workdir }}/{{ id }}'
