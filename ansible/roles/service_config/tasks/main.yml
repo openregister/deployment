@@ -46,6 +46,16 @@
     - "{{ registers }}"
     - "{{ services }}"
 
+- name: Compute password list for indexer.properties
+  set_fact:
+    indexer_password: "{{ lookup('pass', '{{ vpc }}/rds/indexer/{{ item }}') }}"
+  with_items: "{{ registers }}"
+  register: computed
+
+- name: Combine passwords with register keys
+  set_fact:
+    indexer_passwords: "{{ computed.results | map(attribute='ansible_facts.indexer_password') | list | zip_with_keys(registers) }}"
+
 - name: Generate indexer.properties
   template:
     src="templates/indexer.properties.j2" dest="{{ workdir }}/{{ vpc }}/indexer/indexer.properties"
