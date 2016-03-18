@@ -13,9 +13,6 @@
     name: 'dataloader-{{ id }}'
     image: 'jstepien/openjdk8'
 
-    env:
-      MINT_PASSWORD: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
-
     command: >
       /opt/openjdk8/bin/java -jar /srv/loader.jar
       --type={{ type }}
