@@ -1,27 +1,4 @@
-- name: Deploy data loader
-  copy: src="{{ loader_jar | expanduser }}" dest="/srv/loader.jar"
-  become: yes
-
-- name: Upload data files
-  synchronize: src="{{ src_data }}" dest="{{ workdir }}/"
-
-- name: Configure docker instance
-  docker:
-    state: started
-    name: 'dataloader-{{ id }}'
-    image: 'jstepien/openjdk8'
-
-    env:
-      datasource: "{{ file | default(id) }}"
-      type: "{{ file_type | default('yaml_dir') }}"
-      mint_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
-
-    command: >
-      '/usr/bin/java8 -jar /srv/loader.jar'
-      '--type={{ type }}'
-      '--datasource={{ datasource }}'
-      '--minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }}'
-
-    volumes:
-      - '/srv/loader.jar'
-      - '{{ workdir }}/{{ id }}'
+---
+- include: packages.yml
+- include: data.yml
+- include: docker.yml

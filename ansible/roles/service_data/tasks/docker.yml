@@ -1,0 +1,29 @@
+- name: docker service is running
+  service: name=docker state=running
+
+- name: Configure docker instance
+  become: yes
+  vars:
+    datasource: "{{ workdir }}/{{ file | default(id) }}"
+    type: "{{ file_type | default('yaml_dir') }}"
+    mint_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
+
+  docker:
+    state: 'started'
+    name: 'dataloader-{{ id }}'
+    image: 'jstepien/openjdk8'
+
+    env:
+      MINT_PASSWORD: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
+
+    command: >
+      /opt/openjdk8/bin/java -jar /srv/loader.jar
+      --type={{ type }}
+      --datasource={{ datasource }}
+      --minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }}
+
+    links: mintApp
+
+    volumes:
+      - '/srv/loader.jar:/srv/loader.jar:ro'
+      - '{{ datasource }}:{{ datasource }}:ro'
