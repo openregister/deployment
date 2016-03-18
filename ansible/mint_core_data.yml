@@ -1,5 +1,6 @@
 ---
 - name: Load datatype data
+  gather_facts: false
   hosts:
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
     - '&tag_Role_mint_app'
@@ -13,6 +14,7 @@
     }
 
 - name: Load field data
+  gather_facts: false
   hosts:
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
     - '&tag_Role_mint_app'
@@ -26,6 +28,7 @@
     }
 
 - name: Load register data
+  gather_facts: false
   hosts:
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
     - '&tag_Role_mint_app'
@@ -39,31 +42,19 @@
     }
 
 - name: Public body data
+  gather_facts: false
   hosts:
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
     - '&tag_Role_mint_app'
     - '&tag_Register_public_body'
-  tags: public_body
+  tags:
+    - public_body
+    - public-body
 
   roles:
     - { role: service_data,
       id: 'public-body',
       src_data: '../../organisations/public-bodies/data/public-body.tsv',
       file: 'public-body.tsv',
-      file_type: 'tsv',
-    }
-
-- name: Load country data
-  hosts:
-    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
-    - '&tag_Role_mint_app'
-    - '&tag_Register_country'
-  tags: country
-
-  roles:
-    - { role: service_data,
-      id: 'country',
-      src_data: '../../country-data/data/country/countries.tsv',
-      file: 'countries.tsv',
       file_type: 'tsv',
     }

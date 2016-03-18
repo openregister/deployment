@@ -1,0 +1,6 @@
+- name: Ensure target directory exists
+  file: state=directory dest="{{ workdir }}"
+
+- name: Upload data files
+  synchronize: src="{{ src_data }}" dest="{{ workdir }}/"
+  delegate_to: 127.0.0.1

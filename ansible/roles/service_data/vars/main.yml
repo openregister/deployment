@@ -1,7 +1,7 @@
-workdir: '/tmp/mint-uploads'
+workdir: '/tmp/mint-data'
 
 mint_user: 'openregister'
-mint_url: 'localhost:4567/load'
+mint_url: 'mintApp:4567/load'
 
 loader_jar: '../../loader/build/libs/loader.jar'
 
