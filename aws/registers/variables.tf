@@ -42,17 +42,43 @@ variable "mint_database_master_password" {}
 variable "mint_database_apply_immediately" { default = false }
 
 /*
- * Registers
+
+ === Register toggles ===
+
+ This *instance_count* block defines default registers
+
+ Setting a register to 0 will disable register (or remove if register was already provisioned)
+
+ To toggle register(s) per environment use registers/environments/<name>.tfvars instead, e.g.:
+
+ $ grep instance_count environments/alpha.tfvars
+
+ > instance_count.street-classification = 1
+ > instance_count.street-surface = 1
+
+ will enable street-classification and street-surface registers.
+
 */
 
 variable "instance_count" {
   default = {
-    "address" = 0
-    "country" = 0
+    // Core registers
     "datatype" = 1
     "field" = 1
     "public-body" = 0
     "register" = 1
+
+    // Country register
+    "country" = 0
+
+    // Address registers
+    "address" = 0
+    "locality" = 0
+    "postcode" = 0
+    "street" = 0
+    "street-classification" = 0
+    "street-surface" = 0
+    "town" = 0
   }
 }
 
