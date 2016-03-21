@@ -56,7 +56,7 @@ variable "mint_database_apply_immediately" { default = false }
  > instance_count.street-classification = 1
  > instance_count.street-surface = 1
 
- will enable street-classification and street-surface registers.
+ will provision street-classification and street-surface with single EC2 instances for each register.
 
 */
 
