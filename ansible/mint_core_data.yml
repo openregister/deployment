@@ -10,7 +10,7 @@
   roles:
     - { role: service_data,
       id: 'datatype',
-      src_data: '../../registry-data/data/datatype',
+      src_data: '../../registry-data/data/{{ vpc }}/datatype',
     }
 
 - name: Load field data
@@ -24,7 +24,7 @@
   roles:
     - { role: service_data,
       id: 'field',
-      src_data: '../../registry-data/data/field',
+      src_data: '../../registry-data/data/{{ vpc }}/field',
     }
 
 - name: Load register data
@@ -38,7 +38,7 @@
   roles:
     - { role: service_data,
       id: 'register',
-      src_data: '../../registry-data/data/register',
+      src_data: '../../registry-data/data/{{ vpc }}/register',
     }
 
 - name: Public body data
