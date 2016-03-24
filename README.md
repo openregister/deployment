@@ -99,3 +99,39 @@ or with detailed plan (optional)
 	cd aws/registers
 	make apply -e vpc=myvpc
 
+## Ad hoc tasks with ansible
+
+The ansible/ directory contains some tasks for performing ad hoc
+tasks.  In order to work with ansible, you'll need to do the
+following:
+
+Set up your ssh config to tunnel through the gateway:
+
+    Host 172.xxx.* # replace with actual IP range
+        ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
+
+To run a single playbook (ping in this example):
+
+    cd ansible
+    ansible-playbook ping.yml -e vpc=<name> -f 1
+
+(the ping command seems to timeout unless you explicitly run it
+serially (`-f 1`))
+
+Some tasks require fetching data from `pass`.  For this to work, you
+need to set up your environment first:
+
+    export PASSWORD_STORE_DIR=$HOME/.registers-pass
+
+
+To load data, first make sure you have a recently-build loader.jar available:
+
+    pushd ../loader
+    ./gradlew build
+    popd
+
+Then run the playbook:
+
+    cd ansible
+    ansible-playbook mint_core_data.yml -e vpc=<name> -f 1
+
