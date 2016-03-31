@@ -10,7 +10,7 @@
 
   docker:
     state: 'started'
-    name: 'dataloader-{{ id }}'
+    name: 'dataloader'
     image: 'jstepien/openjdk8'
 
     command: >
