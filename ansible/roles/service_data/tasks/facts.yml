@@ -1,0 +1,6 @@
+- set_fact:
+    id: "{{ hostvars[inventory_hostname]['ec2_tag_Register'] }}"
+
+- set_fact:
+    src_data: "{{ sources[id]['src_data'] }}"
+    src_type: "{{ sources[id]['src_type'] }}"
