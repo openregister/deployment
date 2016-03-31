@@ -3,14 +3,16 @@
   hosts: localhost
   connection: local
   vars:
+    registers: !!null
     workdir: '../aws/registers'
     template: 'roles/terraform_config/templates/register_template.tf.j2'
 
   vars_prompt:
-    - name: 'register'
-      prompt: 'Name of register'
+    - name: 'registers'
+      prompt: 'Register name(s)'
       private: no
 
   tasks:
     - name: generate template
-      template: src="{{ template }}" dest="{{ workdir }}/register_{{ register | normalize_ec2_tags }}.tf"
+      template: src="{{ template }}" dest="{{ workdir }}/register_{{ item | normalize_ec2_tags }}.tf"
+      with_items: "{{ registers }}"
