@@ -76,7 +76,6 @@ variable "instance_count" {
 
     // Food Standards Agency registers
     "location" = 0
-    "food-premises-type" = 0
     "food-premises" = 0
     "food-premises-rating" = 0
 
