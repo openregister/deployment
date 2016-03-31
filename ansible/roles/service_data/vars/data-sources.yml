@@ -67,3 +67,14 @@ sources:
     src_data: '../../industry-data/data/industry/industry.tsv'
     src_type: tsv
     target: industry.tsv
+
+# Ordnance Survey
+  street-classification:
+    src_data: '../../address-data/data/street-classification/street-classification.tsv'
+    src_type: tsv
+    target: street-classification.tsv
+
+  street-surface:
+    src_data: '../../address-data/data/street-surface/street-surface.tsv'
+    src_type: tsv
+    target: street-surface.tsv
