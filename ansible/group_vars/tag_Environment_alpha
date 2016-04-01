@@ -1,15 +1,19 @@
 registers:
-  - address
+  - company
+  - country
   - datatype
   - field
-  - locality
-  - postcode
+  - food-premises
+  - food-premises-rating
+  - industry
+  - local-authority
+  - premises
   - public-body
   - register
-  - street
   - street-classification
   - street-surface
-  - town
+  - territory
+  - uk
 
 register_domain: alpha.openregister.org
 

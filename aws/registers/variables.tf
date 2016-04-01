@@ -68,16 +68,37 @@ variable "instance_count" {
     "public-body" = 0
     "register" = 1
 
-    // Country register
-    "country" = 0
+    // Companies House registers
+    "company" = 0
 
-    // Address registers
+    // Department for Communities and Local Government registers
+    "local-authority" = 0
+
+    // Food Standards Agency registers
+    "location" = 0
+    "food-premises" = 0
+    "food-premises-rating" = 0
+
+    // Foreign & Commonwealth registers
+    "country" = 0
+    "territory" = 0
+    "uk" = 0
+
+    // Office for National Statistics registers
     "address" = 0
-    "locality" = 0
+    "industry" = 0
     "postcode" = 0
-    "street" = 0
+
+    // Ordnance Survey registers
     "street-classification" = 0
     "street-surface" = 0
+
+    // Valuation Office Agency registers
+    "premises" = 0
+
+    // Address registers
+    "locality" = 0
+    "street" = 0
     "town" = 0
   }
 }

@@ -1,0 +1,80 @@
+sources:
+# Core registers
+  datatype:
+    src_data: '../../registry-data/data/{{ vpc }}/datatype'
+    src_type: yaml_dir
+
+  field:
+    src_data: '../../registry-data/data/{{ vpc }}/field'
+    src_type: yaml_dir
+
+  register:
+    src_data: '../../registry-data/data/{{ vpc }}/register'
+    src_type: yaml_dir
+
+  public-body:
+    src_data: '../../organisations/public-bodies/data/public-body.tsv'
+    src_type: tsv
+    target: public-body.tsv
+
+# Companies House
+  company:
+    src_data: '../../food-data/ratings/fixed/company.tsv'
+    src_type: tsv
+    target: company.tsv
+
+# Valuation Office Agency
+  premises:
+    src_data: '../../food-data/ratings/fixed/premises.tsv'
+    src_type: tsv
+    target: premises.tsv
+
+# Foreign & Commonwealth Office
+  country:
+    src_type: tsv
+    src_data: '../../country-data/data/country/countries.tsv'
+    target: countries.tsv
+
+  territory:
+    src_data: '../../country-data/data/territory/territories.tsv'
+    src_type: tsv
+    target: territories.tsv
+
+  uk:
+    src_data: '../../country-data/data/uk/uk.tsv'
+    src_type: tsv
+    target: uk.tsv
+
+# Department for Communites and Local Government
+  local-authority:
+    src_data: '../../food-data/ratings/fixed/local-authority.tsv'
+    src_type: tsv
+    target: local-authority.tsv
+
+# Food Standard Agency
+  food-premises:
+    src_data: '../../food-data/ratings/fixed/food-premises.tsv'
+    src_type: tsv
+    target: food-premises.tsv
+
+  food-premises-rating:
+    src_data: '../../food-data/ratings/fixed/food-premises-rating.tsv'
+    src_type: tsv
+    target: food-premises-rating.tsv
+
+# Office for National Statistics
+  industry:
+    src_data: '../../industry-data/data/industry/industry.tsv'
+    src_type: tsv
+    target: industry.tsv
+
+# Ordnance Survey
+  street-classification:
+    src_data: '../../address-data/data/street-classification/street-classification.tsv'
+    src_type: tsv
+    target: street-classification.tsv
+
+  street-surface:
+    src_data: '../../address-data/data/street-surface/street-surface.tsv'
+    src_type: tsv
+    target: street-surface.tsv

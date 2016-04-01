@@ -1,15 +1,15 @@
-module "{{ item }}_policy" {
+module "uk_policy" {
   source = "../modules/instance_policy"
-  id = "{{ item }}"
-  enabled = "${signum(lookup(var.instance_count, "{{ item }}"))}"
+  id = "uk"
+  enabled = "${signum(lookup(var.instance_count, "uk"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 }
 
-module "{{ item }}_presentation" {
+module "uk_presentation" {
   source = "../modules/instance"
-  id = "{{ item }}"
+  id = "uk"
   role = "presentation_app"
 
   vpc_name = "${var.vpc_name}"
@@ -18,15 +18,15 @@ module "{{ item }}_presentation" {
   subnet_ids = "${module.presentation.subnet_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
 
-  instance_count = "${lookup(var.instance_count, "{{ item }}")}"
-  iam_instance_profile = "${module.{{ item }}_policy.profile_name}"
+  instance_count = "${lookup(var.instance_count, "uk")}"
+  iam_instance_profile = "${module.uk_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
 }
 
-module "{{ item }}_mint" {
+module "uk_mint" {
   source = "../modules/instance"
-  id = "{{ item }}"
+  id = "uk"
   role = "mint_app"
 
   vpc_name = "${var.vpc_name}"
@@ -35,21 +35,21 @@ module "{{ item }}_mint" {
   subnet_ids = "${module.mint.subnet_ids}"
   security_group_ids = "${module.mint.security_group_id}"
 
-  instance_count = "${signum(lookup(var.instance_count, "{{ item }}"))}"
-  iam_instance_profile = "${module.{{ item }}_policy.profile_name}"
+  instance_count = "${signum(lookup(var.instance_count, "uk"))}"
+  iam_instance_profile = "${module.uk_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
 }
 
-module "{{ item }}_elb" {
+module "uk_elb" {
   source = "../modules/load_balancer"
-  id = "{{ item }}"
-  enabled = "${signum(lookup(var.instance_count, "{{ item }}"))}"
+  id = "uk"
+  enabled = "${signum(lookup(var.instance_count, "uk"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  instance_ids = "${module.{{ item }}_presentation.instance_ids}"
+  instance_ids = "${module.uk_presentation.instance_ids}"
   security_group_ids = "${module.presentation.security_group_id}"
   subnet_ids = "${module.core.public_subnet_ids}"
 

@@ -4,13 +4,13 @@
 - name: Configure docker instance
   become: yes
   vars:
-    datasource: "{{ workdir }}/{{ file | default(id) }}"
-    type: "{{ file_type | default('yaml_dir') }}"
+    datasource: "{{ workdir }}/{{ target | default(id) }}"
+    type: "{{ src_type | default('yaml_dir') }}"
     mint_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ id }}') }}"
 
   docker:
     state: 'started'
-    name: 'dataloader-{{ id }}'
+    name: 'dataloader'
     image: 'jstepien/openjdk8'
 
     command: >

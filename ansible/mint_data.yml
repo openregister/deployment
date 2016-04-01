@@ -1,0 +1,32 @@
+---
+- name: Validate input
+  hosts: localhost
+  vars:
+    registers: !!null
+  tasks:
+    - fail: msg="Variable registers must be specified."
+      when: registers is none
+      always_run: yes
+
+- name: Compute mint hosts
+  hosts: localhost
+  vars:
+    vpc_tag: 'tag_Environment_{{ vpc }}'
+  tasks:
+    - name: query mint hosts
+      set_fact:
+        mint_hosts: "{{ groups.tag_Role_mint_app | intersect(groups[vpc_tag]) }}"
+      always_run: yes
+
+    - name: include matching hosts
+      add_host: name="{{ item }}" group="collected_hosts"
+      with_items: "{{ mint_hosts }}"
+      when: hostvars[item].ec2_tag_Register == registers
+      always_run: yes
+
+- name: Load data
+  hosts: collected_hosts
+  vars_files:
+    - 'roles/service_data/vars/data-sources.yml'
+  roles:
+    - service_data

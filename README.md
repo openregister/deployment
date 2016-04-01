@@ -99,7 +99,7 @@ or with detailed plan (optional)
 	cd aws/registers
 	make apply -e vpc=myvpc
 
-## Ad hoc tasks with ansible
+# Ad hoc tasks with ansible
 
 The ansible/ directory contains some tasks for performing ad hoc
 tasks.  In order to work with ansible, you'll need to do the
@@ -124,14 +124,50 @@ need to set up your environment first:
     export PASSWORD_STORE_DIR=$HOME/.registers-pass
 
 
-To load data, first make sure you have a recently-build loader.jar available:
+## Data loading
+
+
+### Prerequisites
+
+To load data, first make sure you have a recently-build [loader.jar](https://github.com/openregister/loader) available:
 
     pushd ../loader
     ./gradlew build
     popd
+    
+### Adding new data sets (if required)
+
+	cd ansible
+	vi roles/service_data/vars/data-sources.yml
+    
+### Executing a data load
 
 Then run the playbook:
 
     cd ansible
-    ansible-playbook mint_core_data.yml -e vpc=<name> -f 1
+    ansible-playbook mint_data.yml \
+    	-e vpc=<name> \
+    	-e registers=<name>
+    
+Alternatively, you can provide specify an array of registers to load:
 
+`cat registers-to-load.yaml`
+
+	registers:
+	  - country
+	  - territory
+	  - uk
+
+And then run:
+
+	cd ansible
+	ansible-playbook mint_data.yml \
+		-e vpc=<name> \
+		-e @registers-to-load.yaml
+	
+Or finally, import all registers defined for selected environment:
+
+	cd ansible
+	ansible-playbook mint_data.yml \
+		-e vpc=<name> \
+		-e @group_vars/tag_Environment_alpha
