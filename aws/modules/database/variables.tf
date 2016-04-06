@@ -40,10 +40,6 @@ variable "engine" {
   default = "postgres"
 }
 
-variable "engine_version" {
-  default = "9.4.1"
-}
-
 variable "instance_class" {
   default = "db.t2.micro"
 }

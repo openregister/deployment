@@ -12,7 +12,6 @@ resource "aws_db_instance" "db" {
   apply_immediately = "${var.apply_immediately}"
 
   engine = "${var.engine}"
-  engine_version = "${var.engine_version}"
 
   db_subnet_group_name = "${aws_db_subnet_group.subnet_group.id}"
   parameter_group_name = "${var.parameter_group_name}"
