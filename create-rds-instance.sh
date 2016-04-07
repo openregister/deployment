@@ -41,14 +41,14 @@ esac
 
 aws rds create-db-instance \
     --db-instance-identifier "$INSTANCE_NAME" \
-    --db-parameter-group-name "postgresrdsgroup" \
+    --db-parameter-group-name "postgresrdsgroup-9-5-2" \
     --allocated-storage "$SIZE_GB" \
     --db-instance-class "$INSTANCE_CLASS" \
     --multi-az "$MULTI_AZ" \
     --backup-retention-period "$BACKUP_RETENTION_PERIOD" \
     --no-publicly-accessible \
     --engine postgres \
-    --engine-version 9.4.1 \
+    --engine-version 9.5.2 \
     --master-username "$PG_USER" \
     --master-user-password "$PG_PASSWORD" \
     --db-subnet-group-name "$VPC" \
