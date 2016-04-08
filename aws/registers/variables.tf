@@ -25,6 +25,14 @@ variable "public_cidr_block" {}
 
 variable "admin_ips" {}
 
+// RDS Configuration
+variable "rds_parameter_group_name" {
+  default = {
+    "mint" = "postgresrdsgroup-9-5-2"
+    "presentation" = "postgresrdsgroup-9-5-2"
+  }
+}
+
 // Read APIs
 variable "presentation_cidr_block" {}
 variable "presentation_database_cidr_block" {}

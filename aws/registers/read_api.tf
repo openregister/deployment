@@ -25,6 +25,7 @@ module "presentation_db" {
   allow_from = "${var.presentation_cidr_block} ${var.indexer_cidr_block}"
 
   instance_class = "${var.presentation_database_class_instance}"
+  parameter_group_name = "${lookup(var.rds_parameter_group_name, "presentation")}"
 
   username = "${var.read_api_rds_username}"
   password = "${var.presentation_database_master_password}"
