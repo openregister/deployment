@@ -1,5 +1,5 @@
 - name: Ensure docker-py is installed
-  pip: state=present name=docker-py
+  pip: state=present version='1.6.0' name=docker-py
   become: yes
 
 - name: Deploy data loader
