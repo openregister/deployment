@@ -63,6 +63,11 @@ sources:
     target: food-premises-rating.tsv
 
 # Office for National Statistics
+  address:
+    src_data: '../../address-data/data/address.tsv'
+    src_type: tsv
+    target: address.tsv
+
   industry:
     src_data: '../../industry-data/data/industry/industry.tsv'
     src_type: tsv
