@@ -31,6 +31,8 @@ module "presentation_db" {
   password = "${var.presentation_database_master_password}"
 
   apply_immediately = "${var.presentation_database_apply_immediately}"
+
+  allocated_storage = "60"
 }
 
 module "presentation_codedeploy" {
