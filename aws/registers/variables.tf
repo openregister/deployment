@@ -33,6 +33,13 @@ variable "rds_parameter_group_name" {
   }
 }
 
+variable "rds_allocated_storage" {
+  default = {
+    "mint" = 5
+    "presentation" = 5
+  }
+}
+
 // Read APIs
 variable "presentation_cidr_block" {}
 variable "presentation_database_cidr_block" {}
@@ -85,6 +92,7 @@ variable "instance_count" {
     // Food Standards Agency registers
     "location" = 0
     "food-premises" = 0
+    "food-premises-type" = 0
     "food-premises-rating" = 0
 
     // Foreign & Commonwealth registers

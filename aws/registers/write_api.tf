@@ -39,6 +39,8 @@ module "mint_db" {
 
   username = "${var.read_api_rds_username}"
   password = "${var.mint_database_master_password}"
+
+  allocated_storage = "${lookup(var.rds_allocated_storage, "mint")}"
 }
 
 module "mint" {
