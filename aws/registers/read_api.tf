@@ -32,7 +32,7 @@ module "presentation_db" {
 
   apply_immediately = "${var.presentation_database_apply_immediately}"
 
-  allocated_storage = "60"
+  allocated_storage = "${lookup(var.rds_allocated_storage, "presentation")}"
 }
 
 module "presentation_codedeploy" {

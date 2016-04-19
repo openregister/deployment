@@ -33,6 +33,13 @@ variable "rds_parameter_group_name" {
   }
 }
 
+variable "rds_allocated_storage" {
+  default = {
+    "mint" = 5
+    "presentation" = 5
+  }
+}
+
 // Read APIs
 variable "presentation_cidr_block" {}
 variable "presentation_database_cidr_block" {}
