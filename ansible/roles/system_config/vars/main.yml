@@ -1,0 +1,59 @@
+sshd_banner_path: /etc/ssh/ssh_banner
+sshd_banner: |
+  --------------------------------------------------------------
+  Warning: Authorised Users Only. All access is monitored.
+  Unauthorised attempts at obtaining access will be
+  prosecuted under the Computer Misuse Act 1990.
+  Disconnect now unless authorised to use this system.
+  --------------------------------------------------------------
+
+sshd_config_path: /etc/ssh/sshd_config
+sshd_config:
+  Banner:
+    value: 'Banner {{ sshd_banner_path }}'
+
+  Ciphers:
+    value: 'Ciphers aes128-ctr,aes192-ctr,aes256-ctr'
+
+  Protocol:
+    value: 'Protocol 2'
+
+  PermitRootLogin:
+    value: 'PermitRootLogin no'
+
+  Macs:
+    value: 'Macs hmac-sha1'
+
+sysctl_config:
+  net.ipv4.conf.all.rp_filter:
+    value: 1
+  net.ipv4.conf.default.rp_filter:
+    value: 1
+  net.ipv4.tcp_max_syn_backlog:
+    value: 4096
+  net.ipv4.conf.all.accept_redirects:
+    value: 0
+  net.ipv4.conf.all.secure_redirects:
+    value: 0
+
+pam_limits:
+  core_soft:
+    domain: '*'
+    item: core
+    type: soft
+    value: 0
+
+files:
+  /etc/at.allow:
+    state: touch
+
+files_content:
+  /etc/cron.allow:
+    content: |
+      root
+
+files_inline:
+  'password required in single user mode':
+    path: /etc/inittab
+    match: '^~~:S:wait:/sbin/sulogin$'
+    value: '~~:S:wait:/sbin/sulogin'
