@@ -1,1 +1,6 @@
 register_domain: register.gov.uk
+registers:
+  - country
+  - datatype
+  - field
+  - register
