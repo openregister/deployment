@@ -1,0 +1,24 @@
+- name: /etc/ssh/ssh_banner
+  copy:
+    content: "{{ sshd_banner }}"
+    dest: "{{ sshd_banner_path }}"
+  notify:
+    - sshd configtest
+    - sshd restart
+  tags:
+    - sshd
+  when: ansible_distribution == 'Amazon'
+
+- name: /etc/ssh/sshd_config
+  lineinfile:
+    dest: "{{ sshd_config_path }}"
+    state: "{{ item.value.state | default('present') }}"
+    regexp: "{{ item.key }}"
+    line: "{{ item.value.value }}"
+  notify:
+    - sshd configtest
+    - sshd restart
+  tags:
+    - sshd
+  with_dict: "{{ sshd_config }}"
+  when: ansible_distribution == 'Amazon'

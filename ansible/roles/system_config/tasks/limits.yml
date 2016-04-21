@@ -1,0 +1,11 @@
+- name: /etc/security/limits.conf
+  pam_limits:
+    domain: "{{ item.value.domain }}"
+    limit_type: "{{ item.value.type }}"
+    limit_item: "{{ item.value.item }}"
+    value: "{{ item.value.value }}"
+    use_max: "{{ item.value.use_max | default('no') }}"
+  tags:
+    - limits
+  with_dict: "{{ pam_limits }}"
+  when: ansible_distribution == 'Amazon'

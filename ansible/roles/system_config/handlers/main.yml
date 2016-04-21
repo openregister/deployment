@@ -1,0 +1,5 @@
+- name: sshd restart
+  service: name=sshd state=restarted
+
+- name: sshd configtest
+  command: sshd -t
