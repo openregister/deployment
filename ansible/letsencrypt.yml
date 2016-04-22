@@ -1,0 +1,75 @@
+---
+- name: "Generate SSL certificates with letsencrypt.org"
+  hosts: localhost
+  connection: local
+  environment:
+    AWS_REGION: 'eu-west-1'
+  vars:
+    api_server:
+      staging: 'https://acme-staging.api.letsencrypt.org/directory'
+      production: 'https://acme-v01.api.letsencrypt.org/directory'
+    debug: yes
+    lego_args: >-
+      --accept-tos
+      --dns route53
+      --path {{ workdir }}
+      --email register-ssl-renew@digital.cabinet-office.gov.uk
+      --exclude http-01
+      --exclude tls-sni-01
+    lego_command: renew
+    lego_path: '../../lego/lego'
+    staging: yes
+    workdir: '../tls-certs/{{ vpc }}'
+
+  tasks:
+    - name: create work directory
+      file: path='{{ workdir }}' state=directory mode=0700
+
+    - name: check lego binary
+      stat: path='{{ lego_path }}'
+      register: status
+
+    - assert: { that: status.stat.xusr == true }
+
+    - include_vars: '{{ item }}'
+      with_first_found:
+        - 'group_vars/tag_Environment_{{ vpc }}'
+        - 'group_vars/all'
+
+    - name: compute domains list
+      set_fact:
+        fqdn: '{{ item }}.{{ register_domain }}'
+      with_items: '{{ registers | union([ "www" ]) }}'
+      register: output
+
+    - set_fact: domains="{{ output.results | map(attribute='ansible_facts.fqdn') | list }}"
+
+    - name: compute command string
+      set_fact:
+        command: >-
+          {{ lego_path }} {{ lego_args }}
+          --server {{ (staging == true) | ternary(api_server.staging, api_server.production) }}
+          -d {{ register_domain }} -d {{ domains | join(' -d ') }}
+          {{ lego_command }}
+
+    - name: print command string
+      debug: var=command
+      when: debug
+
+    - stat: path='{{ workdir }}/certificates/{{ register_domain }}.crt'
+      register: cert_file
+
+    - name: execute lego command (it may take some time)
+      shell: '{{ command }} | tee {{ workdir }}/lego.log'
+      register: output
+      when:
+        - not cert_file.stat.exists
+
+    - debug: var=output
+      when: debug
+
+    - name: split certficate and chain from bundle
+      shell: csplit -kf {{ register_domain }}.pem_ {{ register_domain }}.crt '/END CERTIFICATE/+1'
+      args:
+        chdir: '{{ workdir }}/certificates'
+        creates: '{{ register_domain }}.pem_0*'
