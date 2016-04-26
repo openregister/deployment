@@ -18,3 +18,6 @@ Example usage:
 
     # generate real cert from production
     ansible-playbook letsencrypt.yml -e vpc=beta -e staging=no
+    
+The certificate will be put in tls-certs/${VPC}/certificates.  It can
+then be uploaded with the terraform scripts in aws/tls-certs.
