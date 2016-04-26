@@ -17,7 +17,6 @@
       --exclude http-01
       --exclude tls-sni-01
     lego_command: renew
-    lego_path: '../../lego/lego'
     staging: yes
     workdir: '../tls-certs/{{ vpc }}'
 
@@ -26,10 +25,8 @@
       file: path='{{ workdir }}' state=directory mode=0700
 
     - name: check lego binary
-      stat: path='{{ lego_path }}'
+      command: lego
       register: status
-
-    - assert: { that: status.stat.xusr == true }
 
     - include_vars: '{{ item }}'
       with_first_found:
@@ -46,8 +43,8 @@
 
     - name: compute command string
       set_fact:
-        command: >-
-          {{ lego_path }} {{ lego_args }}
+        command: >
+          lego {{ lego_args }}
           --server {{ (staging == true) | ternary(api_server.staging, api_server.production) }}
           -d {{ register_domain }} -d {{ domains | join(' -d ') }}
           {{ lego_command }}
