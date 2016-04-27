@@ -58,13 +58,13 @@
     - debug: var=cert_file
 
     - name: create certificate (it may take some time)
-      shell: '{{ command_prefix }} run | tee {{ workdir }}/lego.log'
+      shell: '{{ command_prefix }} run 2>&1 | tee {{ workdir }}/lego.log'
       register: output
       when:
         - not cert_file.stat.exists
 
     - name: renew certificate (it may take some time)
-      shell: '{{ command_prefix }} renew | tee {{ workdir }}/lego.log'
+      shell: '{{ command_prefix }} renew 2>&1 | tee {{ workdir }}/lego.log'
       register: output
       when:
         - cert_file.stat.exists
