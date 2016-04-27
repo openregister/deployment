@@ -21,3 +21,6 @@ Example usage:
     
 The certificate will be put in tls-certs/${VPC}/certificates.  It can
 then be uploaded with the terraform scripts in aws/tls-certs.
+
+It can take quite some time to provision the certificates.  You can
+follow progress of the lego client in `../tls-certs/${VPC}/lego.log`.
