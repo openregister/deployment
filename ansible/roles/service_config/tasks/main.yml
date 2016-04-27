@@ -18,13 +18,6 @@
     - "{{ registers }}"
     - "{{ services }}"
 
-- name: Copy static files
-  template:
-    src="templates/{{ item }}.j2" dest="{{ workdir }}/{{ vpc }}/{{ item }}"
-  with_items:
-    - 'fields.yaml'
-    - 'registers.yaml'
-
 - name: Generate configuration files
   template:
     src="templates/{{ item.1 }}-config.yaml.j2"
