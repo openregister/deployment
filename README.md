@@ -24,10 +24,6 @@ On OSX you can install via brew:
 
 ## System variables
 
-* password store location:
-
-		export PASSWORD_STORE_DIR=~/.registers-pass
-
 * set AWS CLI variables:
 
 		export AWS_REGION=eu-west-1
@@ -117,11 +113,6 @@ To run a single playbook (ping in this example):
 
 (the ping command seems to timeout unless you explicitly run it
 serially (`-f 1`))
-
-Some tasks require fetching data from `pass`.  For this to work, you
-need to set up your environment first:
-
-    export PASSWORD_STORE_DIR=$HOME/.registers-pass
 
 
 ## Data loading
