@@ -6,6 +6,7 @@
   vars:
     users:
       - andrewg
+      - slawekm
   tasks:
     - name: Purge user
       user: name="{{ item }}" state=absent

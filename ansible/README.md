@@ -24,3 +24,12 @@ then be uploaded with the terraform scripts in aws/tls-certs.
 
 It can take quite some time to provision the certificates.  You can
 follow progress of the lego client in `../tls-certs/${VPC}/lego.log`.
+
+
+## Remove users ##
+
+Use script `remove-users.yml` to remove user from an environment. 
+Add user to be removed in the users list in the file `remove-users.yml` 
+and then run command: 
+
+`ansible-playbook remove-users.yml -e vpc=<vpcname>`
