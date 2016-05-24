@@ -83,3 +83,10 @@ sources:
     src_data: '../../address-data/data/street-surface/street-surface.tsv'
     src_type: tsv
     target: street-surface.tsv
+
+# School data
+  school:
+    src_data: '../../education/data/school/schools.tsv'
+    src_type: tsv
+    target: schools.tsv
+
