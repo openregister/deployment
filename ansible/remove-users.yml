@@ -6,6 +6,7 @@
   vars:
     users:
       - andrewg
+      - omsharma
       - slawekm
   tasks:
     - name: Purge user
