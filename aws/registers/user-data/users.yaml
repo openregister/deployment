@@ -2,11 +2,6 @@
 
 users:
   - default
-  - name: omsharma
-    groups: users
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7u+dU4GpcG73nZD4BJGuq8s9roUGSrSKE8dJ/b224t8sUFtr+G8Aa6i90p+qwAnoH/x9ZtUW2CV/qjHGVT1FprHvFHIjPJ7lvFiGm9TQIFQYz2ps7nUDHybWDXCxN2quF2VLRyvSuhEwXLyqL+OdpYl+7VmchfL9jgumkcPRjh2q+7h3l3Bio0tvy6m40QKjbqRXG0bdOAaQMApkWLm5J438WxMum1sfVgcpDBopeK2WYF5eFmnLefzynlpxrRagRSuTqCJ+uPpQJSPhBYjyXu4UtkUr9xCJJx+jSrvgkeyXA4ZVZDaW5FVnr6CdlDJwCx6Y3gB2CIGqA+B/HIsmR OmSharma
-    sudo: ALL=(ALL) NOPASSWD:ALL
 
   - name: philandstuff
     groups: users
