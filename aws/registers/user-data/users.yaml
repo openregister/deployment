@@ -3,6 +3,12 @@
 users:
   - default
 
+  - name: chrisduraj
+    group: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCVVhDnVJvuYocL64Vu6Pr+AJRRrp15UciKpbSsvplhw5l5oc1yvB/+a4oi6AGZZUu66Gk7FGS2f3ESQBP5yPPkKJS+SHACjTqNpGD9OwMb4hRdAiK14gEn5CJDeGF/6gnG31vWeh9ZHlzU0TEfIICIpZ1ojYJu8YM+cuhuuXHIknK9iDngGDIlbhbqA57hts5IsqdktwZgDlJe1h2F/QbU1/+xadjrR7v+tCDhUlw52zHvgeW5hCqnG24Px7zea5eYkShmMjVKtqpJqZWfKaxPaYnJRpbtKpT8L3IyIWdagemxiPsgyG5LglrMdlxRDl9CHUtyBDeMLm23wkWrWQn0LKe07qhUltWvg4UXI8x5j7NzKATNIPB7BTbeQyMbgiGHEWloy9dkJBuNQKSUFQyolFG6lj9z+ea6w80q7f9Of9ylXtaNGWHuP253fSUwU+5mjYaSuQcI7rqk0rU2I6QT1NEXmtM3SPDkNDUfDDrN6d2HYpOHCbzqS0ygH2uVYrfPPG3Unef35MVSIA0KAxpXhoWTNg/pZ2hh+y3YbFKclVqXFFy3R8ka39LKTn+NYWW1Dsb/81EjeTxcfRLKzUTED+Wu5n/Trb0q0YYJld1Hyye9UL0fJ91oEm79AN0+TQXNMemxyIwuqYSruF787eLHcb7mqs9ACiEqkIytCGMXaQ== christopherduraj@gmail.com
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
   - name: philandstuff
     groups: users
     ssh-authorized-keys:
