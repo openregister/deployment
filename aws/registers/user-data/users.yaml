@@ -17,8 +17,7 @@ users:
 
   - name: michaelab
     groups: users
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC0TIzHlEIGZPLhrU1ZC1H5t+Jmh/1ZLwge0dy2alayWAqGuID6KuMW/xplwKhZiZPh7p2tnFurZlknMLLZ+O3BK3DPt3i+PKlmkf91rqJv+81dTQD+s915ay/qe9luaCgNTvdPz7tmvdJkGJglLHJtpR8WFPDvudqF4WXitG1i2RdRfaFpws3Ab4LV5G5pg0FR50hJrNOjO2LtwejxEQvuseO+stTWzft4f21UsPQPNA85OWzG+xrkYnAAWSdnRJnpO+LJ+Ld4FSkidOwMuXyNehANNTJAWS9qqyOgNqH3A2gEGVC7zJIh5gKPF8svYgw2N+U81/I2400ES1Uu9Clb2yZ5QdBEJMIbxNiaNQ5NHnuifONpuV4dSl7UPp8MDkKfEGfixdaPpa/agYLN8JnCeLlVj62xj61Qpzjzk/aUizD6KoUoRV9YT5Ob6YVJjbsI+/tRiRT0/ca8StZvYsymbI+bHEuc7CqmMPo7L1CMo/0YIBfpRCL+dkPEMByqvWNzdsMhiIH8s/rwDVx9CUZKpcDcVmmWHBXLLoRlMu66d2GVYjXdJmdnGiA/A7V7kexABlUo2LcmY58k+kd1uQtFBqVHkI2Yq0TS0wqb07H/8U9oP5SUOEQlO18htSqvZqmjgJiScbrftDCl5Q9rnBAG7S4iTnuaKRgEhbTwrCxAqw== michaela.broschomb@digital.cabinet-office.gov.uk
+    ssh-authorized-keys: [ ]
     sudo: ALL=(ALL) NOPASSWD:ALL
 
 
