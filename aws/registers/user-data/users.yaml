@@ -22,7 +22,9 @@ users:
 
 
 packages:
+  - aws-cli
   - docker
+  - ruby
 
 package_upgrade: true
 
