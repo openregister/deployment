@@ -6,7 +6,7 @@ variable "vpc_name" {}
 // Instance properties
 
 variable "instance_ami" {
-  default = "ami-a10897d6"
+  default = "ami-6ced7f1f"
 }
 
 variable "instance_count" {
