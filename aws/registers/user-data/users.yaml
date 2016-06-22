@@ -41,5 +41,6 @@ write_files:
 
 runcmd:
   - [ service, docker, start ]
+  - [ chkconfig, docker, on ]
   - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
   - [ /usr/local/bin/setup-cdagent.sh ]
