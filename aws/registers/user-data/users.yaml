@@ -15,9 +15,10 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDpD0Wc0pfD5NrV0D7alwOZDIqC9id+RroF2BQ59wLqxvF4wvlgtab0VHiIylSeN4K2bK5ikugy6/rwhWWdoQ3raMXIgOWP6ukSh/OLUioxCeop04IlF4JgUo3uNoInkUegnLw42sg/cKX+pbv/1Rc4GEO6J0Wy6YylyeieAWiy2rwgO/nr/49Tyiw1C66embmglhv7OaZEthpKyM3u6rlJeeU0H2K/bsc9yU/Utpek0hx/nih8qlVEPG7/3welWUNb/LwFC4EpJKiU72mRcjWGh9l5MjCJ2SR/wimY1AHQ4YES3VeAQvcaTKMCnaBET/RhnashxMr0f3V7IDkg56tZ cardno:000603815000
     sudo: ALL=(ALL) NOPASSWD:ALL
 
-  - name: michaelab
+  - name: michaelabenyohai
     groups: users
-    ssh-authorized-keys: [ ]
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDBWdzo8bSa/jm95AtgkRmIOMOxXt6sBtA/s6tkQ4R5I+ZM+jK0Gpf+AuIwzlNMIZjNXnH9FeX0Grm+gGK+wRUSbjRMkzoAl3fJhwDII5XY375aiz8VcuLEwW0n4/tGu1qKB3UlB67etxdHBksrgNFEJPA3/EzOizuugVFC396dUIzWEBVFJ6fY/LIlaBnQWkO5lT7+t+PnoBG5dPNslDEYgfp/+p9MxgAX/kzSpEzc1qrtcTwzZHMaO7F5Qix2+QeZ4GTDY3kuDnYbHKRXFHN9lOYoUxHLjXiRNiyqxx5Z+d7QQE76sxidt7d5//amJY6F3KQzXqpJqfbXfJ0ZPFE33BS5SAZx+o/6oE35yays8DjGT98piOGKko0OtCZYM2wiv+d51KMKIU+BFKv9ZxDlMLr/hQulTtjR3BaAWDfLISzaB1N5qqinYXbmEV31z/ymcYGK2LHpV4nIs60ph2CFLzB+nr4eUmf7AbK9IPmYnCnj6JRFwvF7JYsDcNurDcfzkt+dponq2jJnH2SeEjghS1BW+cif8xJtXCdz2i1P6i/ISt19Enwck6iHJ5FjT6zamupp2Lpp+1sFBKoKX60ILGeUQMAzDjCV1mCUhzh8mu9cmf7LGahht+PCX7zBB4NTt5fOYo7uSW1AFB0sPaZwMlFmeO9G7e/5Feq8sXqBvQ== michaelabenyohai
     sudo: ALL=(ALL) NOPASSWD:ALL
 
 
