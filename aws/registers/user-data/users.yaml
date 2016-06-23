@@ -26,6 +26,7 @@ packages:
   - aws-cli
   - docker
   - ruby
+  - yum-cron
 
 package_upgrade: true
 
