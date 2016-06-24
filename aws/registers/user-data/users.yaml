@@ -46,15 +46,8 @@ write_files:
     # 'security' means run command `yum --security upgrade`
     update_cmd = security
 
-    # Whether a message should be emitted when updates are available,
-    # were downloaded, or applied.
-    update_messages = no
-
-    # Whether updates should be downloaded when they are available.
+    update_messages = yes
     download_updates = yes
-
-    # Whether updates should be applied when they are available.  Note
-    # that download_updates must also be yes for the update to be applied.
     apply_updates = yes
 
     # Maximum amout of time to randomly sleep, in minutes.  The program
@@ -73,12 +66,7 @@ write_files:
     # system_name is None, the hostname will be used.
     system_name = None
 
-    # How to send messages.  Valid options are stdio and email.  If
-    # emit_via includes stdio, messages will be sent to stdout; this is useful
-    # to have cron send the messages.  If emit_via includes email, this
-    # program will send email itself according to the configured options.
-    # If emit_via is None or left blank, no messages will be sent.
-    emit_via = None
+    emit_via = stdio
 
     # The width, in characters, that messages that are emitted should be
     # formatted to.
@@ -104,9 +92,31 @@ write_files:
 
     # skip_broken = True
     mdpolicy = group:main
+- path: /etc/yum/yum-cron-hourly.conf
+  permissions: '0644'
+  content: |
+    [commands]
+    update_cmd = security
 
-    # Uncomment to auto-import new gpg keys (dangerous)
-    # assumeyes = True
+    update_messages = no
+    download_updates = no
+    apply_updates = no
+    random_sleep = 0
+
+    [emitters]
+    system_name = None
+    emit_via = None
+
+
+    [groups]
+    group_list = None
+
+    group_package_types = mandatory, default
+
+    [base]
+    debuglevel = -2
+
+    mdpolicy = group:main
 
 
 runcmd:
