@@ -26,6 +26,7 @@ packages:
   - aws-cli
   - docker
   - ruby
+  - yum-cron
 
 package_upgrade: true
 
@@ -38,8 +39,90 @@ write_files:
     aws s3 cp s3://aws-codedeploy-eu-west-1/latest/install /tmp/install --region eu-west-1
     chmod +x /tmp/install
     /tmp/install auto
+- path: /etc/yum/yum-cron.conf
+  permissions: '0644'
+  content: |
+    [commands]
+    # 'security' means run command `yum --security upgrade`
+    update_cmd = security
+
+    update_messages = yes
+    download_updates = yes
+    apply_updates = yes
+
+    # Maximum amout of time to randomly sleep, in minutes.  The program
+    # will sleep for a random amount of time between 0 and random_sleep
+    # minutes before running.  This is useful for e.g. staggering the
+    # times that multiple systems will access update servers.  If
+    # random_sleep is 0 or negative, the program will run immediately.
+    #  NOTE that we hold up all the other things in cron.daily as we wait,
+    # so while waiting for 6+ hours is fine for us it might not be nice
+    # for logrotate (so wait for 2 hours by default).
+    random_sleep = 120
+
+
+    [emitters]
+    # Name to use for this system in messages that are emitted.  If
+    # system_name is None, the hostname will be used.
+    system_name = None
+
+    emit_via = stdio
+
+    # The width, in characters, that messages that are emitted should be
+    # formatted to.
+    output_width = 80
+
+
+    [groups]
+    # NOTE: This only works when group_command != objects, which is now the default
+    # List of groups to update
+    group_list = None
+
+    # The types of group packages to install
+    group_package_types = mandatory, default
+
+    [base]
+    # This section overrides yum.conf
+
+    # Use this to filter Yum core messages
+    # -4: critical
+    # -3: critical+errors
+    # -2: critical+errors+warnings (default)
+    debuglevel = -2
+
+    # skip_broken = True
+    mdpolicy = group:main
+- path: /etc/yum/yum-cron-hourly.conf
+  permissions: '0644'
+  content: |
+    [commands]
+    update_cmd = security
+
+    update_messages = no
+    download_updates = no
+    apply_updates = no
+    random_sleep = 0
+
+    [emitters]
+    system_name = None
+    emit_via = None
+
+
+    [groups]
+    group_list = None
+
+    group_package_types = mandatory, default
+
+    [base]
+    debuglevel = -2
+
+    mdpolicy = group:main
+
 
 runcmd:
+  - [ service, yum-cron, start ]
+  - [ chkconfig, yum-cron, on ]
   - [ service, docker, start ]
+  - [ chkconfig, docker, on ]
   - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
   - [ /usr/local/bin/setup-cdagent.sh ]

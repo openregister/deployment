@@ -86,6 +86,8 @@ variable "instance_count" {
     // Companies House registers
     "company" = 0
 
+    "school" = 0
+
     // Department for Communities and Local Government registers
     "local-authority" = 0
 
