@@ -6,6 +6,10 @@ the AWS certificate manager.
 
 ## Setup
 
+Install modules
+
+    terraform get
+
 Run a plan
 
     make plan
