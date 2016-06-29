@@ -4,7 +4,7 @@ resource "aws_instance" "indexer" {
   count = "${var.instance_count}"
   subnet_id = "${aws_subnet.indexer.id}"
   user_data = "${var.user_data}"
-  security_groups = [ "${aws_security_group.indexer.id}" ]
+  vpc_security_group_ids = [ "${aws_security_group.indexer.id}" ]
   iam_instance_profile = "${aws_iam_instance_profile.indexer.id}"
 
   tags = {
