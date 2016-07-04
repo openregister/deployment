@@ -7,6 +7,10 @@ resource "aws_instance" "indexer" {
   vpc_security_group_ids = [ "${aws_security_group.indexer.id}" ]
   iam_instance_profile = "${aws_iam_instance_profile.indexer.id}"
 
+  root_block_device = {
+    volume_size = "10" // gigabytes
+  }
+
   tags = {
     // should be this once we've fixed the app startup script to use the Register tag:
     // Name = "${var.vpc_name}-${var.id}-${count.index +1}"
