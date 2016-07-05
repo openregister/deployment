@@ -19,6 +19,7 @@ module "address_presentation" {
   security_group_ids = "${module.presentation.security_group_id}"
 
   instance_count = "${lookup(var.instance_count, "address")}"
+  instance_type = "t2.large"
   iam_instance_profile = "${module.address_policy.profile_name}"
 
   user_data = "${template_file.user_data.rendered}"
