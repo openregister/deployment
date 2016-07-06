@@ -47,9 +47,9 @@ sources:
 
 # Department for Communites and Local Government
   local-authority:
-    src_data: '../../food-data/ratings/fixed/local-authority.tsv'
+    src_data: '../../local-authority-data/data/local-authority/local-authorities.tsv'
     src_type: tsv
-    target: local-authority.tsv
+    target: local-authorities.tsv
 
 # Food Standard Agency
   food-premises:
