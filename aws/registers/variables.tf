@@ -90,6 +90,7 @@ variable "instance_count" {
 
     // Department for Communities and Local Government registers
     "local-authority" = 0
+    "local-authority-type" = 0
 
     // Food Standards Agency registers
     "location" = 0
