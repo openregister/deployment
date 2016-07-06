@@ -51,6 +51,11 @@ sources:
     src_type: tsv
     target: local-authorities.tsv
 
+  local-authority-type:
+    src_data: '../../local-authority-data/data/local-authority-type/local-authority-types.tsv'
+    src_type: tsv
+    target: local-authority-types.tsv
+
 # Food Standard Agency
   food-premises:
     src_data: '../../food-data/ratings/fixed/food-premises.tsv'
