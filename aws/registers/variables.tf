@@ -86,7 +86,14 @@ variable "instance_count" {
     // Companies House registers
     "company" = 0
 
+    // Department for Education registers
     "school" = 0
+    "school-admissions-policy" = 0
+    "school-federation" = 0
+    "school-gender" = 0
+    "school-phase" = 0
+    "school-tag" = 0
+    "school-type" = 0
 
     // Department for Communities and Local Government registers
     "local-authority" = 0
@@ -107,6 +114,7 @@ variable "instance_count" {
     "address" = 0
     "industry" = 0
     "postcode" = 0
+    "denomination" = 0
 
     // Ordnance Survey registers
     "street-classification" = 0
@@ -119,6 +127,7 @@ variable "instance_count" {
     "locality" = 0
     "street" = 0
     "town" = 0
+    "place" = 0
   }
 }
 
