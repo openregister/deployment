@@ -1,3 +1,11 @@
+- name: Ensure rsync is installed
+  yum: state=present name=rsync
+  become: yes
+
+- name: Ensure pip is installed
+  yum: state=present name=python27-pip
+  become: yes
+
 - name: Ensure docker-py is installed
   pip: state=present version='1.6.0' name=docker-py
   become: yes
