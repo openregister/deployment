@@ -4,5 +4,6 @@ registers:
   - datatype
   - field
   - register
+  - uk
 
 register_domain: discovery.openregister.org
