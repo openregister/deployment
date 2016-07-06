@@ -1,0 +1,7 @@
+registers:
+  - local-authority
+  - datatype
+  - field
+  - register
+
+register_domain: discovery.openregister.org
