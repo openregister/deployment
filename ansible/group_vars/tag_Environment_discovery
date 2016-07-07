@@ -1,6 +1,7 @@
 registers:
   - address
   - denomination
+  - diocese
   - datatype
   - field
   - local-authority
