@@ -1,9 +1,21 @@
 registers:
-  - local-authority
-  - local-authority-type
+  - address
+  - denomination
+  - diocese
   - datatype
   - field
+  - local-authority
+  - local-authority-type
+  - place
   - register
+  - school-admissions-policy
+  - school-federation
+  - school-gender
+  - school-phase
+  - school-tag
+  - school-type
+  - school
+  - street
   - uk
 
 register_domain: discovery.openregister.org
