@@ -55,4 +55,5 @@ module "address_elb" {
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"
+  certificate_arn = "${var.elb_certificate_arn}"
 }

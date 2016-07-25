@@ -25,3 +25,5 @@ variable "dns_ttl" {
 variable "dns_domain" {
   default = "openregister.org"
 }
+
+variable "certificate_arn" {}

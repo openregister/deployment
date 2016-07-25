@@ -13,6 +13,14 @@ resource "aws_elb" "load_balancer" {
     lb_protocol = "http"
   }
 
+  listener = {
+    instance_port = "${var.instance_port}"
+    instance_protocol = "http"
+    lb_port = 443
+    lb_protocol = "https"
+    ssl_certificate_id = "${var.certificate_arn}"
+  }
+
   instances = [ "${split(" ", var.instance_ids)}" ]
 
   health_check {
