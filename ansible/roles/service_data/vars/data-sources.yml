@@ -78,6 +78,11 @@ sources:
     src_type: tsv
     target: industry.tsv
 
+  place:
+    src_data: '../../place-data/data/place/places.tsv'
+    src_type: tsv
+    target: places.tsv
+
 # Ordnance Survey
   street-classification:
     src_data: '../../address-data/data/street-classification/street-classification.tsv'
@@ -90,8 +95,37 @@ sources:
     target: street-surface.tsv
 
 # School data
+  diocese:
+    src_data: '../../school-data/data/diocese/dioceses.tsv'
+    src_type: tsv
+    target: dioceses.tsv
+
   school:
     src_data: '../../education/data/school/schools.tsv'
     src_type: tsv
     target: schools.tsv
 
+  school-admissions-policy:
+    src_data: '../../school-data/data/school-admissions-policy/school-admissions-policies.tsv'
+    src_type: tsv
+    target: school-admissions-policies.tsv
+
+  school-gender:
+    src_data: '../../school-data/data/school-gender/school-genders.tsv'
+    src_type: tsv
+    target: school-genders.tsv
+
+  school-federation:
+    src_data: '../../school-data/data/school-federation/school-federations.tsv'
+    src_type: tsv
+    target: school-federations.tsv
+
+  school-phase:
+    src_data: '../../school-data/data/school-phase/school-phases.tsv'
+    src_type: tsv
+    target: school-phases.tsv
+
+  school-type:
+    src_data: '../../school-data/data/school-type/school-types.tsv'
+    src_type: tsv
+    target: school-types.tsv
