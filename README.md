@@ -22,6 +22,16 @@ On OSX you can install via brew:
 
 # Bootstrapping
 
+## Create an AWS access key
+
+Log in to the AWS console, go to Identity and Access Management (IAM),
+click on your user, click on "Security Credentials", and create a new
+access key.
+
+Run `aws configure` and save your access key and secret access key.
+For default region, choose `eu-west-1`.  Now the aws cli will use your
+access key for operations.
+
 ## System variables
 
 * set AWS CLI variables:
