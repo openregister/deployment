@@ -1,10 +1,7 @@
-server:
-  registerDefaultExceptionMappers: false
-
 database:
   driverClass: org.postgresql.Driver
   url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
-  user: {{ db_user }} 
+  user: {{ db_user }}
   password: {{ db_password }}
 
   #db connection properties
@@ -15,6 +12,14 @@ database:
   properties:
     charSet: UTF-8
 
+server:
+  registerDefaultExceptionMappers: false
+  adminConnectors:
+    - type: {{ app_protocol | default('http') }}
+      port: {{ app_port | default(9092) }}
+
 registerDomain: {{ register_domain }}
+
+register: {{ register_name }}
 
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
