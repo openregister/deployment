@@ -20,5 +20,11 @@
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
     - '&tag_Role_mint_app'
 
+- name: Ping openregister
+  hosts:
+    - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'
+    - '&tag_Role_openregister_app'
+
+
   tasks:
     - ping:
