@@ -30,6 +30,7 @@ variable "rds_parameter_group_name" {
   default = {
     "mint" = "postgresrdsgroup-9-5-2"
     "presentation" = "postgresrdsgroup-9-5-2"
+    "openregister" = "postgresrdsgroup-9-5-2"
   }
 }
 
@@ -37,8 +38,19 @@ variable "rds_allocated_storage" {
   default = {
     "mint" = 5
     "presentation" = 5
+    "openregister" = 5
   }
 }
+
+// openregister app
+variable "openregister_cidr_block" {}
+variable "openregister_database_cidr_block" {}
+variable "openregister_database_class_instance" {
+  default = "db.t2.micro"
+}
+variable "openregister_database_master_password" {}
+variable "openregister_database_apply_immediately" { default = false }
+
 
 // Read APIs
 variable "presentation_cidr_block" {}
