@@ -14,9 +14,6 @@ database:
 
 server:
   registerDefaultExceptionMappers: false
-  adminConnectors:
-    - type: {{ app_protocol | default('http') }}
-      port: {{ app_port | default(9092) }}
 
 registerDomain: {{ register_domain }}
 
