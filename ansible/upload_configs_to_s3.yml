@@ -10,7 +10,7 @@
     services:
       mint: 'mint-config.yaml'
       presentation: 'config.yaml'
-      openregister: 'openregister-config.yaml'
+      openregister: 'config.yaml'
 
     rds_mint_instance_name: "{{ vpc }}-mint-db"
     rds_presentation_instance_name: "{{ vpc }}-presentation-db"
