@@ -1,0 +1,20 @@
+server:
+  registerDefaultExceptionMappers: false
+
+database:
+  driverClass: org.postgresql.Driver
+  url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
+  user: {{ db_user }} 
+  password: {{ db_password }}
+
+  #db connection properties
+  initialSize: {{ db_initial_size | default(1) }}
+  minSize: {{ db_min_size | default(1) }}
+  maxSize: {{ db_max_size | default(4) }}
+
+  properties:
+    charSet: UTF-8
+
+registerDomain: {{ register_domain }}
+
+enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
