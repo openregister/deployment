@@ -41,6 +41,23 @@ module "datatype_mint" {
   user_data = "${template_file.user_data.rendered}"
 }
 
+module "datatype_openregister" {
+  source = "../modules/instance"
+  id = "datatype"
+  role = "openregister_app"
+
+  vpc_name = "${var.vpc_name}"
+  vpc_id = "${module.core.vpc_id}"
+
+  subnet_ids = "${module.openregister.subnet_ids}"
+  security_group_ids = "${module.openregister.security_group_id}"
+
+  instance_count = "${lookup(var.instance_count, "datatype")}"
+  iam_instance_profile = "${module.datatype_policy.profile_name}"
+
+  user_data = "${template_file.user_data.rendered}"
+}
+
 module "datatype_elb" {
   source = "../modules/load_balancer"
   id = "datatype"

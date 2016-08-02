@@ -41,6 +41,23 @@ module "postcode_mint" {
   user_data = "${template_file.user_data.rendered}"
 }
 
+module "postcode_openregister" {
+  source = "../modules/instance"
+  id = "postcode"
+  role = "openregister_app"
+
+  vpc_name = "${var.vpc_name}"
+  vpc_id = "${module.core.vpc_id}"
+
+  subnet_ids = "${module.openregister.subnet_ids}"
+  security_group_ids = "${module.openregister.security_group_id}"
+
+  instance_count = "${lookup(var.instance_count, "postcode")}"
+  iam_instance_profile = "${module.postcode_policy.profile_name}"
+
+  user_data = "${template_file.user_data.rendered}"
+}
+
 module "postcode_elb" {
   source = "../modules/load_balancer"
   id = "postcode"

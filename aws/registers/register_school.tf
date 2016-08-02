@@ -41,6 +41,23 @@ module "school_mint" {
   user_data = "${template_file.user_data.rendered}"
 }
 
+module "school_openregister" {
+  source = "../modules/instance"
+  id = "school"
+  role = "openregister_app"
+
+  vpc_name = "${var.vpc_name}"
+  vpc_id = "${module.core.vpc_id}"
+
+  subnet_ids = "${module.openregister.subnet_ids}"
+  security_group_ids = "${module.openregister.security_group_id}"
+
+  instance_count = "${lookup(var.instance_count, "school")}"
+  iam_instance_profile = "${module.school_policy.profile_name}"
+
+  user_data = "${template_file.user_data.rendered}"
+}
+
 module "school_elb" {
   source = "../modules/load_balancer"
   id = "school"
