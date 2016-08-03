@@ -95,6 +95,11 @@ sources:
     target: street-surface.tsv
 
 # School data
+  denomination:
+    src_data: '../../school-data/data/denomination/denominations.tsv'
+    src_type: tsv
+    target: denominations.tsv
+
   diocese:
     src_data: '../../school-data/data/diocese/dioceses.tsv'
     src_type: tsv
