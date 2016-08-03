@@ -1,0 +1,5 @@
+register_domain: test.openregister.org
+registers:
+  - address
+  - country
+  - register
