@@ -13,14 +13,14 @@
   vars:
     vpc_tag: 'tag_Environment_{{ vpc }}'
   tasks:
-    - name: query mint hosts
+    - name: query openregister hosts
       set_fact:
-        mint_hosts: "{{ groups.tag_Role_mint_app | intersect(groups[vpc_tag]) }}"
+        openregister_hosts: "{{ groups.tag_Role_openregister_app | intersect(groups[vpc_tag]) }}"
       always_run: yes
 
     - name: include matching hosts
       add_host: name="{{ item }}" group="collected_hosts"
-      with_items: "{{ mint_hosts }}"
+      with_items: "{{ openregister_hosts }}"
       when: hostvars[item].ec2_tag_Register == registers
       always_run: yes
 
