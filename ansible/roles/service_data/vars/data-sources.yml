@@ -78,6 +78,11 @@ sources:
     src_type: tsv
     target: industry.tsv
 
+  location:
+    src_data: '../../food-data/ratings/data/location.tsv'
+    src_type: tsv
+    target: location.tsv
+
   place:
     src_data: '../../place-data/data/place/places.tsv'
     src_type: tsv
