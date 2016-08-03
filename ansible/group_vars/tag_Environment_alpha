@@ -13,8 +13,6 @@ registers:
   - premises
   - public-body
   - register
-  - street-classification
-  - street-surface
   - territory
   - uk
 

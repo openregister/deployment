@@ -80,10 +80,10 @@ variable "mint_database_apply_immediately" { default = false }
 
  $ grep instance_count environments/alpha.tfvars
 
- > instance_count.street-classification = 1
- > instance_count.street-surface = 1
+ > instance_count.school = 1
+ > instance_count.street = 1
 
- will provision street-classification and street-surface with single EC2 instances for each register.
+ will provision school and street with single EC2 instances for each register.
 
 */
 
@@ -128,10 +128,6 @@ variable "instance_count" {
     "industry" = 0
     "postcode" = 0
     "denomination" = 0
-
-    // Ordnance Survey registers
-    "street-classification" = 0
-    "street-surface" = 0
 
     // Valuation Office Agency registers
     "premises" = 0
