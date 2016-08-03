@@ -83,6 +83,11 @@ sources:
     src_type: tsv
     target: places.tsv
 
+  street:
+    src_data: '../../school-data/data/street/streets.tsv'
+    src_type: tsv
+    target: streets.tsv
+
 # School data
   denomination:
     src_data: '../../school-data/data/denomination/denominations.tsv'
