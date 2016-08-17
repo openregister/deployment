@@ -153,3 +153,8 @@ sources:
     src_data: '../../school-data/data/school-type/school-types.tsv'
     src_type: tsv
     target: school-types.tsv
+
+  school-authority:
+    src_data: '../../school-data/data/school-authority/school-authority.tsv'
+    src_type: tsv
+    target: school-authority.tsv
