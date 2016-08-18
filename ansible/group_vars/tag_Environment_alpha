@@ -9,6 +9,8 @@ registers:
   - food-premises-type
   - industry
   - local-authority
+  - local-authority-eng
+  - local-authority-type
   - location
   - premises
   - public-body

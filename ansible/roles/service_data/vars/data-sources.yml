@@ -46,8 +46,8 @@ sources:
     target: uk.tsv
 
 # Department for Communites and Local Government
-  local-authority:
-    src_data: '../../local-authority-data/data/local-authority/local-authorities.tsv'
+  local-authority-eng:
+    src_data: '../../local-authority-data/data/local-authority-eng/local-authorities.tsv'
     src_type: tsv
     target: local-authorities.tsv
 
