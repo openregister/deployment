@@ -1,12 +1,22 @@
 registers:
   - address
+  - company
   - denomination
   - diocese
   - datatype
   - field
+  - food-authority
+  - food-premises
+  - food-premises-rating
+  - industry
   - local-authority
+  - local-authority-eng
+  - local-authority-nir
+  - local-authority-sct
+  - local-authority-wls
   - local-authority-type
   - place
+  - premises
   - register
   - school-admissions-policy
   - school-federation
