@@ -7,5 +7,4 @@
     - 'python27-psycopg2'
 
 - include: databases.yml
-- include: write_user.yml
-- include: read_user.yml
+- include: user.yml

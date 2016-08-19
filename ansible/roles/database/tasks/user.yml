@@ -1,4 +1,4 @@
-- name: Create a write user
+- name: Create a read/write user
   postgresql_user: >
     state=present
     db="{{ item }}"
@@ -13,7 +13,7 @@
   with_items: "{{ registers }}"
   when: create_db
 
-- name: Set privileges for write user
+- name: Set privileges for user
   postgresql_privs:
     state=present
     db="{{ item }}"

@@ -13,11 +13,13 @@ database:
     charSet: UTF-8
 
 server:
-  applicationConnectors:
-    - type: {{ app_protocol | default('http') }}
-      port: {{ app_port | default(4567) }}
+  registerDefaultExceptionMappers: false
+
+registerDomain: {{ register_domain }}
 
 register: {{ register_name }}
+
+enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 
 credentials:
   user: {{ app_user }}

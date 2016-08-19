@@ -1,0 +1,35 @@
+---
+- stat: path="group_vars/tag_Environment_{{ vpc }}"
+  register: overrides
+
+- include_vars: "group_vars/tag_Environment_{{ vpc }}"
+  when: overrides.stat.exists
+
+- name: Create config directories
+  file: name="{{ item }}" state=directory mode=0700
+  with_items:
+    - "{{ workdir }}"
+    - "{{ workdir }}/{{ vpc }}"
+
+- name: Create config register directories
+  file: name="{{ workdir }}/{{ vpc }}/{{ item }}/openregister" state=directory mode=0700
+  with_items: "{{ registers }}"
+
+- name: Generate openregister-java configuration files
+  template:
+    src="templates/openregister-config.yaml.j2"
+    dest="{{ workdir }}/{{ vpc }}/{{ item }}/openregister/config.yaml"
+
+  vars:
+    rds_instance_name: "{{ vpc }}-openregister-db"
+    password_store_key: "{{ vpc }}/rds/openregister/{{ item }}"
+    db_name: "{{ item }}"
+    db_user: "{{ item }}_openregister"
+    db_password: "{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
+    db_host: "{{ groups[rds_instance_name][0] }}"
+    register_name: "{{ item }}"
+    app_user: 'openregister'
+    app_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ item }}') }}"
+    settings: "{{ register_settings[item] | default({}) }}"
+
+  with_items: "{{ registers }}"

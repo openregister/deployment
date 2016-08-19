@@ -16,6 +16,7 @@
 export AWS_DEFAULT_REGION=eu-west-1
 
 # RDS master passwords
+export TF_VAR_openregister_database_master_password=$(shell pass $(vpc)/rds/openregister/master)
 export TF_VAR_presentation_database_master_password=$(shell pass $(vpc)/rds/presentation/master)
 export TF_VAR_mint_database_master_password=$(shell pass $(vpc)/rds/mint/master)
 
@@ -33,6 +34,11 @@ check-for-local-state:
 check-variables:
 ifndef vpc
   $(error You must pass -e vpc=<name> switch)
+endif
+
+# TODO should also reject defined-but-blank variable
+ifndef TF_VAR_openregister_database_master_password
+  $(error TF_VAR_openregister_database_master_password variable is required)
 endif
 
 ifndef TF_VAR_presentation_database_master_password

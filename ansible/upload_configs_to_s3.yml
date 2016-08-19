@@ -7,17 +7,9 @@
 
   vars:
     sync: true
-    services:
-      mint: 'mint-config.yaml'
-      presentation: 'config.yaml'
-      openregister: 'config.yaml'
-
-    rds_mint_instance_name: "{{ vpc }}-mint-db"
-    rds_presentation_instance_name: "{{ vpc }}-presentation-db"
-    rds_openregister_instance_name: "{{ vpc }}-openregister-db"
 
   roles:
-    - service_config
+    - openregister_config
 
     - { role: s3_sync,
         when: sync,

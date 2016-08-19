@@ -46,8 +46,8 @@ sources:
     target: uk.tsv
 
 # Department for Communites and Local Government
-  local-authority:
-    src_data: '../../local-authority-data/data/local-authority/local-authorities.tsv'
+  local-authority-eng:
+    src_data: '../../local-authority-data/data/local-authority-eng/local-authorities.tsv'
     src_type: tsv
     target: local-authorities.tsv
 
@@ -63,7 +63,7 @@ sources:
     target: food-premises.tsv
 
   food-premises-rating:
-    src_data: '../../food-data/ratings/fixed/food-premises-rating.tsv'
+    src_data: '../../food-data/ratings/data/food-premises-rating.tsv'
     src_type: tsv
     target: food-premises-rating.tsv
 
@@ -78,30 +78,34 @@ sources:
     src_type: tsv
     target: industry.tsv
 
+  location:
+    src_data: '../../food-data/ratings/data/location.tsv'
+    src_type: tsv
+    target: location.tsv
+
   place:
     src_data: '../../place-data/data/place/places.tsv'
     src_type: tsv
     target: places.tsv
 
-# Ordnance Survey
-  street-classification:
-    src_data: '../../address-data/data/street-classification/street-classification.tsv'
+  street:
+    src_data: '../../school-data/data/street/streets.tsv'
     src_type: tsv
-    target: street-classification.tsv
-
-  street-surface:
-    src_data: '../../address-data/data/street-surface/street-surface.tsv'
-    src_type: tsv
-    target: street-surface.tsv
+    target: streets.tsv
 
 # School data
+  denomination:
+    src_data: '../../school-data/data/denomination/denominations.tsv'
+    src_type: tsv
+    target: denominations.tsv
+
   diocese:
     src_data: '../../school-data/data/diocese/dioceses.tsv'
     src_type: tsv
     target: dioceses.tsv
 
   school:
-    src_data: '../../education/data/school/schools.tsv'
+    src_data: '../../school-data/data/school/schools.tsv'
     src_type: tsv
     target: schools.tsv
 

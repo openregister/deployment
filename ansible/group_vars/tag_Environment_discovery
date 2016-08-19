@@ -16,6 +16,7 @@ registers:
   - school-type
   - school
   - street
+  - territory
   - uk
 
 register_domain: discovery.openregister.org

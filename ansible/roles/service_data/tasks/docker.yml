@@ -19,7 +19,7 @@
       --datasource={{ datasource }}
       --minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }}
 
-    links: mintApp
+    links: openregister
 
     volumes:
       - '/srv/loader.jar:/srv/loader.jar:ro'

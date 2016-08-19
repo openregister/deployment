@@ -30,6 +30,7 @@ variable "rds_parameter_group_name" {
   default = {
     "mint" = "postgresrdsgroup-9-5-2"
     "presentation" = "postgresrdsgroup-9-5-2"
+    "openregister" = "postgresrdsgroup-9-5-2"
   }
 }
 
@@ -37,8 +38,19 @@ variable "rds_allocated_storage" {
   default = {
     "mint" = 5
     "presentation" = 5
+    "openregister" = 5
   }
 }
+
+// openregister app
+variable "openregister_cidr_block" {}
+variable "openregister_database_cidr_block" {}
+variable "openregister_database_class_instance" {
+  default = "db.t2.micro"
+}
+variable "openregister_database_master_password" {}
+variable "openregister_database_apply_immediately" { default = false }
+
 
 // Read APIs
 variable "presentation_cidr_block" {}
@@ -68,10 +80,10 @@ variable "mint_database_apply_immediately" { default = false }
 
  $ grep instance_count environments/alpha.tfvars
 
- > instance_count.street-classification = 1
- > instance_count.street-surface = 1
+ > instance_count.school = 1
+ > instance_count.street = 1
 
- will provision street-classification and street-surface with single EC2 instances for each register.
+ will provision school and street with single EC2 instances for each register.
 
 */
 
@@ -98,6 +110,7 @@ variable "instance_count" {
 
     // Department for Communities and Local Government registers
     "local-authority" = 0
+    "local-authority-eng" = 0
     "local-authority-type" = 0
 
     // Food Standards Agency registers
@@ -116,10 +129,6 @@ variable "instance_count" {
     "industry" = 0
     "postcode" = 0
     "denomination" = 0
-
-    // Ordnance Survey registers
-    "street-classification" = 0
-    "street-surface" = 0
 
     // Valuation Office Agency registers
     "premises" = 0
