@@ -51,12 +51,32 @@ sources:
     src_type: tsv
     target: local-authorities.tsv
 
+  local-authority-nir:
+    src_data: '../../local-authority-data/data/local-authority-nir/local-authorities.tsv'
+    src_type: tsv
+    target: local-authorities.tsv
+
+  local-authority-sct:
+    src_data: '../../local-authority-data/data/local-authority-sct/local-authorities.tsv'
+    src_type: tsv
+    target: local-authorities.tsv
+
+  local-authority-wls:
+    src_data: '../../local-authority-data/data/local-authority-wls/local-authorities.tsv'
+    src_type: tsv
+    target: local-authorities.tsv
+
   local-authority-type:
     src_data: '../../local-authority-data/data/local-authority-type/local-authority-types.tsv'
     src_type: tsv
     target: local-authority-types.tsv
 
 # Food Standard Agency
+  food-authority:
+    src_data: '../../food-data/ratings/data/food-authority/food-authority.tsv'
+    src_type: tsv
+    target: food-authority.tsv  
+
   food-premises:
     src_data: '../../food-data/ratings/fixed/food-premises.tsv'
     src_type: tsv
