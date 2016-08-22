@@ -102,6 +102,7 @@ variable "instance_count" {
     "diocese" = 0
     "school" = 0
     "school-admissions-policy" = 0
+    "school-authority" = 0
     "school-federation" = 0
     "school-gender" = 0
     "school-phase" = 0
