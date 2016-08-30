@@ -11,7 +11,7 @@ module "indexer" {
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
 
-  instance_count = 1
+  instance_count = 0
   user_data = "${template_file.user_data.rendered}"
 }
 
