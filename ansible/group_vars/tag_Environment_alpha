@@ -1,22 +1,11 @@
 registers:
-  - address
-  - company
-  - country
   - datatype
   - field
-  - food-premises
-  - food-premises-rating
-  - food-premises-type
-  - industry
   - local-authority
   - local-authority-eng
   - local-authority-type
-  - location
-  - premises
-  - public-body
   - register
   - territory
-  - uk
 
 register_domain: alpha.openregister.org
 
