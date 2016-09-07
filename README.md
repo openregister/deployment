@@ -14,11 +14,26 @@ On OSX you can install via brew:
 
 	brew install ansible
 
-### [terraform](https://www.terraform.io) installed
+### [terraform](https://www.terraform.io) 0.6.16 installed
 
-On OSX you can install via brew:
+# Ad hoc tasks with ansible
 
-	brew install terraform
+The ansible/ directory contains some tasks for performing ad hoc
+tasks.  In order to work with ansible, you'll need to do the
+following:
+
+Set up your ssh config to tunnel through the gateway:
+
+    Host 172.xxx.* # replace with actual IP range
+        ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
+
+To run a single playbook (ping in this example):
+
+    cd ansible
+    ansible-playbook ping.yml -e vpc=<name> -f 1
+
+(the ping command seems to timeout unless you explicitly run it
+serially (`-f 1`))
 
 # Bootstrapping
 
@@ -54,11 +69,12 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 		export AWS_PROFILE=registers
 
-## Preparing a new environment
+## Preparing a new environment or register
 
-### Ansible configuration
+A combination of the below steps are required if creating a new environment, 
+creating a new register or adding an existing register to an existing environment for the first time.
 
-#### environment overrides
+### Ansible configuration environment overrides
 
 The `ansible/group_vars/all` file contains sensible defaults for your
 environment.  However you will probably want to override at least the
@@ -73,70 +89,135 @@ environment.  However you will probably want to override at least the
     
     register_domain: my-environment.openregister.org
 
-### Terraform setup
+### Generate credentials
 
-Updating terraform module links:
+The `ansible/generate_passwords.yml` file generates passwords for new
+registers in the [credentials](https://github.com/openregister/credentials) repository.
+
+	registers-pass git checkout -b new-passwords
+	cd ansible
+	ansible-playbook generate_passwords.yml -e vpc=<myenv>
+
+### Terraform config for a register
+
+This is only required when creating a brand new register that
+doesn’t already exist in any environment.
+The `ansible/generate_terraform_register.yml` file creates the terraform
+configuration file `aws/registers/register_<myregister>.tf` required to
+configure a single register (across all environments).
+
+	cd ansible
+	ansible-playbook generate_terraform_register.yml -e registers=<myregister>
+
+Set the default instance count for the new register. This is the 
+default number of instances of this register for all environments:
+
+`vi aws/registers/variables.tf`
+
+	variable "instance_count" {
+	  default = {
+	    “country” = 0
+	    “other-register” = 0
+	    “another-register” = 0
+	  }
+	}
+
+### Terraform config for an environment
+
+#### if creating a brand new environment:
+
+The `ansible/configure_terraform.yml` file creates the terraform
+configuration file `aws/registers/environments/<myenv>.tfvars` 
+required to configure a single environment (your CIDR block needs to be
+at least a `/16`).
+
+	cd ansible
+	ansible-playbook configure_terraform.yml -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
+
+#### if using an existing environment:
+
+This downloads the latest configuration file for an existing environment
+from S3 to `aws/registers/environments/<myenv>.tfvars` locally.
+
+	cd aws/registers
+	make pull-config -e vpc=<myenv>
+
+#### terraform config environment overrides:
+
+If creating a register in an environment, override the
+instance count for the register in that environment.
+
+`vi aws/registers/environments/<myenv>.tfvars`
+
+	# instance_count
+	instance_count.country = 1
+	instance_count.other-register = 1
+	instance_count.another-register = 1
+
+### Update terraform module links
+
+Skip this if you have not created any new `.tf` or `.tfvars` files.
 
 	cd aws/registers
 	terraform get
-
-Preparing new environment (your CIDR block needs to be at least a `/16`):
-
-	cd aws/registers
-	make config -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
-
-Using an existing environment
-
-	cd aws/registers
-	make pull-config -e vpc=<name>
-
-Pushing local changes
-
-	cd aws/registers
-	make push-config -e vpc=<name>
-	make push-state -e vpc=<name>
 
 ## Terraforming
 
 ### Executing a plan
 
-with basic output
-
 	cd aws/registers
-	make plan -e vpc=myenv
-
-or with detailed plan (optional)
-
-	cd aws/registers
-	make plan -e module_depth=1 -e vpc=myenv
+	make plan -e vpc=<myenv>
 
 ### Applying changes
 
 	cd aws/registers
-	make apply -e vpc=myvpc
+	make apply -e vpc=<myenv>
 
-# Ad hoc tasks with ansible
+### Pushing local changes to terraform config
 
-The ansible/ directory contains some tasks for performing ad hoc
-tasks.  In order to work with ansible, you'll need to do the
-following:
+The terraform config and state files for each environment are not stored in Git but are
+stored in S3. Any local changes made and applied should be pushed back to S3.
 
-Set up your ssh config to tunnel through the gateway:
+	cd aws/registers
+	make push-config -e vpc=<name>
+	make push-state -e vpc=<name>
 
-    Host 172.xxx.* # replace with actual IP range
-        ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
+# Running the registers application
 
-To run a single playbook (ping in this example):
+## Start the registers application
 
-    cd ansible
-    ansible-playbook ping.yml -e vpc=<name> -f 1
+### Generate application config
 
-(the ping command seems to timeout unless you explicitly run it
-serially (`-f 1`))
+#### config.yaml
 
+The `ansible/upload_configs_to_s3.yml` file creates the application 
+config files required for each register in each environment.
+The config files are written locally to `ansible/config/<myenv>` and
+uploaded to S3 buckets.
+
+	cd ansible
+	ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
+
+#### registers.yaml and fields.yaml
+
+These files need to be created/updated for each environment in the S3 bucket for that environment
+e.g. `s3://openregister.beta.config/registers.yaml` and `s3://openregister.beta.config/fields.yaml`.
+Make any required changes to the [registry-data](https://github.com/openregister/registry-data) repository and use
+this to update the registers.yaml and fields.yaml.
+
+### Create databases
+
+The `ansible/create_databases.yml` file creates the database, creates users and grants permissions 
+to users for any register in an environment that does not have the database set up.
+
+	cd ansible
+	ansible-playbook create_databases.yml -e vpc=<myenv>
+
+### Deploy registers application
+
+Deploy the registers application using CodeDeploy.
 
 ## Data loading
-
 
 ### Prerequisites
 
