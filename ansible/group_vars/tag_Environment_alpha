@@ -1,7 +1,6 @@
 registers:
   - datatype
   - field
-  - local-authority
   - local-authority-eng
   - local-authority-type
   - register
