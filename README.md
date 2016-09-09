@@ -14,7 +14,7 @@ On OSX you can install via brew:
 
 	brew install ansible
 
-### [terraform](https://www.terraform.io) 0.6.16 installed
+### [terraform](https://www.terraform.io) 0.7 installed
 
 # Ad hoc tasks with ansible
 
