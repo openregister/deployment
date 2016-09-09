@@ -21,7 +21,7 @@ resource "aws_elb" "load_balancer" {
     ssl_certificate_id = "${var.certificate_arn}"
   }
 
-  instances = [ "${split(" ", var.instance_ids)}" ]
+  instances = ["${var.instance_ids}"]
 
   health_check {
     healthy_threshold = 2
