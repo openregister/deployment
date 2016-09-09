@@ -12,8 +12,6 @@
   roles:
     - { role: database,
         inventory_group_name: '{{ vpc }}-openregister-db',
-        read_user: 'openregister',
-        write_user: 'openregister',
         master_password: "{{ lookup('pass', '{{ vpc }}/rds/openregister/master') }}"
       }
 
