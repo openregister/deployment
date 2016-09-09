@@ -23,26 +23,6 @@ module "indexer_codedeploy" {
   tag = "${var.vpc_name}-indexer"
 }
 
-module "mint_db" {
-  source = "../modules/database"
-  id = "${module.core.vpc_name}-mint-db"
-
-  vpc_name = "${module.core.vpc_name}"
-  vpc_id = "${module.core.vpc_id}"
-
-  cidr_block = "${var.mint_database_cidr_block}"
-
-  allow_from = "${var.mint_cidr_block} ${var.indexer_cidr_block}"
-
-  parameter_group_name = "${lookup(var.rds_parameter_group_name, "mint")}"
-  apply_immediately = "${var.mint_database_apply_immediately}"
-
-  username = "${var.read_api_rds_username}"
-  password = "${var.mint_database_master_password}"
-
-  allocated_storage = "${lookup(var.rds_allocated_storage, "mint")}"
-}
-
 module "mint" {
   source = "../modules/mint"
   id = "${module.core.vpc_name}-mint-app"
