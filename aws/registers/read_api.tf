@@ -12,11 +12,3 @@ module "presentation" {
   nat_private_ip = "${module.core.nat_private_ip}"
   public_route_table_id = "${module.core.public_route_table_id}"
 }
-
-module "presentation_codedeploy" {
-  source = "../modules/codedeploy_group"
-  id = "${var.vpc_name}"
-  application = "presentation-app"
-  service_role_arn = "${var.codedeploy_service_role_arn}"
-  tag = "${var.vpc_name}-presentation_app"
-}

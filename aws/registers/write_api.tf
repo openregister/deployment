@@ -15,14 +15,6 @@ module "indexer" {
   user_data = "${template_file.user_data.rendered}"
 }
 
-module "indexer_codedeploy" {
-  source = "../modules/codedeploy_group"
-  id = "${var.vpc_name}"
-  application = "indexer-app"
-  service_role_arn = "${var.codedeploy_service_role_arn}"
-  tag = "${var.vpc_name}-indexer"
-}
-
 module "mint" {
   source = "../modules/mint"
   id = "${module.core.vpc_name}-mint-app"
@@ -39,12 +31,4 @@ module "mint" {
 
   instance_count = 1
   user_data = "${template_file.user_data.rendered}"
-}
-
-module "mint_codedeploy" {
-  source = "../modules/codedeploy_group"
-  id = "${var.vpc_name}"
-  application = "mint-app"
-  service_role_arn = "${var.codedeploy_service_role_arn}"
-  tag = "${var.vpc_name}-mint_app"
 }
