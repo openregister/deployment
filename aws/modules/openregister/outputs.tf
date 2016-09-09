@@ -3,7 +3,7 @@ output "cidr_block" {
 }
 
 output "subnet_ids" {
-  value = "${join(" ", aws_subnet.openregister.*.id)}"
+  value = ["${aws_subnet.openregister.*.id}"]
 }
 
 output "security_group_id" {
