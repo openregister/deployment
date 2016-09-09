@@ -8,7 +8,7 @@ variable "instance_port" {
 
 variable "enabled" { default = 1 }
 
-variable "subnet_ids" {}
+variable "subnet_ids" { type = "list" }
 variable "instance_ids" { type = "list" }
 variable "security_group_ids" {}
 

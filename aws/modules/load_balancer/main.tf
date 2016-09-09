@@ -3,7 +3,7 @@ resource "aws_elb" "load_balancer" {
 
   # replace discovery with disco to ensure name does not exceed string length limit
   name = "${replace(format("%s-%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
-  subnets = [ "${split(" ", var.subnet_ids)}" ]
+  subnets = [ "${var.subnet_ids}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]
 
   listener = {
