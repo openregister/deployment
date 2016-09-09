@@ -58,14 +58,12 @@ variable "presentation_database_cidr_block" {}
 variable "presentation_database_class_instance" {
   default = "db.t2.micro"
 }
-variable "presentation_database_master_password" {}
 variable "presentation_database_apply_immediately" { default = false }
 
 // Write APIs
 variable "indexer_cidr_block" {}
 variable "mint_cidr_block" {}
 variable "mint_database_cidr_block" {}
-variable "mint_database_master_password" {}
 variable "mint_database_apply_immediately" { default = false }
 
 /*
