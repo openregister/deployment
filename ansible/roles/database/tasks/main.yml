@@ -1,5 +1,5 @@
 ---
-- name: Install python depedencies
+- name: Install python dependencies
   yum: name="{{ item }}" state=installed
   become: true
   become_user: 'root'

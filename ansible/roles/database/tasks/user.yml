@@ -2,10 +2,10 @@
   postgresql_user: >
     state=present
     db="{{ item }}"
-    name="{{ item }}_{{ write_user }}"
+    name="{{ item }}_openregister"
     priv=CONNECT
     role_attr_flags=NOCREATEROLE,NOCREATEUSER,NOCREATEDB,INHERIT,LOGIN,NOREPLICATION
-    password="{{ lookup('pass', '{{ vpc }}/rds/{{ write_user }}/{{ item }}') }}"
+    password="{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
     no_password_changes=yes
     login_host="{{ groups[inventory_group_name][0] }}"
     login_user="{{ master_user }}"
@@ -17,10 +17,10 @@
   postgresql_privs:
     state=present
     db="{{ item }}"
-    roles="{{ item }}_{{ write_user }}"
+    roles="{{ item }}_openregister"
     objs=ALL_IN_SCHEMA
     privs=ALL
     login_host="{{ groups[inventory_group_name][0] }}"
-    login_user="{{ item }}_{{ write_user }}"
-    login_password="{{ lookup('pass', '{{ vpc }}/rds/{{ write_user }}/{{ item }}') }}"
+    login_user="{{ item }}_openregister"
+    login_password="{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
   with_items: "{{ registers }}"
