@@ -21,7 +21,7 @@ module "school-admissions-policy_openregister" {
   instance_count = "${lookup(var.instance_count, "school-admissions-policy")}"
   iam_instance_profile = "${module.school-admissions-policy_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "school-admissions-policy_elb" {

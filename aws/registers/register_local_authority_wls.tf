@@ -21,7 +21,7 @@ module "local-authority-wls_openregister" {
   instance_count = "${lookup(var.instance_count, "local-authority-wls")}"
   iam_instance_profile = "${module.local-authority-wls_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "local-authority-wls_elb" {

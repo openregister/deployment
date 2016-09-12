@@ -21,7 +21,7 @@ module "datatype_openregister" {
   instance_count = "${lookup(var.instance_count, "datatype")}"
   iam_instance_profile = "${module.datatype_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "datatype_elb" {

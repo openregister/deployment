@@ -21,7 +21,7 @@ module "place_openregister" {
   instance_count = "${lookup(var.instance_count, "place")}"
   iam_instance_profile = "${module.place_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "place_elb" {

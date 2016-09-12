@@ -21,7 +21,7 @@ module "food-authority_openregister" {
   instance_count = "${lookup(var.instance_count, "food-authority")}"
   iam_instance_profile = "${module.food-authority_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "food-authority_elb" {

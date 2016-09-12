@@ -21,7 +21,7 @@ module "school-federation_openregister" {
   instance_count = "${lookup(var.instance_count, "school-federation")}"
   iam_instance_profile = "${module.school-federation_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "school-federation_elb" {

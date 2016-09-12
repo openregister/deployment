@@ -21,7 +21,7 @@ module "food-premises-type_openregister" {
   instance_count = "${lookup(var.instance_count, "food-premises-type")}"
   iam_instance_profile = "${module.food-premises-type_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "food-premises-type_elb" {
