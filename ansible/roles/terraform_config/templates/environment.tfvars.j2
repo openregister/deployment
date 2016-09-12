@@ -35,15 +35,3 @@ presentation_cidr_block = "{{ presentation_cidr_block | default(presentation_cid
 presentation_database_cidr_block = "{{ presentation_database_cidr_block | default(presentation_database_cidr_block_defaults) }}"
 
 presentation_database_class_instance = "{{ presentation_database_class_instance | default('db.m3.large') }}"
-
-{% set mint_cidr_block_defaults = vpc_cidr_block | ipsubnet(27, 240) -%}
-mint_cidr_block = "{{ mint_cidr_block | default(mint_cidr_block_defaults) }}"
-{% set mint_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 248) -%}
-{% set mint_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 249) -%}
-{% set mint_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 250) -%}
-{% set mint_database_cidr_block_defaults = [
-  mint_database_cidr_block_default_a, 
-  mint_database_cidr_block_default_b, 
-  mint_database_cidr_block_default_c 
-  ] | join(' ') -%}
-mint_database_cidr_block = "{{ mint_database_cidr_block | default(mint_database_cidr_block_defaults) }}"
