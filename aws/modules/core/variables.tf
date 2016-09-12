@@ -1,6 +1,6 @@
 variable "vpc_name" {}
 variable "vpc_cidr_block" {}
-variable "public_cidr_block" {}
+variable "public_cidr_blocks" { type = "list" }
 
 variable "zones" {
   default = {
