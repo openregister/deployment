@@ -25,7 +25,7 @@ variable "nat_instance_type" {
 
 variable "nat_user_data" {}
 
-variable "admin_ips" {}
+variable "admin_ips" { type = "list" }
 
 /*
  * route53.tf

@@ -15,7 +15,7 @@ resource "aws_security_group_rule" "inbound_ssh" {
   from_port = "22"
   to_port = "22"
   protocol = "tcp"
-  cidr_blocks = [ "${split(" ", var.admin_ips)}" ]
+  cidr_blocks = [ "${var.admin_ips}" ]
 }
 
 resource "aws_security_group_rule" "inbound_http_from_vpc" {

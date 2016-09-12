@@ -23,7 +23,7 @@ variable "read_api_rds_username" {
 // Public network used by ELBs and NAT instance
 variable "public_cidr_block" {}
 
-variable "admin_ips" {}
+variable "admin_ips" { type = "list" }
 
 // RDS Configuration
 variable "rds_parameter_group_name" {
