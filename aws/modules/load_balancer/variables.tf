@@ -10,7 +10,7 @@ variable "enabled" { default = 1 }
 
 variable "subnet_ids" { type = "list" }
 variable "instance_ids" { type = "list" }
-variable "security_group_ids" {}
+variable "security_group_ids" { type = "list" }
 
 /*
  * route53.tf

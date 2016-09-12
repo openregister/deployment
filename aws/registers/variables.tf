@@ -21,9 +21,9 @@ variable "read_api_rds_username" {
 */
 
 // Public network used by ELBs and NAT instance
-variable "public_cidr_block" {}
+variable "public_cidr_blocks" { type = "list" }
 
-variable "admin_ips" {}
+variable "admin_ips" { type = "list" }
 
 // RDS Configuration
 variable "rds_parameter_group_name" {
@@ -43,8 +43,8 @@ variable "rds_allocated_storage" {
 }
 
 // openregister app
-variable "openregister_cidr_block" {}
-variable "openregister_database_cidr_block" {}
+variable "openregister_cidr_blocks" { type = "list" }
+variable "openregister_database_cidr_blocks" { type = "list" }
 variable "openregister_database_class_instance" {
   default = "db.t2.micro"
 }

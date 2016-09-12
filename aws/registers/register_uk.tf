@@ -16,7 +16,7 @@ module "uk_openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
 
   instance_count = "${lookup(var.instance_count, "uk")}"
   iam_instance_profile = "${module.uk_policy.profile_name}"
@@ -33,7 +33,7 @@ module "uk_elb" {
   vpc_id = "${module.core.vpc_id}"
 
   instance_ids = "${module.uk_openregister.instance_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"

@@ -1,6 +1,6 @@
 variable "vpc_name" {}
 variable "vpc_cidr_block" {}
-variable "public_cidr_block" {}
+variable "public_cidr_blocks" { type = "list" }
 
 variable "zones" {
   default = {
@@ -25,7 +25,7 @@ variable "nat_instance_type" {
 
 variable "nat_user_data" {}
 
-variable "admin_ips" {}
+variable "admin_ips" { type = "list" }
 
 /*
  * route53.tf

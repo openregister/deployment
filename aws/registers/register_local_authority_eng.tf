@@ -16,7 +16,7 @@ module "local-authority-eng_openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
 
   instance_count = "${lookup(var.instance_count, "local-authority-eng")}"
   iam_instance_profile = "${module.local-authority-eng_policy.profile_name}"
@@ -33,7 +33,7 @@ module "local-authority-eng_elb" {
   vpc_id = "${module.core.vpc_id}"
 
   instance_ids = "${module.local-authority-eng_openregister.instance_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"

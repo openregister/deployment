@@ -2,9 +2,9 @@ resource "aws_subnet" "openregister" {
   vpc_id = "${var.vpc_id}"
 
   // Calculate subnet count from cidr_block list
-  count = "${length(split(" ", var.cidr_block))}"
+  count = "${length(var.cidr_blocks)}"
 
-  cidr_block = "${element(split(" ", var.cidr_block), count.index)}"
+  cidr_block = "${element(var.cidr_blocks, count.index)}"
 
   availability_zone = "${lookup(var.zones, count.index)}"
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "openregister" {
 
 /*
 resource "aws_route_table_association" "public" {
-  count = "${length(split(" ", var.cidr_block))}"
+  count = "${length(var.cidr_blocks)}"
 
   subnet_id = "${element(aws_subnet.openregister.*.id, count.index)}"
   route_table_id = "${var.public_route_table_id}"

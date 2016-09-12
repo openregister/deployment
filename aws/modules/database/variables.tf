@@ -5,7 +5,7 @@ variable "name" {
 
 variable "vpc_name" {}
 variable "vpc_id" {}
-variable "cidr_block" {}
+variable "cidr_blocks" { type = "list" }
 
 variable "count" {
   default = "1"
@@ -14,7 +14,7 @@ variable "count" {
 variable "password" {}
 variable "username" {}
 
-variable "allow_from" {}
+variable "allow_from" { type = "list" }
 
 variable "multi_az" {
   default = "false"

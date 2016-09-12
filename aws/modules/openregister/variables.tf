@@ -2,8 +2,8 @@ variable "id" {}
 variable "vpc_name" {}
 variable "vpc_id" {}
 
-variable "cidr_block" {}
-variable "db_cidr_block" {}
+variable "cidr_blocks" { type = "list" }
+variable "db_cidr_blocks" { type = "list" }
 
 variable "public_route_table_id" {}
 

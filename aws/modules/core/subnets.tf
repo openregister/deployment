@@ -1,7 +1,7 @@
 resource "aws_subnet" "public" {
   vpc_id = "${aws_vpc.registers.id}"
-  count = "${length(split(" ", var.public_cidr_block))}"
-  cidr_block = "${element(split(" ", var.public_cidr_block), count.index)}"
+  count = "${length(var.public_cidr_blocks)}"
+  cidr_block = "${element(var.public_cidr_blocks, count.index)}"
   availability_zone = "${lookup(var.zones, count.index)}"
 
   tags = {
@@ -25,7 +25,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = "${length(split(" ", var.public_cidr_block))}"
+  count = "${length(var.public_cidr_blocks)}"
   subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }
