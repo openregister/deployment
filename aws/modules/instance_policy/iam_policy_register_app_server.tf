@@ -15,9 +15,6 @@ resource "aws_iam_role_policy" "instance_policy" {
             "Resource": [
                 "arn:aws:s3:::aws-codedeploy-eu-west-1/*",
                 "arn:aws:s3:::openregister.app.artifacts/*",
-                "arn:aws:s3:::presentation.app.artifacts/*",
-                "arn:aws:s3:::mint.app.artifacts/*",
-                "arn:aws:s3:::indexer.app.artifacts/*"
             ]
         },
         {
