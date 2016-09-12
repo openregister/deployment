@@ -2,7 +2,7 @@ resource "aws_instance" "instance" {
   count = "${var.instance_count}"
   ami = "${var.instance_ami}"
   instance_type = "${var.instance_type}"
-  subnet_id = "${element(split(" ", var.subnet_ids), count.index)}"
+  subnet_id = "${element(var.subnet_ids, count.index)}"
   user_data = "${var.user_data}"
   vpc_security_group_ids = [ "${split(" ", var.security_group_ids)}" ]
   iam_instance_profile = "${var.iam_instance_profile}"
