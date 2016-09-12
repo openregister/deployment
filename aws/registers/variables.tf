@@ -28,7 +28,6 @@ variable "admin_ips" { type = "list" }
 // RDS Configuration
 variable "rds_parameter_group_name" {
   default = {
-    "mint" = "postgresrdsgroup-9-5-2"
     "presentation" = "postgresrdsgroup-9-5-2"
     "openregister" = "postgresrdsgroup-9-5-2"
   }
@@ -36,7 +35,6 @@ variable "rds_parameter_group_name" {
 
 variable "rds_allocated_storage" {
   default = {
-    "mint" = 5
     "presentation" = 5
     "openregister" = 5
   }
@@ -62,9 +60,7 @@ variable "presentation_database_apply_immediately" { default = false }
 
 // Write APIs
 variable "indexer_cidr_block" {}
-variable "mint_cidr_block" {}
 variable "mint_database_cidr_block" {}
-variable "mint_database_apply_immediately" { default = false }
 
 /*
 
