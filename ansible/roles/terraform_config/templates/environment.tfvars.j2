@@ -12,8 +12,6 @@ admin_ips = "{{ admin_ips }}"
   public_cidr_block_default_c 
   ] | join(' ') -%}
 public_cidr_block = "{{ public_cidr_block | default(public_cidr_block_defaults) }}"
-{% set indexer_cidr_block_defaults = vpc_cidr_block | ipsubnet(27, 320) -%}
-indexer_cidr_block = "{{ indexer_cidr_block | default(indexer_cidr_block_defaults) }}"
 
 {% set presentation_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 21) -%}
 {% set presentation_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 22) -%}
