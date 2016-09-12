@@ -6,7 +6,7 @@ module "openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   cidr_blocks = "${var.openregister_cidr_blocks}"
-  db_cidr_block = "${var.openregister_database_cidr_block}"
+  db_cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
   nat_gateway_id = "${module.core.nat_gateway_id}"
   nat_private_ip = "${module.core.nat_private_ip}"
@@ -20,7 +20,7 @@ module "openregister_db" {
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  cidr_block = "${var.openregister_database_cidr_block}"
+  cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
   allow_from = "${var.openregister_cidr_blocks}"
 

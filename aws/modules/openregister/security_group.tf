@@ -62,5 +62,5 @@ resource "aws_security_group_rule" "outbound_postgres" {
   from_port = 5432
   to_port = 5432
   protocol = "tcp"
-  cidr_blocks = ["${split(" ", var.db_cidr_block)}"]
+  cidr_blocks = "${var.db_cidr_blocks}"
 }
