@@ -16,7 +16,7 @@ module "local-authority-wls_openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
 
   instance_count = "${lookup(var.instance_count, "local-authority-wls")}"
   iam_instance_profile = "${module.local-authority-wls_policy.profile_name}"

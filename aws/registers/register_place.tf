@@ -16,7 +16,7 @@ module "place_openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
 
   instance_count = "${lookup(var.instance_count, "place")}"
   iam_instance_profile = "${module.place_policy.profile_name}"

@@ -30,4 +30,4 @@ variable "zones" {
 variable "user_data" {}
 variable "subnet_ids" { type = "list" }
 
-variable "security_group_ids" {}
+variable "security_group_ids" { type = "list" }
