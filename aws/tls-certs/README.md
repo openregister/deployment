@@ -18,4 +18,8 @@ Apply the changes
 
     make apply
     
-The Makefile ensures you use the correct terraform remote state.
+This will fail the first time.  This is because the CloudFront distributions are not managed by Terraform :(
+
+The new certificate will be created but the old one will not be destroyed as it is still in use.  You then have to go into the AWS console and manually update each CloudFront distribution to use the new certificate.
+
+Once the update is complete, you can destroy the old certificate by running `make apply` again.
