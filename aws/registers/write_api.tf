@@ -12,7 +12,7 @@ module "indexer" {
   nat_private_ip = "${module.core.nat_private_ip}"
 
   instance_count = 0
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "mint" {
@@ -30,5 +30,5 @@ module "mint" {
   nat_private_ip = "${module.core.nat_private_ip}"
 
   instance_count = 1
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }

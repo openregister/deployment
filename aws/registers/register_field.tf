@@ -21,7 +21,7 @@ module "field_openregister" {
   instance_count = "${lookup(var.instance_count, "field")}"
   iam_instance_profile = "${module.field_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "field_elb" {

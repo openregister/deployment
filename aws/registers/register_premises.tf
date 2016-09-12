@@ -21,7 +21,7 @@ module "premises_openregister" {
   instance_count = "${lookup(var.instance_count, "premises")}"
   iam_instance_profile = "${module.premises_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "premises_elb" {

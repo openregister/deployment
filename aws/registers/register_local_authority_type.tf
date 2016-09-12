@@ -21,7 +21,7 @@ module "local-authority-type_openregister" {
   instance_count = "${lookup(var.instance_count, "local-authority-type")}"
   iam_instance_profile = "${module.local-authority-type_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "local-authority-type_elb" {
