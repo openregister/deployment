@@ -58,10 +58,6 @@ variable "presentation_database_class_instance" {
 }
 variable "presentation_database_apply_immediately" { default = false }
 
-// Write APIs
-variable "indexer_cidr_block" {}
-variable "mint_database_cidr_block" {}
-
 /*
 
  === Register toggles ===
