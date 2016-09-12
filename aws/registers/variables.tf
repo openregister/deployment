@@ -43,7 +43,7 @@ variable "rds_allocated_storage" {
 }
 
 // openregister app
-variable "openregister_cidr_block" {}
+variable "openregister_cidr_blocks" { type = "list" }
 variable "openregister_database_cidr_block" {}
 variable "openregister_database_class_instance" {
   default = "db.t2.micro"

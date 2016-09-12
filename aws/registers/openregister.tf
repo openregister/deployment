@@ -5,7 +5,7 @@ module "openregister" {
   vpc_name = "${module.core.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  cidr_block = "${var.openregister_cidr_block}"
+  cidr_blocks = "${var.openregister_cidr_blocks}"
   db_cidr_block = "${var.openregister_database_cidr_block}"
 
   nat_gateway_id = "${module.core.nat_gateway_id}"
@@ -22,7 +22,7 @@ module "openregister_db" {
 
   cidr_block = "${var.openregister_database_cidr_block}"
 
-  allow_from = "${var.openregister_cidr_block} ${var.indexer_cidr_block}"
+  allow_from = "${var.openregister_cidr_blocks}"
 
   instance_class = "${var.openregister_database_class_instance}"
   parameter_group_name = "${lookup(var.rds_parameter_group_name, "openregister")}"
