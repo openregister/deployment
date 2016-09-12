@@ -33,7 +33,7 @@ module "territory_elb" {
   vpc_id = "${module.core.vpc_id}"
 
   instance_ids = "${module.territory_openregister.instance_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"

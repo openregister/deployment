@@ -28,6 +28,6 @@ resource "aws_security_group" "load_balancer" {
     from_port = 80
     to_port = 80
     protocol = "TCP"
-    security_groups = [ "${split(" ", var.security_group_ids)}" ]
+    security_groups = ["${var.security_group_ids}"]
   }
 }
