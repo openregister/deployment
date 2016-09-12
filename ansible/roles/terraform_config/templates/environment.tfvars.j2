@@ -13,23 +13,23 @@ admin_ips = "{{ admin_ips }}"
   ] | join(' ') -%}
 public_cidr_block = "{{ public_cidr_block | default(public_cidr_block_defaults) }}"
 
-{% set presentation_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 21) -%}
-{% set presentation_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 22) -%}
-{% set presentation_cidr_block_default_c = vpc_cidr_block | ipsubnet(24, 23) -%}
-{% set presentation_cidr_block_defaults = [
-  presentation_cidr_block_default_a, 
-  presentation_cidr_block_default_b, 
-  presentation_cidr_block_default_c 
+{% set openregister_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 21) -%}
+{% set openregister_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 22) -%}
+{% set openregister_cidr_block_default_c = vpc_cidr_block | ipsubnet(24, 23) -%}
+{% set openregister_cidr_block_defaults = [
+  openregister_cidr_block_default_a, 
+  openregister_cidr_block_default_b, 
+  openregister_cidr_block_default_c 
   ] | join(' ') -%}
-presentation_cidr_block = "{{ presentation_cidr_block | default(presentation_cidr_block_defaults) }}"
-{% set presentation_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 160) -%}
-{% set presentation_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 161) -%}
-{% set presentation_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 162) -%}
-{% set presentation_database_cidr_block_defaults = [
-  presentation_database_cidr_block_default_a, 
-  presentation_database_cidr_block_default_b, 
-  presentation_database_cidr_block_default_c 
+openregister_cidr_block = "{{ openregister_cidr_block | default(openregister_cidr_block_defaults) }}"
+{% set openregister_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 160) -%}
+{% set openregister_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 161) -%}
+{% set openregister_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 162) -%}
+{% set openregister_database_cidr_block_defaults = [
+  openregister_database_cidr_block_default_a, 
+  openregister_database_cidr_block_default_b, 
+  openregister_database_cidr_block_default_c 
   ] | join(' ') -%}
-presentation_database_cidr_block = "{{ presentation_database_cidr_block | default(presentation_database_cidr_block_defaults) }}"
+openregister_database_cidr_block = "{{ openregister_database_cidr_block | default(openregister_database_cidr_block_defaults) }}"
 
-presentation_database_class_instance = "{{ presentation_database_class_instance | default('db.m3.large') }}"
+openregister_database_class_instance = "{{ openregister_database_class_instance | default('db.m3.large') }}"
