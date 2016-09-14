@@ -18,6 +18,7 @@
       --type={{ type }}
       --datasource={{ datasource }}
       --minturl=http://{{ mint_user }}:{{ mint_password }}@{{ mint_url }}
+      --fieldsurl=https://field.{{ register_domain }}/records.json
 
     links: openregister
 
