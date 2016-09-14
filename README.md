@@ -202,12 +202,18 @@ uploaded to S3 buckets.
 	cd ansible
 	ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
 
-#### registers.yaml and fields.yaml
+#### registers and fields configuration
 
-These files need to be created/updated for each environment in the S3 bucket for that environment
-e.g. `s3://openregister.beta.config/registers.yaml` and `s3://openregister.beta.config/fields.yaml`.
-Make any required changes to the [registry-data](https://github.com/openregister/registry-data) repository and use
-this to update the registers.yaml and fields.yaml.
+There are files `registers.yaml` and `fields.yaml` which need to be
+created/updated for each environment in the S3 bucket for that
+environment.  Make any required changes to the
+[registry-data](https://github.com/openregister/registry-data)
+repository, load this data into the register register and field
+register for that environment, and use this ansible command to
+create/update the config files from the registers:
+
+	cd ansible
+	ansible-playbook refresh_register_field_config_in_s3.yml -e vpc=<myenv>
 
 ### Create databases
 
