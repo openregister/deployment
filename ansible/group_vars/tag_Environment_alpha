@@ -1,9 +1,19 @@
 registers:
   - datatype
+  - diocese
   - field
   - local-authority-eng
   - local-authority-type
   - register
+  - religious-character
+  - school-admissions-policy
+  - school-authority
+  - school-eng
+  - school-gender
+  - school-phase
+  - school-tag
+  - school-trust
+  - school-type
   - territory
 
 register_domain: alpha.openregister.org

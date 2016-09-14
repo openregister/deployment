@@ -1,15 +1,15 @@
-module "{{ item }}_policy" {
+module "school-trust_policy" {
   source = "../modules/instance_policy"
-  id = "{{ item }}"
-  enabled = "${signum(lookup(var.instance_count, "{{ item }}"))}"
+  id = "school-trust"
+  enabled = "${signum(lookup(var.instance_count, "school-trust"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 }
 
-module "{{ item }}_openregister" {
+module "school-trust_openregister" {
   source = "../modules/instance"
-  id = "{{ item }}"
+  id = "school-trust"
   role = "openregister_app"
 
   vpc_name = "${var.vpc_name}"
@@ -18,21 +18,21 @@ module "{{ item }}_openregister" {
   subnet_ids = "${module.openregister.subnet_ids}"
   security_group_ids = ["${module.openregister.security_group_id}"]
 
-  instance_count = "${lookup(var.instance_count, "{{ item }}")}"
-  iam_instance_profile = "${module.{{ item }}_policy.profile_name}"
+  instance_count = "${lookup(var.instance_count, "school-trust")}"
+  iam_instance_profile = "${module.school-trust_policy.profile_name}"
 
   user_data = "${data.template_file.user_data.rendered}"
 }
 
-module "{{ item }}_elb" {
+module "school-trust_elb" {
   source = "../modules/load_balancer"
-  id = "{{ item }}"
-  enabled = "${signum(lookup(var.instance_count, "{{ item }}"))}"
+  id = "school-trust"
+  enabled = "${signum(lookup(var.instance_count, "school-trust"))}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
 
-  instance_ids = "${module.{{ item }}_openregister.instance_ids}"
+  instance_ids = "${module.school-trust_openregister.instance_ids}"
   security_group_ids = ["${module.openregister.security_group_id}"]
   subnet_ids = "${module.core.public_subnet_ids}"
 

@@ -79,13 +79,16 @@ variable "instance_count" {
 
     // Department for Education registers
     "diocese" = 0
+    "religious-character" = 0
     "school" = 0
     "school-admissions-policy" = 0
     "school-authority" = 0
+    "school-eng" = 0
     "school-federation" = 0
     "school-gender" = 0
     "school-phase" = 0
     "school-tag" = 0
+    "school-trust" = 0
     "school-type" = 0
 
     // Department for Communities and Local Government registers
@@ -97,7 +100,6 @@ variable "instance_count" {
     "local-authority-type" = 0
 
     // Food Standards Agency registers
-    "location" = 0
     "food-authority" = 0
     "food-premises" = 0
     "food-premises-type" = 0
@@ -111,16 +113,13 @@ variable "instance_count" {
     // Office for National Statistics registers
     "address" = 0
     "industry" = 0
-    "postcode" = 0
     "denomination" = 0
 
     // Valuation Office Agency registers
     "premises" = 0
 
     // Address registers
-    "locality" = 0
     "street" = 0
-    "town" = 0
     "place" = 0
   }
 }
