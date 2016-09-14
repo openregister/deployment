@@ -75,7 +75,7 @@ sources:
   food-authority:
     src_data: '../../food-data/ratings/data/food-authority/food-authority.tsv'
     src_type: tsv
-    target: food-authority.tsv  
+    target: food-authority.tsv
 
   food-premises:
     src_data: '../../food-ratings-data/data/food-premises/food-premises.tsv'
@@ -115,46 +115,61 @@ sources:
 
 # School data
   denomination:
-    src_data: '../../school-data/data/denomination/denominations.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/denomination/denominations.tsv'
     src_type: tsv
     target: denominations.tsv
 
+  religious-character:
+    src_data: '../../school-data/data/{{ vpc }}/religious-character/religious-characters.tsv'
+    src_type: tsv
+    target: religious-characters.tsv
+
   diocese:
-    src_data: '../../school-data/data/diocese/dioceses.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/diocese/dioceses.tsv'
     src_type: tsv
     target: dioceses.tsv
 
   school:
-    src_data: '../../school-data/data/school/schools.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school/schools.tsv'
+    src_type: tsv
+    target: schools.tsv
+
+  school-eng:
+    src_data: '../../school-data/data/{{ vpc }}/school-eng/schools.tsv'
     src_type: tsv
     target: schools.tsv
 
   school-admissions-policy:
-    src_data: '../../school-data/data/school-admissions-policy/school-admissions-policies.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-admissions-policy/school-admissions-policies.tsv'
     src_type: tsv
     target: school-admissions-policies.tsv
 
   school-gender:
-    src_data: '../../school-data/data/school-gender/school-genders.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-gender/school-genders.tsv'
     src_type: tsv
     target: school-genders.tsv
 
   school-federation:
-    src_data: '../../school-data/data/school-federation/school-federations.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-federation/school-federations.tsv'
     src_type: tsv
     target: school-federations.tsv
 
   school-phase:
-    src_data: '../../school-data/data/school-phase/school-phases.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-phase/school-phases.tsv'
     src_type: tsv
     target: school-phases.tsv
 
   school-type:
-    src_data: '../../school-data/data/school-type/school-types.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-type/school-types.tsv'
     src_type: tsv
     target: school-types.tsv
 
   school-authority:
-    src_data: '../../school-data/data/school-authority/school-authority.tsv'
+    src_data: '../../school-data/data/{{ vpc }}/school-authority/school-authority.tsv'
     src_type: tsv
     target: school-authority.tsv
+
+  school-trust:
+    src_data: '../../school-data/data/{{ vpc }}/school-trust/school-trusts.tsv'
+    src_type: tsv
+    target: school-trusts.tsv
