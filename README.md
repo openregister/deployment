@@ -103,11 +103,11 @@ registers in the [credentials](https://github.com/openregister/credentials) repo
 This is only required when creating a brand new register that
 doesn’t already exist in any environment.
 The `ansible/generate_terraform_register.yml` file creates the terraform
-configuration file `aws/registers/register_<myregister>.tf` required to
+configuration files `aws/registers/register_<myregister>.tf` required to
 configure a single register (across all environments).
 
 	cd ansible
-	ansible-playbook generate_terraform_register.yml -e registers=<myregister>
+	ansible-playbook generate_terraform_register.yml -e registers='["register1","register2",...]'
 
 Set the default instance count for the new register. This is the 
 default number of instances of this register for all environments:
@@ -150,9 +150,13 @@ instance count for the register in that environment.
 `vi aws/registers/environments/<myenv>.tfvars`
 
 	# instance_count
-	instance_count.country = 1
-	instance_count.other-register = 1
-	instance_count.another-register = 1
+	instance_count = {
+      # ... other registers
+      country = 1
+      other-register = 1
+      another-register = 1
+      # ... other registers
+    }
 
 ### Update terraform module links
 
