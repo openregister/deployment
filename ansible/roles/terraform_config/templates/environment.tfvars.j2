@@ -3,9 +3,9 @@ vpc_cidr_block = "{{ vpc_cidr_block }}"
 
 admin_ips = "{{ admin_ips }}"
 
-{% set public_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 80) -%}
-{% set public_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 81) -%}
-{% set public_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 82) -%}
+{% set public_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 1) -%}
+{% set public_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 2) -%}
+{% set public_cidr_block_default_c = vpc_cidr_block | ipsubnet(24, 3) -%}
 {% set public_cidr_block_defaults = [
   public_cidr_block_default_a,
   public_cidr_block_default_b,
@@ -22,9 +22,9 @@ public_cidr_block = "{{ public_cidr_block | default(public_cidr_block_defaults) 
   openregister_cidr_block_default_c 
   ] | join(' ') -%}
 openregister_cidr_block = "{{ openregister_cidr_block | default(openregister_cidr_block_defaults) }}"
-{% set openregister_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(27, 160) -%}
-{% set openregister_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(27, 161) -%}
-{% set openregister_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(27, 162) -%}
+{% set openregister_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 24) -%}
+{% set openregister_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 25) -%}
+{% set openregister_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(24, 26) -%}
 {% set openregister_database_cidr_block_defaults = [
   openregister_database_cidr_block_default_a, 
   openregister_database_cidr_block_default_b, 
