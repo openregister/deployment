@@ -16,12 +16,12 @@ module "{{ item }}_openregister" {
   vpc_id = "${module.core.vpc_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
 
   instance_count = "${lookup(var.instance_count, "{{ item }}")}"
   iam_instance_profile = "${module.{{ item }}_policy.profile_name}"
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 module "{{ item }}_elb" {
@@ -33,7 +33,7 @@ module "{{ item }}_elb" {
   vpc_id = "${module.core.vpc_id}"
 
   instance_ids = "${module.{{ item }}_openregister.instance_ids}"
-  security_group_ids = "${module.openregister.security_group_id}"
+  security_group_ids = ["${module.openregister.security_group_id}"]
   subnet_ids = "${module.core.public_subnet_ids}"
 
   dns_zone_id = "${module.core.dns_zone_id}"
