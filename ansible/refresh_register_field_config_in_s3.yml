@@ -1,0 +1,22 @@
+---
+- name: Refresh field and register configuration
+  hosts: localhost
+  connection: local
+  environment:
+    PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
+
+  vars:
+    sync: true
+
+  tasks:
+    - fail: msg="Please define a vpc to work on"
+      when: vpc is not defined
+    - include_vars: '{{ item }}'
+      with_first_found:
+        - 'group_vars/tag_Environment_{{ vpc }}'
+
+    - name: synchronize register register
+      shell: "curl -s https://register.{{ register_domain }}/records.yaml | aws s3 cp - s3://openregister.{{ vpc }}.config/registers.yaml"
+
+    - name: synchronize field register
+      shell: "curl -s https://field.{{ register_domain }}/records.yaml | aws s3 cp - s3://openregister.{{ vpc }}.config/fields.yaml"
