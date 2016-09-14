@@ -79,13 +79,16 @@ variable "instance_count" {
 
     // Department for Education registers
     "diocese" = 0
+    "religious-character" = 0
     "school" = 0
     "school-admissions-policy" = 0
     "school-authority" = 0
+    "school-eng" = 0
     "school-federation" = 0
     "school-gender" = 0
     "school-phase" = 0
     "school-tag" = 0
+    "school-trust" = 0
     "school-type" = 0
 
     // Department for Communities and Local Government registers
