@@ -1,7 +1,7 @@
 vpc_name = "{{ vpc }}"
 vpc_cidr_block = "{{ vpc_cidr_block }}"
 
-admin_ips = "{{ admin_ips }}"
+admin_ips = {{ admin_ips }}
 
 {% set public_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 1) -%}
 {% set public_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 2) -%}
@@ -10,8 +10,8 @@ admin_ips = "{{ admin_ips }}"
   public_cidr_block_default_a,
   public_cidr_block_default_b,
   public_cidr_block_default_c 
-  ] | join(' ') -%}
-public_cidr_block = "{{ public_cidr_block | default(public_cidr_block_defaults) }}"
+  ] | wrap_elements_in_quotes | join(', ') -%}
+public_cidr_blocks = [{{ public_cidr_block | default(public_cidr_block_defaults) }}]
 
 {% set openregister_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 21) -%}
 {% set openregister_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 22) -%}
@@ -20,16 +20,17 @@ public_cidr_block = "{{ public_cidr_block | default(public_cidr_block_defaults) 
   openregister_cidr_block_default_a, 
   openregister_cidr_block_default_b, 
   openregister_cidr_block_default_c 
-  ] | join(' ') -%}
-openregister_cidr_block = "{{ openregister_cidr_block | default(openregister_cidr_block_defaults) }}"
+  ] | wrap_elements_in_quotes | join(', ') -%}
+openregister_cidr_blocks = [{{ openregister_cidr_block | default(openregister_cidr_block_defaults) }}]
+
 {% set openregister_database_cidr_block_default_a = vpc_cidr_block | ipsubnet(24, 24) -%}
 {% set openregister_database_cidr_block_default_b = vpc_cidr_block | ipsubnet(24, 25) -%}
 {% set openregister_database_cidr_block_default_c = vpc_cidr_block | ipsubnet(24, 26) -%}
 {% set openregister_database_cidr_block_defaults = [
   openregister_database_cidr_block_default_a, 
   openregister_database_cidr_block_default_b, 
-  openregister_database_cidr_block_default_c 
-  ] | join(' ') -%}
-openregister_database_cidr_block = "{{ openregister_database_cidr_block | default(openregister_database_cidr_block_defaults) }}"
+  openregister_database_cidr_block_default_c
+  ] | wrap_elements_in_quotes | join(', ') -%}
+openregister_database_cidr_blocks = [{{ openregister_database_cidr_block | default(openregister_database_cidr_block_defaults) }}]
 
 openregister_database_class_instance = "{{ openregister_database_class_instance | default('db.m3.large') }}"
