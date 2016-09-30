@@ -21,3 +21,7 @@ register_domain: alpha.openregister.org
 register_settings:
   address:
     enable_download_resource: false
+  local-authority-eng:
+    history_page_url: https://registers-history.herokuapp.com/local-authority-eng
+  territory:
+    history_page_url: https://registers-history.herokuapp.com/territory
