@@ -4,3 +4,7 @@ registers:
   - datatype
   - field
   - register
+
+register_settings:
+  country:
+    history_page_url: https://registers-history.herokuapp.com/country
