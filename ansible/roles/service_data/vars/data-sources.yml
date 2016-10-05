@@ -19,9 +19,9 @@ sources:
 
 # Companies House
   company:
-    src_data: '../../food-ratings-data/data/demo/company.tsv'
+    src_data: '../../company-data/data/{{ vpc }}/company/companies.tsv'
     src_type: tsv
-    target: company.tsv
+    target: companies.tsv
 
 # Valuation Office Agency
   premises:
