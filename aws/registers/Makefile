@@ -56,6 +56,9 @@ pull-config:
 push-config:
 	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
 
+remove-config:
+	aws s3 rm s3://registers-terraform-config/$(vpc).tfvars
+
 push-state:
 	terraform remote push
 
