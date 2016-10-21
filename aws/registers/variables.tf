@@ -73,6 +73,7 @@ variable "instance_count" {
     "field" = 1
     "public-body" = 0
     "register" = 1
+    "government-domain" = 0
 
     // Companies House registers
     "company" = 0
