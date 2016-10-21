@@ -4,6 +4,8 @@ registers:
   - datatype
   - field
   - register
+  - local-authority-eng
+  - local-authority-type
 
 register_settings:
   country:
