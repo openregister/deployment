@@ -9,6 +9,7 @@ registers:
   - food-premises
   - food-premises-rating
   - food-premises-type
+  - government-domain
   - industry
   - local-authority
   - local-authority-eng
