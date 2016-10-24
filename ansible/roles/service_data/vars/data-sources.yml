@@ -175,6 +175,11 @@ sources:
     src_type: tsv
     target: school-authority.tsv
 
+  school-authority-eng:
+    src_data: '../../school-data/data/{{ vpc }}/school-authority-eng/school-authority-eng.tsv'
+    src_type: tsv
+    target: school-authority-eng.tsv
+
   school-trust:
     src_data: '../../school-data/data/{{ vpc }}/school-trust/school-trusts.tsv'
     src_type: tsv
