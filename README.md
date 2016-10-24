@@ -273,3 +273,11 @@ Or finally, import all registers defined for selected environment:
 	ansible-playbook mint_data.yml \
 		-e vpc=<name> \
 		-e @group_vars/tag_Environment_alpha
+
+If your remote username is different (set in `.ssh/config`) you can set additional parameter `use_local_username` to false forcing ansible to use `.ssh/config`:
+
+	cd ansible
+	ansible-playbook mint_data.yml \
+		-e vpc=<name> \
+		-e registers=<name> \
+		-e use_local_username=false
