@@ -26,6 +26,8 @@
 
 - name: Load data
   hosts: collected_hosts
+  vars:
+    set_remote_user: "{{ use_local_username|default(True)|bool }}"
   vars_files:
     - 'roles/service_data/vars/data-sources.yml'
   roles:
