@@ -59,6 +59,12 @@ push-config:
 remove-config:
 	aws s3 rm s3://registers-terraform-config/$(vpc).tfvars
 
+remove-bucket:
+	aws s3 rb s3://openregister.$(vpc).config --force
+
+remove-state:
+	aws s3 rm s3://registers-terraform-state/$(vpc).tfstate
+
 push-state:
 	terraform remote push
 
