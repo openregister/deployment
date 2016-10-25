@@ -134,6 +134,13 @@ at least a `/16`).
 	cd ansible
 	ansible-playbook configure_terraform.yml -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
 
+You must also request a new SSL certificate in AWS Certficate Manager for the new environment. 
+The ARN for the new certificate must then be added to the existing terraform configuration file as below.
+
+`vi aws/register/environments/<myenv>.tfvars`
+
+	elb_certificate_arn = "arn:aws:acm:eu-west-1:022990953738:certificate/<abcde>"
+
 #### if using an existing environment:
 
 This downloads the latest configuration file for an existing environment
