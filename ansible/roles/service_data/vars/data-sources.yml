@@ -17,6 +17,12 @@ sources:
     src_type: tsv
     target: public-body.tsv
 
+# Cabinet Office
+  government-domain:
+    src_data: '../../government-domain-data/data/government-domain-data.tsv'
+    src_type: tsv
+    target: government-domain-data.tsv
+
 # Companies House
   company:
     src_data: '../../company-data/data/{{ vpc }}/company/companies.tsv'
