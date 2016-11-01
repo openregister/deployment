@@ -11,6 +11,7 @@ registers:
   - food-premises-type
   - government-domain
   - industry
+  - job-centre
   - local-authority
   - local-authority-eng
   - local-authority-nir
