@@ -125,6 +125,9 @@ variable "instance_count" {
     // Address registers
     "street" = 0
     "place" = 0
+
+    // Department for Work and Pensions
+    "job-centre" = 0
   }
 }
 

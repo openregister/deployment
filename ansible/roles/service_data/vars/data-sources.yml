@@ -184,3 +184,9 @@ sources:
     src_data: '../../school-data/data/{{ vpc }}/school-trust/school-trusts.tsv'
     src_type: tsv
     target: school-trusts.tsv
+
+# Department for Work and Pensions
+  job-centre:
+    src_data: '../../job-centre-data/data/job-centres.tsv'
+    src_type: tsv
+    target: job-centres.tsv
