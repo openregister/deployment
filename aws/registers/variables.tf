@@ -86,6 +86,7 @@ variable "instance_count" {
     "school" = 0
     "school-admissions-policy" = 0
     "school-authority" = 0
+    "school-authority-eng" = 0
     "school-eng" = 0
     "school-federation" = 0
     "school-gender" = 0
