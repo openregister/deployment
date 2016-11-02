@@ -11,19 +11,18 @@ variable "zones" {
 }
 
 /*
- * NAT Instance
+ * Bastion Instance
 */
 
-variable "nat_instance_ami" {
-//  default = "ami-30913f47"
-  default = "ami-c0993ab3"
+variable "bastion_instance_ami" {
+  default = "ami-6ced7f1f"
 }
 
-variable "nat_instance_type" {
+variable "bastion_instance_type" {
   default = "t2.micro"
 }
 
-variable "nat_user_data" {}
+variable "bastion_user_data" {}
 
 variable "admin_ips" { type = "list" }
 

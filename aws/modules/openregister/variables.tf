@@ -23,5 +23,4 @@ variable "zones" {
   }
 }
 
-variable "nat_gateway_id" {}
-variable "nat_private_ip" {}
+variable "bastion_private_ip" {}

@@ -8,8 +8,7 @@ module "openregister" {
   cidr_blocks = "${var.openregister_cidr_blocks}"
   db_cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
-  nat_gateway_id = "${module.core.nat_gateway_id}"
-  nat_private_ip = "${module.core.nat_private_ip}"
+  bastion_private_ip = "${module.core.bastion_private_ip}"
   public_route_table_id = "${module.core.public_route_table_id}"
 }
 
