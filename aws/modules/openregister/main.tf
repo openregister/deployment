@@ -13,12 +13,3 @@ resource "aws_subnet" "openregister" {
     Environment = "${var.vpc_name}"
   }
 }
-
-/*
-resource "aws_route_table_association" "public" {
-  count = "${length(var.cidr_blocks)}"
-
-  subnet_id = "${element(aws_subnet.openregister.*.id, count.index)}"
-  route_table_id = "${var.public_route_table_id}"
-}
-*/
