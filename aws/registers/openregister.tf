@@ -8,7 +8,7 @@ module "openregister" {
   cidr_blocks = "${var.openregister_cidr_blocks}"
   db_cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
-  bastion_private_ip = "${module.core.bastion_private_ip}"
+  bastion_security_group_id = "${module.core.bastion_security_group_id}"
   public_route_table_id = "${module.core.public_route_table_id}"
 }
 

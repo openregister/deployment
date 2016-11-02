@@ -23,4 +23,4 @@ variable "zones" {
   }
 }
 
-variable "bastion_private_ip" {}
+variable "bastion_security_group_id" {}
