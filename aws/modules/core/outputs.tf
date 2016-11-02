@@ -11,26 +11,10 @@ output "vpc_name" {
 }
 
 /*
- * gateway.tf exports
+ * bastion.tf exports
 */
-output "nat_gateway_id" {
-  value = "${aws_instance.natgw.id}"
-}
-
-output "nat_private_ip" {
-  value = "${aws_instance.natgw.private_ip}"
-}
-
-output "nat_public_ip" {
-  value = "${aws_instance.natgw.public_ip}"
-}
-
-output "nat_fqdn_address" {
-  value = "${aws_route53_record.natgw.fqdn}"
-}
-
-output "sg_natsg_id" {
-  value = "${aws_security_group.natsg.id}"
+output "bastion_security_group_id" {
+  value = "${aws_security_group.bastionsg.id}"
 }
 
 /*

@@ -5,7 +5,3 @@ output "vpc_name" {
 output "vpc_id" {
   value = "${module.core.vpc_id}"
 }
-
-output "gateway" {
-  value = "${module.core.nat_fqdn_address}"
-}
