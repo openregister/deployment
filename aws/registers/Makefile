@@ -29,7 +29,6 @@ module_depth=-1
 check-for-local-state: 
 	@test ! -f terraform.tfstate || exit 1
 
-check-variables:
 ifndef vpc
   $(error You must pass -e vpc=<name> switch)
 endif
@@ -42,7 +41,7 @@ endif
 purge-remote-state-cache: 
 	rm -rf .terraform/terraform.tfstate
 
-configure-state: check-variables check-for-local-state purge-remote-state-cache
+configure-state: check-for-local-state purge-remote-state-cache
 	terraform remote config \
           -backend=S3 \
           -backend-config="bucket=registers-terraform-state" \
