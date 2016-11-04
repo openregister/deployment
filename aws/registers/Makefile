@@ -12,6 +12,17 @@
 	push-config \
 	push-state
 
+export expected_terraform_version=v0.7.8
+export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" ")
+
+ifneq ($(expected_terraform_version), $(actual_terraform_version))
+  $(error Expected terraform version $(expected_terraform_version), but saw $(actual_terraform_version))
+endif
+
+ifndef vpc
+  $(error You must pass -e vpc=<name> switch)
+endif
+
 # Default AWS region
 export AWS_DEFAULT_REGION=eu-west-1
 
@@ -29,11 +40,6 @@ module_depth=-1
 check-for-local-state: 
 	@test ! -f terraform.tfstate || exit 1
 
-check-variables:
-ifndef vpc
-  $(error You must pass -e vpc=<name> switch)
-endif
-
 # TODO should also reject defined-but-blank variable
 ifndef TF_VAR_openregister_database_master_password
   $(error TF_VAR_openregister_database_master_password variable is required)
@@ -42,7 +48,7 @@ endif
 purge-remote-state-cache: 
 	rm -rf .terraform/terraform.tfstate
 
-configure-state: check-variables check-for-local-state purge-remote-state-cache
+configure-state: check-for-local-state purge-remote-state-cache
 	terraform remote config \
           -backend=S3 \
           -backend-config="bucket=registers-terraform-state" \
