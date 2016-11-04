@@ -25,7 +25,7 @@
       always_run: yes
 
 - name: Load data
-  hosts: collected_hosts
+  hosts: "collected_hosts[0]"
   vars:
     set_remote_user: "{{ use_local_username|default(True)|bool }}"
   vars_files:
