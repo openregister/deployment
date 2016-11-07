@@ -24,7 +24,7 @@ following:
 
 Set up your ssh config to tunnel through the gateway:
 
-    Host 172.xxx.* # replace with actual IP range
+    Host 172.xxx.* *.<vpc-name>.openregister # replace with actual IP range and VPC name
         ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
 
 To run a single playbook (ping in this example):
