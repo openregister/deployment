@@ -14,6 +14,7 @@ module "food-premises-rating_openregister" {
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
+  private_dns_zone_id = "${module.core.private_dns_zone_id}"
 
   subnet_ids = "${module.openregister.subnet_ids}"
   security_group_ids = ["${module.openregister.security_group_id}"]

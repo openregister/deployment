@@ -31,3 +31,5 @@ variable "user_data" {}
 variable "subnet_ids" { type = "list" }
 
 variable "security_group_ids" { type = "list" }
+
+variable "private_dns_zone_id" {}
