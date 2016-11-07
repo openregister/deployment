@@ -1,5 +1,9 @@
 - name: Ensure target directory exists
-  file: state=directory dest="{{ workdir }}"
+  command: mktemp -d
+  register: tempdir
+
+- set_fact:
+    workdir: "{{ tempdir.stdout }}"
 
 - name: Upload data files
   synchronize: src="{{ src_data }}" dest="{{ workdir }}/" set_remote_user={{ set_remote_user }}
