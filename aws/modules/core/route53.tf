@@ -17,3 +17,8 @@ resource "aws_route53_record" "zone_delegation" {
   ttl = "${var.dns_ttl}"
   records = [ "${aws_route53_zone.core.name_servers}" ]
 }
+
+resource "aws_route53_zone" "private" {
+  name = "${var.vpc_name}.openregister"
+  vpc_id = "${aws_vpc.registers.id}"
+}

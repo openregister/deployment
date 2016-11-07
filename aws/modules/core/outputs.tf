@@ -44,3 +44,7 @@ output "public_subnet_ids" {
 output "dns_zone_id" {
   value = "${aws_route53_zone.core.zone_id}"
 }
+
+output "private_dns_zone_id" {
+  value = "${aws_route53_zone.private.zone_id}"
+}
