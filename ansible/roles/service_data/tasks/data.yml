@@ -1,8 +1,5 @@
 - name: Ensure target directory exists
-  file: state=directory dest="{{ workdir }}"
-
-- name: Ensure target directory exists
-  command: mktemp -d /tmp/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  command: mktemp -d
   register: tempdir
 
 - set_fact:
