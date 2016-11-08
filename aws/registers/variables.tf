@@ -128,6 +128,7 @@ variable "instance_count" {
 
     // Department for Work and Pensions
     "job-centre" = 0
+    "jobcentre" = 0
   }
 }
 
