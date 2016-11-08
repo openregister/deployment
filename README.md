@@ -189,12 +189,11 @@ Skip this if you have not created any new `.tf` or `.tfvars` files.
 
 ### Pushing local changes to terraform config
 
-The terraform config and state files for each environment are not stored in Git but are
-stored in S3. Any local changes made and applied should be pushed back to S3.
+The terraform config file for each environment is not stored in Git but is
+stored in S3. Any local changes made and applied should be pushed back to S3:
 
 	cd aws/registers
 	make push-config -e vpc=<name>
-	make push-state -e vpc=<name>
 
 # Running the registers application
 

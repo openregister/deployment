@@ -71,9 +71,6 @@ remove-bucket:
 remove-state:
 	aws s3 rm s3://registers-terraform-state/$(vpc).tfstate
 
-push-state:
-	terraform remote push
-
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
 
