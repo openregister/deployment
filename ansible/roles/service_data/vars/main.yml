@@ -1,5 +1,3 @@
-workdir: '/tmp/mint-data'
-
 mint_user: 'openregister'
 mint_url: 'openregister:8080/load'
 
