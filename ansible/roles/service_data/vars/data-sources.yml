@@ -190,3 +190,8 @@ sources:
     src_data: '../../job-centre-data/data/job-centres.tsv'
     src_type: tsv
     target: job-centres.tsv
+
+  jobcentre:
+    src_data: '../../jobcentre-data/data/jobcentres.tsv'
+    src_type: tsv
+    target: jobcentres.tsv
