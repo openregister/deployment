@@ -260,22 +260,12 @@ Then run the playbook:
     	-e vpc=<name> \
     	-e registers=<name>
     
-Alternatively, you can provide specify an array of registers to load:
+Alternatively, you can provide specify an array of registers to load by passing a JSON array to the `registers` variable:
 
-`cat registers-to-load.yaml`
+    ansible-playbook mint_data.yml \
+    	-e vpc=<name> \
+    	-e registers='["country","territory","uk"]'
 
-	registers:
-	  - country
-	  - territory
-	  - uk
-
-And then run:
-
-	cd ansible
-	ansible-playbook mint_data.yml \
-		-e vpc=<name> \
-		-e @registers-to-load.yaml
-	
 Or finally, import all registers defined for selected environment:
 
 	cd ansible

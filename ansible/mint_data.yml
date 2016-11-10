@@ -13,19 +13,13 @@
   vars:
     vpc_tag: 'tag_Environment_{{ vpc }}'
   tasks:
-    - name: query openregister hosts
-      set_fact:
-        openregister_hosts: "{{ groups.tag_Role_openregister_app | intersect(groups[vpc_tag]) }}"
-      always_run: yes
-
     - name: include matching hosts
-      add_host: name="{{ item }}" group="collected_hosts"
-      with_items: "{{ openregister_hosts }}"
-      when: hostvars[item].ec2_tag_Register == registers
+      add_host: name="{{ item }}-1.{{ vpc }}.openregister" group="hosts_to_mint" register="{{ item }}"
+      with_items: "{{ registers }}"
       always_run: yes
 
 - name: Load data
-  hosts: "collected_hosts[0]"
+  hosts: "hosts_to_mint"
   vars:
     set_remote_user: "{{ use_local_username|default(True)|bool }}"
   vars_files:
