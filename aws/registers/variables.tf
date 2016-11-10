@@ -139,3 +139,4 @@ variable "codedeploy_service_role_arn" {
 
 // https
 variable "elb_certificate_arn" {}
+variable "cloudfront_certificate_arn" {}
