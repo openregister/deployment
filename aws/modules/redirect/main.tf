@@ -11,8 +11,16 @@ resource "aws_s3_bucket" "s3_redirect" {
 resource "aws_cloudfront_distribution" "cf_redirect" {
   count = "${var.enabled}"
   origin {
-    domain_name = "${aws_s3_bucket.s3_redirect.id}.s3.amazonaws.com"
+    domain_name = "${aws_s3_bucket.s3_redirect.website_endpoint}"
     origin_id   = "${var.from}"
+
+    custom_origin_config {
+      http_port = 80
+      origin_protocol_policy = "http-only"
+
+      https_port = 443 # "required" but not used
+      origin_ssl_protocols = ["TLSv1.2"] # ditto
+    }
   }
 
   default_cache_behavior {
