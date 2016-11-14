@@ -13,10 +13,6 @@ resource "aws_cloudfront_distribution" "cf_redirect" {
   origin {
     domain_name = "${aws_s3_bucket.s3_redirect.id}.s3.amazonaws.com"
     origin_id   = "${var.from}"
-
-    # s3_origin_config {
-    #   # origin_access_identity = "origin-access-identity/cloudfront/ABCDEFG1234567"
-    # }
   }
 
   default_cache_behavior {
