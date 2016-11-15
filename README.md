@@ -2,19 +2,17 @@
 
 ## Prerequisites
 
-### [awscli](http://aws.amazon.com/cli/) installed
+### [awscli](http://aws.amazon.com/cli/) and [ansible](http://www.ansible.com) installed
 
-On OSX you can install via brew:
+On OSX you can install via `virtualenv` and `pip`:
 
-	brew install awscli
-
-### [ansible](http://www.ansible.com) installed
-
-On OSX you can install via brew:
-
-	brew install ansible
+    virtualenv .venv
+    source .venv/bin/activate
+    pip install -r ansible/requirements.txt
 
 ### [terraform](https://www.terraform.io) 0.7 installed
+
+On OSX you can install via `brew`, although you'll want to make sure you use the version defined in `aws/registers/Makefile`.
 
 # Ad hoc tasks with ansible
 
