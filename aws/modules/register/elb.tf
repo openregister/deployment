@@ -2,7 +2,7 @@ resource "aws_elb" "load_balancer" {
   count = "${signum(var.instance_count)}"
 
   # replace discovery with disco to ensure name does not exceed string length limit
-  name = "${replace(format("%s-%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
+  name = "${replace(format("%s--%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
   subnets = [ "${var.public_subnet_ids}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]
 

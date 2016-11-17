@@ -96,9 +96,9 @@ resource "aws_iam_role_policy" "instance_policy" {
 POLICY
 }
 
-resource "aws_iam_instance_profile" "instance_policy" {
+resource "aws_iam_instance_profile" "instance_profile" {
   count = "${signum(var.instance_count)}"
-  name = "${var.vpc_name}-${var.id}"
+  name = "${var.vpc_name}-${var.id}-profile"
   path = "/"
   roles = [ "${aws_iam_role.instance_policy.name}" ]
 }

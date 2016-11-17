@@ -5,7 +5,7 @@ resource "aws_instance" "instance" {
   subnet_id = "${element(var.subnet_ids, count.index)}"
   user_data = "${var.user_data}"
   vpc_security_group_ids = [ "${var.security_group_ids}" ]
-  iam_instance_profile = "${aws_iam_instance_profile.instance_policy.name}"
+  iam_instance_profile = "${aws_iam_instance_profile.instance_profile.name}"
 
   root_block_device = {
     volume_size = "10" // gigabytes
