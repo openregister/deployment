@@ -27,7 +27,7 @@ endif
 export AWS_DEFAULT_REGION=eu-west-1
 
 # RDS master passwords
-export TF_VAR_openregister_database_master_password=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master)
+export TF_VAR_openregister_database_master_password=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
 
 # Required minimum to terraform
 defaults=-var-file=environments/$(vpc).tfvars
