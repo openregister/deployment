@@ -145,6 +145,11 @@ sources:
     src_type: tsv
     target: schools.tsv
 
+  academy-school-eng:
+    src_data: '../../school-data/data/{{ vpc }}/academy-school-eng/academy-schools.tsv'
+    src_type: tsv
+    target: academy-schools.tsv
+
   school-admissions-policy:
     src_data: '../../school-data/data/{{ vpc }}/school-admissions-policy/school-admissions-policies.tsv'
     src_type: tsv
