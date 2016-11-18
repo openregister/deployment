@@ -17,7 +17,7 @@ module "diocese" {
 
 resource "aws_route53_record" "load_balancer" {
   count = "${signum(lookup(var.instance_count, "diocese"))}"
-  zone_id = "${module.core.private_dns_zone_id}"
+  zone_id = "${module.core.dns_zone_id}"
   name = "diocese.${var.vpc_name}.openregister.org"
   type = "CNAME"
   ttl = "300"
