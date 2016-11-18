@@ -94,11 +94,6 @@ sources:
     target: food-premises-rating.tsv
 
 # Office for National Statistics
-  address:
-    src_data: '../../school-data/data/address/addresses.tsv'
-    src_type: tsv
-    target: addresses.tsv
-
   industry:
     src_data: '../../industry-data/data/industry/industry.tsv'
     src_type: tsv
@@ -109,15 +104,26 @@ sources:
     src_type: tsv
     target: location.tsv
 
+# Addresses
+  address:
+    src_data: '../../address-discovery-data/data/address/addresses.tsv'
+    src_type: tsv
+    target: addresses.tsv
+
+  street:
+    src_data: '../../address-discovery-data/data/street/streets.tsv'
+    src_type: tsv
+    target: streets.tsv
+
+  street-custodian:
+    src_data: '../../address-discovery-data/data/street-custodian/street-custodians.tsv'
+    src_type: tsv
+    target: street-custodians.tsv
+
   place:
     src_data: '../../place-data/data/place/places.tsv'
     src_type: tsv
     target: places.tsv
-
-  street:
-    src_data: '../../school-data/data/street/streets.tsv'
-    src_type: tsv
-    target: streets.tsv
 
 # School data
   denomination:
