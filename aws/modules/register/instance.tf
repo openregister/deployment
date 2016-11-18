@@ -18,8 +18,8 @@ resource "aws_instance" "instance" {
     Register = "${var.id}"
     Environment = "${var.vpc_name}"
     AppServer = "${var.vpc_name}-register"
-    Role = "openregister_app"
-    DeploymentGroup = "${var.vpc_name}-openregister_app"
+    Role = "openregister"
+    DeploymentGroup = "${var.vpc_name}-openregister"
   }
 }
 

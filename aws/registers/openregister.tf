@@ -39,5 +39,5 @@ module "openregister_codedeploy" {
   id = "${var.vpc_name}"
   application = "openregister-app"
   service_role_arn = "${var.codedeploy_service_role_arn}"
-  tag = "${var.vpc_name}-openregister_app"
+  tag = "${var.vpc_name}-openregister"
 }
