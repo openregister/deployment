@@ -22,12 +22,3 @@ resource "aws_instance" "instance" {
     DeploymentGroup = "${var.vpc_name}-${var.role}"
   }
 }
-
-resource "aws_route53_record" "instance_record" {
-  count = "${var.instance_count}"
-  zone_id = "${var.private_dns_zone_id}"
-  name = "${var.id}-${count.index + 1}"
-  type = "A"
-  ttl = "300"
-  records = [ "${element(aws_instance.instance.*.private_ip, count.index)}" ]
-}
