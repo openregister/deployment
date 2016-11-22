@@ -1,7 +1,7 @@
-module "local-authority" {
+module "street-custodian" {
   source = "../modules/register"
-  id = "local-authority"
-  instance_count = "${lookup(var.instance_count, "local-authority")}"
+  id = "street-custodian"
+  instance_count = "${lookup(var.instance_count, "street-custodian")}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"

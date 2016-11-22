@@ -2,7 +2,7 @@ resource "aws_elb" "load_balancer" {
   count = "${signum(var.instance_count)}"
 
   # replace discovery with disco to ensure name does not exceed string length limit
-  name = "${replace(format("%s-%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
+  name = "${replace(format("%s--%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
   subnets = [ "${var.public_subnet_ids}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]
 
@@ -66,13 +66,11 @@ resource "aws_security_group" "load_balancer" {
   }
 }
 
-# FIXME: disabled while we migrate everything over
-#
-# resource "aws_route53_record" "load_balancer" {
-#   count = "${signum(var.instance_count)}"
-#   zone_id = "${var.dns_zone_id}"
-#   name = "${var.id}.${var.vpc_name}.${var.dns_domain}"
-#   type = "CNAME"
-#   ttl = "${var.dns_ttl}"
-#   records = [ "${aws_elb.load_balancer.dns_name}" ]
-# }
+resource "aws_route53_record" "load_balancer" {
+  count = "${signum(var.instance_count)}"
+  zone_id = "${var.dns_zone_id}"
+  name = "${var.id}.${var.vpc_name}.${var.dns_domain}"
+  type = "CNAME"
+  ttl = "${var.dns_ttl}"
+  records = [ "${aws_elb.load_balancer.dns_name}" ]
+}
