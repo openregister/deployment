@@ -1,7 +1,7 @@
 ---
 - name: Create databases
   hosts:
-    - 'tag_DeploymentGroup_{{ vpc | normalize_ec2_tags }}_openregister_app[0]'
+    - 'tag_DeploymentGroup_{{ vpc | normalize_ec2_tags }}_openregister[0]'
 
   environment:
     PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
