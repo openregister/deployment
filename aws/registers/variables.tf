@@ -81,7 +81,9 @@ variable "instance_count" {
     "company" = 0
 
     // Department for Education registers
+    "academy-school-eng" = 0
     "diocese" = 0
+    "la-maintained-school-eng" = 0
     "religious-character" = 0
     "school" = 0
     "school-admissions-policy" = 0
