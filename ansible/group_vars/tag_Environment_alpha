@@ -1,7 +1,9 @@
 registers:
+  - academy-school-eng
   - datatype
   - diocese
   - field
+  - la-maintained-school-eng
   - local-authority-eng
   - local-authority-type
   - register
