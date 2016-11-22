@@ -1,0 +1,5 @@
+build/
+node_modules
+
+# built by the Makefile. Could contain secrets required for lambda functions
+lambda.js
