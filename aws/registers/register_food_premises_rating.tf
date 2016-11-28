@@ -2,6 +2,7 @@ module "food-premises-rating" {
   source = "../modules/register"
   id = "food-premises-rating"
   instance_count = "${lookup(var.instance_count, "food-premises-rating")}"
+  instance_type = "t2.small"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
