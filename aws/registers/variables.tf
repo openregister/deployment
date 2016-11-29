@@ -74,16 +74,38 @@ variable "instance_count" {
     "public-body" = 0
     "register" = 1
 
-    // Cabinet Office
-    "government-domain" = 0
-
-    // Companies House registers
-    "company" = 0
-
-    // Department for Education registers
     "academy-school-eng" = 0
+    "address" = 0
+    "company" = 0
+    "country" = 0
+    "court" = 0
+    "denomination" = 0
+    "dental-practice" = 0
     "diocese" = 0
+    "food-authority" = 0
+    "food-premises" = 0
+    "food-premises-rating" = 0
+    "food-premises-type" = 0
+    "government-domain" = 0
+    "government-organisation" = 0
+    "government-website" = 0
+    "gp-practice" = 0
+    "industry" = 0
+    "internal-drainage-board" = 0
+    "job-centre" = 0
+    "jobcentre" = 0
     "la-maintained-school-eng" = 0
+    "local-authority" = 0
+    "local-authority-eng" = 0
+    "local-authority-nir" = 0
+    "local-authority-sct" = 0
+    "local-authority-type" = 0
+    "local-authority-wls" = 0
+    "place" = 0
+    "police-force" = 0
+    "premises" = 0
+    "prison" = 0
+    "register-office" = 0
     "religious-character" = 0
     "school" = 0
     "school-admissions-policy" = 0
@@ -96,42 +118,11 @@ variable "instance_count" {
     "school-tag" = 0
     "school-trust" = 0
     "school-type" = 0
-
-    // Department for Communities and Local Government registers
-    "local-authority" = 0
-    "local-authority-eng" = 0
-    "local-authority-nir" = 0
-    "local-authority-sct" = 0
-    "local-authority-wls" = 0
-    "local-authority-type" = 0
-
-    // Food Standards Agency registers
-    "food-authority" = 0
-    "food-premises" = 0
-    "food-premises-type" = 0
-    "food-premises-rating" = 0
-
-    // Foreign & Commonwealth registers
-    "country" = 0
-    "territory" = 0
-    "uk" = 0
-
-    // Office for National Statistics registers
-    "address" = 0
-    "industry" = 0
-    "denomination" = 0
-
-    // Valuation Office Agency registers
-    "premises" = 0
-
-    // Address registers
+    "social-housing-provider" = 0
     "street" = 0
     "street-custodian" = 0
-    "place" = 0
-
-    // Department for Work and Pensions
-    "job-centre" = 0
-    "jobcentre" = 0
+    "territory" = 0
+    "uk" = 0
   }
 }
 

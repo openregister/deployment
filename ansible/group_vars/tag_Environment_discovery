@@ -1,27 +1,37 @@
 registers:
   - address
   - company
-  - denomination
-  - diocese
+  - court
   - datatype
+  - denomination
+  - dental-practice
+  - diocese
   - field
   - food-authority
   - food-premises
   - food-premises-rating
   - food-premises-type
   - government-domain
+  - government-organisation
+  - government-website
+  - gp-practice
   - industry
+  - internal-drainage-board
   - job-centre
   - jobcentre
   - local-authority
   - local-authority-eng
   - local-authority-nir
   - local-authority-sct
-  - local-authority-wls
   - local-authority-type
+  - local-authority-wls
   - place
+  - police-force
   - premises
+  - prison
   - register
+  - register-office
+  - school
   - school-admissions-policy
   - school-authority
   - school-federation
@@ -29,7 +39,7 @@ registers:
   - school-phase
   - school-tag
   - school-type
-  - school
+  - social-housing-provider
   - street
   - street-custodian
   - uk
