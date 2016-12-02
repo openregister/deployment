@@ -3,3 +3,5 @@ registers:
   - address
   - country
   - register
+
+enable_register_data_delete: true
