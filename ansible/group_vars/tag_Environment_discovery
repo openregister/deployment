@@ -45,3 +45,5 @@ registers:
   - uk
 
 register_domain: discovery.openregister.org
+
+enable_register_data_delete: true

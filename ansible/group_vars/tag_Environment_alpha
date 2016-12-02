@@ -27,3 +27,5 @@ register_settings:
     history_page_url: https://registers-history.herokuapp.com/local-authority-eng
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
+
+enable_register_data_delete: true
