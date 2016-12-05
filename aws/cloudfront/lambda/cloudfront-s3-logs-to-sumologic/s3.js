@@ -31,7 +31,7 @@ var options = {
 
 function anonymizeIp(field) {
     if (ip.isV4Format(field)) {
-        return ip.mask(field, "255.255.0.0");
+        return ip.mask(field, "255.255.255.0");
     }
 
     return "-";
