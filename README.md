@@ -251,7 +251,7 @@ Upload the new certificate to IAM using terraform. Follow the instructions [here
 
 ### Rotate SSL certificate for CloudFront distributions
 
-Each Beta register has a CloudFront distribution. These will be using the old certificate (without the <myregister>.register.gov.uk 
+Each Beta register has a CloudFront distribution. These will be using the old certificate (without the `<myregister>.register.gov.uk` 
 alternative domain. Using the AWS CloudFront console, change each of the existing Beta CloudFront 
 distributions to use the new certificate.
 
@@ -268,12 +268,12 @@ add the new SSL certificate.
 
 ## Create CloudFront distribution
 
-Create a CloudFront distribution for the new register. It should have an origin of <myregister>.beta.openregister.org and an alternate domain name of <myregister>.register.gov.uk.
+Create a CloudFront distribution for the new register. It should have an origin of `<myregister>.beta.openregister.org` and an alternate domain name of `<myregister>.register.gov.uk`.
 
 ## Create DNS record
 
-Use the AWS Route53 console to create a new DNS record for <myregister>.register.gov.uk and ensure the Alias Target matches
-the CloudFront distribution for <myregister>.register.gov.uk.
+Use the AWS Route53 console to create a new DNS record for `<myregister>.register.gov.uk` and ensure the Alias Target matches
+the CloudFront distribution for `<myregister>.register.gov.uk`.
 
 # Data loading
 
