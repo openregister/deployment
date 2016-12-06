@@ -34,3 +34,5 @@ openregister_cidr_blocks = [{{ openregister_cidr_block | default(openregister_ci
 openregister_database_cidr_blocks = [{{ openregister_database_cidr_block | default(openregister_database_cidr_block_defaults) }}]
 
 openregister_database_class_instance = "{{ openregister_database_class_instance | default('db.m3.large') }}"
+
+enable_statuscake_checks = {{ enable_statuscake_checks | default(false) }}
