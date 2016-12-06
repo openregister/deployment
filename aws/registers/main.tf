@@ -4,6 +4,11 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
+provider "statuscake" {
+  username = "${var.statuscake_username}"
+  apikey = "${var.statuscake_apikey}"
+}
+
 module "core" {
   source = "../modules/core"
   vpc_name = "${var.vpc_name}"

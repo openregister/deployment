@@ -63,3 +63,8 @@ variable "dns_domain" {
 variable "certificate_arn" {
   description = "ARN for TLS certificate for ELB"
 }
+
+variable "enable_statuscake_checks" {
+  default = false
+  description = "Whether to enable StatusCake health checks for this Register"
+}

@@ -13,4 +13,6 @@ module "school-trust" {
 
   dns_zone_id = "${module.core.dns_zone_id}"
   certificate_arn = "${var.elb_certificate_arn}"
+
+  enable_statuscake_checks = "${var.enable_statuscake_checks}"
 }
