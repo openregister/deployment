@@ -139,4 +139,4 @@ variable "cloudfront_certificate_arn" {}
 variable "statuscake_username" {}
 variable "statuscake_apikey" {}
 
-variable "enable_statuscake_checks" {}
+variable "enable_availability_checks" {}

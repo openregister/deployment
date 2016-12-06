@@ -64,7 +64,7 @@ variable "certificate_arn" {
   description = "ARN for TLS certificate for ELB"
 }
 
-variable "enable_statuscake_checks" {
+variable "enable_availability_checks" {
   default = false
-  description = "Whether to enable StatusCake health checks for this Register"
+  description = "Whether to enable availability health checks for this register"
 }
