@@ -234,7 +234,48 @@ to users for any register in an environment that does not have the database set 
 
 Deploy the registers application using CodeDeploy.
 
-## Data loading
+# Extra steps for creating a new Beta register
+
+Ignore these if you are creating a register in an environment other than Beta.
+
+## SSL certificates
+
+### Create the certificate
+
+Create a new SSL certificate using LetsEncrypt that includes <myregister>.register.gov.uk as an alternative domain.
+Create the new certificate using the `ansible/letsencrypt.yml` using the [instructions](ansible/README.md)
+
+### Upload the new certificate to IAM
+
+Upload the new certificate to IAM using terraform. Follow the instructions [here](aws/tls-certs/README.md).
+
+### Rotate SSL certificate for CloudFront distributions
+
+Each Beta register has a CloudFront distribution. These will be using the old certificate (without the <myregister>.register.gov.uk 
+alternative domain. Using the AWS CloudFront console, change each of the existing Beta CloudFront 
+distributions to use the new certificate.
+
+### Delete the old certificate
+
+Rerun `make apply` at `aws/tls-certs` (as mentioned in the instructions [here](aws/tls-certs/README.md) 
+to delete the old certificate from IAM.
+
+### Rotate SSL certificate for API Gateway
+
+Use the AWS API Gateway console to rotate the SSL certificate. 
+Go to Custom Domain Names then select the custom domain name called `register.gov.uk` and use the Rotate button to
+add the new SSL certificate.
+
+## Create CloudFront distribution
+
+Create a CloudFront distribution for the new register. It should have an origin of <myregister>.beta.openregister.org and an alternate domain name of <myregister>.register.gov.uk.
+
+## Create DNS record
+
+Use the AWS Route53 console to create a new DNS record for <myregister>.register.gov.uk and ensure the Alias Target matches
+the CloudFront distribution for <myregister>.register.gov.uk.
+
+# Data loading
 
 ### Prerequisites
 
