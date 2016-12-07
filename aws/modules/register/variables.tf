@@ -63,3 +63,8 @@ variable "dns_domain" {
 variable "certificate_arn" {
   description = "ARN for TLS certificate for ELB"
 }
+
+variable "enable_availability_checks" {
+  default = false
+  description = "Whether to enable availability health checks for this register"
+}

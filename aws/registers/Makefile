@@ -29,6 +29,10 @@ export AWS_DEFAULT_REGION=eu-west-1
 # RDS master passwords
 export TF_VAR_openregister_database_master_password=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
 
+# StatusCake
+export TF_VAR_statuscake_username=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
+export TF_VAR_statuscake_apikey=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
+
 # Required minimum to terraform
 defaults=-var-file=environments/$(vpc).tfvars
 

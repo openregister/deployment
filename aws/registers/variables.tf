@@ -134,3 +134,9 @@ variable "codedeploy_service_role_arn" {
 // https
 variable "elb_certificate_arn" {}
 variable "cloudfront_certificate_arn" {}
+
+// StatusCake
+variable "statuscake_username" {}
+variable "statuscake_apikey" {}
+
+variable "enable_availability_checks" {}
