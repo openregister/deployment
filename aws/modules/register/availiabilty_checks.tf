@@ -1,5 +1,5 @@
 resource "statuscake_test" "status_check_home" {
-  website_name = "${var.vpc_name} - ${var.id} (${var.dns_domain}) - home"
+  website_name = "${var.vpc_name} - ${var.id} - home"
   website_url = "https://${aws_route53_record.load_balancer.fqdn}"
   test_type = "HTTP"
   check_rate = 300
@@ -7,7 +7,7 @@ resource "statuscake_test" "status_check_home" {
 }
 
 resource "statuscake_test" "status_check_records" {
-  website_name = "${var.vpc_name} - ${var.id} (${var.dns_domain}) - records"
+  website_name = "${var.vpc_name} - ${var.id} - records"
   website_url = "https://${aws_route53_record.load_balancer.fqdn}/records"
   test_type = "HTTP"
   check_rate = 300
