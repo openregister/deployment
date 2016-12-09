@@ -211,3 +211,9 @@ sources:
     src_data: '../../jobcentre-data/data/jobcentres.tsv'
     src_type: tsv
     target: jobcentres.tsv
+
+# Ministry of Justice
+  prison:
+    src_data: '../../prison-data/data/{{ vpc }}/prisons.tsv'
+    src_type: tsv
+    target: prisons.tsv
