@@ -16,6 +16,7 @@
 
 var AWS = require('aws-sdk'),
     https = require('https'),
+    LineStream = require('byline').LineStream,
     zlib = require('zlib');
 
 var options = {
@@ -51,6 +52,7 @@ function cloudTrailLogsToSumo(bucket, objKey, s3, callback) {
     var totalLogs = 0;
 
     s3Stream
+        .pipe(new LineStream())
         .on('data', function(data) {
             var logs = JSON.parse(data);
             

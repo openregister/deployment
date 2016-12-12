@@ -11,6 +11,7 @@
     "sinon": "^1.17.6"
   },
   "dependencies": {
-    "aws-sdk": "^2.7.0"
+    "aws-sdk": "^2.7.0",
+    "byline": "^5.0.0"
   }
 }
