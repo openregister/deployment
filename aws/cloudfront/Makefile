@@ -23,7 +23,8 @@ endif
 
 lambda_functions=$(addprefix build/,$(addsuffix .zip,$(wildcard lambda/*)))
 
-sumologic_key=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
+sumologic_cloudfront_key=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
+sumologic_cloudtrail_key=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
 
 # Default terraform plan -module-depth= value
 module_depth=-1
@@ -59,7 +60,11 @@ build/lambda/%.zip: lambda/%/lambda.js lambda/%/package.json
 	cd $(dir $<); zip -r ../../$@ $(notdir $<) node_modules/
 
 lambda/cloudfront-s3-logs-to-sumologic/lambda.js: lambda/cloudfront-s3-logs-to-sumologic/s3.js
-	sed -e 's/<XXXX>/$(sumologic_key)/' $< > $@
+	sed -e 's/<XXXX>/$(sumologic_cloudfront_key)/' $< > $@
+
+
+lambda/cloudtrail-s3-logs-to-sumologic/lambda.js: lambda/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
+	sed -e 's/<XXXX>/$(sumologic_cloudtrail_key)/' $< > $@
 
 clean:
 	rm -rf build/
