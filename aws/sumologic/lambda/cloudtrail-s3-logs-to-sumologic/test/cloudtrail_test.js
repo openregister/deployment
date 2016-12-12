@@ -2,7 +2,6 @@ var subject = require('../cloudtrail'),
   AWS = require('aws-sdk-mock'),
   assert = require('assert'),
   nock = require('nock'),
-  fake_context = require('./helpers/fake-context'),
   TEST_DATA = require('./helpers/test-data');
 
 describe("Sumo Logic S3 CloudTrail Lambda", function() {
@@ -19,10 +18,11 @@ describe("Sumo Logic S3 CloudTrail Lambda", function() {
 
       AWS.mock("S3", "getObject", new Buffer(TEST_DATA.compressed.cloudtrail_logs));
 
-      subject.handler(TEST_DATA.compressed.lambda_event, fake_context(function(err) {
-        assert.equal(err, undefined);
+      subject.handler(TEST_DATA.compressed.lambda_event, {}, function(error) {
+        assert.equal(error, undefined);
         http_mock.done();
-      }, done));
+        done();
+      });
     });
 
     it("should send logs to Sumo Logic", function(done) {
@@ -32,10 +32,11 @@ describe("Sumo Logic S3 CloudTrail Lambda", function() {
 
       AWS.mock("S3", "getObject", new Buffer(TEST_DATA.uncompressed.cloudtrail_logs));
 
-      subject.handler(TEST_DATA.uncompressed.lambda_event, fake_context(function(err) {
-        assert.equal(err, undefined);
+      subject.handler(TEST_DATA.uncompressed.lambda_event, {}, function(error) {
+        assert.equal(error, undefined);
         http_mock.done();
-      }, done));
+        done();
+      });
     });
   });
 });

@@ -19,7 +19,7 @@ resource "aws_lambda_function" "cloudtrail_logs_to_sumologic" {
     function_name = "cloudtrail_logs_to_sumologic"
     role = "${aws_iam_role.lambda.arn}"
     handler = "lambda.handler"
-    runtime = "nodejs"
+    runtime = "nodejs4.3"
     timeout = 20
     source_code_hash = "${base64sha256(file("build/lambda/cloudtrail-s3-logs-to-sumologic.zip"))}"
 }

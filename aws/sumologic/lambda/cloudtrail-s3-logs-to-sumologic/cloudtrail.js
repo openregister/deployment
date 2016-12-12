@@ -24,7 +24,7 @@ var options = {
     'method': 'POST'
 };
 
-function cloudTrailLogsToSumo(bucket, objKey, context, s3) {
+function cloudTrailLogsToSumo(bucket, objKey, s3, callback) {
     var req = https.request(options, function(res) {
         var body = '';
         console.log('Status: ', res.statusCode);
@@ -40,7 +40,7 @@ function cloudTrailLogsToSumo(bucket, objKey, context, s3) {
 
     var s3Stream = s3.getObject({ Bucket: bucket, Key: objKey }).createReadStream();
     s3Stream.on('error', function(error) {
-        context.fail(error);
+        callback(error);
     });
 
     var isCompressed = !!objKey.match(/\.gz$/);
@@ -63,14 +63,14 @@ function cloudTrailLogsToSumo(bucket, objKey, context, s3) {
             console.log("End of stream");
             console.log("Total logs sent: " + totalLogs);
             req.end();
-            context.succeed();
+            callback();
         })
         .on('error', function(error) {
-            context.fail(error);
+            callback(error);
         });
 }
 
-exports.handler = function(event, context) {
+exports.handler = function(event, context, callback) {
     console.log('Received event: ', JSON.stringify(event, null, 2));
 
     var s3 = new AWS.S3();
@@ -80,6 +80,6 @@ exports.handler = function(event, context) {
         var bucket = record.s3.bucket.name;
         var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
         console.log('Bucket: ' + bucket + ' ObjectKey: ' + objKey);
-        cloudTrailLogsToSumo(bucket, objKey, context, s3);
+        cloudTrailLogsToSumo(bucket, objKey, s3, callback);
     });
 };
