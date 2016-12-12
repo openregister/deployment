@@ -1,4 +1,4 @@
-var subject = require('../s3'),
+var subject = require('../cloudfront'),
   AWS = require('aws-sdk-mock'),
   assert = require('assert'),
   nock = require('nock'),

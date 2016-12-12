@@ -59,7 +59,7 @@ build/lambda/%.zip: lambda/%/lambda.js lambda/%/package.json
 	npm install --production --prefix $(dir $<)
 	cd $(dir $<); zip -r ../../$@ $(notdir $<) node_modules/
 
-lambda/cloudfront-s3-logs-to-sumologic/lambda.js: lambda/cloudfront-s3-logs-to-sumologic/s3.js
+lambda/cloudfront-s3-logs-to-sumologic/lambda.js: lambda/cloudfront-s3-logs-to-sumologic/cloudfront.js
 	sed -e 's/<XXXX>/$(sumologic_cloudfront_key)/' $< > $@
 
 
