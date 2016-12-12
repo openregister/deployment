@@ -6,7 +6,6 @@
   "devDependencies": {
     "aws-sdk-mock": "^1.6.0",
     "jshint": "^2.9.4",
-    "lambda-local": "^1.1.0",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "sinon": "^1.17.6"
