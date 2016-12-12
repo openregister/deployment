@@ -6,5 +6,7 @@ This is based off [Sumologic/sumologic-aws-lambda](https://github.com/SumoLogic/
 
 There are some (not very good) unit tests. You can invoke them with:
 
-  npm install
-  npm test
+```
+npm install
+npm test
+```
