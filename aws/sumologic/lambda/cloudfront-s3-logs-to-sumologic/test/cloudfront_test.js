@@ -18,7 +18,7 @@ describe("Sumo Logic S3 CloudFront Lambda", function() {
 
       AWS.mock("S3", "getObject", new Buffer(TEST_DATA.compressed.cloudfront_logs));
 
-      subject.handler(TEST_DATA.compressed.lambda_event, {}, function(error, result) {
+      subject.handler(TEST_DATA.compressed.lambda_event, {}, function(error) {
         assert.equal(error, undefined);
         http_mock.done();
         done();
@@ -32,7 +32,7 @@ describe("Sumo Logic S3 CloudFront Lambda", function() {
 
       AWS.mock("S3", "getObject", new Buffer(TEST_DATA.uncompressed.cloudfront_logs));
 
-      subject.handler(TEST_DATA.uncompressed.lambda_event, {}, function(error, result) {
+      subject.handler(TEST_DATA.uncompressed.lambda_event, {}, function(error) {
         assert.equal(error, undefined);
         http_mock.done();
         done();
