@@ -16,12 +16,8 @@
 
 var AWS = require('aws-sdk'),
     https = require('https'),
-    zlib = require('zlib'),
-    byline = require('byline'),
     LineStream = require('byline').LineStream,
-    ip = require('ip');
-
-var HASH_ASCII_CODE = 35;
+    zlib = require('zlib');
 
 var options = {
     'hostname': 'endpoint1.collection.eu.sumologic.com',
@@ -29,29 +25,7 @@ var options = {
     'method': 'POST'
 };
 
-function anonymizeIp(field) {
-    if (ip.isV4Format(field)) {
-        return ip.mask(field, "255.255.255.0");
-    }
-
-    return "-";
-}
-
-function anonymizeXForwardedFor(field) {
-    return "-";
-}
-
-function anonymize(line) {
-    var s = line.toString();
-    var fields = s.split('\t');
-
-    fields[4] = anonymizeIp(fields[4]);
-    fields[19] = anonymizeXForwardedFor(fields[19]);
-
-    return fields.join('\t');
-}
-
-function s3LogsToSumo(bucket, objKey, context, s3) {
+function cloudTrailLogsToSumo(bucket, objKey, s3, callback) {
     var req = https.request(options, function(res) {
         var body = '';
         console.log('Status: ', res.statusCode);
@@ -65,40 +39,36 @@ function s3LogsToSumo(bucket, objKey, context, s3) {
         });
     });
 
-    var totalLines = 0;
-
     var s3Stream = s3.getObject({ Bucket: bucket, Key: objKey }).createReadStream();
-    s3Stream.on('error', function(error) {
-        context.fail(error);
-    });
+    s3Stream.on('error', callback);
 
     var isCompressed = !!objKey.match(/\.gz$/);
     if (isCompressed) {
         s3Stream = s3Stream.pipe(zlib.createGunzip());
     }
 
+    var totalLogs = 0;
+
     s3Stream
         .pipe(new LineStream())
         .on('data', function(data) {
-            if (data[0] === HASH_ASCII_CODE) {
-                return;
-            }
-
-            totalLines++;
-            req.write(anonymize(data) + '\n');
+            var logs = JSON.parse(data);
+            
+            logs.Records.forEach(function(log) {
+                req.write(JSON.stringify(log) + '\n');
+                totalLogs++;
+            });
         })
         .on('end', function() {
             console.log("End of stream");
-            console.log("Log lines processed: " + totalLines);
+            console.log("Total logs sent: " + totalLogs);
             req.end();
-            context.succeed();
+            callback();
         })
-        .on('error', function(error) {
-            context.fail(error);
-        });
+        .on('error', callback);
 }
 
-exports.handler = function(event, context) {
+exports.handler = function(event, context, callback) {
     console.log('Received event: ', JSON.stringify(event, null, 2));
 
     var s3 = new AWS.S3();
@@ -108,6 +78,6 @@ exports.handler = function(event, context) {
         var bucket = record.s3.bucket.name;
         var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
         console.log('Bucket: ' + bucket + ' ObjectKey: ' + objKey);
-        s3LogsToSumo(bucket, objKey, context, s3);
+        cloudTrailLogsToSumo(bucket, objKey, s3, callback);
     });
 };
