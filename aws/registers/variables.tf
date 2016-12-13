@@ -133,7 +133,11 @@ variable "codedeploy_service_role_arn" {
 
 // https
 variable "elb_certificate_arn" {}
-variable "cloudfront_certificate_arn" {}
+variable "cloudfront_certificate_arn" {
+  default = ""
+}
+
+variable "enable_cdn" {}
 
 // StatusCake
 variable "statuscake_username" {}
