@@ -68,9 +68,7 @@ function s3LogsToSumo(bucket, objKey, s3, callback) {
     var totalLines = 0;
 
     var s3Stream = s3.getObject({ Bucket: bucket, Key: objKey }).createReadStream();
-    s3Stream.on('error', function(error) {
-        callback(error);
-    });
+    s3Stream.on('error', callback);
 
     var isCompressed = !!objKey.match(/\.gz$/);
     if (isCompressed) {
@@ -93,9 +91,7 @@ function s3LogsToSumo(bucket, objKey, s3, callback) {
             req.end();
             callback();
         })
-        .on('error', function(error) {
-            callback(error);
-        });
+        .on('error', callback);
 }
 
 exports.handler = function(event, context, callback) {
