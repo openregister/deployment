@@ -20,10 +20,10 @@ module "country" {
 module "country_cdn" {
   source = "../modules/cdn"
 
-  id = "country"
+  id = "country-temp"
   enabled = "${var.enable_cdn}"
 
-  alias = "country.register.gov.uk"
+  alias = "country-temp.register.gov.uk"
   origin = "${module.country.fqdn}"
 
   certificate_id = "${var.cloudfront_certificate_id}"

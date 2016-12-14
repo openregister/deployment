@@ -20,10 +20,10 @@ module "register" {
 module "register_cdn" {
   source = "../modules/cdn"
 
-  id = "register"
+  id = "register-temp"
   enabled = "${var.enable_cdn}"
 
-  alias = "register.register.gov.uk"
+  alias = "register-temp.register.gov.uk"
   origin = "${module.register.fqdn}"
 
   certificate_id = "${var.cloudfront_certificate_id}"

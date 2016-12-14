@@ -20,10 +20,10 @@ module "local-authority-type" {
 module "local-authority-type_cdn" {
   source = "../modules/cdn"
 
-  id = "local-authority-type"
+  id = "local-authority-type-temp"
   enabled = "${var.enable_cdn}"
 
-  alias = "local-authority-type.register.gov.uk"
+  alias = "local-authority-type-temp.register.gov.uk"
   origin = "${module.local-authority-type.fqdn}"
 
   certificate_id = "${var.cloudfront_certificate_id}"

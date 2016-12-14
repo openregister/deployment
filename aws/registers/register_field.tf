@@ -20,10 +20,10 @@ module "field" {
 module "field_cdn" {
   source = "../modules/cdn"
 
-  id = "field"
+  id = "field-temp"
   enabled = "${var.enable_cdn}"
 
-  alias = "field.register.gov.uk"
+  alias = "field-temp.register.gov.uk"
   origin = "${module.field.fqdn}"
 
   certificate_id = "${var.cloudfront_certificate_id}"

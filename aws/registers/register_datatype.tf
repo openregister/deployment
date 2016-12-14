@@ -20,10 +20,10 @@ module "datatype" {
 module "datatype_cdn" {
   source = "../modules/cdn"
 
-  id = "datatype"
+  id = "datatype-temp"
   enabled = "${var.enable_cdn}"
 
-  alias = "datatype.register.gov.uk"
+  alias = "datatype-temp.register.gov.uk"
   origin = "${module.datatype.fqdn}"
 
   certificate_id = "${var.cloudfront_certificate_id}"
