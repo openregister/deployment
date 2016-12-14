@@ -64,16 +64,7 @@ variable "certificate_arn" {
   description = "ARN for TLS certificate for ELB"
 }
 
-variable "cloudfront_certificate_arn" {
-  default = ""
-  description = "ARN for TLS certificate for CloudFront"
-}
-
 variable "enable_availability_checks" {
   default = false
   description = "Whether to enable availability health checks for this register"
-}
-
-variable "enable_cdn" {
-  description = "Whether to front this register with a CDN"
 }
