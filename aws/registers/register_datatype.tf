@@ -16,3 +16,15 @@ module "datatype" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
+
+module "datatype_cdn" {
+  source = "../modules/cdn"
+
+  id = "datatype"
+  enabled = "${var.enable_cdn}"
+
+  alias = "datatype.register.gov.uk"
+  origin = "${module.datatype.fqdn}"
+
+  certificate_id = "${var.cloudfront_certificate_id}"
+}
