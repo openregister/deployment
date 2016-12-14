@@ -15,5 +15,6 @@ module "address" {
   dns_zone_id = "${module.core.dns_zone_id}"
   certificate_arn = "${var.elb_certificate_arn}"
 
+  enable_cdn = "${var.enable_cdn}"
   enable_availability_checks = "${var.enable_availability_checks}"
 }
