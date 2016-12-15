@@ -6,6 +6,7 @@ registers:
   - register
   - local-authority-eng
   - local-authority-type
+  - territory
 
 register_settings:
   local-authority-eng:
