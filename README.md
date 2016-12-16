@@ -10,7 +10,7 @@ On OSX you can install via `virtualenv` and `pip`:
     source .venv/bin/activate
     pip install -r ansible/requirements.txt
 
-### [terraform](https://www.terraform.io) 0.7 installed
+### [terraform](https://www.terraform.io) installed
 
 On OSX you can install via `brew`, although you'll want to make sure you use the version defined in `aws/registers/Makefile`.
 
