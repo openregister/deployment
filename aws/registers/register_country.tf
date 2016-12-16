@@ -16,15 +16,3 @@ module "country" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
-
-module "country_cdn" {
-  source = "../modules/cdn"
-
-  id = "country-temp"
-  enabled = "${var.enable_cdn}"
-
-  alias = "country-temp.register.gov.uk"
-  origin = "${module.country.fqdn}"
-
-  certificate_id = "${var.cloudfront_certificate_id}"
-}
