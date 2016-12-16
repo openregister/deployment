@@ -66,15 +66,6 @@ pull-config:
 push-config:
 	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
 
-remove-config:
-	aws s3 rm s3://registers-terraform-config/$(vpc).tfvars
-
-remove-bucket:
-	aws s3 rb s3://openregister.$(vpc).config --force
-
-remove-state:
-	aws s3 rm s3://registers-terraform-state/$(vpc).tfstate
-
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
 
