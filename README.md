@@ -188,9 +188,14 @@ Skip this if you have not created any new `.tf` or `.tfvars` files.
 ### Pushing local changes to terraform config
 
 The terraform config file for each environment is not stored in Git but is
-stored in S3. Any local changes made and applied should be pushed back to S3:
+stored in S3. Any local changes made and applied should be pushed back to S3.
+First check that the config hasn't changed since you last pulled:
 
 	cd aws/registers
+	make diff-config -e vpc=<name>
+
+And then push if the previous task reports that the files are identical:
+
 	make push-config -e vpc=<name>
 
 # Running the registers application

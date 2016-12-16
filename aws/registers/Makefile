@@ -10,6 +10,7 @@
 	purge-remote-state-cache \
 	pull-config \
 	push-config \
+	diff-config \
 	push-state
 
 export expected_terraform_version=v0.8.0
@@ -65,6 +66,9 @@ pull-config:
 
 push-config:
 	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
+
+diff-config:
+	bash -c "diff --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -)"
 
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
