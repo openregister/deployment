@@ -16,15 +16,3 @@ module "local-authority-eng" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
-
-module "local-authority-eng_cdn" {
-  source = "../modules/cdn"
-
-  id = "local-authority-eng-temp"
-  enabled = "${var.enable_cdn}"
-
-  alias = "local-authority-eng-temp.register.gov.uk"
-  origin = "${module.local-authority-eng.fqdn}"
-
-  certificate_id = "${var.cloudfront_certificate_id}"
-}

@@ -16,15 +16,3 @@ module "field" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
-
-module "field_cdn" {
-  source = "../modules/cdn"
-
-  id = "field-temp"
-  enabled = "${var.enable_cdn}"
-
-  alias = "field-temp.register.gov.uk"
-  origin = "${module.field.fqdn}"
-
-  certificate_id = "${var.cloudfront_certificate_id}"
-}
