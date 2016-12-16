@@ -16,3 +16,15 @@ module "register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
+
+module "register_cdn" {
+  source = "../modules/cdn"
+
+  id = "register-temp"
+  enabled = "${var.enable_cdn}"
+
+  alias = "register-temp.register.gov.uk"
+  origin = "${module.register.fqdn}"
+
+  certificate_id = "${var.cloudfront_certificate_id}"
+}
