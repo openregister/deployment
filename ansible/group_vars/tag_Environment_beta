@@ -13,3 +13,5 @@ register_settings:
     history_page_url: https://registers-history.herokuapp.com/local-authority-eng
   country:
     history_page_url: https://registers-history.herokuapp.com/country
+  territory:
+    history_page_url: https://registers-history.herokuapp.com/territory
