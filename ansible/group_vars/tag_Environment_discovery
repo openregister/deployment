@@ -36,3 +36,11 @@ registers:
 register_domain: discovery.openregister.org
 
 enable_register_data_delete: true
+
+register_settings:
+  datatype:
+    enable_register_data_delete: false
+  field:
+    enable_register_data_delete: false
+  register:
+    enable_register_data_delete: false
