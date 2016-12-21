@@ -23,7 +23,7 @@ register: {{ register_name }}
 
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 
-enableRegisterDataDelete: {{ enable_register_data_delete | default(false) }}
+enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 
 credentials:
   user: {{ app_user }}

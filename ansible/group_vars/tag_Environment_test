@@ -5,3 +5,7 @@ registers:
   - register
 
 enable_register_data_delete: true
+
+register_settings:
+  register:
+    enable_register_data_delete: false
