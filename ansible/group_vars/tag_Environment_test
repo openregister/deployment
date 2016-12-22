@@ -10,30 +10,7 @@ register_settings:
   register:
     enable_register_data_delete: false
 
-
-# reg_groups:
-#   a:
-#     - register
-#     - country
-#   b:
-#     - address
-
-
-# reg_groups:
-#   - name: groupA
-#     registers:
-#       - register
-#       - country
-    
-#   - name: groupB
-#     registers:
-#       - address
-
 reg_groups:
-  groupA:
+  multi:
     - register
     - country
-    - address
-
-  groupB:
-    - address
