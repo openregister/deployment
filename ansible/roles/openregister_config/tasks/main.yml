@@ -13,10 +13,10 @@
 
 - name: Create config register directories
   file: name="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister" state=directory mode=0700
-  with_dict: "{{ reg_groups }}"
+  with_dict: "{{ register_groups }}"
 
 - name: Generate openregister-java configuration files
   template:
     src="templates/openregister-config.yaml.j2"
     dest="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister/config.yaml"
-  with_dict: "{{ reg_groups }}"
+  with_dict: "{{ register_groups }}"

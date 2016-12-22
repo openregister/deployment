@@ -38,7 +38,7 @@ register_settings:
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
 
-reg_groups:
+register_groups:
   academy-school-eng:
     - academy-school-eng
   datatype:

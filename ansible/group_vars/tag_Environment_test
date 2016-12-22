@@ -10,7 +10,7 @@ register_settings:
   register:
     enable_register_data_delete: false
 
-reg_groups:
+register_groups:
   multi:
     - register
     - country
