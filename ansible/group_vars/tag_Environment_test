@@ -14,3 +14,9 @@ reg_groups:
   multi:
     - register
     - country
+  register:
+    - register
+  country:
+    - country
+  address:
+    - address
