@@ -11,25 +11,68 @@
     - "{{ workdir }}"
     - "{{ workdir }}/{{ vpc }}"
 
+
+- name: Print phone records
+  debug: 
+    msg: "{{ item }} + key: {{ item.key }}"
+  with_dict: "{{ reg_groups }}"
+
+
 - name: Create config register directories
-  file: name="{{ workdir }}/{{ vpc }}/{{ item }}/openregister" state=directory mode=0700
-  with_items: "{{ registers }}"
+  file: name="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister" state=directory mode=0700
+  with_dict: "{{ reg_groups }}"
+
+# - name: Generate openregister-java configuration files
+#   template:
+#     src="templates/openregister-config.yaml.j2"
+#     dest="{{ workdir }}/{{ vpc }}/{{ item }}/openregister/config.yaml"
+
+# #   vars:
+# #     rds_instance_name: "{{ vpc }}-openregister-db"
+# #     password_store_key: "{{ vpc }}/rds/openregister/{{ item }}"
+# #     db_name: "{{ item }}"
+# #     db_user: "{{ item }}_openregister"
+# #     db_password: "{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
+# #     db_host: "{{ groups[rds_instance_name][0] }}"
+# #     register_name: "{{ item }}"
+# #     app_user: 'openregister'
+# #     app_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ item }}') }}"
+# #     settings: "{{ register_settings[item] | default({}) }}"
+
+#   with_items: "{{ registers }}"
+
+
+# - name: numero uno
+#   debug:
+#     msg: "group: {{ item.value }}"
+#   with_dict: "{{ reg_groups }}"
+
+# - name: numero dos
+#   debug:
+#     msg: "group: {{ item }}"
+#   with_subelements: 
+#     - "{{ reg_groups }}"
+#     - "{{ reg_groups[0] }}"
+
+# - name: Print phone records
+#   debug: 
+#     msg: "{{ item[0].name }} +     {{ item[1] }}"
+#   with_subelements:
+#    - "{{ reg_groups }}"
+#    - registers
+
+
 
 - name: Generate openregister-java configuration files
   template:
-    src="templates/openregister-config.yaml.j2"
-    dest="{{ workdir }}/{{ vpc }}/{{ item }}/openregister/config.yaml"
+    src="templates/openregister-config.yaml2.j2"
+    dest="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister/config.yaml"
 
-  vars:
-    rds_instance_name: "{{ vpc }}-openregister-db"
-    password_store_key: "{{ vpc }}/rds/openregister/{{ item }}"
-    db_name: "{{ item }}"
-    db_user: "{{ item }}_openregister"
-    db_password: "{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
-    db_host: "{{ groups[rds_instance_name][0] }}"
-    register_name: "{{ item }}"
-    app_user: 'openregister'
-    app_password: "{{ lookup('pass', '{{ vpc }}/app/mint/{{ item }}') }}"
-    settings: "{{ register_settings[item] | default({}) }}"
 
-  with_items: "{{ registers }}"
+  with_dict: "{{ reg_groups }}"
+
+
+
+
+
+

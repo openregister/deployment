@@ -6,13 +6,13 @@
     PASSWORD_STORE_DIR: "{{ pass_store_location | expanduser }}"
 
   vars:
-    sync: true
+    sync: false
 
   roles:
     - openregister_config
 
-    - { role: s3_sync,
-        when: sync,
-        src: "{{ workdir }}/{{ vpc }}",
-        dest: "s3://{{ s3_bucket_prefix }}.{{ vpc }}.{{ s3_bucket_suffix }}"
-      }
+    # - { role: s3_sync,
+    #     when: sync,
+    #     src: "{{ workdir }}/{{ vpc }}",
+    #     dest: "s3://{{ s3_bucket_prefix }}.{{ vpc }}.{{ s3_bucket_suffix }}"
+    #   }

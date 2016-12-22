@@ -1,0 +1,50 @@
+{%- set reg = item.value | first -%}
+{%- set rds_instance_name = vpc + "-openregister-db" -%}
+{%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
+{%- set db_name = reg -%}
+{%- set db_user = reg + "_openregister" -%}
+{%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
+
+{%- set db_host = groups[rds_instance_name][0] -%}
+{%- set register_name = reg -%}
+{%- set app_user = "openregister" -%}
+{%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
+{%- set settings = register_settings[reg] | default({}) -%}
+
+{% include "openregister-config.yaml.j2" ignore missing with context %}
+
+registerDomain: {{ register_domain }}
+externalConfigDirectory: /srv/openregister-java
+downloadConfigs: true
+
+server:
+  registerDefaultExceptionMappers: false
+
+credentials:
+  user: {{ app_user }}
+  password: {{ app_password }}
+
+{% if item.value | length > 1 -%}
+registers:
+  {% for reg in item.value -%}
+    {% if not loop.first %}
+
+      {%- set rds_instance_name = vpc + "-openregister-db" -%}
+      {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
+      {%- set db_name = reg -%}
+      {%- set db_user = reg + "_openregister" -%}
+      {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
+      
+      {%- set db_host = groups[rds_instance_name][0] -%}
+      {%- set register_name = reg -%}
+      {%- set app_user = "openregister" -%}
+      {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
+      {%- set settings = register_settings[reg] | default({}) -%}
+  {{ reg }}:
+  {% macro someop() %}{% include "openregister-config.yaml.j2" ignore missing with context %}{% endmacro %}
+  {{ someop()|indent }}
+    {% endif %}
+  {% endfor %}
+{%- endif -%}
+
+
