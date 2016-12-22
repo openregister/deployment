@@ -1,17 +1,36 @@
-{%- set reg = item.value | first -%}
-{%- set rds_instance_name = vpc + "-openregister-db" -%}
-{%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
-{%- set db_name = reg -%}
-{%- set db_user = reg + "_openregister" -%}
-{%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
+{% for reg in item.value -%}
+  {%- set rds_instance_name = vpc + "-openregister-db" -%}
+  {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
+  {%- set db_name = reg -%}
+  {%- set db_user = reg + "_openregister" -%}
+  {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
 
-{%- set db_host = groups[rds_instance_name][0] -%}
-{%- set register_name = reg -%}
-{%- set app_user = "openregister" -%}
-{%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
-{%- set settings = register_settings[reg] | default({}) -%}
+  {%- set db_host = groups[rds_instance_name][0] -%}
+  {%- set register_name = reg -%}
+  {%- set app_user = "openregister" -%}
+  {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
+  {%- set settings = register_settings[reg] | default({}) -%}
 
-{% include "openregister-config.yaml.j2" ignore missing with context %}
+{%- if loop.first -%}
+database:
+  driverClass: org.postgresql.Driver
+  url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
+  user: {{ db_user }}
+  password: {{ db_password }}
+
+  #db connection properties
+  initialSize: {{ db_initial_size | default(1) }}
+  minSize: {{ db_min_size | default(1) }}
+  maxSize: {{ db_max_size | default(4) }}
+
+  properties:
+    charSet: UTF-8
+
+trackingId: {{ tracking_id }}
+register: {{ register_name }}
+enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
+enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
+{% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
 
 registerDomain: {{ register_domain }}
 externalConfigDirectory: /srv/openregister-java
@@ -24,27 +43,30 @@ credentials:
   user: {{ app_user }}
   password: {{ app_password }}
 
-{% if item.value | length > 1 -%}
+{% if loop.length > 1 %}
 registers:
-  {% for reg in item.value -%}
-    {% if not loop.first %}
-
-      {%- set rds_instance_name = vpc + "-openregister-db" -%}
-      {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
-      {%- set db_name = reg -%}
-      {%- set db_user = reg + "_openregister" -%}
-      {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
-      
-      {%- set db_host = groups[rds_instance_name][0] -%}
-      {%- set register_name = reg -%}
-      {%- set app_user = "openregister" -%}
-      {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
-      {%- set settings = register_settings[reg] | default({}) -%}
+{% endif %}
+{% else %}
   {{ reg }}:
-  {% macro someop() %}{% include "openregister-config.yaml.j2" ignore missing with context %}{% endmacro %}
-  {{ someop()|indent }}
-    {% endif %}
-  {% endfor %}
-{%- endif -%}
+    database:
+      driverClass: org.postgresql.Driver
+      url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
+      user: {{ db_user }}
+      password: {{ db_password }}
 
+      #db connection properties
+      initialSize: {{ db_initial_size | default(1) }}
+      minSize: {{ db_min_size | default(1) }}
+      maxSize: {{ db_max_size | default(4) }}
 
+      properties:
+        charSet: UTF-8
+
+    trackingId: {{ tracking_id }}
+    register: {{ register_name }}
+    enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
+    enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
+    {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
+
+{% endif %}
+{% endfor %}
