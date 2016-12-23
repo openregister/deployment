@@ -15,3 +15,28 @@ register_settings:
     history_page_url: https://registers-history.herokuapp.com/country
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
+
+register_groups:
+  country:
+    - country
+  datatype:
+    - datatype
+  field:
+    - field
+  register:
+    - register
+  local-authority-eng:
+    - local-authority-eng
+  local-authority-type:
+    - local-authority-type
+  territory:
+    - territory
+
+  multi:
+    - country
+    - datatype
+    - field
+    - register
+    - local-authority-eng
+    - local-authority-type
+    - territory

@@ -37,3 +37,61 @@ register_settings:
     history_page_url: https://registers-history.herokuapp.com/school-eng
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
+
+register_groups:
+  academy-school-eng:
+    - academy-school-eng
+  datatype:
+    - datatype
+  diocese:
+    - diocese
+  field:
+    - field
+  la-maintained-school-eng:
+    - la-maintained-school-eng
+  local-authority-eng:
+    - local-authority-eng
+  local-authority-type:
+    - local-authority-type
+  register:
+    - register
+  religious-character:
+    - religious-character
+  school-admissions-policy:
+    - school-admissions-policy
+  school-authority-eng:
+    - school-authority-eng
+  school-eng:
+    - school-eng
+  school-gender:
+    - school-gender
+  school-phase:
+    - school-phase
+  school-tag:
+    - school-tag
+  school-trust:
+    - school-trust
+  school-type:
+    - school-type
+  territory:
+    - territory
+
+  multi:
+    - academy-school-eng
+    - datatype
+    - diocese
+    - field
+    - la-maintained-school-eng
+    - local-authority-eng
+    - local-authority-type
+    - register
+    - religious-character
+    - school-admissions-policy
+    - school-authority-eng
+    - school-eng
+    - school-gender
+    - school-phase
+    - school-tag
+    - school-trust
+    - school-type
+    - territory

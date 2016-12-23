@@ -44,3 +44,103 @@ register_settings:
     enable_register_data_delete: false
   register:
     enable_register_data_delete: false
+
+register_groups:
+  address:
+    - address
+  company:
+    - company
+  court:
+    - court
+  datatype:
+    - datatype
+  dental-practice:
+    - dental-practice
+  field:
+    - field
+  food-authority:
+    - food-authority
+  food-premises:
+    - food-premises
+  food-premises-rating:
+    - food-premises-rating
+  food-premises-type:
+    - food-premises-type
+  government-domain:
+    - government-domain
+  government-organisation:
+    - government-organisation
+  government-website:
+    - government-website
+  gp-practice:
+    - gp-practice
+  industry:
+    - industry
+  internal-drainage-board:
+    - internal-drainage-board
+  jobcentre:
+    - jobcentre
+  local-authority-eng:
+    - local-authority-eng
+  local-authority-nir:
+    - local-authority-nir
+  local-authority-sct:
+    - local-authority-sct
+  local-authority-type:
+    - local-authority-type
+  local-authority-wls:
+    - local-authority-wls
+  place:
+    - place
+  police-force:
+    - police-force
+  premises:
+    - premises
+  prison:
+    - prison
+  register:
+    - register
+  register-office:
+    - register-office
+  social-housing-provider:
+    - social-housing-provider
+  street:
+    - street
+  street-custodian:
+    - street-custodian
+  uk:
+    - uk
+
+  multi:
+    - address
+    - company
+    - court
+    - datatype
+    - dental-practice
+    - field
+    - food-authority
+    - food-premises
+    - food-premises-rating
+    - food-premises-type
+    - government-domain
+    - government-organisation
+    - government-website
+    - gp-practice
+    - industry
+    - internal-drainage-board
+    - jobcentre
+    - local-authority-eng
+    - local-authority-nir
+    - local-authority-sct
+    - local-authority-type
+    - local-authority-wls
+    - place
+    - police-force
+    - premises
+    - prison
+    - register
+    - register-office
+    - social-housing-provider
+    - street
+    - street-custodian
+    - uk

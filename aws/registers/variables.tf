@@ -123,6 +123,8 @@ variable "instance_count" {
     "street-custodian" = 0
     "territory" = 0
     "uk" = 0
+
+    "multi" = 0
   }
 }
 
