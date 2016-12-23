@@ -77,6 +77,8 @@ register_groups:
     - territory
 
   multi:
+    - register
+
     - academy-school-eng
     - datatype
     - diocese

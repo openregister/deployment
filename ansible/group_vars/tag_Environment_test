@@ -22,4 +22,5 @@ register_groups:
 
   multi:
     - register
+
     - country
