@@ -11,12 +11,13 @@ register_settings:
     enable_register_data_delete: false
 
 register_groups:
-  multi:
-    - register
-    - country
   register:
     - register
   country:
     - country
   address:
     - address
+
+  multi:
+    - register
+    - country

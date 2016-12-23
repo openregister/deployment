@@ -75,3 +75,23 @@ register_groups:
     - school-type
   territory:
     - territory
+
+  multi:
+    - academy-school-eng
+    - datatype
+    - diocese
+    - field
+    - la-maintained-school-eng
+    - local-authority-eng
+    - local-authority-type
+    - register
+    - religious-character
+    - school-admissions-policy
+    - school-authority-eng
+    - school-eng
+    - school-gender
+    - school-phase
+    - school-tag
+    - school-trust
+    - school-type
+    - territory

@@ -31,3 +31,12 @@ register_groups:
     - local-authority-type
   territory:
     - territory
+
+  multi:
+    - country
+    - datatype
+    - field
+    - register
+    - local-authority-eng
+    - local-authority-type
+    - territory

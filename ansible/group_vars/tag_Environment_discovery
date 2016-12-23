@@ -110,3 +110,37 @@ register_groups:
     - street-custodian
   uk:
     - uk
+
+  multi:
+    - address
+    - company
+    - court
+    - datatype
+    - dental-practice
+    - field
+    - food-authority
+    - food-premises
+    - food-premises-rating
+    - food-premises-type
+    - government-domain
+    - government-organisation
+    - government-website
+    - gp-practice
+    - industry
+    - internal-drainage-board
+    - jobcentre
+    - local-authority-eng
+    - local-authority-nir
+    - local-authority-sct
+    - local-authority-type
+    - local-authority-wls
+    - place
+    - police-force
+    - premises
+    - prison
+    - register
+    - register-office
+    - social-housing-provider
+    - street
+    - street-custodian
+    - uk
