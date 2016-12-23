@@ -67,5 +67,9 @@ registers:
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
     {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
 
+    credentials:
+      user: {{ app_user }}
+      password: {{ app_password }}
+
 {% endif %}
 {% endfor %}
