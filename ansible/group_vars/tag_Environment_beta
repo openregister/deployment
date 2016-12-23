@@ -33,10 +33,11 @@ register_groups:
     - territory
 
   multi:
+    - register
+
     - country
     - datatype
     - field
-    - register
     - local-authority-eng
     - local-authority-type
     - territory
