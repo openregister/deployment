@@ -1,5 +1,3 @@
 pass_store_location: '~/.registers-pass'
 
-register_domain: openregister.org
-
 tracking_id: UA-86101042-1
