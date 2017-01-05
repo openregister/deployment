@@ -34,6 +34,12 @@ enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
 
+{% if settings.similar_registers is defined %}similarRegisters:
+  {% for register in settings.similar_registers -%}
+    - {{ register }}
+  {% endfor %}
+{% endif %}
+
 registerDomain: {{ register_domain }}
 externalConfigDirectory: /srv/openregister-java
 downloadConfigs: true
@@ -70,6 +76,12 @@ registers:
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
     {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
+
+    {% if settings.similar_registers is defined %}similarRegisters:
+      {% for register in settings.similar_registers -%}
+        - {{ register }}
+      {% endfor %}
+    {% endif %}
 
     credentials:
       user: {{ app_user }}
