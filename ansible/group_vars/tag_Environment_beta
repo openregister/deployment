@@ -9,12 +9,25 @@ registers:
   - territory
 
 register_settings:
-  local-authority-eng:
-    history_page_url: https://registers-history.herokuapp.com/local-authority-eng
   country:
+    custodian_name: Tony Worron
     history_page_url: https://registers-history.herokuapp.com/country
+  datatype:
+    custodian_name: Paul Downey
+  field:
+    custodian_name: Paul Downey
+  local-authority-eng:
+    custodian_name: Stephen McAllister
+    history_page_url: https://registers-history.herokuapp.com/local-authority-eng
+  local-authority-type:
+    custodian_name: Stephen McAllister
+  register:
+    custodian_name: Paul Downey
+  school-eng:
+    custodian_name: Andrew Thomson
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
+    custodian_name: Tony Worron
 
 register_groups:
   country:
