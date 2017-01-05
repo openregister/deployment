@@ -11,6 +11,9 @@ register_settings:
     enable_register_data_delete: false
   address:
     enable_download_resource: false
+  country:
+    similar_registers:
+      - territory
 
 register_groups:
   register:
