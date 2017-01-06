@@ -12,6 +12,8 @@ register_settings:
   country:
     custodian_name: Tony Worron
     history_page_url: https://registers-history.herokuapp.com/country
+    similar_registers:
+      - territory
   datatype:
     custodian_name: Paul Downey
   field:
@@ -28,6 +30,8 @@ register_settings:
   territory:
     history_page_url: https://registers-history.herokuapp.com/territory
     custodian_name: Tony Worron
+    similar_registers:
+      - country
 
 register_groups:
   country:

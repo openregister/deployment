@@ -45,6 +45,8 @@ register_settings:
   territory:
     custodian_name: Tony Worron
     history_page_url: https://registers-history.herokuapp.com/territory
+    similar_registers:
+      - country
 
 register_groups:
   academy-school-eng:
