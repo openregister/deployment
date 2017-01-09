@@ -128,6 +128,10 @@ variable "instance_count" {
   }
 }
 
+variable "multitenancy_groups" {
+  type = "map"
+}
+
 // CodeDeploy
 variable "codedeploy_service_role_arn" {
   default = "arn:aws:iam::022990953738:role/code-deploy-role"
