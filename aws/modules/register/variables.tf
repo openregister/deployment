@@ -68,3 +68,7 @@ variable "enable_availability_checks" {
   default = false
   description = "Whether to enable availability health checks for this register"
 }
+
+variable "registers" {
+  default = []
+}
