@@ -115,6 +115,7 @@ register_groups:
 
   multi:
     - register
+    - address
     - company
     - datatype
     - field
