@@ -68,7 +68,7 @@ push-config:
 	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
 
 diff-config:
-	bash -c "diff --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -)"
+	bash -c "diff --unified --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -)"
 
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
