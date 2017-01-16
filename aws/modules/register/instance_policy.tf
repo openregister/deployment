@@ -18,27 +18,6 @@ resource "aws_iam_role" "instance_policy" {
 POLICY
 }
 
-resource "aws_iam_role_policy" "iam_policy_cloudwatch_access" {
-  count = "${signum(var.instance_count)}"
-  name = "${format("%s_CloudWatch_PutMetricData", var.vpc_name)}"
-  role = "${aws_iam_role.instance_policy.id}"
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "Stmt1456223097000",
-    "Effect": "Allow",
-    "Action": [
-      "cloudwatch:PutMetricData"
-    ],
-    "Resource": [
-      "*"
-    ]}
-  ]
-}
-POLICY
-}
-
 resource "aws_iam_role_policy" "policy_config_access" {
   count = "${signum(var.instance_count)}"
   name = "${format("%sConfigAccess", var.vpc_name)}"
