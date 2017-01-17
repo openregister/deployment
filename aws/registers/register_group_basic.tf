@@ -3,7 +3,6 @@ module "basic" {
   id = "basic"
   instance_count = "${lookup(var.group_instance_count, "basic", 0)}"
   instance_type = "${lookup(var.group_instance_type, "basic", "t2.medium")}"
-  instance_ami = "ami-c51e3eb6"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
