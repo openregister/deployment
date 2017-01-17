@@ -96,30 +96,6 @@ registers in the [credentials](https://github.com/openregister/credentials) repo
 	cd ansible
 	ansible-playbook generate_passwords.yml -e vpc=<myenv>
 
-### Terraform config for a register
-
-This is only required when creating a brand new register that
-doesn’t already exist in any environment.
-The `ansible/generate_terraform_register.yml` file creates the terraform
-configuration files `aws/registers/register_<myregister>.tf` required to
-configure a single register (across all environments).
-
-	cd ansible
-	ansible-playbook generate_terraform_register.yml -e registers='["register1","register2",...]'
-
-Set the default instance count for the new register. This is the 
-default number of instances of this register for all environments:
-
-`vi aws/registers/variables.tf`
-
-	variable "instance_count" {
-	  default = {
-	    “country” = 0
-	    “other-register” = 0
-	    “another-register” = 0
-	  }
-	}
-
 ### Terraform config for an environment
 
 #### if creating a brand new environment:
