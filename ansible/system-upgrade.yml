@@ -1,3 +1,6 @@
+---
+- include: includes/check_ansible_version.yml
+
 - name: Upgrade Amazon Linux instances
   become: yes
   hosts:

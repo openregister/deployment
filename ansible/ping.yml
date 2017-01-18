@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: Ping openregister
   hosts:
     - '&tag_Environment_{{ vpc | normalize_ec2_tags }}'

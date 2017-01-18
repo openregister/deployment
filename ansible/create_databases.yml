@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: Create databases
   hosts:
     - 'tag_DeploymentGroup_{{ vpc | normalize_ec2_tags }}_openregister[0]'

@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: Upload register configs
   hosts: localhost
   connection: local

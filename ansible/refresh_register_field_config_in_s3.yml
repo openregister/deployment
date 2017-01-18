@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: Refresh field and register configuration
   hosts: localhost
   connection: local
