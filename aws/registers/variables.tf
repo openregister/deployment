@@ -58,6 +58,11 @@ variable "instance_count" {
 
 variable "multitenancy_groups" {
   type = "map"
+  default = {
+    address = []
+    multi = []
+    basic = []
+  }
 }
 
 // CodeDeploy

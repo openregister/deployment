@@ -15,7 +15,7 @@ module "address" {
   dns_zone_id = "${module.core.dns_zone_id}"
   certificate_arn = "${var.elb_certificate_arn}"
 
-  registers = ["address"]
-
   enable_availability_checks = "${var.enable_availability_checks}"
+
+  registers = ["${var.multitenancy_groups["address"]}"]
 }
