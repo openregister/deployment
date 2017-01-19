@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: Generate terraform config
   hosts: localhost
   connection: local

@@ -1,4 +1,6 @@
 ---
+- include: includes/check_ansible_version.yml
+
 - name: "Generate SSL certificates with letsencrypt.org"
   hosts: localhost
   connection: local
