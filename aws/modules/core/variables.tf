@@ -41,3 +41,5 @@ variable "dns_domain" {
 variable "dns_parent_zone_id" {
   default = "Z1QBBZW8ZAZIDC"
 }
+
+variable "sumologic_key" {}

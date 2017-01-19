@@ -72,4 +72,8 @@ variable "cloudfront_certificate_arn" {}
 variable "statuscake_username" {}
 variable "statuscake_apikey" {}
 
+variable "sumologic_key" {
+  description = "The key fluentd uses to log to Sumo Logic"
+}
+
 variable "enable_availability_checks" {}

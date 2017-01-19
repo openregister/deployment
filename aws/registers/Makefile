@@ -34,6 +34,9 @@ export TF_VAR_openregister_database_master_password=$(or $(shell PASSWORD_STORE_
 export TF_VAR_statuscake_username=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
 export TF_VAR_statuscake_apikey=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
 
+# Sumo Logic
+export TF_VAR_sumologic_key=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/$(vpc)/app-logs | tail -n 1), $(error "Couldn't get Sumo Logic key"))
+
 # Required minimum to terraform
 defaults=-var-file=environments/$(vpc).tfvars
 
