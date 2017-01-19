@@ -3,12 +3,12 @@
   {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
   {%- set db_name = reg -%}
   {%- set db_user = reg + "_openregister" -%}
-  {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg) -%}
+  {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg).decode('utf-8') -%}
 
   {%- set db_host = groups[rds_instance_name][0] -%}
   {%- set register_name = reg -%}
   {%- set app_user = "openregister" -%}
-  {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg) -%}
+  {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
   {%- set settings = register_settings[reg] | default({}) -%}
 
 {%- if loop.first -%}
