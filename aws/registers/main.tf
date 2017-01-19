@@ -16,8 +16,9 @@ module "core" {
   public_cidr_blocks = "${var.public_cidr_blocks}"
   bastion_user_data = "${data.template_file.user_data.rendered}"
   admin_ips = "${var.admin_ips}"
+  sumologic_key = "${var.sumologic_key}"
 }
 
 data "template_file" "user_data" {
-  template = "${file("user-data/users.yaml")}"
+  template = "${file("templates/users.yaml")}"
 }

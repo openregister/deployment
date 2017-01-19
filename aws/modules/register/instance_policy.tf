@@ -33,7 +33,8 @@ resource "aws_iam_role_policy" "policy_config_access" {
       "Resource": [
         "arn:aws:s3:::openregister.${var.vpc_name}.config/${var.id}/openregister/*",
         "arn:aws:s3:::openregister.${var.vpc_name}.config/fields.yaml",
-        "arn:aws:s3:::openregister.${var.vpc_name}.config/registers.yaml"
+        "arn:aws:s3:::openregister.${var.vpc_name}.config/registers.yaml",
+        "arn:aws:s3:::openregister.${var.vpc_name}.config/fluentd.conf"
       ],
       "Effect": "Allow"
     }
