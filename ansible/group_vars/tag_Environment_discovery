@@ -113,12 +113,14 @@ register_groups:
   uk:
     - uk
 
-  multi:
+  basic:
     - register
-    - address
-    - company
     - datatype
     - field
+
+  multi:
+    - address
+    - company
     - food-authority
     - food-premises
     - food-premises-rating

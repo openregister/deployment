@@ -52,11 +52,17 @@ variable "instance_count" {
     "address" = 0
     "job-centre" = 0
     "multi" = 0
+    "basic" = 0
   }
 }
 
 variable "multitenancy_groups" {
   type = "map"
+  default = {
+    address = []
+    multi = []
+    basic = []
+  }
 }
 
 // CodeDeploy

@@ -1,8 +1,9 @@
-module "address" {
+module "basic" {
   source = "../modules/register"
-  id = "address"
-  instance_count = "${lookup(var.instance_count, "address")}"
-  instance_type = "t2.large"
+  id = "basic"
+  instance_count = "${lookup(var.instance_count, "basic")}"
+  instance_type = "t2.medium"
+  instance_ami = "ami-c51e3eb6"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
@@ -17,5 +18,5 @@ module "address" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 
-  registers = ["${var.multitenancy_groups["address"]}"]
+  registers = ["${var.multitenancy_groups["basic"]}"]
 }

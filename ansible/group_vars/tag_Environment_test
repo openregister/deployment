@@ -16,13 +16,9 @@ register_settings:
       - territory
 
 register_groups:
-  register:
-    - register
-  country:
-    - country
   address:
     - address
-
-  multi:
+  basic:
     - register
+  multi:
     - country
