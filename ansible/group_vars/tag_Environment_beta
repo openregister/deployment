@@ -34,21 +34,6 @@ register_settings:
       - country
 
 register_groups:
-  country:
-    - country
-  datatype:
-    - datatype
-  field:
-    - field
-  register:
-    - register
-  local-authority-eng:
-    - local-authority-eng
-  local-authority-type:
-    - local-authority-type
-  territory:
-    - territory
-
   basic:
     - register
     - datatype
