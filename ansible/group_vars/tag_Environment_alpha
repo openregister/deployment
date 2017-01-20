@@ -39,6 +39,8 @@ register_settings:
   register:
     custodian_name: Paul Downey
     enable_register_data_delete: false
+    fields_yaml_location: "s3://openregister.alpha.config/fields.yaml"
+    registers_yaml_location: "s3://openregister.alpha.config/registers.yaml"
   school-eng:
     custodian_name: Andrew Thomson
     history_page_url: https://registers-history.herokuapp.com/school-eng

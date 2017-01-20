@@ -25,6 +25,8 @@ register_settings:
     custodian_name: Stephen McAllister
   register:
     custodian_name: Paul Downey
+    fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
+    registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
   school-eng:
     custodian_name: Andrew Thomson
   territory:
