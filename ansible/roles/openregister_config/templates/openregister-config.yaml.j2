@@ -10,11 +10,8 @@
   {%- set app_user = "openregister" -%}
   {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
   {%- set settings = register_settings[reg] | default({}) -%}
-  {%- set field_register_url = "http://field." + register_domain + "/records.yaml?page-size=1000"  -%}
-  {%- set register_register_url = "http://register." + register_domain + "/records.yaml?page-size=1000"  -%}
-  {%- set s3_field_yaml = "s3://openregister." + vpc + ".config/fields.yaml"  -%}
-  {%- set s3_register_yaml = "s3://openregister." + vpc + ".config/registers.yaml"  -%}
-
+  {%- set default_field_register_url = "https://field." + register_domain + "/records.yaml?page-size=5000"  -%}
+  {%- set default_register_register_url = "https://register." + register_domain + "/records.yaml?page-size=5000"  -%}
 
 {%- if loop.first -%}
 database:
@@ -38,9 +35,9 @@ register: {{ register_name }}
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 
-fieldsYamlLocation: {{ settings.fields_yaml_location | default( s3_field_yaml ) }}
+fieldsYamlLocation: {{ settings.fields_yaml_location | default(default_field_register_url) }}
 
-registersYamlLocation: {{ settings.registers_yaml_location | default( s3_register_yaml ) }}
+registersYamlLocation: {{ settings.registers_yaml_location | default(default_register_register_url) }}
 
 {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
 
