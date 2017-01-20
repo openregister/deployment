@@ -86,12 +86,14 @@ register_groups:
   territory:
     - territory
 
-  multi:
+  basic:
     - register
-    - academy-school-eng
     - datatype
-    - diocese
     - field
+
+  multi:
+    - academy-school-eng
+    - diocese
     - la-maintained-school-eng
     - local-authority-eng
     - local-authority-type

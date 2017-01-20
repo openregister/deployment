@@ -49,11 +49,13 @@ register_groups:
   territory:
     - territory
 
-  multi:
+  basic:
     - register
-    - country
     - datatype
     - field
+
+  multi:
+    - country
     - local-authority-eng
     - local-authority-type
     - territory
