@@ -10,6 +10,8 @@
   {%- set app_user = "openregister" -%}
   {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
   {%- set settings = register_settings[reg] | default({}) -%}
+  {%- set default_field_register_url = "https://field." + register_domain + "/records.yaml?page-size=5000"  -%}
+  {%- set default_register_register_url = "https://register." + register_domain + "/records.yaml?page-size=5000"  -%}
 
 {%- if loop.first -%}
 database:
@@ -32,6 +34,11 @@ register: {{ register_name }}
 
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
+
+fieldsYamlLocation: {{ settings.fields_yaml_location | default(default_field_register_url) }}
+
+registersYamlLocation: {{ settings.registers_yaml_location | default(default_register_register_url) }}
+
 {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
 
 {% if settings.similar_registers is defined %}similarRegisters:
