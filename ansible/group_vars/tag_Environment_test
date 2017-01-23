@@ -2,6 +2,7 @@ register_domain: test.openregister.org
 registers:
   - address
   - country
+  - field
   - register
 
 enable_register_data_delete: true
@@ -24,5 +25,6 @@ register_groups:
     - address
   basic:
     - register
+    - field
   multi:
     - country
