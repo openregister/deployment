@@ -10,6 +10,7 @@ register_settings:
   register:
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.test.config/fields.yaml"
+    registers_yaml_location: "s3://openregister.test.config/registers.yaml"
   address:
     enable_download_resource: false
     fields_yaml_location: "s3://openregister.test.config/fields.yaml"
