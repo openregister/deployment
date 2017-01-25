@@ -38,7 +38,7 @@
     - name: compute domains list
       set_fact:
         fqdn: '{{ item }}.{{ register_domain }}'
-      with_items: '{{ registers | union([ "www" ]) }}'
+      with_flattened: '{{ register_groups.values() | union([ "www" ]) }}'
       register: output
 
     - set_fact: domains="{{ output.results | map(attribute='ansible_facts.fqdn') | list }}"

@@ -6,6 +6,6 @@
     login_host="{{ groups[inventory_group_name][0] }}"
     login_password="{{ master_password }}"
     login_user="{{ master_user }}"
-  with_items: "{{ registers }}"
+  with_flattened: "{{ register_groups.values() }}"
   register: create_db
   run_once: true
