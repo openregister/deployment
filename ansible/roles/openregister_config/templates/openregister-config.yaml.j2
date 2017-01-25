@@ -1,3 +1,5 @@
+#jinja2: trim_blocks: False
+
 {% for reg in item.value -%}
   {%- set rds_instance_name = vpc + "-openregister-db" -%}
   {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
@@ -31,16 +33,13 @@ database:
 trackingId: {{ tracking_id }}
 register: {{ register_name }}
 {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
-
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 
 fieldsYamlLocation: {{ settings.fields_yaml_location | default(default_field_register_url) }}
-
 registersYamlLocation: {{ settings.registers_yaml_location | default(default_register_register_url) }}
 
 {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
-
 {% if settings.similar_registers is defined %}similarRegisters:
   {% for register in settings.similar_registers -%}
     - {{ register }}
@@ -87,11 +86,9 @@ registers:
 
     trackingId: {{ tracking_id }}
     {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
-
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
     {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
-
     {% if settings.similar_registers is defined %}similarRegisters:
       {% for register in settings.similar_registers -%}
         - {{ register }}
