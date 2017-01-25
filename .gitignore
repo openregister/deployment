@@ -14,3 +14,4 @@ tls-certs/*
 !aws/tls-certs/terraform.tfstate
 !aws/tls-certs/terraform.tfstate.backup
 !aws/tls-certs/terraform.tfvars
+.venv
