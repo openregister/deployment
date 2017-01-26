@@ -62,6 +62,11 @@ variable "enabled_redirects" {
   default = {}
 }
 
+variable "enabled_registers" {
+  type = "map"
+  default = {}
+}
+
 variable "multitenancy_groups" {
   type = "map"
   default = {
