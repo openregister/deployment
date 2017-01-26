@@ -36,3 +36,45 @@ openregister_database_cidr_blocks = [{{ openregister_database_cidr_block | defau
 openregister_database_class_instance = "{{ openregister_database_class_instance | default('db.m3.large') }}"
 
 enable_availability_checks = {{ enable_availability_checks | default(false) }}
+
+{# specific instance counts are hardcoded to sensible defaults here #}
+instance_count = {
+{% if 'address' in register_groups %}
+  address = 1
+{% endif %}
+{% if 'basic' in register_groups %}
+  basic = 2
+{% endif %}
+{% if 'multi' in register_groups %}
+  multi = 3
+{% endif %}
+}
+
+multitenancy_groups = {
+{% if 'address' in register_groups %}
+  address = [
+{% for register in register_groups['address'] %}
+    "{{ register }}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+{% endif %}
+
+{% if 'basic' in register_groups %}
+  basic = [
+{% for register in register_groups['basic'] %}
+    "{{ register }}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+{% endif %}
+
+{% if 'basic' in register_groups %}
+  multi = [
+{% for register in register_groups['multi'] %}
+    "{{ register }}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+{% endif %}
+}
