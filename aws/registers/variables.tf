@@ -47,13 +47,15 @@ variable "openregister_database_class_instance" {
 variable "openregister_database_master_password" {}
 variable "openregister_database_apply_immediately" { default = false }
 
-variable "instance_count" {
-  default = {
-    "address" = 0
-    "job-centre" = 0
-    "multi" = 0
-    "basic" = 0
-  }
+variable "group_instance_count" {
+  type = "map"
+  default = {}
+}
+
+variable "group_instance_type" {
+  type = "map"
+  default = {}
+}
 
 variable "enabled_redirects" {
   type = "map"

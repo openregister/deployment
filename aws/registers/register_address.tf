@@ -1,8 +1,8 @@
 module "address" {
   source = "../modules/register"
   id = "address"
-  instance_count = "${lookup(var.instance_count, "address")}"
-  instance_type = "t2.large"
+  instance_count = "${lookup(var.group_instance_count, "address", 0)}"
+  instance_type = "${lookup(var.group_instance_type, "address", "t2.large")}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
