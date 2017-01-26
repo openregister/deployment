@@ -1,5 +1,5 @@
 module "address" {
-  source = "../modules/register"
+  source = "../modules/register_group"
   id = "address"
   instance_count = "${lookup(var.group_instance_count, "address", 0)}"
   instance_type = "${lookup(var.group_instance_type, "address", "t2.large")}"

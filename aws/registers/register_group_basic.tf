@@ -1,5 +1,5 @@
 module "basic" {
-  source = "../modules/register"
+  source = "../modules/register_group"
   id = "basic"
   instance_count = "${lookup(var.group_instance_count, "basic", 0)}"
   instance_type = "${lookup(var.group_instance_type, "basic", "t2.medium")}"

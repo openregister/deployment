@@ -1,5 +1,5 @@
 module "multi" {
-  source = "../modules/register"
+  source = "../modules/register_group"
   id = "multi"
   instance_count = "${lookup(var.group_instance_count, "multi", 0)}"
   instance_type = "${lookup(var.group_instance_type, "multi", "t2.medium")}"
