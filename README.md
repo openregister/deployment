@@ -80,12 +80,17 @@ environment.  However you will probably want to override at least the
 
 `vi ansible/group_vars/tag_Environment_<vpc>`
 
-	registers:
-	  - country
-	  - other-register
-	  - another-register
-    
     register_domain: my-environment.openregister.org
+    
+    register_groups:
+      basic:
+        - register
+        - field
+        - datatype
+      multi:
+        - country
+        - other-register
+        - another-register
 
 ### Generate credentials
 
