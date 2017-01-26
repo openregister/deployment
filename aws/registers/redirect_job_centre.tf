@@ -1,7 +1,7 @@
 module "job-centre_redirect" {
   source = "../modules/redirect"
 
-  enabled = "${signum(lookup(var.instance_count, "job-centre"))}"
+  enabled = "${lookup(var.enabled_redirects, "job-centre", false)}"
 
   from = "job-centre.${var.vpc_name}.openregister.org"
   to   = "https://jobcentre.${var.vpc_name}.openregister.org"

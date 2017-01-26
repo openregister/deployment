@@ -54,6 +54,10 @@ variable "instance_count" {
     "multi" = 0
     "basic" = 0
   }
+
+variable "enabled_redirects" {
+  type = "map"
+  default = {}
 }
 
 variable "multitenancy_groups" {

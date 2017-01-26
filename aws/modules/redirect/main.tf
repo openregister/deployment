@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3_redirect" {
-  count = "${var.enabled}"
+  count = "${var.enabled ? 1 : 0}"
   bucket = "${var.from}"
   acl = "public-read"
 
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "s3_redirect" {
 }
 
 resource "aws_cloudfront_distribution" "cf_redirect" {
-  count = "${var.enabled}"
+  count = "${var.enabled ? 1 : 0}"
   origin {
     domain_name = "${aws_s3_bucket.s3_redirect.website_endpoint}"
     origin_id   = "${var.from}"
@@ -52,11 +52,11 @@ resource "aws_cloudfront_distribution" "cf_redirect" {
   }
 
   aliases = ["${var.from}"]
-  enabled = "${var.enabled}"
+  enabled = "${var.enabled ? 1 : 0}"
 }
 
 resource "aws_route53_record" "r53_redirect" {
-  count = "${var.enabled}"
+  count = "${var.enabled ? 1 : 0}"
   zone_id = "${var.dns_zone_id}"
   name = "${var.from}"
   type = "A"
