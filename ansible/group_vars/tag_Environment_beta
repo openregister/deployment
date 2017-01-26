@@ -1,13 +1,4 @@
 register_domain: register.gov.uk
-registers:
-  - country
-  - datatype
-  - field
-  - register
-  - local-authority-eng
-  - local-authority-type
-  - territory
-
 register_settings:
   country:
     custodian_name: Tony Worron
