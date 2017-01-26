@@ -67,51 +67,46 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 		export AWS_PROFILE=registers
 
-## Preparing a new environment or register
+## How to create a register in an existing environment
 
-A combination of the below steps are required if creating a new environment, 
-creating a new register or adding an existing register to an existing environment for the first time.
+Step-by-step:
 
-### Ansible configuration environment overrides
+### Add configuration and credentials
 
-The `ansible/group_vars/all` file contains sensible defaults for your
-environment.  However you will probably want to override at least the
-`registers` and `register_domain` variables:
+Edit the `ansible/group_vars/tag_Environment_<vpc>` file and add the
+register details to the `register_groups` and `register_settings` keys.
 
-`vi ansible/group_vars/tag_Environment_<vpc>`
+Generate credentials using the `ansible/generate_passwords.yml` playbook:
 
-    register_domain: my-environment.openregister.org
+    ansible-playbook generate_passwords.yml -e vpc=<myenv>
     
-    register_groups:
-      basic:
-        - register
-        - field
-        - datatype
-      multi:
-        - country
-        - other-register
-        - another-register
+### Update terraform
 
-### Generate credentials
+Fetch the latest `.tfvars` file from S3:
 
-The `ansible/generate_passwords.yml` file generates passwords for new
-registers in the [credentials](https://github.com/openregister/credentials) repository.
+	cd aws/registers
+	make pull-config -e vpc=<myenv>
 
-	registers-pass git checkout -b new-passwords
-	cd ansible
-	ansible-playbook generate_passwords.yml -e vpc=<myenv>
+Then [plan and apply your terraform](#terraforming) code.
 
-### Terraform config for an environment
+## How to create a new environment
 
-#### if creating a brand new environment:
+Step by step:
 
-The `ansible/configure_terraform.yml` file creates the terraform
-configuration file `aws/registers/environments/<myenv>.tfvars` 
-required to configure a single environment (your CIDR block needs to be
-at least a `/16`).
+### Add configuration and credentials
 
-	cd ansible
-	ansible-playbook configure_terraform.yml -e vpc=<myenv> -e vpc_cidr_block=<cidr_subnet>/16
+Create a new `ansible/group_vars/tag_Environment_<vpc>` file and
+customize it for the new environment.
+
+Generate credentials using the `ansible/generate_passwords.yml` playbook:
+
+    ansible-playbook generate_passwords.yml -e vpc=<myenv>
+    
+### Set up and run terraform
+
+Create a new `.tfvars` file for the environment:
+
+    ansible-playbook configure_terraform.yml -e vpc=<myenv>
 
 You must also request a new SSL certificate in AWS Certficate Manager for the new environment. 
 This certificate will require approval before it can be used. Bear in mind that only certain people 
@@ -123,36 +118,7 @@ Once approved, the ARN for the new certificate must then be added to the existin
 
 	elb_certificate_arn = "arn:aws:acm:eu-west-1:022990953738:certificate/<abcde>"
 
-#### if using an existing environment:
-
-This downloads the latest configuration file for an existing environment
-from S3 to `aws/registers/environments/<myenv>.tfvars` locally.
-
-	cd aws/registers
-	make pull-config -e vpc=<myenv>
-
-#### terraform config environment overrides:
-
-If creating a register in an environment, override the
-instance count for the register in that environment.
-
-`vi aws/registers/environments/<myenv>.tfvars`
-
-	# instance_count
-	instance_count = {
-      # ... other registers
-      country = 1
-      other-register = 1
-      another-register = 1
-      # ... other registers
-    }
-
-### Update terraform module links
-
-Skip this if you have not created any new `.tf` or `.tfvars` files.
-
-	cd aws/registers
-	terraform get
+Then run terraform (see next section).
 
 ## Terraforming
 
