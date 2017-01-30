@@ -141,6 +141,4 @@ runcmd:
   - [ chkconfig, yum-cron, on ]
   - [ service, docker, start ]
   - [ chkconfig, docker, on ]
-  - [ docker, pull, jstepien/openjdk8 ] # make this available for app deployments
-  - [ docker, pull, openjdk:8-jre-alpine ] # make this available for app deployments
   - [ /usr/local/bin/setup-cdagent.sh ]
