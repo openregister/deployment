@@ -87,6 +87,12 @@ Fetch the latest `.tfvars` file from S3:
 	cd aws/registers
 	make pull-config -e vpc=<myenv>
 
+Enable the register in the environment by adding the register to the
+`enabled_registers` list in `environments/<myenv>.tfvars` and add an
+appropriate `register` module resource in `registers.tf`. Pay close attention
+to the `load_balancer` argument which specifies which register group the
+register is part of.
+
 Then [plan and apply your terraform](#terraforming) code.
 
 ## How to create a new environment
