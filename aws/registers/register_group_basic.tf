@@ -1,8 +1,8 @@
-module "multi" {
-  source = "../modules/register"
-  id = "multi"
-  instance_count = "${lookup(var.instance_count, "multi")}"
-  instance_type = "t2.medium"
+module "basic" {
+  source = "../modules/register_group"
+  id = "basic"
+  instance_count = "${lookup(var.group_instance_count, "basic", 0)}"
+  instance_type = "${lookup(var.group_instance_type, "basic", "t2.medium")}"
   instance_ami = "ami-c51e3eb6"
 
   vpc_name = "${var.vpc_name}"
@@ -18,5 +18,5 @@ module "multi" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
 
-  registers = ["${var.multitenancy_groups["multi"]}"]
+  registers = ["${var.multitenancy_groups["basic"]}"]
 }

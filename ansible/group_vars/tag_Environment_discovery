@@ -20,8 +20,10 @@ register_groups:
     - datatype
     - field
 
-  multi:
+  address:
     - address
+
+  multi:
     - company
     - food-authority
     - food-premises
