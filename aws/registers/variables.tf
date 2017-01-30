@@ -67,15 +67,6 @@ variable "enabled_registers" {
   default = {}
 }
 
-variable "multitenancy_groups" {
-  type = "map"
-  default = {
-    address = []
-    multi = []
-    basic = []
-  }
-}
-
 // CodeDeploy
 variable "codedeploy_service_role_arn" {
   default = "arn:aws:iam::022990953738:role/code-deploy-role"
