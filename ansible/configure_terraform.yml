@@ -1,6 +1,12 @@
 ---
 - include: includes/check_ansible_version.yml
 
+- name: pull in vars
+  hosts: localhost
+  connection: local
+  tasks:
+    - include_vars: "group_vars/tag_Environment_{{ vpc }}"
+
 - name: Generate terraform config
   hosts: localhost
   connection: local
