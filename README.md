@@ -67,7 +67,7 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 		export AWS_PROFILE=registers
 
-## How to create a register in an existing environment
+## How to create a register in an existing environment with an existing register group
 
 Step-by-step:
 
@@ -92,6 +92,13 @@ Enable the register in the environment by adding the register to the
 appropriate `register` module resource in `registers.tf`. Pay close attention
 to the `load_balancer` argument which specifies which register group the
 register is part of.
+
+Then [plan and apply your terraform](#terraforming) code.
+
+## How to create a register group in an existing environment
+
+- Duplicate an existing `register_group_*.tf` configuration and edit appropriately.
+- Specify the `group_instance_count` in `environments/<myenv>.tfvars`.
 
 Then [plan and apply your terraform](#terraforming) code.
 
