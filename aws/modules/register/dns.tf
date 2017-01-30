@@ -1,9 +1,9 @@
 resource "aws_route53_record" "record" {
-  count = "${var.enabled ? 1 : 0}"
+  count = "${var.enabled ? 2 : 0}"
 
   name = "${var.name}"
   type = "A"
-  zone_id = "${var.dns_zone_id}"
+  zone_id = "${element(var.dns_zone_id, count.index)}"
 
   alias {
     name = "${var.load_balancer["dns_name"]}"

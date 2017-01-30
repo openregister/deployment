@@ -1,3 +1,8 @@
+resource "aws_route53_zone" "temporary_hosted_zone" {
+  name = "${var.vpc_name}.openregister.org"
+  comment = "Temporary whilst migrating to separate Terraform resources for each DNS record"
+}
+
 module "address_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "address", false)}"
@@ -5,7 +10,7 @@ module "address_register" {
   name = "address"
   environment = "${var.vpc_name}"
   load_balancer = "${module.address.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -17,7 +22,7 @@ module "academy-school-eng_register" {
   name = "academy-school-eng"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -29,7 +34,7 @@ module "company_register" {
   name = "company"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -41,7 +46,7 @@ module "country_register" {
   name = "country"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -53,7 +58,7 @@ module "datatype_register" {
   name = "datatype"
   environment = "${var.vpc_name}"
   load_balancer = "${module.basic.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -65,7 +70,7 @@ module "diocese_register" {
   name = "diocese"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -77,7 +82,7 @@ module "field_register" {
   name = "field"
   environment = "${var.vpc_name}"
   load_balancer = "${module.basic.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -89,7 +94,7 @@ module "food-authority_register" {
   name = "food-authority"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -101,7 +106,7 @@ module "food-premises_register" {
   name = "food-premises"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -113,7 +118,7 @@ module "food-premises-rating_register" {
   name = "food-premises-rating"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -125,7 +130,7 @@ module "food-premises-type_register" {
   name = "food-premises-type"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -137,7 +142,7 @@ module "government-domain_register" {
   name = "government-domain"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -149,7 +154,7 @@ module "industry_register" {
   name = "industry"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -161,7 +166,7 @@ module "jobcentre_register" {
   name = "jobcentre"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -173,7 +178,7 @@ module "la-maintained-school-eng_register" {
   name = "la-maintained-school-eng"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -185,7 +190,7 @@ module "local-authority-eng_register" {
   name = "local-authority-eng"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -197,7 +202,7 @@ module "local-authority-nir_register" {
   name = "local-authority-nir"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -209,7 +214,7 @@ module "local-authority-sct_register" {
   name = "local-authority-sct"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -221,7 +226,7 @@ module "local-authority-type_register" {
   name = "local-authority-type"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -233,7 +238,7 @@ module "local-authority-wls_register" {
   name = "local-authority-wls"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -245,7 +250,7 @@ module "place_register" {
   name = "place"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -257,7 +262,7 @@ module "premises_register" {
   name = "premises"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -269,7 +274,7 @@ module "prison_register" {
   name = "prison"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -281,7 +286,7 @@ module "register_register" {
   name = "register"
   environment = "${var.vpc_name}"
   load_balancer = "${module.basic.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -293,7 +298,7 @@ module "religious-character_register" {
   name = "religious-character"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -305,7 +310,7 @@ module "school-admissions-policy_register" {
   name = "school-admissions-policy"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -317,7 +322,7 @@ module "school-authority-eng_register" {
   name = "school-authority-eng"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -329,7 +334,7 @@ module "school-eng_register" {
   name = "school-eng"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -341,7 +346,7 @@ module "school-gender_register" {
   name = "school-gender"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -353,7 +358,7 @@ module "school-phase_register" {
   name = "school-phase"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -365,7 +370,7 @@ module "school-tag_register" {
   name = "school-tag"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -377,7 +382,7 @@ module "school-trust_register" {
   name = "school-trust"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -389,7 +394,7 @@ module "school-type_register" {
   name = "school-type"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -401,7 +406,7 @@ module "street_register" {
   name = "street"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -413,7 +418,7 @@ module "street-custodian_register" {
   name = "street-custodian"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -425,7 +430,7 @@ module "territory_register" {
   name = "territory"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
@@ -437,7 +442,7 @@ module "uk_register" {
   name = "uk"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
+  dns_zone_id = ["${aws_route53_zone.temporary_hosted_zone.zone_id}", "{$module.core.dns_zone_id}"]
 
   enable_availability_checks = "${var.enable_availability_checks}"
 }
