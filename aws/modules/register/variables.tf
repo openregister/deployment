@@ -11,7 +11,6 @@ variable enabled {
 }
 
 variable dns_zone_id {
-  type = "list"
   description = "the Route 53 DNS zone to create these records in"
 }
 
