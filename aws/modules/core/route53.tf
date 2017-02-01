@@ -11,7 +11,7 @@ resource "aws_route53_record" "bastion" {
 }
 
 resource "aws_route53_record" "zone_delegation" {
-  zone_id = "${var.dns_parent_zone_id}"
+  zone_id = "${aws_route53_zone.core.zone_id}"
   name = "${var.vpc_name}.${var.dns_domain}"
   type = "NS"
   ttl = "${var.dns_ttl}"
