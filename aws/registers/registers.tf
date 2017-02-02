@@ -238,6 +238,30 @@ module "local-authority-wls_register" {
   enable_availability_checks = "${var.enable_availability_checks}"
 }
 
+module "notifiable-animal-disease" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease", false)}"
+
+  name = "notifiable-animal-disease"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+}
+
+module "notifiable-animal-disease-investigation-category" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease-investigation-category", false)}"
+
+  name = "notifiable-animal-disease-investigation-category"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+}
+
 module "place_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "place", false)}"
