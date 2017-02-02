@@ -42,6 +42,8 @@ register_groups:
     - la-maintained-school-eng
     - local-authority-eng
     - local-authority-type
+    - notifiable-animal-disease
+    - notifiable-animal-disease-investigation-category
     - religious-character
     - school-admissions-policy
     - school-authority-eng
