@@ -79,6 +79,8 @@ register details to the `register_groups` and `register_settings` keys.
 Generate credentials using the `ansible/generate_passwords.yml` playbook:
 
     ansible-playbook generate_passwords.yml -e vpc=<myenv>
+
+[Regenerate application configuration for the register group which will host the new regsister](https://github.com/openregister/deployment#generate-application-config).
     
 ### Update terraform
 
