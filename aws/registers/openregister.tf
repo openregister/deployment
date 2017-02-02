@@ -20,8 +20,6 @@ module "openregister_db" {
 
   cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
-  allow_from = "${var.openregister_cidr_blocks}"
-
   instance_class = "${var.openregister_database_class_instance}"
   parameter_group_name = "${lookup(var.rds_parameter_group_name, "openregister")}"
 
