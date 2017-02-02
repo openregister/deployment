@@ -14,5 +14,3 @@ variable "zones" {
     "2" = "eu-west-1c"
   }
 }
-
-variable "bastion_security_group_id" {}

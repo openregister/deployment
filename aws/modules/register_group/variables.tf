@@ -37,11 +37,6 @@ variable "public_subnet_ids" {
   type = "list"
 }
 
-variable "security_group_ids" {
-  description = "list of security groups to attach EC2 instances to"
-  type = "list"
-}
-
 variable "private_dns_zone_id" {
   description = "Route 53 hosted zone id for DNS records for EC2 instances (ie private records)"
 }
@@ -62,4 +57,12 @@ variable "dns_domain" {
 
 variable "certificate_arn" {
   description = "ARN for TLS certificate for ELB"
+}
+
+variable "database_security_group_id" {
+  description = "security group of the database to allow register application egress access to"
+}
+
+variable "bastion_security_group_id" {
+  description = "security group of the bastion box to allow ingress access to register application instances from"
 }
