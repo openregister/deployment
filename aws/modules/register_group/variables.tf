@@ -13,7 +13,7 @@ variable "vpc_id" {
 }
 
 variable "instance_ami" {
-  default = "ami-6ced7f1f"
+  default = "ami-c51e3eb6"
   description = "AMI to use for the register EC2 instances"
 }
 

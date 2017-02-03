@@ -15,7 +15,7 @@ variable "zones" {
 */
 
 variable "bastion_instance_ami" {
-  default = "ami-6ced7f1f"
+  default = "ami-c51e3eb6"
 }
 
 variable "bastion_instance_type" {

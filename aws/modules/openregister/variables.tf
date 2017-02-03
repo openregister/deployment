@@ -7,14 +7,6 @@ variable "db_cidr_blocks" { type = "list" }
 
 variable "public_route_table_id" {}
 
-variable "instance_ami" {
-  default = "ami-6ced7f1f"
-}
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
 variable "zones" {
   default = {
     "0" = "eu-west-1a"
