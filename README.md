@@ -242,7 +242,20 @@ Create a CloudFront distribution for the new register. It should have an origin 
 Use the AWS Route53 console to create a new DNS record for `<myregister>.register.gov.uk` and ensure the Alias Target matches
 the CloudFront distribution for `<myregister>.register.gov.uk`.
 
-# Data loading
+# Data loading via HTTP
+
+To reload data into existing register via HTTP, you can run this script passing
+the register name and the phase name, you will be prompted if you want to delete
+data and if you want to load data, eg:
+
+    ./scripts/data-load.sh prison discovery
+
+The script looks in parent directory for a data repo, changes it to master
+branch, and git pulls to ensure master data is used. Script assumes data is in
+../[register]-data/data/[phase]/[register].tsv file. For example:
+../prison-data/data/discovery/prison.tsv
+
+# Data loading via ansible
 
 ### Prerequisites
 
