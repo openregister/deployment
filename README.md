@@ -80,8 +80,8 @@ Generate credentials using the `ansible/generate_passwords.yml` playbook:
 
     ansible-playbook generate_passwords.yml -e vpc=<myenv>
 
-[Regenerate application configuration for the register group which will host the new regsister](https://github.com/openregister/deployment#generate-application-config).
-    
+Follow the steps on [running the registers application](https://github.com/openregister/deployment#running-the-registers-application).
+
 ### Update terraform
 
 Fetch the latest `.tfvars` file from S3:
