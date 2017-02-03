@@ -24,11 +24,11 @@ resource "aws_elb" "load_balancer" {
   instances = ["${aws_instance.instance.*.id}"]
 
   health_check {
-    healthy_threshold = 2
+    healthy_threshold = 4
     unhealthy_threshold = 2
     timeout = 3
     target = "HTTP:8081/healthcheck"
-    interval = 30
+    interval = 10
   }
 }
 
