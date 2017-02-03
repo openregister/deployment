@@ -28,7 +28,7 @@ resource "aws_security_group" "openregister" {
   vpc_id = "${var.vpc_id}"
 
   tags = {
-    Name = "${var.id}-sg"
+    Name = "${var.vpc_name}-${var.id}-sg"
     Environment = "${var.vpc_name}"
   }
 }
