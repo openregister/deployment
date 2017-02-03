@@ -8,7 +8,6 @@ module "openregister" {
   cidr_blocks = "${var.openregister_cidr_blocks}"
   db_cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
-  bastion_security_group_id = "${module.core.bastion_security_group_id}"
   public_route_table_id = "${module.core.public_route_table_id}"
 }
 
@@ -20,8 +19,6 @@ module "openregister_db" {
   vpc_id = "${module.core.vpc_id}"
 
   cidr_blocks = "${var.openregister_database_cidr_blocks}"
-
-  allow_from = "${var.openregister_cidr_blocks}"
 
   instance_class = "${var.openregister_database_class_instance}"
   parameter_group_name = "${lookup(var.rds_parameter_group_name, "openregister")}"

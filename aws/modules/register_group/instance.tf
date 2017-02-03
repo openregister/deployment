@@ -4,7 +4,7 @@ resource "aws_instance" "instance" {
   instance_type = "${var.instance_type}"
   subnet_id = "${element(var.subnet_ids, count.index)}"
   user_data = "${var.user_data}"
-  vpc_security_group_ids = [ "${var.security_group_ids}" ]
+  vpc_security_group_ids = [ "${aws_security_group.openregister.id}" ]
   iam_instance_profile = "${aws_iam_instance_profile.instance_profile.name}"
 
   root_block_device = {

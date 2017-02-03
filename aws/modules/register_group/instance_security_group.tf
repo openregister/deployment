@@ -1,5 +1,23 @@
+resource "aws_security_group_rule" "bastion_outbound_ssh" {
+  security_group_id = "${var.bastion_security_group_id}"
+  type = "egress"
+  from_port = "22"
+  to_port = "22"
+  protocol = "tcp"
+  source_security_group_id = "${aws_security_group.openregister.id}"
+}
+
+resource "aws_security_group_rule" "inbound_postgres" {
+  security_group_id = "${var.database_security_group_id}"
+  type = "ingress"
+  from_port = 5432
+  to_port = 5432
+  protocol = "tcp"
+  source_security_group_id = "${aws_security_group.openregister.id}"
+}
+
 resource "aws_security_group" "openregister" {
-  name = "${var.id}-sg"
+  name = "${var.vpc_name}-${var.id}-openregister-sg"
   description = "Openregister EC2 Instance security group"
   vpc_id = "${var.vpc_id}"
 
@@ -9,7 +27,6 @@ resource "aws_security_group" "openregister" {
   }
 }
 
-// Ingress Rules
 resource "aws_security_group_rule" "inbound_ssh" {
   security_group_id = "${aws_security_group.openregister.id}"
   type = "ingress"
@@ -25,10 +42,9 @@ resource "aws_security_group_rule" "inbound_http" {
   from_port = 80
   to_port = 80
   protocol = "tcp"
-  cidr_blocks = [ "0.0.0.0/0" ]
+  source_security_group_id = "${aws_security_group.load_balancer.id}"
 }
 
-// Egress Rules
 resource "aws_security_group_rule" "outbound_dns" {
   security_group_id = "${aws_security_group.openregister.id}"
   type = "egress"
@@ -62,5 +78,5 @@ resource "aws_security_group_rule" "outbound_postgres" {
   from_port = 5432
   to_port = 5432
   protocol = "tcp"
-  cidr_blocks = "${var.db_cidr_blocks}"
+  source_security_group_id = "${var.database_security_group_id}"
 }
