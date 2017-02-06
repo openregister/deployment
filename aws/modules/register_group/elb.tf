@@ -64,4 +64,11 @@ resource "aws_security_group" "load_balancer" {
     protocol = "TCP"
     security_groups = ["${aws_security_group.openregister.id}"]
   }
+
+  egress {
+    from_port = 8081
+    to_port = 8081
+    protocol = "TCP"
+    security_groups = ["${aws_security_group.openregister.id}"]
+  }
 }
