@@ -56,6 +56,8 @@ resource "aws_security_group_rule" "inbound_http" {
 }
 
 resource "aws_security_group_rule" "inbound_http_application_health_check" {
+  count = "${signum(var.instance_count)}"
+
   security_group_id = "${aws_security_group.openregister.id}"
   type = "ingress"
   from_port = 8081
