@@ -16,6 +16,10 @@ register_settings:
     history_page_url: https://registers-history.herokuapp.com/local-authority-eng
   local-authority-type:
     custodian_name: Stephen McAllister
+  notifiable-animal-disease:
+    custodian_name: Jonathan Smith
+  notifiable-animal-disease-investigation-category:
+    custodian_name: Jonathan Smith
   register:
     custodian_name: Paul Downey
     enable_register_data_delete: false
