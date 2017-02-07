@@ -44,7 +44,20 @@ read answer
 if echo "$answer" | grep -iq "^y" ; then
     echo ""
     echo "Deleting $REGISTER data from $PHASE"
-    curl -X DELETE -u openregister:$PASSWORD https://$REGISTER.$PHASE.openregister.org/delete-register-data
+    for i in `seq 1 20`; do
+        curl -X DELETE -u openregister:$PASSWORD https://$REGISTER.$PHASE.openregister.org/delete-register-data
+        echo " - request: $i of 20"
+    done
+
+    echo ""
+    echo "Testing consistency of instances"
+    for i in `seq 1 20`; do
+        REGISTER_PROOF=$(curl -s https://$REGISTER.$PHASE.openregister.org/proof/register/merkle:sha-256)
+        if [[ $REGISTER_PROOF != *"sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"* ]]; then
+            echo "Root hash from one of the instances is not empty - exiting..."
+            exit 1
+        fi
+    done  
 fi
 
 echo ""
