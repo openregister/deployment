@@ -20,5 +20,10 @@ variable load_balancer {
 }
 
 variable enable_availability_checks {
-  description = "should availability checks be enabled for this register"
+  description = "should availability checks be enabled for this register?"
+}
+
+variable cdn_configuration {
+  type = "map"
+  description = "should register be fronted by a CDN?"
 }

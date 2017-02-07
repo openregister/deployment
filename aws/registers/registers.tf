@@ -8,6 +8,7 @@ module "address_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "academy-school-eng_register" {
@@ -20,6 +21,7 @@ module "academy-school-eng_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "company_register" {
@@ -32,6 +34,7 @@ module "company_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "country_register" {
@@ -44,6 +47,7 @@ module "country_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "datatype_register" {
@@ -56,6 +60,7 @@ module "datatype_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "diocese_register" {
@@ -68,6 +73,7 @@ module "diocese_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "field_register" {
@@ -80,6 +86,7 @@ module "field_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "food-authority_register" {
@@ -92,6 +99,7 @@ module "food-authority_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "food-premises_register" {
@@ -104,6 +112,7 @@ module "food-premises_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "food-premises-rating_register" {
@@ -116,6 +125,7 @@ module "food-premises-rating_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "food-premises-type_register" {
@@ -128,6 +138,7 @@ module "food-premises-type_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "government-domain_register" {
@@ -140,6 +151,7 @@ module "government-domain_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "industry_register" {
@@ -152,6 +164,7 @@ module "industry_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "jobcentre_register" {
@@ -164,6 +177,7 @@ module "jobcentre_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "la-maintained-school-eng_register" {
@@ -176,6 +190,7 @@ module "la-maintained-school-eng_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "local-authority-eng_register" {
@@ -188,6 +203,7 @@ module "local-authority-eng_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "local-authority-nir_register" {
@@ -200,6 +216,7 @@ module "local-authority-nir_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "local-authority-sct_register" {
@@ -212,6 +229,7 @@ module "local-authority-sct_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "local-authority-type_register" {
@@ -224,6 +242,7 @@ module "local-authority-type_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "local-authority-wls_register" {
@@ -236,6 +255,7 @@ module "local-authority-wls_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "notifiable-animal-disease" {
@@ -248,6 +268,7 @@ module "notifiable-animal-disease" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "notifiable-animal-disease-investigation-category" {
@@ -260,6 +281,7 @@ module "notifiable-animal-disease-investigation-category" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "place_register" {
@@ -272,6 +294,7 @@ module "place_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "premises_register" {
@@ -284,6 +307,7 @@ module "premises_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "prison_register" {
@@ -296,6 +320,7 @@ module "prison_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "register_register" {
@@ -308,6 +333,7 @@ module "register_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "religious-character_register" {
@@ -320,6 +346,7 @@ module "religious-character_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-admissions-policy_register" {
@@ -332,6 +359,7 @@ module "school-admissions-policy_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-authority-eng_register" {
@@ -344,6 +372,7 @@ module "school-authority-eng_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-eng_register" {
@@ -356,6 +385,7 @@ module "school-eng_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-gender_register" {
@@ -368,6 +398,7 @@ module "school-gender_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-phase_register" {
@@ -380,6 +411,7 @@ module "school-phase_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-tag_register" {
@@ -392,6 +424,7 @@ module "school-tag_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-trust_register" {
@@ -404,6 +437,7 @@ module "school-trust_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "school-type_register" {
@@ -416,6 +450,7 @@ module "school-type_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "street_register" {
@@ -428,6 +463,7 @@ module "street_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "street-custodian_register" {
@@ -440,6 +476,7 @@ module "street-custodian_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "territory_register" {
@@ -452,6 +489,7 @@ module "territory_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "uk_register" {
@@ -464,4 +502,5 @@ module "uk_register" {
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
