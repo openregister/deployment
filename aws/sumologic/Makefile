@@ -7,7 +7,7 @@
 	plan-destroy \
 	push-state
 
-export expected_terraform_version=v0.7
+export expected_terraform_version=v0.8
 export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
 
 export expected_node_version=v7.1.0
