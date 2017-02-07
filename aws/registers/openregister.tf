@@ -29,6 +29,8 @@ module "openregister_db" {
   apply_immediately = "${var.openregister_database_apply_immediately}"
 
   allocated_storage = "${lookup(var.rds_allocated_storage, "openregister")}"
+
+  maintenance_window = "${var.rds_maintenance_window}"
 }
 
 module "openregister_codedeploy" {

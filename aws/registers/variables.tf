@@ -38,6 +38,8 @@ variable "rds_allocated_storage" {
   }
 }
 
+variable "rds_maintenance_window" {}
+
 // openregister app
 variable "openregister_cidr_blocks" { type = "list" }
 variable "openregister_database_cidr_blocks" { type = "list" }
