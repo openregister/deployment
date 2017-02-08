@@ -42,9 +42,7 @@ variable "instance_class" {
   default = "db.t2.micro"
 }
 
-variable "maintenance_window" {
-  default = ""
-}
+variable "maintenance_window" {}
 
 variable "parameter_group_name" {
   default = "postgresrdsgroup"

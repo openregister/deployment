@@ -11,6 +11,13 @@
 # Default AWS region
 export AWS_DEFAULT_REGION=eu-west-1
 
+export expected_terraform_version=v0.8
+export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
+
+ifneq ($(expected_terraform_version), $(actual_terraform_version))
+  $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
+endif
+
 # Default terraform plan -module-depth= value
 module_depth=-1
 
