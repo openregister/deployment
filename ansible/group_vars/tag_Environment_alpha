@@ -55,6 +55,5 @@ register_groups:
     - school-gender
     - school-phase
     - school-tag
-    - school-trust
     - school-type
     - territory
