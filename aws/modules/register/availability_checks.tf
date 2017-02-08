@@ -5,6 +5,7 @@ resource "statuscake_test" "home" {
   test_type = "HTTP"
   check_rate = 60
   contact_id = 55280
+  confirmations = 1
 }
 
 resource "statuscake_test" "records" {
@@ -14,4 +15,5 @@ resource "statuscake_test" "records" {
   test_type = "HTTP"
   check_rate = 60
   contact_id = 55280
+  confirmations = 1
 }
