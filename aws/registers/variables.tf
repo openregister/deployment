@@ -87,3 +87,10 @@ variable "sumologic_key" {
 }
 
 variable "enable_availability_checks" {}
+
+variable "cdn_configuration" {
+  type = "map"
+  default = {
+    enabled = false
+  }
+}
