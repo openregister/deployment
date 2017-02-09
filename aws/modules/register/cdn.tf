@@ -3,7 +3,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   aliases = ["${var.name}.${var.cdn_configuration["domain"]}"]
   enabled = true
-  http_version = "http1.1"
+  http_version = "http2"
   price_class = "PriceClass_100"
 
   viewer_certificate {
