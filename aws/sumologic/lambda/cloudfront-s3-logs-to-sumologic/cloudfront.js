@@ -19,55 +19,54 @@ var AWS = require('aws-sdk'),
     zlib = require('zlib'),
     byline = require('byline'),
     LineStream = require('byline').LineStream,
+    through = require('through'),
+    request = require('request'),
     ip = require('ip');
+
+var totalLogs = 0;
 
 var HASH_ASCII_CODE = 35;
 
-var options = {
-    'hostname': 'endpoint1.collection.eu.sumologic.com',
-    'path': "/receiver/v1/http/<XXXX>",
-    'method': 'POST'
-};
-
-function anonymizeIp(field) {
-    if (ip.isV4Format(field)) {
-        return ip.mask(field, "255.255.255.0");
+function filterComments() {
+  return through(function write(data) {
+    if (data[0] === HASH_ASCII_CODE) {
+      return;
     }
 
-    return "-";
+    this.queue(data);
+  });
 }
 
-function anonymizeXForwardedFor(field) {
-    return "-";
-}
+function anonymize() { 
+  return through(function write(data) {
+    function anonymizeIp(field) {
+      if (ip.isV4Format(field)) {
+        return ip.mask(field, "255.255.255.0");
+      }
 
-function anonymize(line) {
-    var s = line.toString();
+      return "-";
+    }
+
+    function anonymizeXForwardedFor(field) {
+      return "-";
+    }
+
+    var s = data.toString();
     var fields = s.split('\t');
 
     fields[4] = anonymizeIp(fields[4]);
     fields[19] = anonymizeXForwardedFor(fields[19]);
-
-    return fields.join('\t');
+    this.queue(fields.join('\t') + '\n');
+    totalLogs++;
+  });
 }
 
 function s3LogsToSumo(bucket, objKey, s3, callback) {
-    var req = https.request(options, function(res) {
-        var body = '';
-        console.log('Status: ', res.statusCode);
-        res.setEncoding('utf8');
-        res.on('data', function(chunk) { body += chunk; });
-        res.on('end', function() {
-            console.log('Successfully processed HTTPS response');
-        });
-        res.on('error', function(err) {
-            console.log(err);
-        });
-    });
+    var s3Stream = s3.getObject({
+      Bucket: bucket,
+      Key: objKey
+    }).createReadStream();
 
-    var totalLines = 0;
-
-    var s3Stream = s3.getObject({ Bucket: bucket, Key: objKey }).createReadStream();
     s3Stream.on('error', callback);
 
     var isCompressed = !!objKey.match(/\.gz$/);
@@ -77,19 +76,17 @@ function s3LogsToSumo(bucket, objKey, s3, callback) {
 
     s3Stream
         .pipe(new LineStream())
-        .on('data', function(data) {
-            if (data[0] === HASH_ASCII_CODE) {
-                return;
-            }
+        .pipe(filterComments())
+        .pipe(anonymize())
+        .pipe(request.post('https://endpoint1.collection.eu.sumologic.com/receiver/v1/http/<XXXX>'))
+        .on('response', function(response) {
+          console.log(response.statusCode);
+          console.log('Total logs sent: ' +  totalLogs);
+          if (response.statusCode !== 200) {
+            return callback('status code: ' + response.statusCode);
+          }
 
-            totalLines++;
-            req.write(anonymize(data) + '\n');
-        })
-        .on('end', function() {
-            console.log("End of stream");
-            console.log("Log lines processed: " + totalLines);
-            req.end();
-            callback();
+          callback();
         })
         .on('error', callback);
 }
@@ -99,7 +96,6 @@ exports.handler = function(event, context, callback) {
 
     var s3 = new AWS.S3();
 
-    options.agent = new https.Agent(options);
     event.Records.forEach(function(record) {
         var bucket = record.s3.bucket.name;
         var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
