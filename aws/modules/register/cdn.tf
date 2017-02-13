@@ -92,6 +92,7 @@ resource "aws_s3_bucket_object" "robots_txt" {
 
   bucket = "${var.cdn_configuration["robots_bucket"]}"
   key = "${var.name}/robots.txt"
+  content_type = "text/plain"
   content =  <<EOF
 # ${var.name}.${var.cdn_configuration["domain"]}
 User-agent: *
