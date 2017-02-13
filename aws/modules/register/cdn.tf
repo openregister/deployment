@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "distribution" {
         forward = "none"
       }
       query_string = true
-      headers = ["Accept", "Host", "Origin"]
+      headers = ["Origin"]
     }
 
     target_origin_id = "${var.environment}-${var.name}-robots-txt"
