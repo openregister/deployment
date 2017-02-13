@@ -68,7 +68,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   origin {
     domain_name = "${var.cdn_configuration["robots_bucket"]}.s3.amazonaws.com"
     origin_id = "${var.environment}-${var.name}-robots-txt"
-    origin_path = "${var.name}"
+    origin_path = "/${var.name}"
 
     s3_origin_config = {
       origin_access_identity = "${var.cdn_s3_origin_access_identity}"
