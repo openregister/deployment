@@ -27,3 +27,7 @@ variable cdn_configuration {
   type = "map"
   description = "should register be fronted by a CDN?"
 }
+
+variable cdn_s3_origin_access_identity {
+  description = "identity that allows CloudFront to read from an S3 origin"
+}
