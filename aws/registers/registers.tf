@@ -9,6 +9,7 @@ module "address_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "academy-school-eng_register" {
@@ -22,6 +23,7 @@ module "academy-school-eng_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "company_register" {
@@ -35,6 +37,7 @@ module "company_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "country_register" {
@@ -48,6 +51,7 @@ module "country_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "datatype_register" {
@@ -61,6 +65,7 @@ module "datatype_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "diocese_register" {
@@ -74,6 +79,7 @@ module "diocese_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "field_register" {
@@ -87,6 +93,7 @@ module "field_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "food-authority_register" {
@@ -100,6 +107,7 @@ module "food-authority_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "food-premises_register" {
@@ -113,6 +121,7 @@ module "food-premises_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "food-premises-rating_register" {
@@ -126,6 +135,7 @@ module "food-premises-rating_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "food-premises-type_register" {
@@ -139,6 +149,7 @@ module "food-premises-type_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "government-domain_register" {
@@ -152,6 +163,7 @@ module "government-domain_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "industry_register" {
@@ -165,6 +177,7 @@ module "industry_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "jobcentre_register" {
@@ -178,6 +191,7 @@ module "jobcentre_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "la-maintained-school-eng_register" {
@@ -191,6 +205,7 @@ module "la-maintained-school-eng_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "local-authority-eng_register" {
@@ -204,6 +219,7 @@ module "local-authority-eng_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "local-authority-nir_register" {
@@ -217,6 +233,7 @@ module "local-authority-nir_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "local-authority-sct_register" {
@@ -230,6 +247,7 @@ module "local-authority-sct_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "local-authority-type_register" {
@@ -243,6 +261,7 @@ module "local-authority-type_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "local-authority-wls_register" {
@@ -256,6 +275,7 @@ module "local-authority-wls_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "notifiable-animal-disease" {
@@ -269,6 +289,7 @@ module "notifiable-animal-disease" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "notifiable-animal-disease-investigation-category" {
@@ -282,6 +303,7 @@ module "notifiable-animal-disease-investigation-category" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "place_register" {
@@ -295,6 +317,7 @@ module "place_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "premises_register" {
@@ -308,6 +331,7 @@ module "premises_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "prison_register" {
@@ -321,6 +345,7 @@ module "prison_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "register_register" {
@@ -334,6 +359,7 @@ module "register_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "religious-character_register" {
@@ -347,6 +373,7 @@ module "religious-character_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-admissions-policy_register" {
@@ -360,6 +387,7 @@ module "school-admissions-policy_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-authority-eng_register" {
@@ -373,6 +401,7 @@ module "school-authority-eng_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-eng_register" {
@@ -386,6 +415,7 @@ module "school-eng_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-gender_register" {
@@ -399,6 +429,7 @@ module "school-gender_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-phase_register" {
@@ -412,6 +443,7 @@ module "school-phase_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-tag_register" {
@@ -425,6 +457,7 @@ module "school-tag_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-trust_register" {
@@ -438,6 +471,7 @@ module "school-trust_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "school-type_register" {
@@ -451,6 +485,7 @@ module "school-type_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "street_register" {
@@ -464,6 +499,7 @@ module "street_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "street-custodian_register" {
@@ -477,6 +513,7 @@ module "street-custodian_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "territory_register" {
@@ -490,6 +527,7 @@ module "territory_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
 module "uk_register" {
@@ -503,4 +541,5 @@ module "uk_register" {
 
   enable_availability_checks = "${var.enable_availability_checks}"
   cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }

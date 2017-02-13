@@ -32,6 +32,28 @@ resource "aws_cloudfront_distribution" "distribution" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
+  cache_behavior {
+    allowed_methods = ["HEAD", "GET"]
+    cached_methods = ["HEAD", "GET"]
+
+    path_pattern = "robots.txt"
+
+    default_ttl = 86400
+    max_ttl = 31536000
+    min_ttl = 0
+
+    forwarded_values {
+      cookies {
+        forward = "none"
+      }
+      query_string = true
+      headers = ["Accept", "Host", "Origin"]
+    }
+
+    target_origin_id = "${var.environment}-${var.name}-robots-txt"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
   origin {
     domain_name = "${aws_route53_record.record.fqdn}"
     origin_id = "${var.environment}-${var.name}-elb"
@@ -40,6 +62,16 @@ resource "aws_cloudfront_distribution" "distribution" {
       https_port = 443
       origin_protocol_policy = "https-only"
       origin_ssl_protocols = ["TLSv1.2"]
+    }
+  }
+
+  origin {
+    domain_name = "${var.cdn_configuration["robots_bucket"]}.s3.amazonaws.com"
+    origin_id = "${var.environment}-${var.name}-robots-txt"
+    origin_path = "${var.name}"
+
+    s3_origin_config = {
+      origin_access_identity = "${var.cdn_s3_origin_access_identity}"
     }
   }
 
@@ -53,4 +85,16 @@ resource "aws_cloudfront_distribution" "distribution" {
     bucket = "${var.cdn_configuration["logging_bucket"]}.s3.amazonaws.com"
     prefix = "${var.name}"
   }
+}
+
+resource "aws_s3_bucket_object" "robots_txt" {
+  count = "${var.enabled && var.cdn_configuration["enabled"] ? 1 : 0}"
+
+  bucket = "${var.cdn_configuration["robots_bucket"]}"
+  key = "${var.name}/robots.txt}"
+  content =  <<EOF
+# ${var.name}.${var.cdn_configuration["domain"]}
+User-agent: *
+Disallow: /
+EOF
 }
