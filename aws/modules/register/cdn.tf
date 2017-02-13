@@ -91,7 +91,7 @@ resource "aws_s3_bucket_object" "robots_txt" {
   count = "${var.enabled && var.cdn_configuration["enabled"] ? 1 : 0}"
 
   bucket = "${var.cdn_configuration["robots_bucket"]}"
-  key = "${var.name}/robots.txt}"
+  key = "${var.name}/robots.txt"
   content =  <<EOF
 # ${var.name}.${var.cdn_configuration["domain"]}
 User-agent: *
