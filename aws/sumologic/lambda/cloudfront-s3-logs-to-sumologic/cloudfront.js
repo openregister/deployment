@@ -78,7 +78,7 @@ function s3LogsToSumo(bucket, objKey, s3, callback) {
     .pipe(anonymize())
     .pipe(request.post('https://endpoint1.collection.eu.sumologic.com/receiver/v1/http/<XXXX>'))
     .on('response', function(response) {
-      console.log(response.statusCode);
+      console.log('Status code: ' + response.statusCode);
       console.log('Total logs sent: ' +  totalLogs);
       if (response.statusCode !== 200) {
         return callback('status code: ' + response.statusCode);
