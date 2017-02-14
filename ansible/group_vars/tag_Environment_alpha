@@ -13,12 +13,12 @@ register_settings:
     enable_register_data_delete: false
   local-authority-eng:
     custodian_name: Stephen McAllister
-    history_page_url: https://register-status.herokuapp.com/registers/local-authority-eng
+    history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
   local-authority-type:
     custodian_name: Stephen McAllister
   notifiable-animal-disease:
     custodian_name: Jonathan Smith
-    history_page_url: https://register-status.herokuapp.com/registers/notifiable-animal-disease
+    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
   register:
@@ -28,7 +28,7 @@ register_settings:
     registers_yaml_location: "s3://openregister.alpha.config/registers.yaml"
   school-eng:
     custodian_name: Andrew Thomson
-    history_page_url: https://register-status.herokuapp.com/registers/school-eng
+    history_page_url: https://registers.cloudapps.digital/registers/school-eng
   territory:
     custodian_name: Tony Worron
     similar_registers:
