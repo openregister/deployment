@@ -9,7 +9,7 @@ module "address" {
   private_dns_zone_id = "${module.core.private_dns_zone_id}"
   subnet_ids = "${module.openregister.subnet_ids}"
   public_subnet_ids = "${module.core.public_subnet_ids}"
-  user_data = "${data.template_file.user_data.rendered}"
+  user_data = "${file("templates/users.yaml")}"
 
   database_security_group_id = "${module.openregister_db.security_group_id}"
   bastion_security_group_id = "${module.core.bastion_security_group_id}"
