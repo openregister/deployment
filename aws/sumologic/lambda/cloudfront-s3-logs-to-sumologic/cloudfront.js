@@ -15,11 +15,11 @@
 // Modifications copyright (C) 2016 Crown Copyright (Government Digital Service)
 
 var AWS = require('aws-sdk'),
-    zlib = require('zlib'),
-    LineStream = require('byline').LineStream,
-    through = require('through'),
-    request = require('request'),
-    ip = require('ip');
+  zlib = require('zlib'),
+  LineStream = require('byline').LineStream,
+  through = require('through'),
+  request = require('request'),
+  ip = require('ip');
 
 var totalLogs = 0;
 
@@ -60,44 +60,44 @@ function anonymize() {
 }
 
 function s3LogsToSumo(bucket, objKey, s3, callback) {
-    var s3Stream = s3.getObject({
-      Bucket: bucket,
-      Key: objKey
-    }).createReadStream();
+  var s3Stream = s3.getObject({
+    Bucket: bucket,
+    Key: objKey
+  }).createReadStream();
 
-    s3Stream.on('error', callback);
+  s3Stream.on('error', callback);
 
-    var isCompressed = !!objKey.match(/\.gz$/);
-    if (isCompressed) {
-        s3Stream = s3Stream.pipe(zlib.createGunzip());
-    }
+  var isCompressed = !!objKey.match(/\.gz$/);
+  if (isCompressed) {
+    s3Stream = s3Stream.pipe(zlib.createGunzip());
+  }
 
-    s3Stream
-        .pipe(new LineStream())
-        .pipe(filterComments())
-        .pipe(anonymize())
-        .pipe(request.post('https://endpoint1.collection.eu.sumologic.com/receiver/v1/http/<XXXX>'))
-        .on('response', function(response) {
-          console.log(response.statusCode);
-          console.log('Total logs sent: ' +  totalLogs);
-          if (response.statusCode !== 200) {
-            return callback('status code: ' + response.statusCode);
-          }
+  s3Stream
+    .pipe(new LineStream())
+    .pipe(filterComments())
+    .pipe(anonymize())
+    .pipe(request.post('https://endpoint1.collection.eu.sumologic.com/receiver/v1/http/<XXXX>'))
+    .on('response', function(response) {
+      console.log(response.statusCode);
+      console.log('Total logs sent: ' +  totalLogs);
+      if (response.statusCode !== 200) {
+        return callback('status code: ' + response.statusCode);
+      }
 
-          callback();
-        })
-        .on('error', callback);
+      callback();
+    })
+    .on('error', callback);
 }
 
 exports.handler = function(event, context, callback) {
-    console.log('Received event: ', JSON.stringify(event, null, 2));
+  console.log('Received event: ', JSON.stringify(event, null, 2));
 
-    var s3 = new AWS.S3();
+  var s3 = new AWS.S3();
 
-    event.Records.forEach(function(record) {
-        var bucket = record.s3.bucket.name;
-        var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
-        console.log('Bucket: ' + bucket + ' ObjectKey: ' + objKey);
-        s3LogsToSumo(bucket, objKey, s3, callback);
-    });
+  event.Records.forEach(function(record) {
+    var bucket = record.s3.bucket.name;
+    var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
+    console.log('Bucket: ' + bucket + ' ObjectKey: ' + objKey);
+    s3LogsToSumo(bucket, objKey, s3, callback);
+  });
 };
