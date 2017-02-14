@@ -46,8 +46,8 @@ resource "aws_cloudfront_distribution" "distribution" {
       cookies {
         forward = "none"
       }
-      query_string = true
-      headers = ["Accept", "Host", "Origin"]
+      query_string = false
+      headers = ["Origin"]
     }
 
     target_origin_id = "${var.environment}-${var.name}-robots-txt"
