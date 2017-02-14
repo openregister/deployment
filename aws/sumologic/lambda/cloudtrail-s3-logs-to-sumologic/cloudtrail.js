@@ -15,31 +15,31 @@
 // Modifications copyright (C) 2016 Crown Copyright (Government Digital Service)
 
 var AWS = require('aws-sdk'),
-    https = require('https'),
-    LineStream = require('byline').LineStream,
-    zlib = require('zlib');
+  zlib = require('zlib'),
+  LineStream = require('byline').LineStream,
+  through = require('through'),
+  request = require('request');
 
-var options = {
-    'hostname': 'endpoint1.collection.eu.sumologic.com',
-    'path': "/receiver/v1/http/<XXXX>",
-    'method': 'POST'
-};
+var totalLogs = 0;
+
+function splitRecords() {
+  return through(function write(data) {
+    var logs = JSON.parse(data);
+    var that = this;
+
+    logs.Records.forEach(function(log) {
+        that.queue(JSON.stringify(log) + '\n');
+        totalLogs++;
+    });
+  });
+}
 
 function cloudTrailLogsToSumo(bucket, objKey, s3, callback) {
-    var req = https.request(options, function(res) {
-        var body = '';
-        console.log('Status: ', res.statusCode);
-        res.setEncoding('utf8');
-        res.on('data', function(chunk) { body += chunk; });
-        res.on('end', function() {
-            console.log('Successfully processed HTTPS response');
-        });
-        res.on('error', function(err) {
-            console.log(err);
-        });
-    });
+    var s3Stream = s3.getObject({
+      Bucket: bucket,
+      Key: objKey
+    }).createReadStream();
 
-    var s3Stream = s3.getObject({ Bucket: bucket, Key: objKey }).createReadStream();
     s3Stream.on('error', callback);
 
     var isCompressed = !!objKey.match(/\.gz$/);
@@ -47,23 +47,18 @@ function cloudTrailLogsToSumo(bucket, objKey, s3, callback) {
         s3Stream = s3Stream.pipe(zlib.createGunzip());
     }
 
-    var totalLogs = 0;
-
     s3Stream
         .pipe(new LineStream())
-        .on('data', function(data) {
-            var logs = JSON.parse(data);
-            
-            logs.Records.forEach(function(log) {
-                req.write(JSON.stringify(log) + '\n');
-                totalLogs++;
-            });
-        })
-        .on('end', function() {
-            console.log("End of stream");
-            console.log("Total logs sent: " + totalLogs);
-            req.end();
-            callback();
+        .pipe(splitRecords())
+        .pipe(request.post('https://endpoint1.collection.eu.sumologic.com/receiver/v1/http/<XXXX>'))
+        .on('response', function(response) {
+          console.log('Status code: ' + response.statusCode);
+          console.log('Total logs sent: ' +  totalLogs);
+          if (response.statusCode !== 200) {
+            return callback('status code: ' + response.statusCode);
+          }
+
+          callback();
         })
         .on('error', callback);
 }
@@ -73,7 +68,6 @@ exports.handler = function(event, context, callback) {
 
     var s3 = new AWS.S3();
 
-    options.agent = new https.Agent(options);
     event.Records.forEach(function(record) {
         var bucket = record.s3.bucket.name;
         var objKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
