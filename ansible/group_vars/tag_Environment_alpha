@@ -43,6 +43,7 @@ register_groups:
   multi:
     - academy-school-eng
     - diocese
+    - internal-drainage-board
     - la-maintained-school-eng
     - local-authority-eng
     - local-authority-type

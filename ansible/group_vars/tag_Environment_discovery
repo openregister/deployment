@@ -24,6 +24,7 @@ register_groups:
     - address
 
   multi:
+    - clinical-commissioning-group
     - company
     - food-authority
     - food-premises
