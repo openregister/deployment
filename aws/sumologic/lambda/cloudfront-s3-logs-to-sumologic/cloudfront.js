@@ -23,9 +23,9 @@ var AWS = require('aws-sdk'),
 
 var totalLogs = 0;
 
-var HASH_ASCII_CODE = 35;
-
 function filterComments() {
+  var HASH_ASCII_CODE = 35;
+
   return through(function write(data) {
     if (data[0] === HASH_ASCII_CODE) {
       return;
