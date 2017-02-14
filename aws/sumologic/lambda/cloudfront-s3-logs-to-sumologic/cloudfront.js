@@ -15,9 +15,7 @@
 // Modifications copyright (C) 2016 Crown Copyright (Government Digital Service)
 
 var AWS = require('aws-sdk'),
-    https = require('https'),
     zlib = require('zlib'),
-    byline = require('byline'),
     LineStream = require('byline').LineStream,
     through = require('through'),
     request = require('request'),
