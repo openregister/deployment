@@ -1,13 +1,9 @@
-data "template_file" "old_user_data" {
-  template = "${file("${path.module}/old-users.yaml")}"
-}
-
 resource "aws_instance" "instance" {
   count = "${var.instance_count}"
-  ami = "${element(list(var.instance_ami,"ami-c51e3eb6"), count.index)}"
+  ami = "${var.instance_ami}"
   instance_type = "${var.instance_type}"
   subnet_id = "${element(var.subnet_ids, count.index)}"
-  user_data = "${element(list(var.user_data, data.template_file.old_user_data.rendered), count.index)}"
+  user_data = "${var.user_data}"
   vpc_security_group_ids = [ "${aws_security_group.openregister.id}" ]
   iam_instance_profile = "${aws_iam_instance_profile.instance_profile.name}"
 
