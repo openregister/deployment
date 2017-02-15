@@ -9,6 +9,15 @@ provider "statuscake" {
   apikey = "${var.statuscake_apikey}"
 }
 
+data "aws_ami" "ubuntu-xenial-ebs-ssd" {
+  most_recent = true
+  filter {
+    name = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial*"]
+  }
+  owners = ["099720109477"] # canonical account
+}
+
 module "core" {
   source = "../modules/core"
   vpc_name = "${var.vpc_name}"
