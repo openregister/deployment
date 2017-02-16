@@ -41,6 +41,7 @@ register_groups:
     - place
     - premises
     - prison
+    - registration-district
     - street
     - street-custodian
     - uk
