@@ -80,5 +80,7 @@ rm $REGISTER.rsf
 rm field-records.json
 
 echo ""
-echo "Done!"
+echo "Done! To view:"
+echo ""
+echo "open https://$REGISTER.$PHASE.openregister.org/records"
 echo ""
