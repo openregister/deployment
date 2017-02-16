@@ -12,6 +12,8 @@ ifneq ($(expected_terraform_version), $(actual_terraform_version))
   $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
 endif
 
+export TF_VAR_central_cloudtrail_bucket_name=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/central-cloudtrail-bucket-name | tail -n 1), $(error "Couldn't get central cloudtrail bucket name"))
+
 # Default terraform plan -module-depth= value
 module_depth=-1
 
