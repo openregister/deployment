@@ -29,7 +29,12 @@ PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
 echo ""
 echo "Serialize tsv to $REGISTER.rsf"
 cd ../deployment
-TSVFILE="../$REGISTER-data/data/$PHASE/$REGISTER/$REGISTER"
+
+if [[ -e "../$REGISTER-data/data/$PHASE" ]]; then
+  TSVFILE="../$REGISTER-data/data/$PHASE/$REGISTER/$REGISTER"
+elif [[ -e "../$REGISTER-data/data" ]]; then
+  TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
+fi
 if [[ -e $TSVFILE"es.tsv" ]]; then
   serializer tsv field-records.json $TSVFILE"es.tsv" $REGISTER > $REGISTER.rsf
 elif [[ -e $TSVFILE"s.tsv" ]]; then
