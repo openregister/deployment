@@ -42,6 +42,7 @@ users:
 packages:
   - awscli
   - docker.io
+  - python
   - ruby
   - update-notifier-common # required for automatic reboots
   - unattended-upgrades
