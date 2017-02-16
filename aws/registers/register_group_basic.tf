@@ -2,7 +2,7 @@ module "basic" {
   source = "../modules/register_group"
   id = "basic"
   instance_count = "${lookup(var.group_instance_count, "basic", 0)}"
-  instance_type = "${lookup(var.group_instance_type, "basic", "t2.medium")}"
+  instance_type = "${lookup(var.group_instance_type, "basic", "t2.micro")}"
   instance_ami = "${data.aws_ami.ubuntu-xenial-ebs-ssd.image_id}"
 
   vpc_name = "${var.vpc_name}"
