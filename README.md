@@ -255,6 +255,21 @@ branch, and git pulls to ensure master data is used. Script assumes data is in
 ../[register]-data/data/[phase]/[register].tsv file. For example:
 ../prison-data/data/discovery/prison.tsv
 
+To load a register entry into the `register` register, you can run this script
+passing the register name, you will be prompted if you want to load data. For
+example:
+
+  ./scripts/registry-load.sh prison discovery
+
+To load a field entry into the `field` register, you can run this script
+passing the field name, you will be prompted if you want to load data. For
+example:
+
+  ./scripts/field-load.sh start-date discovery
+
+These last two scripts look for the yaml configuration of the register or field
+in the `registry-data` repository.
+
 # Data loading via ansible
 
 ### Prerequisites
