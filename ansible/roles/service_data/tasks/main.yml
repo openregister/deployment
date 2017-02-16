@@ -1,4 +1,0 @@
-- include: facts.yml
-- include: packages.yml
-- include: data.yml
-- include: docker.yml
