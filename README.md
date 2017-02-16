@@ -259,13 +259,13 @@ To load a register entry into the `register` register, you can run this script
 passing the register name, you will be prompted if you want to load data. For
 example:
 
-  ./scripts/registry-load.sh prison discovery
+    ./scripts/registry-load.sh prison discovery
 
 To load a field entry into the `field` register, you can run this script
 passing the field name, you will be prompted if you want to load data. For
 example:
 
-  ./scripts/field-load.sh start-date discovery
+    ./scripts/field-load.sh start-date discovery
 
 These last two scripts look for the yaml configuration of the register or field
 in the `registry-data` repository.
