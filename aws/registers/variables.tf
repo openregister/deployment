@@ -81,11 +81,6 @@ variable "cloudfront_certificate_arn" {}
 // StatusCake
 variable "statuscake_username" {}
 variable "statuscake_apikey" {}
-
-variable "sumologic_key" {
-  description = "The key fluentd uses to log to Sumo Logic"
-}
-
 variable "enable_availability_checks" {}
 
 variable "cdn_configuration" {
@@ -93,4 +88,16 @@ variable "cdn_configuration" {
   default = {
     enabled = false
   }
+}
+
+variable "sumologic_key" {
+  description = "The key fluentd uses to log to Sumo Logic"
+}
+
+variable "influxdb_password" {
+  description = "Password used to connect to influxdb. Defined outside of `influxdb_configuration` due to the way we pass in secrets from `pass` through `TF_VARS_*`."
+}
+variable "influxdb_configuration" {
+  type = "map"
+  description = "Configuration options for InfluxDB"
 }

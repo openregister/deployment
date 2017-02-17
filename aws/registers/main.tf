@@ -26,5 +26,11 @@ module "core" {
   bastion_instance_ami = "${data.aws_ami.ubuntu-xenial-ebs-ssd.image_id}"
   bastion_user_data = "${file("templates/users.yaml")}"
   admin_ips = "${var.admin_ips}"
+}
+
+module "configuration" {
+  source = "../modules/configuration"
+  vpc_name = "${var.vpc_name}"
   sumologic_key = "${var.sumologic_key}"
+  influxdb_configuration = "${merge(var.influxdb_configuration, map("password", var.influxdb_password))}"
 }
