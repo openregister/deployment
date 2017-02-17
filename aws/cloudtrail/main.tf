@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 resource "aws_cloudtrail" "cloudtrail" {
-  name = "CloudTrail-all-regions"
+  name = "CloudTrail-all-regions-local"
   enable_log_file_validation = true
   s3_bucket_name = "${aws_s3_bucket.local-bucket.id}"
   s3_key_prefix = "prod"
