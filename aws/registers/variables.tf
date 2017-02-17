@@ -94,3 +94,11 @@ variable "cdn_configuration" {
     enabled = false
   }
 }
+
+variable "influxdb_password" {
+  description = "Password used to connect to influxdb. Defined outside of `influxdb_configuration` due to the way we pass in secrets from `pass` through `TF_VARS_*`."
+}
+variable "influxdb_configuration" {
+  type = "map"
+  description = "Configuration options for InfluxDB"
+}

@@ -27,4 +27,5 @@ module "core" {
   bastion_user_data = "${file("templates/users.yaml")}"
   admin_ips = "${var.admin_ips}"
   sumologic_key = "${var.sumologic_key}"
+  influxdb_configuration = "${merge(var.influxdb_configuration, map("password", var.influxdb_password))}"
 }
