@@ -42,14 +42,8 @@ variable "dns_parent_zone_id" {
   default = "Z1QBBZW8ZAZIDC"
 }
 
-variable "sumologic_key" {}
-
 variable "soa_negative_cache_ttl" {
   default = 3600
   description = "The length of time `NXDOMAIN` responses from our authoritative nameservers should be cached by recursors for"
 }
 
-variable "influxdb_configuration" {
-  type = "map"
-  description = "Configuration options for InfluxDB"
-}
