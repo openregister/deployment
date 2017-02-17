@@ -54,5 +54,5 @@ POLICY
 module "ship-to-central-bucket" {
   source                      = "git::github.com/alphagov/aws-security-alarms.git//terraform?ref=d3382473690a5389e45effd1b1a03df723a97588"
   cloudtrail_s3_bucket_name   = "${var.central_cloudtrail_bucket_name}"
-  cloudtrail_s3_bucket_prefix = "prod"
+  cloudtrail_s3_bucket_prefix = "${data.aws_caller_identity.current.account_id}"
 }
