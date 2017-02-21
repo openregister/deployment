@@ -109,3 +109,14 @@ resource "aws_security_group_rule" "outbound_postgres" {
   protocol = "tcp"
   source_security_group_id = "${var.database_security_group_id}"
 }
+
+resource "aws_security_group_rule" "outbound_influxcloud" {
+  count = "${signum(var.instance_count)}"
+
+  security_group_id = "${aws_security_group.openregister.id}"
+  type = "egress"
+  from_port = 8086
+  to_port = 8086
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
