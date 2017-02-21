@@ -13,7 +13,7 @@ data "aws_ami" "ubuntu-xenial-ebs-ssd" {
   most_recent = true
   filter {
     name = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20170202"]
   }
   owners = ["099720109477"] # canonical account
 }
