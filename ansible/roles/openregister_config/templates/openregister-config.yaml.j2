@@ -65,6 +65,14 @@ logging:
       target: stdout
       logFormat: "%-5p [%d{ISO8601}] [Register: %X{register}] %c: %m %replace(%rEx){'\n',' '}%nopex%n"
 
+metrics:
+  reporters:
+    - type: graphite
+      host: telegraf
+      port: 8092
+      transport: udp
+      frequency: 5 seconds
+
 {% if loop.length > 1 %}
 registers:
 {% endif %}
