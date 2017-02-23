@@ -48,6 +48,7 @@ packages:
   - unattended-upgrades
 
 package_upgrade: true
+package_reboot_if_required: true
 
 write_files:
 - path: /usr/local/bin/setup-cdagent.sh
