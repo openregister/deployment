@@ -13,6 +13,8 @@ register_settings:
     registers_yaml_location: "s3://openregister.discovery.config/registers.yaml"
   address:
     enable_download_resource: false
+  registration-district:
+    custodian_name: Joanne Wilkes-Waterworth
 
 register_groups:
   basic:
