@@ -3,7 +3,7 @@ module "multi" {
   id = "multi"
   instance_count = "${lookup(var.group_instance_count, "multi", 0)}"
   instance_type = "${lookup(var.group_instance_type, "multi", "t2.medium")}"
-  instance_ami = "${data.aws_ami.ubuntu-xenial-ebs-ssd.image_id}"
+  instance_ami = "${data.aws_ami.ubuntu-hvm-ebs-ssd.image_id}"
 
   vpc_name = "${var.vpc_name}"
   vpc_id = "${module.core.vpc_id}"
