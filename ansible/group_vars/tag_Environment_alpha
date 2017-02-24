@@ -14,6 +14,8 @@ register_settings:
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
+  local-authority-sct:
+    custodian_name: Stephen McAllister
   local-authority-type:
     custodian_name: Stephen McAllister
   notifiable-animal-disease:
@@ -46,6 +48,7 @@ register_groups:
     - internal-drainage-board
     - la-maintained-school-eng
     - local-authority-eng
+    - local-authority-sct
     - local-authority-type
     - notifiable-animal-disease
     - notifiable-animal-disease-investigation-category
