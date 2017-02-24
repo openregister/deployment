@@ -36,11 +36,17 @@ elif [[ -e "../$REGISTER-data/data" ]]; then
   TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
 fi
 if [[ -e $TSVFILE"es.tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE"es.tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE"es.tsv"
 elif [[ -e $TSVFILE"s.tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE"s.tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE"s.tsv"
 elif [[ -e $TSVFILE".tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE".tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE".tsv"
+fi
+
+if [[ -e $TSVFILE ]]; then
+  serializer tsv field-records.json $TSVFILE $REGISTER > $REGISTER.rsf
+else
+  echo "Data file $TSVFILE not found"; exit 1
 fi
 
 echo ""
