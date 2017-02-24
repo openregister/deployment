@@ -45,9 +45,9 @@ fi
 
 echo ""
 echo "Removing temporary files"
-rm tmp/$FIELD.yaml
-rm $FIELD.rsf
-rm field-records.json
+rm -f tmp/*.yaml
+rm -f $FIELD.rsf
+rm -f field-records.json
 
 echo ""
 echo "Done!"
