@@ -8,6 +8,7 @@ REGISTER=$1
 PHASE=$2
 echo "register: $REGISTER"
 echo "phase: $PHASE"
+REGISTER_URL="https://"$REGISTER"."$PHASE".openregister.org/records"
 
 echo ""
 echo "Downloading $PHASE field-records.json"
@@ -25,6 +26,7 @@ echo "Get credentials for $PHASE $REGISTER"
 [[ -e ~/.registers-pass ]] || echo "cloning credentials repo to ~/.registers-pass"
 [[ -e ~/.registers-pass ]] || (cd ~ && git clone git@github.com:openregister/credentials.git .registers-pass)
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
+SLACK_PATH=`PASSWORD_STORE_DIR=~/.registers-pass pass services/slack/rda-team-incoming-webhook`
 
 echo ""
 echo "Serialize tsv to $REGISTER.rsf"
@@ -36,11 +38,17 @@ elif [[ -e "../$REGISTER-data/data" ]]; then
   TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
 fi
 if [[ -e $TSVFILE"es.tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE"es.tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE"es.tsv"
 elif [[ -e $TSVFILE"s.tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE"s.tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE"s.tsv"
 elif [[ -e $TSVFILE".tsv" ]]; then
-  serializer tsv field-records.json $TSVFILE".tsv" $REGISTER > $REGISTER.rsf
+  TSVFILE=$TSVFILE".tsv"
+fi
+
+if [[ -e $TSVFILE ]]; then
+  serializer tsv field-records.json $TSVFILE $REGISTER > $REGISTER.rsf
+else
+  echo "Data file $TSVFILE not found"; exit 1
 fi
 
 echo ""
@@ -48,7 +56,10 @@ echo -n "Delete existing $REGISTER data from $PHASE register? (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ; then
     echo ""
-    echo "Deleting $REGISTER data from $PHASE"
+    echo "Deleting $REGISTER data from $PHASE $REGISTER"
+    curl -X POST -H 'Content-type: application/json' \
+      --data "{'text':'Deleting $REGISTER data from <$REGISTER_URL|$PHASE $REGISTER>'}" \
+      "https://hooks.slack.com/services/"$SLACK_PATH
     for i in `seq 1 20`; do
         curl -X DELETE -u openregister:$PASSWORD https://$REGISTER.$PHASE.openregister.org/delete-register-data
         echo " - request: $i of 20"
@@ -62,7 +73,7 @@ if echo "$answer" | grep -iq "^y" ; then
             echo "Root hash from one of the instances is not empty - exiting..."
             exit 1
         fi
-    done  
+    done
 fi
 
 echo ""
@@ -71,6 +82,9 @@ read answer
 if echo "$answer" | grep -iq "^y" ; then
   echo ""
   echo "Loading $REGISTER data to $PHASE"
+  curl -X POST -H 'Content-type: application/json' \
+    --data "{'text':'Loading $REGISTER data to <$REGISTER_URL|$PHASE $REGISTER>'}" \
+    "https://hooks.slack.com/services/"$SLACK_PATH
   echo `cat $REGISTER.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://$REGISTER.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
 fi
 
@@ -82,5 +96,5 @@ rm field-records.json
 echo ""
 echo "Done! To view:"
 echo ""
-echo "open https://$REGISTER.$PHASE.openregister.org/records"
+echo "open $REGISTER_URL"
 echo ""
