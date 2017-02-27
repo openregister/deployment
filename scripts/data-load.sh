@@ -27,6 +27,7 @@ echo "Get credentials for $PHASE $REGISTER"
 [[ -e ~/.registers-pass ]] || (cd ~ && git clone git@github.com:openregister/credentials.git .registers-pass)
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
 SLACK_PATH=`PASSWORD_STORE_DIR=~/.registers-pass pass services/slack/rda-team-incoming-webhook`
+USERNAME=`git config --get user.name`
 
 echo ""
 echo "Serialize tsv to $REGISTER.rsf"
@@ -58,7 +59,7 @@ if echo "$answer" | grep -iq "^y" ; then
     echo ""
     echo "Deleting $REGISTER data from $PHASE $REGISTER"
     curl -X POST -H 'Content-type: application/json' \
-      --data "{'text':'Deleting $REGISTER data from <$REGISTER_URL|$PHASE $REGISTER>'}" \
+      --data "{'text':'Deleting $REGISTER data from <$REGISTER_URL|$PHASE $REGISTER> - $USERNAME'}" \
       "https://hooks.slack.com/services/"$SLACK_PATH
     for i in `seq 1 20`; do
         curl -X DELETE -u openregister:$PASSWORD https://$REGISTER.$PHASE.openregister.org/delete-register-data
@@ -83,7 +84,7 @@ if echo "$answer" | grep -iq "^y" ; then
   echo ""
   echo "Loading $REGISTER data to $PHASE"
   curl -X POST -H 'Content-type: application/json' \
-    --data "{'text':'Loading $REGISTER data to <$REGISTER_URL|$PHASE $REGISTER>'}" \
+    --data "{'text':'Loading $REGISTER data to <$REGISTER_URL|$PHASE $REGISTER> - $USERNAME'}" \
     "https://hooks.slack.com/services/"$SLACK_PATH
   echo `cat $REGISTER.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://$REGISTER.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
 fi
