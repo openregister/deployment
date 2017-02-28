@@ -57,6 +57,10 @@ resource "aws_cloudfront_distribution" "distribution" {
   origin {
     domain_name = "${aws_route53_record.record.fqdn}"
     origin_id = "${var.environment}-${var.name}-elb"
+    custom_header {
+      name = "X-Forwaded-Host",
+      value = "${var.name}.${var.cdn_configuration["domain"]}"
+    }
     custom_origin_config {
       http_port = 80
       https_port = 443
