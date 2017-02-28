@@ -376,6 +376,20 @@ module "prison_register" {
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
+module "occupation_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "occupation", false)}"
+
+  name = "occupation"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
 module "register_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "register", false)}"
