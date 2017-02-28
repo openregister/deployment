@@ -58,7 +58,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     domain_name = "${aws_route53_record.record.fqdn}"
     origin_id = "${var.environment}-${var.name}-elb"
     custom_header {
-      name = "X-Forwaded-Host",
+      name = "X-Forwarded-Host",
       value = "${var.name}.${var.cdn_configuration["domain"]}"
     }
     custom_origin_config {
