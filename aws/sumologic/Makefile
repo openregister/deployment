@@ -7,11 +7,11 @@
 	plan-destroy \
 	push-state
 
-export expected_terraform_version=v0.8
-export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
+export expected_terraform_version:=v0.8
+export actual_terraform_version:=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
 
-export expected_node_version=v7.1.0
-export actual_node_version=$(shell node --version | head -n 1)
+export expected_node_version:=v7.1.0
+export actual_node_version:=$(shell node --version | head -n 1)
 
 ifneq ($(expected_terraform_version), $(actual_terraform_version))
   $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
@@ -21,13 +21,13 @@ ifneq ($(expected_node_version), $(actual_node_version))
 	$(error Expected node version $(expected_node_version), but saw $(actual_node_version))
 endif
 
-lambda_functions=$(addprefix build/,$(addsuffix .zip,$(wildcard lambda/*)))
+lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard lambda/*)))
 
-sumologic_cloudfront_key=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
-sumologic_cloudtrail_key=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
+sumologic_cloudfront_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
+sumologic_cloudtrail_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
 
 # Default terraform plan -module-depth= value
-module_depth=-1
+module_depth:=-1
 
 # We don't want any local state being pushed when remote state is
 # configured, so refuse to run if it exists.

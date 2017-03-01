@@ -5,17 +5,17 @@
 	plan \
 	plan-destroy
 
-export expected_terraform_version=v0.8
-export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
+export expected_terraform_version:=v0.8
+export actual_terraform_version:=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
 
 ifneq ($(expected_terraform_version), $(actual_terraform_version))
   $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
 endif
 
-export TF_VAR_central_cloudtrail_bucket_name=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/central-cloudtrail-bucket-name | tail -n 1), $(error "Couldn't get central cloudtrail bucket name"))
+export TF_VAR_central_cloudtrail_bucket_name:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/central-cloudtrail-bucket-name | tail -n 1), $(error "Couldn't get central cloudtrail bucket name"))
 
 # Default terraform plan -module-depth= value
-module_depth=-1
+module_depth:=-1
 
 # We don't want any local state being pushed when remote state is
 # configured, so refuse to run if it exists.

@@ -13,8 +13,8 @@
 	diff-config \
 	push-state
 
-export expected_terraform_version=v0.8
-export actual_terraform_version=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
+export expected_terraform_version:=v0.8
+export actual_terraform_version:=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
 
 ifneq ($(expected_terraform_version), $(actual_terraform_version))
   $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
@@ -25,26 +25,26 @@ ifndef vpc
 endif
 
 # Default AWS region
-export AWS_DEFAULT_REGION=eu-west-1
+export AWS_DEFAULT_REGION:=eu-west-1
 
 # RDS master passwords
-export TF_VAR_openregister_database_master_password=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
+export TF_VAR_openregister_database_master_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
 
 # StatusCake
-export TF_VAR_statuscake_username=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
-export TF_VAR_statuscake_apikey=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
+export TF_VAR_statuscake_username:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
+export TF_VAR_statuscake_apikey:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
 
 # Sumo Logic
-export TF_VAR_sumologic_key=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/$(vpc)/app-logs | tail -n 1), $(error "Couldn't get Sumo Logic key"))
+export TF_VAR_sumologic_key:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/$(vpc)/app-logs | tail -n 1), $(error "Couldn't get Sumo Logic key"))
 
 # InfluxCloud
-export TF_VAR_influxdb_password=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/influxcloud/telegraf | tail -n 1), $(error "Couldn't get InfluxCloud password"))
+export TF_VAR_influxdb_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/influxcloud/telegraf | tail -n 1), $(error "Couldn't get InfluxCloud password"))
 
 # Required minimum to terraform
-defaults=-var-file=environments/$(vpc).tfvars
+defaults:=-var-file=environments/$(vpc).tfvars
 
 # Default terraform plan -module-depth= value
-module_depth=-1
+module_depth:=-1
 
 # We don't want any local state being pushed when remote state is
 # configured, so refuse to run if it exists.
