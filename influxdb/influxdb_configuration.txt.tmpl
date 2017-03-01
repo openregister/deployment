@@ -1,0 +1,13 @@
+# DDL
+CREATE DATABASE metrics
+CREATE RETENTION POLICY "one_month" ON metrics DURATION 31d REPLICATION 2 DEFAULT
+
+CREATE USER "grafana" WITH PASSWORD '{{ grafana_password }}'
+CREATE USER "telegraf" WITH PASSWORD '{{ telegraf_password }}'
+
+GRANT READ ON "metrics" TO "grafana"
+GRANT WRITE ON "metrics" TO "telegraf"
+
+# DML
+# CONTEXT-DATABASE:metrics
+# CONTEXT-RETENTION-POLICY:one_month
