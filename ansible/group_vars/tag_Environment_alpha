@@ -11,6 +11,10 @@ register_settings:
   field:
     custodian_name: Paul Downey
     enable_register_data_delete: false
+  government-organisation:
+    custodian_name: Paul Downey
+  government-service:
+    custodian_name: Paul Downey
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
@@ -23,6 +27,8 @@ register_settings:
     history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
+  prison:
+    custodian_name: Paul Downey
   register:
     custodian_name: Paul Downey
     enable_register_data_delete: false
@@ -45,6 +51,8 @@ register_groups:
   multi:
     - academy-school-eng
     - diocese
+    - government-organisation
+    - government-service
     - internal-drainage-board
     - la-maintained-school-eng
     - local-authority-eng
@@ -52,6 +60,7 @@ register_groups:
     - local-authority-type
     - notifiable-animal-disease
     - notifiable-animal-disease-investigation-category
+    - prison
     - religious-character
     - school-admissions-policy
     - school-authority-eng

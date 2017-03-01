@@ -180,6 +180,34 @@ module "government-domain_register" {
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
+module "government-organisation_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "government-organisation", false)}"
+
+  name = "government-organisation"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
+module "government-service_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "government-service", false)}"
+
+  name = "government-service"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
 module "industry_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "industry", false)}"
@@ -591,6 +619,20 @@ module "uk_register" {
   enabled = "${lookup(var.enabled_registers, "uk", false)}"
 
   name = "uk"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
+module "vehicle-colour_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "vehicle-colour", false)}"
+
+  name = "vehicle-colour"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
   dns_zone_id = "${module.core.dns_zone_id}"

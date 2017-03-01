@@ -15,6 +15,8 @@ register_settings:
     enable_download_resource: false
   registration-district:
     custodian_name: Joanne Wilkes-Waterworth
+  vehicle-colour:
+    custodian_name: Paul Downey
 
 register_groups:
   basic:
@@ -48,3 +50,4 @@ register_groups:
     - street
     - street-custodian
     - uk
+    - vehicle-colour
