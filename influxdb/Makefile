@@ -1,4 +1,5 @@
-.PHONY: apply
+.PHONY: apply \
+	clean
 
 cluster_address:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/influxcloud/admin | tail -n 1), $(error "Couldn't get InfluxCloud cluster address"))
 
@@ -23,3 +24,5 @@ apply: influxdb_configuration.txt
 		-ssl \
 		-import -path=$<
 
+clean:
+	rm -f influxdb_configuration.txt
