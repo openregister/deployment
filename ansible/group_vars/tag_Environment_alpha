@@ -12,9 +12,9 @@ register_settings:
     custodian_name: Paul Downey
     enable_register_data_delete: false
   government-organisation:
-    custodian_name: Paul Downey
+    custodian_name: Neil Williams
   government-service:
-    custodian_name: Paul Downey
+    custodian_name: Thomas Moore
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
@@ -28,7 +28,7 @@ register_settings:
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
   prison:
-    custodian_name: Paul Downey
+    custodian_name: Richard Carling
   register:
     custodian_name: Paul Downey
     enable_register_data_delete: false
