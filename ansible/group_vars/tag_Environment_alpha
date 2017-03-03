@@ -19,7 +19,7 @@ register_settings:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
   local-authority-sct:
-    custodian_name: Stephen McAllister
+    custodian_name: Hugh Buchanan
   local-authority-type:
     custodian_name: Stephen McAllister
   notifiable-animal-disease:
