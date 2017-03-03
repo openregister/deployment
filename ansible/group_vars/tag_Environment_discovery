@@ -16,7 +16,7 @@ register_settings:
   registration-district:
     custodian_name: Joanne Wilkes-Waterworth
   vehicle-colour:
-    custodian_name: Paul Downey
+    custodian_name: Rohan Gye
 
 register_groups:
   basic:
