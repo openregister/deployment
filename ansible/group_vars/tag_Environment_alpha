@@ -34,6 +34,8 @@ register_settings:
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.alpha.config/fields.yaml"
     registers_yaml_location: "s3://openregister.alpha.config/registers.yaml"
+  registration-district:
+    custodian_name: Joanne Wilkes-Waterworth
   school-eng:
     custodian_name: Andrew Thomson
     history_page_url: https://registers.cloudapps.digital/registers/school-eng
@@ -62,6 +64,7 @@ register_groups:
     - notifiable-animal-disease-investigation-category
     - prison
     - religious-character
+    - registration-district
     - school-admissions-policy
     - school-authority-eng
     - school-eng
