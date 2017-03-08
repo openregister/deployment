@@ -88,5 +88,6 @@ write_files:
     Unattended-Upgrade::Automatic-Reboot "true";
 
 runcmd:
-  - [ service, docker, start ]
+  - [ systemctl, enable, docker.service ]
+  - [ systemctl, start, docker.service ]
   - [ /usr/local/bin/setup-cdagent.sh ]
