@@ -1,13 +1,43 @@
 #!/bin/bash
 set -e
 
-echo "usage: ./scripts/data-load.sh [register] [phase]"
+echo ""
+echo "usage:   ./scripts/data-load.sh [register] [phase] [data-tsv-file optional]"
+echo "example: ./scripts/data-load.sh prison     discovery"
+echo "example: ./scripts/data-load.sh local-authority-eng discovery ../local-authority-data/data/local-authority-eng/local-authorities.tsv"
 echo ""
 
 REGISTER=$1
 PHASE=$2
+DATA_FILE_PATH=$3
 echo "register: $REGISTER"
 echo "phase: $PHASE"
+
+if [[ -e $DATA_FILE_PATH ]]; then
+  TSVFILE=$DATA_FILE_PATH
+else
+  if [[ -e "../$REGISTER-data/data/$PHASE" ]]; then
+    TSVFILE="../$REGISTER-data/data/$PHASE/$REGISTER/$REGISTER"
+  elif [[ -e "../$REGISTER-data/data" ]]; then
+    TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
+  fi
+  if [[ -e $TSVFILE"es.tsv" ]]; then
+    TSVFILE=$TSVFILE"es.tsv"
+  elif [[ -e $TSVFILE"s.tsv" ]]; then
+    TSVFILE=$TSVFILE"s.tsv"
+  elif [[ -e $TSVFILE".tsv" ]]; then
+    TSVFILE=$TSVFILE".tsv"
+  fi
+fi
+
+if [[ -e $TSVFILE ]]; then
+  echo "data-file: $TSVFILE"
+else
+  echo ""
+  echo "Exiting as data file $TSVFILE not found"
+  echo ""; exit 1
+fi
+
 REGISTER_URL="https://"$REGISTER"."$PHASE".openregister.org/records"
 
 echo ""
@@ -32,24 +62,10 @@ USERNAME=`git config --get user.name`
 echo ""
 echo "Serialize tsv to $REGISTER.rsf"
 cd ../deployment
-
-if [[ -e "../$REGISTER-data/data/$PHASE" ]]; then
-  TSVFILE="../$REGISTER-data/data/$PHASE/$REGISTER/$REGISTER"
-elif [[ -e "../$REGISTER-data/data" ]]; then
-  TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
-fi
-if [[ -e $TSVFILE"es.tsv" ]]; then
-  TSVFILE=$TSVFILE"es.tsv"
-elif [[ -e $TSVFILE"s.tsv" ]]; then
-  TSVFILE=$TSVFILE"s.tsv"
-elif [[ -e $TSVFILE".tsv" ]]; then
-  TSVFILE=$TSVFILE".tsv"
-fi
-
 if [[ -e $TSVFILE ]]; then
   serializer tsv field-records.json $TSVFILE $REGISTER > $REGISTER.rsf
 else
-  echo "Data file $TSVFILE not found"; exit 1
+  echo "Exiting as data file $TSVFILE not found"; exit 1
 fi
 
 echo ""
