@@ -52,6 +52,8 @@ variable "apply_immediately" {
   default = false
 }
 
+variable "storage_type" {}
+
 variable "zones" {
   default = {
     "0" = "eu-west-1a"

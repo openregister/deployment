@@ -31,6 +31,8 @@ module "openregister_db" {
   allocated_storage = "${lookup(var.rds_allocated_storage, "openregister")}"
 
   maintenance_window = "${var.rds_maintenance_window}"
+
+  storage_type = "${var.rds_storage_type}"
 }
 
 module "openregister_codedeploy" {
