@@ -22,7 +22,7 @@ sumologic_cloudtrail_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass serv
 module_depth:=-1
 
 purge-remote-state-cache:
-	rm -r .terraform/terraform.tfstate
+	rm -f .terraform/terraform.tfstate
 
 configure-state: purge-remote-state-cache
 	terraform init

@@ -13,7 +13,7 @@ export AWS_DEFAULT_REGION:=eu-west-1
 module_depth:=-1
 
 purge-remote-state-cache:
-	rm -r .terraform/terraform.tfstate
+	rm -f .terraform/terraform.tfstate
 
 configure-state: purge-remote-state-cache
 	terraform init
