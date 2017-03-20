@@ -38,6 +38,10 @@ variable "rds_allocated_storage" {
   }
 }
 
+variable "rds_storage_type" {
+  default = "gp2"
+}
+
 variable "rds_maintenance_window" {}
 
 // openregister app

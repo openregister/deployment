@@ -7,6 +7,8 @@ resource "aws_db_instance" "db" {
   publicly_accessible = "false"
 
   allocated_storage = "${var.allocated_storage}"
+  storage_type = "${var.storage_type}"
+
   backup_retention_period = "${var.backup_retention_period}"
   maintenance_window = "${var.maintenance_window}"
   apply_immediately = "${var.apply_immediately}"
