@@ -50,6 +50,7 @@ variable "openregister_database_cidr_blocks" { type = "list" }
 variable "openregister_database_class_instance" {
   default = "db.t2.micro"
 }
+variable "openregister_database_multi_az" { default = false }
 variable "openregister_database_master_password" {}
 variable "openregister_database_apply_immediately" { default = false }
 
