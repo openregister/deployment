@@ -1,3 +1,13 @@
+terraform {
+  required_version = "~> 0.9.0"
+  backend "s3" {
+    bucket  = "registers-cloudfront-terraform-state"
+    key = "cloudfront.tfstate"
+    region = "eu-west-1"
+    encrypt = "true"
+  }
+}
+
 resource "aws_iam_role_policy" "s3_logs_lambda" {
     name = "s3_logs_lambda"
     role = "${aws_iam_role.lambda.id}"

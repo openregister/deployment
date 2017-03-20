@@ -13,13 +13,6 @@
 	diff-config \
 	push-state
 
-export expected_terraform_version:=v0.8
-export actual_terraform_version:=$(shell terraform version | head -n 1 | cut -f2 -d" " | cut -d"." -f1,2)
-
-ifneq ($(expected_terraform_version), $(actual_terraform_version))
-  $(error Expected terraform version $(expected_terraform_version).x, but saw $(actual_terraform_version).x)
-endif
-
 ifndef vpc
   $(error You must pass -e vpc=<name> switch)
 endif
@@ -46,26 +39,22 @@ defaults:=-var-file=environments/$(vpc).tfvars
 # Default terraform plan -module-depth= value
 module_depth:=-1
 
-# We don't want any local state being pushed when remote state is
-# configured, so refuse to run if it exists.
-check-for-local-state: 
-	@test ! -f terraform.tfstate || exit 1
-
 # TODO should also reject defined-but-blank variable
 ifndef TF_VAR_openregister_database_master_password
   $(error TF_VAR_openregister_database_master_password variable is required)
 endif
 
 purge-remote-state-cache: 
-	rm -rf .terraform/terraform.tfstate
+	rm -f backend.tf
+	rm -f .terraform/terraform.tfstate
 
-configure-state: check-for-local-state purge-remote-state-cache
-	terraform remote config \
-          -backend=S3 \
-          -backend-config="bucket=registers-terraform-state" \
-          -backend-config="encrypt=true" \
-          -backend-config="key=$(vpc).tfstate" \
-          -backend-config="region=$(AWS_DEFAULT_REGION)"
+configure-state: purge-remote-state-cache
+	# Hack to make 0.8->0.9 upgrade easy. We should move to using Terraform State
+	# Environments(?).
+	#
+	# https://www.terraform.io/docs/state/environments.html
+	sed -e 's/{{environment}}/$(vpc)/' backend.tf.tmpl > backend.tf
+	terraform init
 
 pull-config:
 	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars
