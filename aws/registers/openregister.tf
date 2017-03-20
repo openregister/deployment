@@ -33,6 +33,8 @@ module "openregister_db" {
   maintenance_window = "${var.rds_maintenance_window}"
 
   storage_type = "${var.rds_storage_type}"
+
+  multi_az = "${var.openregister_database_multi_az}"
 }
 
 module "openregister_codedeploy" {
