@@ -10,16 +10,20 @@ echo ""
 REGISTER=$1
 PHASE=$2
 DATA_FILE_PATH=$3
-echo "register: $REGISTER"
-echo "phase: $PHASE"
+echo "REGISTER: $REGISTER"
+echo "PHASE: $PHASE"
 
 if [[ -e $DATA_FILE_PATH ]]; then
   TSVFILE=$DATA_FILE_PATH
+  IFS='/'
+  read -ra PARTS <<< "$DATA_FILE_PATH"
+  DATA_REPO=${PARTS[1]}
 else
-  if [[ -e "../$REGISTER-data/data/$PHASE" ]]; then
-    TSVFILE="../$REGISTER-data/data/$PHASE/$REGISTER/$REGISTER"
-  elif [[ -e "../$REGISTER-data/data" ]]; then
-    TSVFILE="../$REGISTER-data/data/$REGISTER/$REGISTER"
+  DATA_REPO="$REGISTER-data"
+  if [[ -e "../$DATA_REPO/data/$PHASE" ]]; then
+    TSVFILE="../$DATA_REPO/data/$PHASE/$REGISTER/$REGISTER"
+  elif [[ -e "../$DATA_REPO/data" ]]; then
+    TSVFILE="../$DATA_REPO/data/$REGISTER/$REGISTER"
   fi
   if [[ -e $TSVFILE"es.tsv" ]]; then
     TSVFILE=$TSVFILE"es.tsv"
@@ -31,7 +35,8 @@ else
 fi
 
 if [[ -e $TSVFILE ]]; then
-  echo "data-file: $TSVFILE"
+  echo "DATA_REPO: $DATA_REPO"
+  echo "TSVFILE: $TSVFILE"
 else
   echo ""
   echo "Exiting as data file $TSVFILE not found"
@@ -46,10 +51,10 @@ rm -f field-records.json
 curl -sS https://field.$PHASE.openregister.org/records.json > field-records.json
 
 echo ""
-[[ -e ../$REGISTER-data ]] || echo "cloning $REGISTER-data repo"
-[[ -e ../$REGISTER-data ]] || (cd .. && git clone git@github.com:openregister/$REGISTER-data.git)
-echo "../$REGISTER-data repo: checkout master && pull"
-cd ../$REGISTER-data && git checkout master && git pull --rebase
+[[ -e ../$DATA_REPO ]] || echo "cloning $DATA_REPO repo"
+[[ -e ../$DATA_REPO ]] || (cd .. && git clone git@github.com:openregister/$DATA_REPO.git)
+echo "../$DATA_REPO repo: checkout master && pull"
+cd ../$DATA_REPO && git checkout master && git pull --rebase
 
 echo ""
 echo "Get credentials for $PHASE $REGISTER"
@@ -63,7 +68,8 @@ echo ""
 echo "Serialize tsv to $REGISTER.rsf"
 cd ../deployment
 if [[ -e $TSVFILE ]]; then
-  serializer tsv field-records.json $TSVFILE $REGISTER > $REGISTER.rsf
+  echo "TSVFILE: $TSVFILE"
+  serializer tsv field-records.json "$TSVFILE" $REGISTER > $REGISTER.rsf
 else
   echo "Exiting as data file $TSVFILE not found"; exit 1
 fi
@@ -73,10 +79,11 @@ echo -n "Delete existing $REGISTER data from $PHASE register? (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ; then
     echo ""
-    echo "Deleting $REGISTER data from $PHASE $REGISTER"
+    echo "Slack: Deleting $REGISTER data from $PHASE $REGISTER"
     curl -X POST -H 'Content-type: application/json' \
       --data "{'text':'Deleting $REGISTER data from <$REGISTER_URL|$PHASE $REGISTER> - $USERNAME'}" \
-      "https://hooks.slack.com/services/"$SLACK_PATH
+      "https://hooks.slack.com/services/$SLACK_PATH"
+    echo "Deleting $REGISTER data from $PHASE $REGISTER"
     for i in `seq 1 20`; do
         curl -X DELETE -u openregister:$PASSWORD https://$REGISTER.$PHASE.openregister.org/delete-register-data
         echo " - request: $i of 20"
@@ -101,7 +108,7 @@ if echo "$answer" | grep -iq "^y" ; then
   echo "Loading $REGISTER data to $PHASE"
   curl -X POST -H 'Content-type: application/json' \
     --data "{'text':'Loading $REGISTER data to <$REGISTER_URL|$PHASE $REGISTER> - $USERNAME'}" \
-    "https://hooks.slack.com/services/"$SLACK_PATH
+    "https://hooks.slack.com/services/$SLACK_PATH"
   echo `cat $REGISTER.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://$REGISTER.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
 fi
 
