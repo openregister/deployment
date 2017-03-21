@@ -21,7 +21,6 @@ module "openregister_db" {
   cidr_blocks = "${var.openregister_database_cidr_blocks}"
 
   instance_class = "${var.openregister_database_class_instance}"
-  parameter_group_name = "${lookup(var.rds_parameter_group_name, "openregister")}"
 
   username = "${var.read_api_rds_username}"
   password = "${var.openregister_database_master_password}"
