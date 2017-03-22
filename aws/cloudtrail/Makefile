@@ -10,7 +10,7 @@ export TF_VAR_central_cloudtrail_bucket_name:=$(or $(shell PASSWORD_STORE_DIR=~/
 module_depth:=-1
 
 purge-remote-state-cache:
-	rm -r .terraform/terraform.tfstate
+	rm -f .terraform/terraform.tfstate
 
 configure-state: purge-remote-state-cache
 	terraform init
