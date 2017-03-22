@@ -5,6 +5,7 @@ resource "aws_elb" "load_balancer" {
   name = "${replace(format("%s--%s", replace(var.vpc_name,"discovery","disco"), var.id),"_","-")}"
   subnets = [ "${var.public_subnet_ids}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]
+  connection_draining = true
 
   listener = {
     instance_port = 80
