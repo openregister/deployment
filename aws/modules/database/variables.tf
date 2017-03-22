@@ -30,10 +30,6 @@ variable "backup_retention_period" {
   default = "1"
 }
 
-variable "db_parameter_group_name" {
-  default = "postgresrdsgroup"
-}
-
 variable "engine" {
   default = "postgres"
 }
@@ -43,10 +39,6 @@ variable "instance_class" {
 }
 
 variable "maintenance_window" {}
-
-variable "parameter_group_name" {
-  default = "postgresrdsgroup"
-}
 
 variable "apply_immediately" {
   default = false

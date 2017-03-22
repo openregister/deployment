@@ -26,12 +26,6 @@ variable "public_cidr_blocks" { type = "list" }
 variable "admin_ips" { type = "list" }
 
 // RDS Configuration
-variable "rds_parameter_group_name" {
-  default = {
-    "openregister" = "postgresrdsgroup-9-5-2"
-  }
-}
-
 variable "rds_allocated_storage" {
   default = {
     "openregister" = 5
