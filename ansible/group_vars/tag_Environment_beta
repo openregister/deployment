@@ -11,6 +11,9 @@ register_settings:
   field:
     custodian_name: Paul Downey
     history_page_url: https://registers.cloudapps.digital/registers/field
+  internal-drainage-board:
+    custodian_name: Killie Mpopo
+    history_page_url: https://registers.cloudapps.digital/registers/internal-drainage-board
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
@@ -22,8 +25,9 @@ register_settings:
     history_page_url: https://registers.cloudapps.digital/registers/register
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
-  school-eng:
-    custodian_name: Andrew Thomson
+  registration-district:
+    custodian_name: Joanne Wilkes-Waterworth
+    history_page_url: https://registers.cloudapps.digital/registers/registration-district
   territory:
     history_page_url: https://registers.cloudapps.digital/registers/territory
     custodian_name: Tony Worron
@@ -38,6 +42,8 @@ register_groups:
 
   multi:
     - country
+    - internal-drainage-board
     - local-authority-eng
     - local-authority-type
+    - registration-district
     - territory
