@@ -10,7 +10,7 @@
     login_host="{{ groups[inventory_group_name][0] }}"
     login_user="{{ master_user }}"
     login_password="{{ master_password }}"
-  with_flattened: "{{ register_groups.values() }}"
+  with_items: "{{ register_groups.keys() }}"
   when: create_db
 
 - name: Set privileges for user
@@ -23,4 +23,4 @@
     login_host="{{ groups[inventory_group_name][0] }}"
     login_user="{{ item }}_openregister"
     login_password="{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
-  with_flattened: "{{ register_groups.values() }}"
+  with_items: "{{ register_groups.keys() }}"

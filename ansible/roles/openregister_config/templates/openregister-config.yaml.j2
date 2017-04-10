@@ -1,21 +1,12 @@
 #jinja2: trim_blocks: False
 
-{% for reg in item.value -%}
-  {%- set rds_instance_name = vpc + "-openregister-db" -%}
-  {%- set password_store_key = vpc + "/rds/openregister/" + reg -%}
-  {%- set db_name = reg -%}
-  {%- set db_user = reg + "_openregister" -%}
-  {%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + reg).decode('utf-8') -%}
+{%- set rds_instance_name = vpc + "-openregister-db" -%}
+{%- set password_store_key = vpc + "/rds/openregister/" + item.key -%}
+{%- set db_name = item.key -%}
+{%- set db_user = item.key + "_openregister" -%}
+{%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + item.key).decode('utf-8') -%}
 
-  {%- set db_host = groups[rds_instance_name][0] -%}
-  {%- set register_name = reg -%}
-  {%- set app_user = "openregister" -%}
-  {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
-  {%- set settings = register_settings[reg] | default({}) -%}
-  {%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
-  {%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
-
-{%- if loop.first -%}
+{%- set db_host = groups[rds_instance_name][0] -%}
 database:
   driverClass: org.postgresql.Driver
   url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
@@ -30,6 +21,15 @@ database:
   properties:
     charSet: UTF-8
 
+{% for reg in item.value -%}
+{%- set register_name = reg -%}
+{%- set app_user = "openregister" -%}
+{%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
+{%- set settings = register_settings[reg] | default({}) -%}
+%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
+{%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
+
+{%- if loop.first -%}
 trackingId: {{ tracking_id }}
 register: {{ register_name }}
 {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
@@ -78,20 +78,6 @@ registers:
 {% endif %}
 {% else %}
   {{ reg }}:
-    database:
-      driverClass: org.postgresql.Driver
-      url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
-      user: {{ db_user }}
-      password: {{ db_password }}
-
-      #db connection properties
-      initialSize: {{ db_initial_size | default(1) }}
-      minSize: {{ db_min_size | default(1) }}
-      maxSize: {{ db_max_size | default(4) }}
-
-      properties:
-        charSet: UTF-8
-
     trackingId: {{ tracking_id }}
     {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
