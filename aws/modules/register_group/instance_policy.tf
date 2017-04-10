@@ -66,10 +66,21 @@ resource "aws_iam_role_policy" "instance_policy" {
         {
             "Effect": "Allow",
             "Action": [
-                "ec2:DescribeTags"
+                "ec2:DescribeTags",
+                "elasticloadbalancing:Describe*"
             ],
             "Resource": [
                 "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+                "elasticloadbalancing:RegisterInstancesWithLoadBalancer"
+            ],
+            "Resource": [
+                "arn:aws:elasticloadbalancing:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:loadbalancer/${aws_elb.load_balancer.name}"
             ]
         }
     ]
