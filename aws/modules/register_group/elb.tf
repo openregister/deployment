@@ -6,6 +6,7 @@ resource "aws_elb" "load_balancer" {
   subnets = [ "${var.public_subnet_ids}" ]
   security_groups = ["${aws_security_group.load_balancer.id}"]
   connection_draining = true
+  connection_draining_timeout = 300
 
   listener = {
     instance_port = 80
