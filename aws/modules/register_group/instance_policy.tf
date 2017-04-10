@@ -60,7 +60,7 @@ resource "aws_iam_role_policy" "instance_policy" {
             ],
             "Resource": [
                 "arn:aws:s3:::aws-codedeploy-eu-west-1/*",
-                "arn:aws:s3:::openregister.app.artifacts/*"
+                "arn:aws:s3:::codepipeline-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}/*"
             ]
         },
         {
