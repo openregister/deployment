@@ -12,8 +12,8 @@
   {%- set app_user = "openregister" -%}
   {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
   {%- set settings = register_settings[reg] | default({}) -%}
-  {%- set default_field_register_url = "https://field." + register_domain + "/records.yaml?page-size=5000"  -%}
-  {%- set default_register_register_url = "https://register." + register_domain + "/records.yaml?page-size=5000"  -%}
+  {%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
+  {%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
 
 {%- if loop.first -%}
 database:
