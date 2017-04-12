@@ -45,5 +45,8 @@ register_groups:
     - internal-drainage-board
     - local-authority-eng
     - local-authority-type
+    - notifiable-animal-disease
+    - notifiable-animal-disease-confirmation-category
+    - notifiable-animal-disease-investigation-category
     - registration-district
     - territory
