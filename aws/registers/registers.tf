@@ -348,6 +348,20 @@ module "notifiable-animal-disease" {
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
+module "notifiable-animal-disease-confirmation-category" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease-confirmation-category", false)}"
+
+  name = "notifiable-animal-disease-confirmation-category"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
 module "notifiable-animal-disease-investigation-category" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease-investigation-category", false)}"
