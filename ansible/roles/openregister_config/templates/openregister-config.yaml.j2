@@ -26,12 +26,13 @@ database:
 {%- set app_user = "openregister" -%}
 {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
 {%- set settings = register_settings[reg] | default({}) -%}
-%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
+{%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
 {%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
 
 {%- if loop.first -%}
 trackingId: {{ tracking_id }}
 register: {{ register_name }}
+schema: {{ register_name }}
 {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
@@ -79,6 +80,7 @@ registers:
 {% else %}
   {{ reg }}:
     trackingId: {{ tracking_id }}
+    schema: {{ register_name }}
     {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
