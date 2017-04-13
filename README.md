@@ -102,6 +102,12 @@ Then [plan and apply your terraform](#terraforming) code.
 - Duplicate an existing `register_group_*.tf` configuration and edit appropriately.
 - Specify the `group_instance_count` in `environments/<myenv>.tfvars`.
 
+Additionally, by creating a new register group, you will need to create a new 
+database and user, per environment. To do this:
+- Update application config files by running `ansible/upload_configs_to_s3.yml` playbook.
+- Create a new database using `ansible/create_databases.yml` playbook.
+- Generate credentials via the `ansible/generate_passwords.yml` playbook
+
 Then [plan and apply your terraform](#terraforming) code.
 
 ## How to create a new environment
@@ -192,7 +198,7 @@ create/update the config files from the registers:
 ### Create databases
 
 The `ansible/create_databases.yml` file creates the database, creates users and grants permissions 
-to users for any register in an environment that does not have the database set up.
+to users for any register group in an environment that does not have the database set up.
 
 	cd ansible
 	ansible-playbook create_databases.yml -e vpc=<myenv>
