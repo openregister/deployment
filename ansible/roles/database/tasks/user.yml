@@ -18,9 +18,9 @@
     state=present
     db="{{ item }}"
     roles="{{ item }}_openregister"
-    objs=ALL_IN_SCHEMA
-    privs=ALL
+    type=database
+    privs=CREATE
     login_host="{{ groups[inventory_group_name][0] }}"
-    login_user="{{ item }}_openregister"
-    login_password="{{ lookup('pass', '{{ vpc }}/rds/openregister/{{ item }}') }}"
+    login_user="{{ master_user }}"
+    login_password="{{ master_password }}"
   with_items: "{{ register_groups.keys() }}"
