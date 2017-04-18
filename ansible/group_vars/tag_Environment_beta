@@ -20,23 +20,11 @@ register_settings:
   local-authority-type:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-type
-  notifiable-animal-disease:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease
-  notifiable-animal-disease-confirmation-category:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-confirmation-category
-  notifiable-animal-disease-investigation-category:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-investigation-category
   register:
     custodian_name: Paul Downey
     history_page_url: https://registers.cloudapps.digital/registers/register
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
-  registration-district:
-    custodian_name: Joanne Wilkes-Waterworth
-    history_page_url: https://registers.cloudapps.digital/registers/registration-district
   territory:
     history_page_url: https://registers.cloudapps.digital/registers/territory
     custodian_name: Tony Worron
@@ -54,8 +42,4 @@ register_groups:
     - internal-drainage-board
     - local-authority-eng
     - local-authority-type
-    - notifiable-animal-disease
-    - notifiable-animal-disease-confirmation-category
-    - notifiable-animal-disease-investigation-category
-    - registration-district
     - territory

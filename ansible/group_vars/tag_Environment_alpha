@@ -25,8 +25,12 @@ register_settings:
   notifiable-animal-disease:
     custodian_name: Jonathan Smith
     history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease
+  notifiable-animal-disease-confirmation-category:
+    custodian_name: Jonathan Smith
+    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-confirmation-category
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
+    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-investigation-category
   prison:
     custodian_name: Richard Carling
   register:
@@ -61,6 +65,7 @@ register_groups:
     - local-authority-sct
     - local-authority-type
     - notifiable-animal-disease
+    - notifiable-animal-disease-confirmation-category
     - notifiable-animal-disease-investigation-category
     - prison
     - religious-character
