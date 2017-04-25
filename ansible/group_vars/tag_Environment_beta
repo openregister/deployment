@@ -3,6 +3,8 @@ register_settings:
   country:
     custodian_name: Tony Worron
     history_page_url: https://registers.cloudapps.digital/registers/country
+    indexes:
+      - current-countries
     similar_registers:
       - territory
   datatype:
@@ -17,6 +19,8 @@ register_settings:
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
+    indexes:
+      - local-authority-by-type
   local-authority-type:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-type
