@@ -208,11 +208,11 @@ module "government-service_register" {
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
-module "industry_register" {
+module "industrial-classification_register" {
   source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "industry", false)}"
+  enabled = "${lookup(var.enabled_registers, "industrial-classification", false)}"
 
-  name = "industry"
+  name = "industrial-classification"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
   dns_zone_id = "${module.core.dns_zone_id}"
