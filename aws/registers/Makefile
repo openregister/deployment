@@ -44,7 +44,7 @@ ifndef TF_VAR_openregister_database_master_password
   $(error TF_VAR_openregister_database_master_password variable is required)
 endif
 
-purge-remote-state-cache: 
+purge-remote-state-cache:
 	rm -f backend.tf
 	rm -f .terraform/terraform.tfstate
 
