@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-echo "usage: ./scripts/registry-load.sh [registry] [phase]"
+echo "usage: ./scripts/datatype-load.sh [datatype] [phase]"
 echo ""
 
-REGISTRY=$1
+DATATYPE=$1
 PHASE=$2
-echo "registry: $REGISTRY"
+echo "datatype: $DATATYPE"
 echo "phase: $PHASE"
 
 echo ""
@@ -19,7 +19,7 @@ echo ""
 echo "Get credentials for $PHASE registry data"
 [[ -e ~/.registers-pass ]] || echo "cloning credentials repo to ~/.registers-pass"
 [[ -e ~/.registers-pass ]] || (cd ~ && git clone git@github.com:openregister/credentials.git .registers-pass)
-PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/register`
+PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/datatype`
 
 cd ../deployment
 
@@ -29,25 +29,24 @@ rm -f field-records.json
 curl -sS https://field.$PHASE.openregister.org/records.json > field-records.json
 
 echo ""
-echo "Serialize registry config tsv to $REGISTRY.rsf"
+echo "Serialize datatype config yaml to $DATATYPE.rsf"
 mkdir -p ./tmp
-cp ../registry-data/data/$PHASE/registry/$REGISTRY.yaml ./tmp
-echo "serializer yaml field-records.json tmp $REGISTRY > $REGISTRY.rsf"
-serializer yaml field-records.json tmp registry -excludeRootHash > $REGISTRY.rsf
+cp ../registry-data/data/$PHASE/datatype/$DATATYPE.yaml ./tmp
+serializer yaml field-records.json tmp datatype -excludeRootHash > $DATATYPE.rsf
 
 echo ""
-echo -n "Load $REGISTRY data into $PHASE registry register? (y/n)? "
+echo -n "Load $DATATYPE data into $PHASE datatype register? (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ; then
   echo ""
-  echo "Loading $REGISTRY configuration to $PHASE registry register"
-  echo `cat $REGISTRY.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://registry.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
+  echo "Loading $DATATYPE configuration to $PHASE datatype register"
+  echo `cat $DATATYPE.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://datatype.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
 fi
 
 echo ""
 echo "Removing temporary files"
 rm -f tmp/*.yaml
-rm -f $REGISTRY.rsf
+rm -f $DATATYPE.rsf
 rm -f field-records.json
 
 echo ""
