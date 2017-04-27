@@ -12,6 +12,8 @@ register_settings:
   country:
     similar_registers:
       - territory
+    indexes:
+      - current-countries
 
 register_groups:
   address:
