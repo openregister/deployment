@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-echo "usage: ./scripts/registry-load.sh [registry] [phase]"
+echo "usage: ./scripts/registry-load.sh [register] [phase]"
 echo ""
 
-REGISTRY=$1
+REGISTER=$1
 PHASE=$2
-echo "registry: $REGISTRY"
+echo "register: $REGISTER"
 echo "phase: $PHASE"
 
 echo ""
@@ -29,25 +29,25 @@ rm -f field-records.json
 curl -sS https://field.$PHASE.openregister.org/records.json > field-records.json
 
 echo ""
-echo "Serialize registry config tsv to $REGISTRY.rsf"
+echo "Serialize register config tsv to $REGISTER.rsf"
 mkdir -p ./tmp
-cp ../registry-data/data/$PHASE/registry/$REGISTRY.yaml ./tmp
-echo "serializer yaml field-records.json tmp $REGISTRY > $REGISTRY.rsf"
-serializer yaml field-records.json tmp registry -excludeRootHash > $REGISTRY.rsf
+cp ../registry-data/data/$PHASE/register/$REGISTER.yaml ./tmp
+echo "serializer yaml field-records.json tmp $REGISTER > $REGISTER.rsf"
+serializer yaml field-records.json tmp register -excludeRootHash > $REGISTER.rsf
 
 echo ""
-echo -n "Load $REGISTRY data into $PHASE registry register? (y/n)? "
+echo -n "Load $REGISTER data into $PHASE register register? (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ; then
   echo ""
-  echo "Loading $REGISTRY configuration to $PHASE registry register"
-  echo `cat $REGISTRY.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://registry.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
+  echo "Loading $REGISTER configuration to $PHASE register register"
+  echo `cat $REGISTER.rsf | curl -X POST -u openregister:$PASSWORD --data-binary @- https://register.$PHASE.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"`
 fi
 
 echo ""
 echo "Removing temporary files"
 rm -f tmp/*.yaml
-rm -f $REGISTRY.rsf
+rm -f $REGISTER.rsf
 rm -f field-records.json
 
 echo ""
