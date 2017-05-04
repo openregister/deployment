@@ -404,11 +404,39 @@ module "premises_register" {
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
 }
 
+module "principal-local-authority_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "principal-local-authority", false)}"
+
+  name = "principal-local-authority"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
 module "prison_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "prison", false)}"
 
   name = "prison"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+}
+
+module "prison-estate_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "prison-estate", false)}"
+
+  name = "prison-estate"
   environment = "${var.vpc_name}"
   load_balancer = "${module.multi.load_balancer}"
   dns_zone_id = "${module.core.dns_zone_id}"
