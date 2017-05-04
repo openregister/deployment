@@ -31,8 +31,11 @@ register_settings:
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
     history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-investigation-category
-  prison:
+  prison-estate:
     custodian_name: Richard Carling
+  principal-local-authority:
+    custodian_name: Lisa James
+    history_page_url: https://registers.cloudapps.digital/registers/principal-local-authority
   register:
     custodian_name: Paul Downey
     enable_register_data_delete: false
@@ -55,26 +58,17 @@ register_groups:
     - field
 
   multi:
-    - academy-school-eng
-    - diocese
     - government-organisation
     - government-service
     - internal-drainage-board
-    - la-maintained-school-eng
     - local-authority-eng
     - local-authority-sct
     - local-authority-type
     - notifiable-animal-disease
     - notifiable-animal-disease-confirmation-category
     - notifiable-animal-disease-investigation-category
-    - prison
-    - religious-character
+    - principal-local-authority
+    - prison-estate
     - registration-district
-    - school-admissions-policy
-    - school-authority-eng
     - school-eng
-    - school-gender
-    - school-phase
-    - school-tag
-    - school-type
     - territory
