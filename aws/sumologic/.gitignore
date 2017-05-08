@@ -1,5 +1,7 @@
 build/
 node_modules
+venv
 
 # built by the Makefile. Could contain secrets required for lambda functions
 lambda.js
+lambda.py
