@@ -13,8 +13,8 @@ ifneq ($(expected_node_version), $(actual_node_version))
 	$(error Expected node version $(expected_node_version), but saw $(actual_node_version))
 endif
 
-python_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard lambda/python/*)))
-node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard lambda/node/*)))
+python_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard python/*)))
+node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard node/*)))
 
 sumologic_cloudfront_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
 sumologic_cloudtrail_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
@@ -45,25 +45,25 @@ apply: configure-state $(python_lambda_functions) $(node_lambda_functions)
 destroy: configure-state
 	terraform destroy
 
-build/lambda/node/%.zip: lambda/node/%/lambda.js lambda/node/%/package.json
+build/node/%.zip: node/%/lambda.js node/%/package.json
 	mkdir -p $(dir $@)
 	npm install --production --prefix $(dir $<)
-	cd $(dir $<); zip -r ../../../$@ $(notdir $<) node_modules/
+	cd $(dir $<); zip -r ../../$@ $(notdir $<) node_modules/
 
-build/lambda/python/%.zip: lambda/python/%/lambda.py
+build/python/%.zip: python/%/lambda.py
 	mkdir -p $(dir $@)
 	virtualenv --python=python3 $(dir $<)venv
 	$(dir $<)venv/bin/pip install -r $(dir $<)requirements.txt
-	cd $(dir $<); zip ../../../$@ $(notdir $<)
-	cd $(dir $<)venv/lib/python3.6/site-packages; zip -r ../../../../../../../$@ ./
+	cd $(dir $<); zip ../../$@ $(notdir $<)
+	cd $(dir $<)venv/lib/python3.6/site-packages; zip -r ../../../../../../$@ ./
 
-lambda/node/cloudfront-s3-logs-to-sumologic/lambda.js: lambda/node/cloudfront-s3-logs-to-sumologic/cloudfront.js
+node/cloudfront-s3-logs-to-sumologic/lambda.js: node/cloudfront-s3-logs-to-sumologic/cloudfront.js
 	sed -e 's/<XXXX>/$(sumologic_cloudfront_key)/' $< > $@
 
-lambda/node/cloudtrail-s3-logs-to-sumologic/lambda.js: lambda/node/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
+node/cloudtrail-s3-logs-to-sumologic/lambda.js: node/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
 	sed -e 's/<XXXX>/$(sumologic_cloudtrail_key)/' $< > $@
 
-lambda/python/statuscake-to-performance-platform/lambda.py: lambda/python/statuscake-to-performance-platform/performance_platform.py
+python/statuscake-to-performance-platform/lambda.py: python/statuscake-to-performance-platform/performance_platform.py
 	cp $< $@
 	gsed -i 's/dummy_key/$(statuscake_key)/' $@
 	gsed -i 's/dummy_username/$(statuscake_username)/' $@
@@ -71,7 +71,7 @@ lambda/python/statuscake-to-performance-platform/lambda.py: lambda/python/status
 
 clean:
 	rm -rf build/
-	rm -rf lambda/node/*/node_modules/
-	rm -rf lambda/node/*/lambda.js
-	rm -rf lambda/python/*/venv
-	rm -rf lambda/python/*/lambda.py
+	rm -rf node/*/node_modules/
+	rm -rf node/*/lambda.js
+	rm -rf python/*/venv
+	rm -rf python/*/lambda.py

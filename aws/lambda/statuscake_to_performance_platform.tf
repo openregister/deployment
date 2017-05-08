@@ -19,11 +19,11 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
 }
 
 resource "aws_lambda_function" "statuscake_availability_to_performance_platform" {
-    filename = "build/lambda/python/statuscake-to-performance-platform.zip"
+    filename = "build/python/statuscake-to-performance-platform.zip"
     function_name = "statuscake_availability_to_performance_platform"
     role = "${aws_iam_role.lambda.arn}"
     handler = "lambda.lambda_handler"
     runtime = "python3.6"
     timeout = 20
-    source_code_hash = "${base64sha256(file("build/lambda/python/statuscake-to-performance-platform.zip"))}"
+    source_code_hash = "${base64sha256(file("build/python/statuscake-to-performance-platform.zip"))}"
 }
