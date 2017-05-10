@@ -24,8 +24,8 @@ def lambda_handler(event, context):
 
     uptimes = [result['Uptime'] for result in results if WEBSITE_MATCHER.match(result['WebsiteName'])]
     print("Uptimes: {}".format(uptimes))
-    mean_uptime = mean(uptimes)
-    print("Mean uptime: {}%".format(mean_uptime))
+    mean_uptime = mean(uptimes)/100.0
+    print("Mean uptime: {}".format(mean_uptime))
 
     print("Sending mean uptime to Performance Platform...")
     performance_platform_payload =  {

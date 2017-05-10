@@ -11,7 +11,7 @@ EXPECTED_PAYLOAD = {
     "service": "govuk-registers",
     "check": "govuk-registers",
     "period": "day",
-    "uptime": 50
+    "uptime": 0.50
 }
 
 FAKE_STATUSCAKE_RESPONSE = [
