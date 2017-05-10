@@ -27,15 +27,16 @@ def lambda_handler(event, context):
     mean_uptime = mean(uptimes)/100.0
     print("Mean uptime: {}".format(mean_uptime))
 
-    print("Sending mean uptime to Performance Platform...")
     performance_platform_payload =  {
-        "_timestamp": datetime.now().isoformat(sep='T'),
+        "_timestamp": datetime.utcnow().strftime("%Y-%m-%dT00:00:00+00:00"),
         "service": "govuk-registers",
         "check": "govuk-registers",
         "period": "day",
         "uptime": mean_uptime
     }
 
+    print("Payload: {}".format(performance_platform_payload))
+    print("Sending mean uptime to Performance Platform...")
     performance_platform_response = requests.post(
         PERFORMANCE_PLATFORM_ENDPOINT,
         headers={ 'Authorization': 'Bearer {}'.format(PERFORMANCE_PLATFORM_BEARER_TOKEN) },

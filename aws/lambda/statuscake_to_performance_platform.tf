@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "every_day" {
     name = "every-day"
     description = "Fires every day"
-    schedule_expression = "rate(1 day)"
+    schedule_expression = "cron(0 0 * * ? *)"
 }
 
 resource "aws_cloudwatch_event_target" "check_every_day" {
