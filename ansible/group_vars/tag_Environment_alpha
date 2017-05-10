@@ -15,6 +15,9 @@ register_settings:
     custodian_name: Neil Williams
   government-service:
     custodian_name: Thomas Moore
+  industrial-classification:
+    custodian_name: Charlie Roth-Smith
+    history_page_url: https://registers.cloudapps.digital/registers/industrial-classification
   local-authority-eng:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
@@ -31,6 +34,9 @@ register_settings:
   notifiable-animal-disease-investigation-category:
     custodian_name: Jonathan Smith
     history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-investigation-category
+  occupation:
+    custodian_name: Charlie Roth-Smith
+    history_page_url: https://registers.cloudapps.digital/registers/occupation
   prison-estate:
     custodian_name: Richard Carling
   principal-local-authority:
@@ -60,6 +66,7 @@ register_groups:
   multi:
     - government-organisation
     - government-service
+    - industrial-classification
     - internal-drainage-board
     - local-authority-eng
     - local-authority-sct
@@ -67,6 +74,7 @@ register_groups:
     - notifiable-animal-disease
     - notifiable-animal-disease-confirmation-category
     - notifiable-animal-disease-investigation-category
+    - occupation
     - principal-local-authority
     - prison-estate
     - registration-district
