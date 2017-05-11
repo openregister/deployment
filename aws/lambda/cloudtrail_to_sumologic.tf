@@ -15,11 +15,11 @@ resource "aws_s3_bucket_notification" "cloudtrail_bucket_notification" {
 }
 
 resource "aws_lambda_function" "cloudtrail_logs_to_sumologic" {
-    filename = "build/lambda/cloudtrail-s3-logs-to-sumologic.zip"
+    filename = "build/node/cloudtrail-s3-logs-to-sumologic.zip"
     function_name = "cloudtrail_logs_to_sumologic"
     role = "${aws_iam_role.lambda.arn}"
     handler = "lambda.handler"
     runtime = "nodejs4.3"
     timeout = 20
-    source_code_hash = "${base64sha256(file("build/lambda/cloudtrail-s3-logs-to-sumologic.zip"))}"
+    source_code_hash = "${base64sha256(file("build/node/cloudtrail-s3-logs-to-sumologic.zip"))}"
 }
