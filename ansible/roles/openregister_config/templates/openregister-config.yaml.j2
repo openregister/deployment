@@ -58,6 +58,10 @@ downloadConfigs: true
 
 server:
   registerDefaultExceptionMappers: false
+  requestLog:
+    type: classic
+    appenders:
+      - type: logstash-console
 
 credentials:
   user: {{ app_user }}
@@ -67,9 +71,7 @@ credentials:
 logging:
   level: WARN
   appenders:
-    - type: console
-      target: stdout
-      logFormat: "%-5p [%d{ISO8601}] [Register: %X{register}] %c: %m %replace(%rEx){'\n',' '}%nopex%n"
+    - type: logstash-console
 
 metrics:
   reporters:
