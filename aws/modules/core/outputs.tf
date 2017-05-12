@@ -49,3 +49,7 @@ output "dns_zone_id" {
 output "private_dns_zone_id" {
   value = "${aws_route53_zone.private.zone_id}"
 }
+
+output "cdn_dns_zone_id" {
+  value = "${aws_route53_zone.cdn.zone_id}"
+}

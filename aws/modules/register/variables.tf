@@ -31,3 +31,7 @@ variable cdn_configuration {
 variable cdn_s3_origin_access_identity {
   description = "identity that allows CloudFront to read from an S3 origin"
 }
+
+variable cdn_dns_zone_id {
+  description = "hosted zone for CDN records"
+}

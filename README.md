@@ -239,11 +239,6 @@ Use the AWS API Gateway console to rotate the SSL certificate.
 Go to Custom Domain Names then select the custom domain name called `register.gov.uk` and use the Rotate button to
 add the new SSL certificate.
 
-## Create DNS record
-
-Use the AWS Route53 console to create a new DNS record for `<myregister>.register.gov.uk` and ensure the Alias Target matches
-the CloudFront distribution for `<myregister>.register.gov.uk`.
-
 # Data loading via HTTP
 
 To reload data into existing register via HTTP, you can run this script passing
