@@ -17,7 +17,7 @@ resource "aws_route53_record" "cdn_record" {
 
   name = "${var.name}.${var.cdn_configuration["domain"]}"
   type = "A"
-  zone_id = "Z10GCCOLEK7PYC"
+  zone_id = "${var.cdn_dns_zone_id}"
 
   alias {
     name = "${aws_cloudfront_distribution.distribution.domain_name}"
