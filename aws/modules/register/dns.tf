@@ -11,3 +11,17 @@ resource "aws_route53_record" "record" {
     evaluate_target_health = false // we don't have anything to fail over to at the moment
   }
 }
+
+resource "aws_route53_record" "cdn_record" {
+  count = "${var.enabled && var.cdn_configuration["enabled"] ? 1 : 0}"
+
+  name = "${var.name}.${var.cdn_configuration["domain"]}"
+  type = "A"
+  zone_id = "Z10GCCOLEK7PYC"
+
+  alias {
+    name = "${aws_cloudfront_distribution.distribution.domain_name}"
+    zone_id = "${aws_cloudfront_distribution.distribution.hosted_zone_id}"
+    evaluate_target_health = false // we don't have anything to fail over to at the moment
+  }
+}

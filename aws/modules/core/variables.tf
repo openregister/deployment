@@ -43,3 +43,6 @@ variable "soa_negative_cache_ttl" {
   description = "The length of time `NXDOMAIN` responses from our authoritative nameservers should be cached by recursors for"
 }
 
+variable "cdn_configuration" {
+  type = "map"
+}

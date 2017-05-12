@@ -30,3 +30,8 @@ resource "aws_route53_zone" "private" {
   name = "${var.vpc_name}.openregister"
   vpc_id = "${aws_vpc.registers.id}"
 }
+
+resource "aws_route53_zone" "cdn" {
+  count = "${var.cdn_configuration["enabled"] ? 1 : 0}"
+  name = "${var.cdn_configuration["domain"]}."
+}

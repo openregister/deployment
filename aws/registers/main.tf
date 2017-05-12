@@ -26,6 +26,7 @@ module "core" {
   bastion_instance_ami = "${data.aws_ami.ubuntu-hvm-ebs-ssd.image_id}"
   bastion_user_data = "${file("templates/users.yaml")}"
   admin_ips = "${var.admin_ips}"
+  cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "configuration" {
