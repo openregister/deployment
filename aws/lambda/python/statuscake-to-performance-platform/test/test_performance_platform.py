@@ -49,7 +49,7 @@ FAKE_STATUSCAKE_RESPONSE = [
 ]
 
 STATUSCAKE_ENDPOINT = "https://app.statuscake.com/API/Tests"
-PERFORMANCE_PLATFORM_ENDPOINT = "https://www.performance.service.gov.uk/data/govuk-registers/monitoring"
+PERFORMANCE_PLATFORM_ENDPOINT = "https://www.performance.service.gov.uk/data/govuk-registers/uptime"
 
 def data_equals(data):
     def _data_equals(request):

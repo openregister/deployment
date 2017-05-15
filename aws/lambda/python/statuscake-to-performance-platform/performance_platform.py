@@ -9,7 +9,7 @@ STATUSCAKE_API_USERNAME = "dummy_username"
 STATUSCAKE_ENDPOINT = "https://app.statuscake.com/API/Tests"
 
 PERFORMANCE_PLATFORM_BEARER_TOKEN=  "dummy_bearer"
-PERFORMANCE_PLATFORM_ENDPOINT = "https://www.performance.service.gov.uk/data/govuk-registers/monitoring"
+PERFORMANCE_PLATFORM_ENDPOINT = "https://www.performance.service.gov.uk/data/govuk-registers/uptime"
 
 WEBSITE_MATCHER = re.compile("^beta.*records$")
 
