@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "usage: ./scripts/registry-load.sh [register] [phase]"
+echo "usage: ./scripts/register-load.sh [register] [phase]"
 echo ""
 
 REGISTER=$1
