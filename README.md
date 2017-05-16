@@ -241,6 +241,18 @@ add the new SSL certificate.
 
 # Data loading via HTTP
 
+## When promoting a register from alpha -> beta (or discovery -> alpha)
+
+When promoting a register to a new phase we must make sure we copy the exact data
+that was approved in the previous phase. I.e. if promoting from alpha to beta, we must
+copy the data via RSF from the alpha register to the new beta register.
+
+	curl https://{register}.alpha.openregister.org/download-rsf | curl -X POST @- -u user:pswd https://{register}.alpha.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"
+
+However, new field and register register data must be loaded from github using the scripts below.
+
+## Loading data to registers in existing phases from github
+
 To reload data into existing register via HTTP, you can run this script passing
 the register name and the phase name, you will be prompted if you want to delete
 data and if you want to load data, eg:
@@ -256,7 +268,7 @@ To load a register entry into the `register` register, you can run this script
 passing the register name, you will be prompted if you want to load data. For
 example:
 
-    ./scripts/registry-load.sh prison discovery
+    ./scripts/register-load.sh prison discovery
 
 To load a field entry into the `field` register, you can run this script
 passing the field name, you will be prompted if you want to load data. For
