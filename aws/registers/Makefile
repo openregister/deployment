@@ -66,16 +66,16 @@ diff-config:
 	bash -c "diff --unified --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -); exit 0"
 
 plan: configure-state
-	terraform plan $(defaults) -module-depth=$(module_depth)
+	terraform plan $(defaults) -module-depth=$(module_depth) -parallelism=1
 
 plan-destroy: configure-state
-	terraform plan -destroy $(defaults) -module-depth=$(module_depth)
+	terraform plan -destroy $(defaults) -module-depth=$(module_depth) -parallelism=1
 
 apply: configure-state
-	terraform apply $(defaults)
+	terraform apply $(defaults) -parallelism=1
 
 destroy: configure-state
-	terraform destroy $(defaults)
+	terraform destroy $(defaults) -parallelism=1
 
 config:
 	cd ../../ansible && ansible-playbook generate_passwords.yml \
