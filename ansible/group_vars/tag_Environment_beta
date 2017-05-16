@@ -35,6 +35,9 @@ register_settings:
     history_page_url: https://registers.cloudapps.digital/registers/register
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
+  registration-district:
+    custodian_name: Joanne Wilkes-Waterworth
+    history_page_url: https://registers.cloudapps.digital/registers/registration-district
   territory:
     history_page_url: https://registers.cloudapps.digital/registers/territory
     custodian_name: Tony Worron
@@ -54,4 +57,5 @@ register_groups:
     - internal-drainage-board
     - local-authority-eng
     - local-authority-type
+    - registration-district
     - territory
