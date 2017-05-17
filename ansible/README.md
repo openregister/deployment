@@ -8,6 +8,10 @@ not suitable for the toplevel README.
 To run this playbook, the [lego](https://github.com/xenolf/lego)
 binary must be available on your PATH.
 
+NOTE - until https://github.com/xenolf/lego/issues/362 is resolved you will 
+need to make sure your lego binary includes this change https://github.com/xenolf/lego/pull/357. 
+Until there is a new release of lego it might be necessary to install it from source.
+
 By default, the letsencrypt staging server will be used (suitable for
 testing, but not suitable for generating trusted certificates).
 
