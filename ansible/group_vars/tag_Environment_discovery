@@ -35,6 +35,7 @@ register_groups:
     - food-premises-rating
     - food-premises-type
     - government-domain
+    - green-deal-certification-body
     - industrial-classification
     - jobcentre
     - local-authority-eng

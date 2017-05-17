@@ -178,6 +178,21 @@ module "food-premises-type_register" {
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
 }
 
+module "green-deal-certification-body_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "green-deal-certification-body", false)}"
+
+  name = "green-deal-certification-body"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+}
+
 module "government-domain_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "government-domain", false)}"
