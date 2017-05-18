@@ -225,8 +225,11 @@ Upload the new certificate to IAM using terraform. Follow the instructions [here
 ### Rotate SSL certificate for CloudFront distributions
 
 Each Beta register has a CloudFront distribution. These will be using the old certificate (without the `<myregister>.register.gov.uk` 
-alternative domain). Using the AWS CloudFront console, change each of the existing Beta CloudFront 
-distributions to use the new certificate.
+alternative domain). You need to update the certificate for each of the CloudFront distributions. Do this by updating `cdn_configuration.certificate_id` in `aws/registers/environments/beta.tfvars`. Then apply the changes using terraform.
+
+	cd aws/registers
+	make plan -e vpc=beta
+	make apply -e vpc=beta
 
 ### Delete the old certificate
 
@@ -236,8 +239,10 @@ to delete the old certificate from IAM.
 ### Rotate SSL certificate for API Gateway
 
 Use the AWS API Gateway console to rotate the SSL certificate. 
-Go to Custom Domain Names then select the custom domain name called `register.gov.uk` and use the Rotate button to
-add the new SSL certificate.
+The AWS Console for API Gateway has changed recently and it is only possible to use certificates stored 
+in AWS Certificate Manager in the US East (N. Virginia) `us-east-1` for a Custom Domain Name. Using
+the Certificate Manager console (in the US East (N. Virginia) region) reimport the certificate with domain
+name `register.gov.uk`. 
 
 # Data loading via HTTP
 
