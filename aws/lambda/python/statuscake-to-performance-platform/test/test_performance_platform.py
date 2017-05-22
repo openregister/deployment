@@ -7,7 +7,7 @@ from requests.exceptions import HTTPError
 import performance_platform
 
 EXPECTED_PAYLOAD = {
-    "_timestamp": "2017-05-08T00:00:00+00:00",
+    "_timestamp": "2017-05-07T00:00:00+00:00",
     "service": "govuk-registers",
     "check": "govuk-registers",
     "period": "day",
