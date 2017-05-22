@@ -7,8 +7,6 @@ register_settings:
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.test.config/fields.yaml"
     registers_yaml_location: "s3://openregister.test.config/registers.yaml"
-  address:
-    enable_download_resource: false
   country:
     similar_registers:
       - territory
@@ -16,8 +14,6 @@ register_settings:
       - current-countries
 
 register_groups:
-  address:
-    - address
   basic:
     - register
     - field
