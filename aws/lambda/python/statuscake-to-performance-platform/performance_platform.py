@@ -2,7 +2,7 @@ import requests
 import json
 import re
 from statistics import mean
-from datetime import datetime
+from datetime import datetime, timedelta
 
 STATUSCAKE_API_KEY = "dummy_key"
 STATUSCAKE_API_USERNAME = "dummy_username"
@@ -28,8 +28,10 @@ def lambda_handler(event, context):
     mean_uptime = mean(uptimes)/100.0
     print("Mean uptime: {}".format(mean_uptime))
 
+    yesterday = datetime.utcnow() - timedelta(days=1)
+
     performance_platform_payload =  {
-        "_timestamp": datetime.utcnow().strftime("%Y-%m-%dT00:00:00+00:00"),
+        "_timestamp": yesterday.strftime("%Y-%m-%dT00:00:00+00:00"),
         "service": "govuk-registers",
         "check": "govuk-registers",
         "period": "day",
