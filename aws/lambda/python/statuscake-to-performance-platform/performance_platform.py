@@ -19,10 +19,10 @@ def lambda_handler(event, context):
         "API": STATUSCAKE_API_KEY,
         "Username": STATUSCAKE_API_USERNAME
     })
+    print("StatusCake response: {}".format(tests_response.text))
     tests_response.raise_for_status()
     results = tests_response.json()
 
-    print("StatusCake response: {}".format(results))
     uptimes = [result['Uptime'] for result in results if WEBSITE_MATCHER.match(result['WebsiteName'])]
     print("Uptimes: {}".format(uptimes))
     mean_uptime = mean(uptimes)/100.0
