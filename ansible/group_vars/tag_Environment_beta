@@ -30,6 +30,9 @@ register_settings:
   local-authority-type:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-type
+  prison-estate:
+    custodian_name: Richard Carling
+    history_page_url: https://registers.cloudapps.digital/registers/prison-estate
   register:
     custodian_name: Paul Downey
     history_page_url: https://registers.cloudapps.digital/registers/register
@@ -57,5 +60,6 @@ register_groups:
     - internal-drainage-board
     - local-authority-eng
     - local-authority-type
+    - prison-estate
     - registration-district
     - territory
