@@ -29,7 +29,7 @@ register_settings:
       - local-authority-by-type
   local-authority-sct:
     custodian_name: Hugh Buchanan
-    history_page_url: https://registers.cloudapps.digital/registers/local-authority-scotland
+    history_page_url: https://registers.cloudapps.digital/registers/local-authority-sct
   local-authority-type:
     custodian_name: Stephen McAllister
     history_page_url: https://registers.cloudapps.digital/registers/local-authority-type
