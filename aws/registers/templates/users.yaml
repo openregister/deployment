@@ -3,13 +3,6 @@
 users:
   - default
 
-  - name: philandstuff
-    groups: users
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDpD0Wc0pfD5NrV0D7alwOZDIqC9id+RroF2BQ59wLqxvF4wvlgtab0VHiIylSeN4K2bK5ikugy6/rwhWWdoQ3raMXIgOWP6ukSh/OLUioxCeop04IlF4JgUo3uNoInkUegnLw42sg/cKX+pbv/1Rc4GEO6J0Wy6YylyeieAWiy2rwgO/nr/49Tyiw1C66embmglhv7OaZEthpKyM3u6rlJeeU0H2K/bsc9yU/Utpek0hx/nih8qlVEPG7/3welWUNb/LwFC4EpJKiU72mRcjWGh9l5MjCJ2SR/wimY1AHQ4YES3VeAQvcaTKMCnaBET/RhnashxMr0f3V7IDkg56tZ cardno:000603815000
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    shell: /bin/bash
-
   - name: michaelabenyohai
     groups: users
     ssh-authorized-keys:
