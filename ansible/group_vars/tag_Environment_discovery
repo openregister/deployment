@@ -48,6 +48,7 @@ register_groups:
     - premises
     - prison
     - registration-district
+    - social-housing-provider
     - statistical-geography
     - street
     - street-custodian
