@@ -52,6 +52,9 @@ register_settings:
   school-eng:
     custodian_name: Andrew Thomson
     history_page_url: https://registers.cloudapps.digital/registers/school-eng
+  social-housing-provider:
+    custodian_name: Julie Bond
+    history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider
   territory:
     custodian_name: Tony Worron
     similar_registers:
@@ -79,4 +82,5 @@ register_groups:
     - prison-estate
     - registration-district
     - school-eng
+    - social-housing-provider
     - territory
