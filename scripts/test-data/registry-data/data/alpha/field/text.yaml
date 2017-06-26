@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: text
+field: text
+phase: alpha
+register: ''
+text: Any additional information about a record in a register. 

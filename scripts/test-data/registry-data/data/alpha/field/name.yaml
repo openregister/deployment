@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: string
+field: name
+phase: alpha
+register: ''
+text: The commonly-used name of a record.

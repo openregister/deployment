@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: string
+field: phase
+phase: alpha
+register: ''
+text: The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live.
