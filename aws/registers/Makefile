@@ -23,10 +23,6 @@ export AWS_DEFAULT_REGION:=eu-west-1
 # RDS master passwords
 export TF_VAR_openregister_database_master_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
 
-# StatusCake
-export TF_VAR_statuscake_username:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
-export TF_VAR_statuscake_apikey:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
-
 # Pingdom
 export TF_VAR_pingdom_user:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n 1), $(error "Couldn't get Pingdom username"))
 export TF_VAR_pingdom_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n 1), $(error "Couldn't get Pingdom password"))
@@ -71,16 +67,16 @@ diff-config:
 	bash -c "diff --unified --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -); exit 0"
 
 plan: configure-state
-	terraform plan $(defaults) -module-depth=$(module_depth) -parallelism=1
+	terraform plan $(defaults) -module-depth=$(module_depth)
 
 plan-destroy: configure-state
-	terraform plan -destroy $(defaults) -module-depth=$(module_depth) -parallelism=1
+	terraform plan -destroy $(defaults) -module-depth=$(module_depth)
 
 apply: configure-state
-	terraform apply $(defaults) -parallelism=1
+	terraform apply $(defaults)
 
 destroy: configure-state
-	terraform destroy $(defaults) -parallelism=1
+	terraform destroy $(defaults)
 
 config:
 	cd ../../ansible && ansible-playbook generate_passwords.yml \
