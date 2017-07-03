@@ -11,6 +11,7 @@ module "address_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "academy-school-eng_register" {
@@ -26,6 +27,7 @@ module "academy-school-eng_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "clinical-commissioning-group_register" {
@@ -41,6 +43,7 @@ module "clinical-commissioning-group_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "company_register" {
@@ -56,6 +59,7 @@ module "company_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "country_register" {
@@ -71,6 +75,7 @@ module "country_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "datatype_register" {
@@ -86,6 +91,7 @@ module "datatype_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "diocese_register" {
@@ -101,6 +107,7 @@ module "diocese_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "field_register" {
@@ -116,6 +123,7 @@ module "field_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "food-authority_register" {
@@ -131,6 +139,7 @@ module "food-authority_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "food-premises_register" {
@@ -146,6 +155,7 @@ module "food-premises_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "food-premises-rating_register" {
@@ -161,6 +171,7 @@ module "food-premises-rating_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "food-premises-type_register" {
@@ -176,6 +187,7 @@ module "food-premises-type_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "green-deal-certification-body_register" {
@@ -191,6 +203,7 @@ module "green-deal-certification-body_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "government-domain_register" {
@@ -206,6 +219,7 @@ module "government-domain_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "government-organisation_register" {
@@ -221,6 +235,7 @@ module "government-organisation_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "government-service_register" {
@@ -236,6 +251,7 @@ module "government-service_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "industrial-classification_register" {
@@ -251,6 +267,7 @@ module "industrial-classification_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "internal-drainage-board_register" {
@@ -266,6 +283,7 @@ module "internal-drainage-board_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "jobcentre_register" {
@@ -281,6 +299,7 @@ module "jobcentre_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "la-maintained-school-eng_register" {
@@ -296,6 +315,7 @@ module "la-maintained-school-eng_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "local-authority-eng_register" {
@@ -311,6 +331,7 @@ module "local-authority-eng_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "local-authority-nir_register" {
@@ -326,6 +347,7 @@ module "local-authority-nir_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "local-authority-sct_register" {
@@ -341,6 +363,7 @@ module "local-authority-sct_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "local-authority-type_register" {
@@ -356,6 +379,7 @@ module "local-authority-type_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "local-authority-wls_register" {
@@ -371,6 +395,7 @@ module "local-authority-wls_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "notifiable-animal-disease" {
@@ -386,6 +411,7 @@ module "notifiable-animal-disease" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "notifiable-animal-disease-confirmation-category" {
@@ -401,6 +427,7 @@ module "notifiable-animal-disease-confirmation-category" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "notifiable-animal-disease-investigation-category" {
@@ -416,6 +443,7 @@ module "notifiable-animal-disease-investigation-category" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "place_register" {
@@ -431,6 +459,7 @@ module "place_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "premises_register" {
@@ -446,6 +475,7 @@ module "premises_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "principal-local-authority_register" {
@@ -461,6 +491,7 @@ module "principal-local-authority_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "prison_register" {
@@ -476,6 +507,7 @@ module "prison_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "prison-estate_register" {
@@ -491,6 +523,7 @@ module "prison-estate_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "occupation_register" {
@@ -506,6 +539,7 @@ module "occupation_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "register_register" {
@@ -521,6 +555,7 @@ module "register_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "registration-district_register" {
@@ -536,6 +571,7 @@ module "registration-district_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "religious-character_register" {
@@ -551,6 +587,7 @@ module "religious-character_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-admissions-policy_register" {
@@ -566,6 +603,7 @@ module "school-admissions-policy_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-authority-eng_register" {
@@ -581,6 +619,7 @@ module "school-authority-eng_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-eng_register" {
@@ -596,6 +635,7 @@ module "school-eng_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-gender_register" {
@@ -611,6 +651,7 @@ module "school-gender_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-phase_register" {
@@ -626,6 +667,7 @@ module "school-phase_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-tag_register" {
@@ -641,6 +683,7 @@ module "school-tag_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-trust_register" {
@@ -656,6 +699,7 @@ module "school-trust_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "school-type_register" {
@@ -671,6 +715,7 @@ module "school-type_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "social-housing-provider_register" {
@@ -686,6 +731,7 @@ module "social-housing-provider_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "statistical-geography_register" {
@@ -701,6 +747,7 @@ module "statistical-geography_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "street_register" {
@@ -716,6 +763,7 @@ module "street_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "street-custodian_register" {
@@ -731,6 +779,7 @@ module "street-custodian_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "territory_register" {
@@ -746,6 +795,7 @@ module "territory_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "uk_register" {
@@ -761,6 +811,7 @@ module "uk_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
 module "vehicle-colour_register" {
@@ -776,4 +827,5 @@ module "vehicle-colour_register" {
   cdn_configuration = "${var.cdn_configuration}"
   cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
   cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
