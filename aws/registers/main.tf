@@ -4,11 +4,6 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
-provider "statuscake" {
-  username = "${var.statuscake_username}"
-  apikey = "${var.statuscake_apikey}"
-}
-
 provider "pingdom" {
   user = "${var.pingdom_user}"
   password = "${var.pingdom_password}"
