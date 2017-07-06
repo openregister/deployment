@@ -19,8 +19,9 @@ node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard node/*)))
 sumologic_cloudfront_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudfront-logs)
 sumologic_cloudtrail_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
 
-statuscake_username:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n1)
-statuscake_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n1)
+pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
+pingdom_password:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n1)
+pingdom_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom/api | head -n1)
 
 performance_platform_bearer_token:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/performance-platform | head -n1)
 
@@ -63,11 +64,12 @@ node/cloudfront-s3-logs-to-sumologic/lambda.js: node/cloudfront-s3-logs-to-sumol
 node/cloudtrail-s3-logs-to-sumologic/lambda.js: node/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
 	sed -e 's/<XXXX>/$(sumologic_cloudtrail_key)/' $< > $@
 
-python/statuscake-to-performance-platform/lambda.py: python/statuscake-to-performance-platform/performance_platform.py
+python/pingdom-to-performance-platform/lambda.py: python/pingdom-to-performance-platform/performance_platform.py
 	cp $< $@
-	gsed -i 's/dummy_key/$(statuscake_key)/' $@
-	gsed -i 's/dummy_username/$(statuscake_username)/' $@
 	gsed -i 's/dummy_bearer/$(performance_platform_bearer_token)/' $@
+	gsed -i 's/dummy_username/$(pingdom_user)/' $@
+	gsed -i 's/dummy_password/$(pingdom_password)/' $@
+	gsed -i 's/dummy_key/$(pingdom_key)/' $@
 
 clean:
 	rm -rf build/
