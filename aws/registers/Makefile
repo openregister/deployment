@@ -27,6 +27,11 @@ export TF_VAR_openregister_database_master_password:=$(or $(shell PASSWORD_STORE
 export TF_VAR_statuscake_username:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | tail -n 1), $(error "Couldn't get StatusCake username"))
 export TF_VAR_statuscake_apikey:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/statuscake/api | head -n 1), $(error "Couldn't get StatusCake password"))
 
+# Pingdom
+export TF_VAR_pingdom_user:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n 1), $(error "Couldn't get Pingdom username"))
+export TF_VAR_pingdom_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n 1), $(error "Couldn't get Pingdom password"))
+export TF_VAR_pingdom_api_key:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom/api | head -n 1), $(error "Couldn't get Pingdom API key"))
+
 # Sumo Logic
 export TF_VAR_sumologic_key:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/$(vpc)/app-logs | tail -n 1), $(error "Couldn't get Sumo Logic key"))
 

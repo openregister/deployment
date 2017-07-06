@@ -35,3 +35,7 @@ variable cdn_s3_origin_access_identity {
 variable cdn_dns_zone_id {
   description = "hosted zone for CDN records"
 }
+
+variable pingdom_contact_ids {
+  description = "contacts to send state change notifications to"
+}

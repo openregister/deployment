@@ -9,6 +9,12 @@ provider "statuscake" {
   apikey = "${var.statuscake_apikey}"
 }
 
+provider "pingdom" {
+  user = "${var.pingdom_user}"
+  password = "${var.pingdom_password}"
+  api_key = "${var.pingdom_api_key}"
+}
+
 data "aws_ami" "ubuntu-hvm-ebs-ssd" {
   most_recent = true
   filter {

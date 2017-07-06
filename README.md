@@ -14,6 +14,10 @@ On OSX you can install via `virtualenv` and `pip`:
 
 On OSX you can install via `brew`, although you'll want to make sure you use the version defined in `aws/registers/Makefile`.
 
+#### Terraform plugins
+
+Install the [terraform-provider-pingdom](https://github.com/russellcardullo/terraform-provider-pingdom) plugin.
+
 # Ad hoc tasks with ansible
 
 The ansible/ directory contains some tasks for performing ad hoc

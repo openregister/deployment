@@ -82,6 +82,12 @@ variable "statuscake_username" {}
 variable "statuscake_apikey" {}
 variable "enable_availability_checks" {}
 
+// Pingdom
+variable "pingdom_user" {}
+variable "pingdom_password" {}
+variable "pingdom_api_key" {}
+variable "pingdom_contact_ids" {}
+
 variable "cdn_configuration" {
   type = "map"
   default = {
