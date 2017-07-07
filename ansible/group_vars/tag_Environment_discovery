@@ -13,8 +13,6 @@ register_settings:
     registers_yaml_location: "s3://openregister.discovery.config/registers.yaml"
   address:
     enable_download_resource: false
-  registration-district:
-    custodian_name: Joanne Wilkes-Waterworth
   vehicle-colour:
     custodian_name: Rohan Gye
 
@@ -30,25 +28,13 @@ register_groups:
   multi:
     - clinical-commissioning-group
     - company
-    - food-authority
-    - food-premises
-    - food-premises-rating
-    - food-premises-type
     - government-domain
     - green-deal-certification-body
-    - industrial-classification
     - jobcentre
-    - local-authority-eng
     - local-authority-nir
-    - local-authority-sct
-    - local-authority-type
     - local-authority-wls
-    - occupation
     - place
-    - premises
     - prison
-    - registration-district
-    - social-housing-provider
     - statistical-geography
     - street
     - street-custodian
