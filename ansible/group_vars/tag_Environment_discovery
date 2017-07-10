@@ -33,6 +33,7 @@ register_groups:
     - jobcentre
     - local-authority-nir
     - local-authority-wls
+    - local-authority-type
     - place
     - prison
     - statistical-geography
