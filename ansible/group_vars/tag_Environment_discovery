@@ -32,7 +32,6 @@ register_groups:
     - green-deal-certification-body
     - jobcentre
     - local-authority-nir
-    - local-authority-wls
     - local-authority-type
     - place
     - prison
