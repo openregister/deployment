@@ -27,7 +27,6 @@ register_groups:
 
   multi:
     - clinical-commissioning-group
-    - company
     - government-domain
     - green-deal-certification-body
     - jobcentre
