@@ -27,12 +27,11 @@ register_groups:
 
   multi:
     - clinical-commissioning-group
-    - company
     - government-domain
     - green-deal-certification-body
     - jobcentre
     - local-authority-nir
-    - local-authority-wls
+    - local-authority-type
     - place
     - prison
     - statistical-geography
