@@ -3,12 +3,7 @@ register_domain: discovery.openregister.org
 enable_register_data_delete: true
 
 register_settings:
-  datatype:
-    enable_register_data_delete: false
-  field:
-    enable_register_data_delete: false
   register:
-    enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.discovery.config/fields.yaml"
     registers_yaml_location: "s3://openregister.discovery.config/registers.yaml"
   address:
