@@ -1,20 +1,22 @@
 import unittest
-import rsfcreator 
+import rsfcreator
 import types
 import re
+from io import StringIO
+from unittest.mock import patch
 
 class TestRsfCreator(unittest.TestCase):
 
     def test_should_order_fields_and_output_no_whitespace(self):
-        line_map = {'notifiable-animal-disease':'WARBLE', 'name':'Warble Fly', 'notifiable-locations':'Scotland','notifiable-animal-disease-investigation-category':'WARBLE','notifiable-animal-disease-confirmation-category':'WARFLY'}	
+        line_map = {'notifiable-animal-disease':'WARBLE', 'name':'Warble Fly', 'notifiable-locations':'Scotland','notifiable-animal-disease-investigation-category':'WARBLE','notifiable-animal-disease-confirmation-category':'WARFLY'}
         item_line, entry_line = rsfcreator.rsf_for_line( line_map, 'notifiable-animal-disease', 'user')
         expected = 'add-item\t{"name":"Warble Fly","notifiable-animal-disease":"WARBLE","notifiable-animal-disease-confirmation-category":"WARFLY","notifiable-animal-disease-investigation-category":"WARBLE","notifiable-locations":"Scotland"}'
         self.assertEqual(item_line, expected)
 
     def test_should_format_entry_line(self):
-        line_map = {'notifiable-animal-disease':'WARBLE', 'name':'Warble Fly', 'notifiable-locations':'Scotland','notifiable-animal-disease-investigation-category':'WARBLE','notifiable-animal-disease-confirmation-category':'WARFLY'}	
+        line_map = {'notifiable-animal-disease':'WARBLE', 'name':'Warble Fly', 'notifiable-locations':'Scotland','notifiable-animal-disease-investigation-category':'WARBLE','notifiable-animal-disease-confirmation-category':'WARFLY'}
         item_line, entry_line = rsfcreator.rsf_for_line( line_map, 'notifiable-animal-disease', 'user')
-        expected = 'append-entry\tWARBLE\tuser\t\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\tsha-256:5ea5f947be468b201c2f4803e54f6a812fed5ecbeaf4053eac39139b44cd55bb'
+        expected = 'append-entry\tuser\tWARBLE\t\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\tsha-256:5ea5f947be468b201c2f4803e54f6a812fed5ecbeaf4053eac39139b44cd55bb'
         match = re.fullmatch(expected, entry_line)
         self.assertIsNotNone(match)
 
@@ -50,10 +52,12 @@ class TestRsfCreator(unittest.TestCase):
     def test_should_handle_commas_quotes(self):
         "to understand the python cvs parser"
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/commas-quotes.tsv', register_data_root='test-data', prepend_metadata=False, env='alpha')
-        rsfcreator.generate_rsf(args)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            rsfcreator.generate_rsf(args)
 
     def test_should_load_yaml(self):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml='test-data/registry-data/data/alpha/field/notifiable-animal-disease.yaml',
                 register_data_root='test-data', prepend_metadata=False, env='alpha')
-        rsfcreator.generate_rsf(args)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            rsfcreator.generate_rsf(args)
