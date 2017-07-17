@@ -1,3 +1,5 @@
+### Introduction
+
 The raw data for registers is in github. Mostly its in the form of TSV but some is in the form of Yaml files.
 We assume you have checked out the relevant Git repos into **[some path]/openregister/** which we will refer to as
 **$OPENREGISTER_ROOT**
@@ -26,6 +28,8 @@ However the naming of the files is not completely consistent.
 
 ### Prerequisites
 
+- the **pass** application must be installed and you must have the required GPG key to access
+  the credentails in the regesters-pass repo
 - python3
 - pip3
 - load required packages with
@@ -90,7 +94,7 @@ Running the script **reload-metadata-yaml.sh** will create an RSF file for the R
 Instances of ORJ serving the Field and Register Registers read files containing fields and registers YAML from S3 on startup.
 
 There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after
-reloading the metadata RSF. 
+reloading the metadata RSF.
 
 Arguments:
 - 'register' or 'field'

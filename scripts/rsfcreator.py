@@ -62,31 +62,21 @@ def rsf_for_line(line_dict, key_field, entry_type, key_prefix=''):
     return (item_line, entry_line)
 
 def generate_rsf(args):
-    # read fields
+    if args.register_data_root:
+        register_def = read_register_from_local(args.env, args.register_name, args.register_data_root)
+        field_names = register_def['fields']
+        fields_by_name = {fn: read_field_from_local(args.env, fn, args.register_data_root) for fn in field_names}
+    else:
+        register_def = read_register_from_register(args.env, args.register_name)
+        field_names = register_def['fields']
+        fields_by_name = {fn: read_field_from_register(args.env, fn) for fn in field_names}
+    # for tsv, check first line headings match the register definition
     if args.tsv:
         with open(args.tsv) as csvfile:
             reader = csv.reader(csvfile, delimiter='\t', strict=True)
-            field_names = list( next(reader) )
-    elif args.yaml:
-        with open(args.yaml) as yamlfile:
-            item = yaml.load(yamlfile)
-            field_names = item.keys()
-    elif args.yaml_dir:
-        yaml_files = [name for name in os.listdir(args.yaml_dir) if name.endswith('.yaml')]
-        if len(yaml_files) > 0:
-            with open(os.path.join(args.yaml_dir, yaml_files[0])) as yamlfile:
-                item = yaml.load(yamlfile)
-                field_names = item.keys()
-        else:
-            raise SystemExit('yaml directory contained no yaml files')
-    else:
-            raise SystemExit('must specify tsv or yaml file/directory')
-    if args.register_data_root:
-        fields_by_name = {fn: read_field_from_local(args.env, fn, args.register_data_root) for fn in field_names}
-        register_def = read_register_from_local(args.env, args.register_name, args.register_data_root)
-    else:
-        fields_by_name = {fn: read_field_from_register(args.env, fn) for fn in field_names}
-        register_def = read_register_from_register(args.env, args.register_name)
+            field_names_tsv = list( next(reader) )
+            if set(field_names_tsv) != set(field_names):
+                raise SystemExit('headings in first line of tsv did not match register definition')
     # metadata rsf
     if args.prepend_metadata:
         for field in fields_by_name.values():

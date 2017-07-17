@@ -1,0 +1,45 @@
+append-entry	system	field:datatype	2017-07-17T22:51:42Z	sha-256:be91fee9031cbb4a22f57a8f42fe65ce86234be6dc857c5bc55b394b1ba46fc7
+add-item	{"cardinality":"1","datatype":"string","field":"field","phase":"alpha","register":"field","text":"The name of a field. This field could appear in more than one register."}
+append-entry	system	field:field	2017-07-17T22:51:42Z	sha-256:1416754313960422972411315398ca0c8a9875153e5489acd5fbef18c5ef7e2a
+add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"alpha","register":"register","text":"The name of a register."}
+append-entry	system	field:register	2017-07-17T22:51:42Z	sha-256:20413e154fc235d323775983f355b33b0e42032d6c7cac98b8681b44110f53b3
+add-item	{"cardinality":"1","datatype":"string","field":"cardinality","phase":"alpha","register":"","text":"A character (either 1 or n) that explains if a field in a register can contain multiple values."}
+append-entry	system	field:cardinality	2017-07-17T22:51:42Z	sha-256:ca8188c7c1ca51fd5cdcdf17b6e7c16129f7eafcfda1ed3a6fa69dca028aec38
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"alpha","register":"","text":"Any additional information about a record in a register."}
+append-entry	system	field:text	2017-07-17T22:51:42Z	sha-256:64130ef564805d87ef8b96408c7074535644709812a9e0dd5067267d54cf4e42
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"alpha","register":"","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+append-entry	system	field:phase	2017-07-17T22:51:42Z	sha-256:0acd04e6758fd52761d15f2f308b598c8dd57e33b42652ae9652b0f227afb501
+add-item	{"fields":["field","datatype","phase","register","cardinality","text"],"phase":"alpha","register":"field","registry":"cabinet-office","text":"Field names which may appear in a register"}
+append-entry	system	register:field	2017-07-17T22:51:42Z	sha-256:e744c984158aea29904201aee263815a4bdab401ff8e6a194b25ff640ce191e2
+add-item	{"cardinality":"n","datatype":"string","field":"notifiable-locations","phase":"alpha","text":"Locations where the disease is notifiable."}
+append-entry	user	notifiable-locations	2017-07-17T22:51:42Z	sha-256:9521ab81c0c4e54297d8bea15265bddc67aa24d124e9809519a088f3abd3547f
+add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"alpha","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
+append-entry	user	registry	2017-07-17T22:51:42Z	sha-256:b58faf5ccd130997fc215f8a47bafdbbd2654490df3932b8189c61fd1108fa97
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"alpha","text":"Any additional information about a record in a register."}
+append-entry	user	text	2017-07-17T22:51:42Z	sha-256:2108df725a601f3354242aa1e4e6dfb256a30b5642e367239b176223668fdad6
+add-item	{"cardinality":"1","datatype":"string","field":"notifiable-animal-disease-confirmation-category","phase":"alpha","register":"notifiable-animal-disease-confirmation-category","text":"Contingency planning confirmation category."}
+append-entry	user	notifiable-animal-disease-confirmation-category	2017-07-17T22:51:42Z	sha-256:f8fe597ebfc08499f3f9032a2c6f71b27285a301044e5d38aafc364f15756e5d
+add-item	{"cardinality":"1","datatype":"string","field":"notifiable-animal-disease-investigation-category","phase":"alpha","register":"notifiable-animal-disease-investigation-category","text":"Veterinary Exotic Notifiable Disease Unit investigation category."}
+append-entry	user	notifiable-animal-disease-investigation-category	2017-07-17T22:51:42Z	sha-256:21a324aabfdb6e712cfebd1823963d2d2d93087f37c55c4c492ded3110c594f9
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"alpha","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+append-entry	user	phase	2017-07-17T22:51:42Z	sha-256:6b4f1465970264c09e5572824c94301e5c76a310be4dc41e04bd301c9cd723d2
+add-item	{"cardinality":"1","datatype":"string","field":"name","phase":"alpha","text":"The commonly-used name of a record."}
+append-entry	user	name	2017-07-17T22:51:42Z	sha-256:9eec41f22ae07d3ff5c99bf9a72173e2368833803069aaabacd821f0a497138d
+add-item	{"cardinality":"1","datatype":"string","field":"cardinality","phase":"alpha","text":"A character (either 1 or n) that explains if a field in a register can contain multiple values."}
+append-entry	user	cardinality	2017-07-17T22:51:42Z	sha-256:b06cdf308960aea9d4ebce2c7895ff7a70fe253a74a8a87c94387025fcddae1a
+add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"alpha","text":"The date a record first became relevant to a register."}
+append-entry	user	start-date	2017-07-17T22:51:42Z	sha-256:f31392366a61837257274bcd038ec73ecc87f56673686f559a283f834745d8bb
+add-item	{"cardinality":"1","datatype":"string","field":"datatype","phase":"alpha","register":"datatype","text":"The format of the data held in a field."}
+append-entry	user	datatype	2017-07-17T22:51:42Z	sha-256:be91fee9031cbb4a22f57a8f42fe65ce86234be6dc857c5bc55b394b1ba46fc7
+add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"alpha","register":"register","text":"The name of a register."}
+append-entry	user	register	2017-07-17T22:51:42Z	sha-256:20413e154fc235d323775983f355b33b0e42032d6c7cac98b8681b44110f53b3
+add-item	{"cardinality":"1","datatype":"datetime","field":"end-date","phase":"alpha","text":"The date a record stopped being applicable."}
+append-entry	user	end-date	2017-07-17T22:51:42Z	sha-256:237c519865320df6edf9961db4135a7cf67a31aba0741ebdba7a45d32a31e2ed
+add-item	{"cardinality":"1","datatype":"string","field":"notifiable-animal-disease","phase":"alpha","register":"notifiable-animal-disease","text":"Notifiable animal disease code."}
+append-entry	user	notifiable-animal-disease	2017-07-17T22:51:42Z	sha-256:6c50807e6819d3835f15d02818486e80a439b1280c436e4eb7cc5de6b6cc7298
+add-item	{"cardinality":"1","datatype":"string","field":"field","phase":"alpha","register":"field","text":"The name of a field. This field could appear in more than one register."}
+append-entry	user	field	2017-07-17T22:51:42Z	sha-256:1416754313960422972411315398ca0c8a9875153e5489acd5fbef18c5ef7e2a
+add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"alpha","text":"The copyright and licensing terms which may apply to the data held in a register."}
+append-entry	user	copyright	2017-07-17T22:51:42Z	sha-256:4a4cd52643043366688f3cff0144d39371ca93c485361b934ccdd60faf4217cf
+add-item	{"cardinality":"n","datatype":"string","field":"fields","phase":"alpha","register":"field","text":"The names of the fields in a register."}
+append-entry	user	fields	2017-07-17T22:51:42Z	sha-256:7f8b3fe1eff4540654395e3097d321a240b0931f9a28b4bae7c3099d3efb0370
