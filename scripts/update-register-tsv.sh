@@ -1,9 +1,12 @@
 #!/bin/bash
 set -e
-source ./includes/set-vars.sh
-source ./includes/git-update.sh
-source ./includes/slack-notify.sh
-source ./includes/register-actions.sh
+OPENREGISTER_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
+
+source "$OPENREGISTER_BASE/deployment/scripts/includes/set-vars.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/git-update.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/slack-notify.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
 {
@@ -38,7 +41,8 @@ else
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
+# TODO remove PASSWORD='bar'
 
 load_rsf $REGISTER $PHASE $PASSWORD
 
-# rm $OPENREGISTER_BASE/tmp.rsf
+rm $OPENREGISTER_BASE/tmp.rsf

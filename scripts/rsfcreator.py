@@ -22,14 +22,14 @@ def canonicalize(item, fields_by_name):
     item_tmp = remove_blanks(item)
     return replace_for_cardinality(item_tmp, fields_by_name)
 
-def read_register_from_local(environment, register_name, root_dir):
+def read_register_from_local(phase, register_name, root_dir):
     file_template = root_dir + '/registry-data/data/{0}/register/{1}.yaml'
-    file_name = file_template.format(environment, register_name)
+    file_name = file_template.format(phase, register_name)
     return read_item_from_local(file_name)
 
-def read_field_from_local(environment, field_name, root_dir):
+def read_field_from_local(phase, field_name, root_dir):
     field_file_template = root_dir + '/registry-data/data/{0}/field/{1}.yaml'
-    file_name = field_file_template.format(environment, field_name)
+    file_name = field_file_template.format(phase, field_name)
     return read_item_from_local(file_name)
 
 def read_item_from_local(file_name):
@@ -37,12 +37,12 @@ def read_item_from_local(file_name):
         dic =  yaml.load(yaml_file)
     return dic
 
-def read_register_from_register(environment, register_name):
-    register_url= 'http://register.{0}.openregister.org/record/{1}.json'.format(environment, register_name)
+def read_register_from_register(phase, register_name):
+    register_url= 'http://register.{0}.openregister.org/record/{1}.json'.format(phase, register_name)
     return read_item_from_register(register_url, register_name)
 
-def read_field_from_register(environment, field_name):
-    field_url= 'http://field.{0}.openregister.org/record/{1}.json'.format(environment, field_name)
+def read_field_from_register(phase, field_name):
+    field_url= 'http://field.{0}.openregister.org/record/{1}.json'.format(phase, field_name)
     return read_item_from_register(field_url, field_name)
 
 def read_item_from_register(url, field_name):
@@ -63,13 +63,13 @@ def rsf_for_line(line_dict, key_field, entry_type, key_prefix=''):
 
 def generate_rsf(args):
     if args.register_data_root:
-        register_def = read_register_from_local(args.env, args.register_name, args.register_data_root)
+        register_def = read_register_from_local(args.phase, args.register_name, args.register_data_root)
         field_names = register_def['fields']
-        fields_by_name = {fn: read_field_from_local(args.env, fn, args.register_data_root) for fn in field_names}
+        fields_by_name = {fn: read_field_from_local(args.phase, fn, args.register_data_root) for fn in field_names}
     else:
-        register_def = read_register_from_register(args.env, args.register_name)
+        register_def = read_register_from_register(args.phase, args.register_name)
         field_names = register_def['fields']
-        fields_by_name = {fn: read_field_from_register(args.env, fn) for fn in field_names}
+        fields_by_name = {fn: read_field_from_register(args.phase, fn) for fn in field_names}
     # for tsv, check first line headings match the register definition
     if args.tsv:
         with open(args.tsv) as csvfile:
@@ -111,7 +111,7 @@ def generate_rsf(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("register_name", help="the register name")
-    parser.add_argument("env", help="environment e.g. alpha")
+    parser.add_argument("phase", help="phase e.g. alpha")
     parser.add_argument("--tsv", help="tsv file containing data for register to be loaded")
     parser.add_argument("--yaml", help="yaml file containing field or register data to be loaded")
     parser.add_argument("--yaml_dir", help="directory containing register data in seperate yaml files")

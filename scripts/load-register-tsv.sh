@@ -1,9 +1,12 @@
 #!/bin/bash
 set -e
-source ./includes/git-update.sh
-source ./includes/slack-notify.sh
-source ./includes/register-actions.sh
-source ./includes/set-vars.sh
+OPENREGISTER_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
+
+source "$OPENREGISTER_BASE/deployment/scripts/includes/git-update.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/slack-notify.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/set-vars.sh"
 
 usage()
 {
@@ -37,7 +40,8 @@ else
   python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV --prepend_metadata > $OPENREGISTER_BASE/tmp.rsf
 fi
 
-PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
+PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass discovery/app/mint/$REGISTER`
+# TODO remove PASSWORD='bar'
 
 # notify_slack "Deleting data from $PHASE $REGISTER - $USERNAME"
 
@@ -47,5 +51,4 @@ delete_register $REGISTER $PHASE $PASSWORD
 
 load_rsf $REGISTER $PHASE $PASSWORD
 
-cat "$OPENREGISTER_BASE/tmp.rsf"
 rm $OPENREGISTER_BASE/tmp.rsf

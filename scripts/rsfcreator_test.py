@@ -49,27 +49,27 @@ class TestRsfCreator(unittest.TestCase):
     
     def test_should_fail_if_column_headings_wrong(self):
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/wrong-headings.tsv',
-                register_data_root='test-data', prepend_metadata=False, env='alpha')
+                register_data_root='test-data', prepend_metadata=False, phase='alpha')
         with self.assertRaises(SystemExit):
             rsfcreator.generate_rsf(args)
 
     def test_should_fail_if_column_headings_missing(self):
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/headings-missing.tsv', 
-                register_data_root='test-data', prepend_metadata=False, env='alpha')
+                register_data_root='test-data', prepend_metadata=False, phase='alpha')
         with self.assertRaises(SystemExit):
             rsfcreator.generate_rsf(args)
 
     def test_should_handle_commas_quotes(self):
         "to understand the python cvs parser"
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/commas-quotes.tsv', 
-                register_data_root='test-data', prepend_metadata=False, env='alpha')
+                register_data_root='test-data', prepend_metadata=False, phase='alpha')
         with patch('sys.stdout', new=StringIO()) as fake_out:
             rsfcreator.generate_rsf(args)
 
     def test_should_load_yaml_file(self):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml='test-data/registry-data/data/alpha/field/notifiable-animal-disease.yaml',
-                register_data_root='test-data', prepend_metadata=False, env='alpha')
+                register_data_root='test-data', prepend_metadata=False, phase='alpha')
         with open('test-data/expected/register-update.rsf','r') as rsf_file:
             expected_rsf = rsf_file.read()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -81,7 +81,7 @@ class TestRsfCreator(unittest.TestCase):
         args = types.SimpleNamespace(register_name='register',
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/register',
-                register_data_root='test-data', prepend_metadata=True, env='alpha')
+                register_data_root='test-data', prepend_metadata=True, phase='alpha')
         with open('test-data/expected/register-register.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -94,7 +94,7 @@ class TestRsfCreator(unittest.TestCase):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/field',
-                register_data_root='test-data', prepend_metadata=True, env='alpha')
+                register_data_root='test-data', prepend_metadata=True, phase='alpha')
         with open('test-data/expected/field-register.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:

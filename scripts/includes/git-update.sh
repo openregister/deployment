@@ -1,6 +1,6 @@
 function update_registers_pass()
 {
-  if [ -e ~/.registers-pass ]
+  if [ -d ~/.registers-pass ]
   then
     echo "updating repo ~/.registers-pass"
     cd ~/.registers-pass
@@ -17,7 +17,7 @@ function update_data_repo()
 {
   echo ""
   local repo="$OPENREGISTER_BASE/$1"
-  if [ -e $repo ]
+  if [ -d $repo ]
   then
     echo "$repo repo: checkout master && pull"
     cd $repo

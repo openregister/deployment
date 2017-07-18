@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
-source ./includes/set-vars.sh
-source ./includes/git-update.sh
-source ./includes/slack-notify.sh
-source ./includes/register-actions.sh
+OPENREGISTER_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
+
+source "$OPENREGISTER_BASE/deployment/scripts/includes/set-vars.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/git-update.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/slack-notify.sh"
+source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
 {
-  echo "usage: ./readload-metadata-yaml.sh [field|register] [phase] [local|remote]"
+  echo "usage: ./readload-metadata-yaml.sh [field|register|datatype] [phase] [local|remote]"
 }
 
 # validation check number of args but other validation is done in python script
@@ -24,7 +27,7 @@ YAML="$OPENREGISTER_BASE/registry-data/data/$PHASE/$1"
 
 update_registers_pass
 
-update_data_repo "registry-data"
+update_data_repo 'registry-data'
 
 echo "converting $YAML to RSF"
 if [ "$METADATA_SOURCE" = 'local' ]
@@ -35,9 +38,10 @@ else
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
+# TODO remove PASSWORD='bar'
 
 delete_register $REGISTER $PHASE $PASSWORD
 
 load_rsf $REGISTER $PHASE $PASSWORD
 
-# rm $OPENREGISTER_BASE/tmp.rsf
+rm $OPENREGISTER_BASE/tmp.rsf
