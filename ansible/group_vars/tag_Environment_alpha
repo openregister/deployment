@@ -14,15 +14,6 @@ register_settings:
   industrial-classification:
     custodian_name: Charlie Roth-Smith
     history_page_url: https://registers.cloudapps.digital/registers/industrial-classification
-  notifiable-animal-disease:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease
-  notifiable-animal-disease-confirmation-category:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-confirmation-category
-  notifiable-animal-disease-investigation-category:
-    custodian_name: Jonathan Smith
-    history_page_url: https://registers.cloudapps.digital/registers/notifiable-animal-disease-investigation-category
   occupation:
     custodian_name: Charlie Roth-Smith
     history_page_url: https://registers.cloudapps.digital/registers/occupation
@@ -37,6 +28,9 @@ register_settings:
   school-eng:
     custodian_name: Andrew Thomson
     history_page_url: https://registers.cloudapps.digital/registers/school-eng
+  school-type:
+    custodian_name: Andrew Thomson
+    history_page_url: https://registers.cloudapps.digital/registers/school-type
   social-housing-provider:
     custodian_name: Julie Bond
     history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider
@@ -50,10 +44,8 @@ register_groups:
   multi:
     - industrial-classification
     - internal-drainage-board
-    - notifiable-animal-disease
-    - notifiable-animal-disease-confirmation-category
-    - notifiable-animal-disease-investigation-category
     - occupation
     - principal-local-authority
     - school-eng
+    - school-type
     - social-housing-provider
