@@ -398,54 +398,6 @@ module "local-authority-wls_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
-module "notifiable-animal-disease" {
-  source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease", false)}"
-
-  name = "notifiable-animal-disease"
-  environment = "${var.vpc_name}"
-  load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
-
-  enable_availability_checks = "${var.enable_availability_checks}"
-  cdn_configuration = "${var.cdn_configuration}"
-  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
-  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
-  pingdom_contact_ids = "${var.pingdom_contact_ids}"
-}
-
-module "notifiable-animal-disease-confirmation-category" {
-  source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease-confirmation-category", false)}"
-
-  name = "notifiable-animal-disease-confirmation-category"
-  environment = "${var.vpc_name}"
-  load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
-
-  enable_availability_checks = "${var.enable_availability_checks}"
-  cdn_configuration = "${var.cdn_configuration}"
-  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
-  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
-  pingdom_contact_ids = "${var.pingdom_contact_ids}"
-}
-
-module "notifiable-animal-disease-investigation-category" {
-  source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "notifiable-animal-disease-investigation-category", false)}"
-
-  name = "notifiable-animal-disease-investigation-category"
-  environment = "${var.vpc_name}"
-  load_balancer = "${module.multi.load_balancer}"
-  dns_zone_id = "${module.core.dns_zone_id}"
-
-  enable_availability_checks = "${var.enable_availability_checks}"
-  cdn_configuration = "${var.cdn_configuration}"
-  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
-  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
-  pingdom_contact_ids = "${var.pingdom_contact_ids}"
-}
-
 module "place_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "place", false)}"
