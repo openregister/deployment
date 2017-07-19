@@ -51,8 +51,9 @@ def read_item_from_register(url, field_name):
     record = record_response.json()
     return record[field_name]['item'][0]
 
-def rsf_for_line(line_dict, key_field, entry_type, key_prefix=''):
-    key = line_dict[key_field]
+def rsf_for_line(line_dict, key_field, entry_type, key_prefix='', key=None):
+    if key is None:
+        key = line_dict[key_field]
     timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
     item_str = json.dumps(line_dict, separators=(',', ':'), sort_keys=True)
     item_hash = hashlib.sha256(item_str.encode("utf-8")).hexdigest()
@@ -79,6 +80,11 @@ def generate_rsf(args):
                 raise SystemExit('headings in first line of tsv did not match register definition')
     # metadata rsf
     if args.prepend_metadata:
+        name_item_line, name_entry_line = rsf_for_line({'register-name': args.register_name}, 'register-name', 'system', key='register-name')
+        print(name_item_line + '\n' + name_entry_line)
+        if args.custodian:
+            custodian_item_line, custodian_entry_line = rsf_for_line({'custodian': args.custodian}, 'custodian', 'system', key='custodian')
+            print(custodian_item_line + '\n' + custodian_entry_line)
         for field in fields_by_name.values():
             field_item_line, field_entry_line = rsf_for_line(field, 'field', 'system', key_prefix='field:')
             print(field_item_line + '\n' + field_entry_line)
@@ -117,6 +123,7 @@ if __name__ == '__main__':
     parser.add_argument("--yaml_dir", help="directory containing register data in seperate yaml files")
     parser.add_argument("--prepend_metadata", help="prepend field and register definitions", action="store_true")
     parser.add_argument("--register_data_root", help="the directory where register data is checked out")
+    parser.add_argument("--custodian", help="the name of the custodian if any")
     args = parser.parse_args()
 
     generate_rsf(args)

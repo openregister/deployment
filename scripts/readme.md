@@ -48,11 +48,12 @@ Arguments:
 - phase
 - TSV file path (relative to $OPENREGISTER_ROOT)
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
+- the custodian name (if more than one word then this must be in quotes)
 - data directory (relative to $OPENREGISTER_ROOT) if data is not in $REGISTER-data [optional].
 
 Examples:
 
-    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv local
+    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv local "Jo Doe"
 
 ### Loading a new field or register
 
@@ -89,18 +90,26 @@ Examples:
 
 Running the script **reload-metadata-yaml.sh** will create an RSF file for the Register Register or Fields Register including metadata, delete the existing register from ORJ in the specified **phase** and load the RSF into the application.
 
-#### Warning
-
-Instances of ORJ serving the Field and Register Registers read files containing fields and registers YAML from S3 on startup.
-
-There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after
-reloading the metadata RSF.
-
 Arguments:
 - 'register' or 'field'
 - phase
-- local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
+- local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service
+- the custodian name (if more than one word then this must be in quotes)
 
 Examples:
 
-    ./reload-metadata-yaml.sh field alpha local
+    ./reload-metadata-yaml.sh field alpha local "Jo Doe"
+
+    #### Warning
+
+    Instances of ORJ serving the Field and Register Registers read files containing fields and registers YAML from S3 on startup.
+
+    There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after
+    reloading the metadata RSF.
+    
+### Python tests
+
+There are some unit tests for the python script and some test data. To run them:
+
+    cd scripts
+    python3 -m unittest rsfcreator_test

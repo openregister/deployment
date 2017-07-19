@@ -41,7 +41,6 @@ else
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
-# TODO remove PASSWORD='bar'
 
 load_rsf $REGISTER $PHASE $PASSWORD
 
