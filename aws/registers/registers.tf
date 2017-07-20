@@ -702,6 +702,22 @@ module "statistical-geography_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
+module "statistical-geography-unitary-authority-wls_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "statistical-geography-unitary-authority-wls", false)}"
+
+  name = "statistical-geography-unitary-authority-wls"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
 module "street_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "street", false)}"
