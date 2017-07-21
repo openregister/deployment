@@ -35,6 +35,7 @@ register_groups:
     - place
     - prison
     - statistical-geography
+    - statistical-geography-unitary-authority-wls
     - street
     - street-custodian
     - uk
