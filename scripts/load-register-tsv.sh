@@ -29,7 +29,7 @@ DATA_DIR=${6:-"$1-data"}
 
 update_registers_pass
 
-update_data_repo 'registry-data' 
+update_data_repo 'registry-data'
 
 update_data_repo $DATA_DIR
 
@@ -41,7 +41,7 @@ else
   python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV --prepend_metadata --custodian "${CUSTODIAN}" > $OPENREGISTER_BASE/tmp.rsf
 fi
 
-PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass discovery/app/mint/$REGISTER`
+PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
 
 delete_register $REGISTER $PHASE $PASSWORD
 

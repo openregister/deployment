@@ -80,7 +80,7 @@ def generate_rsf(args):
                 raise SystemExit('headings in first line of tsv did not match register definition')
     # metadata rsf
     if args.prepend_metadata:
-        name_item_line, name_entry_line = rsf_for_line({'register-name': args.register_name}, 'register-name', 'system', key='register-name')
+        name_item_line, name_entry_line = rsf_for_line({'name': args.register_name}, 'name', 'system', key='name')
         print(name_item_line + '\n' + name_entry_line)
         if args.custodian:
             custodian_item_line, custodian_entry_line = rsf_for_line({'custodian': args.custodian}, 'custodian', 'system', key='custodian')
