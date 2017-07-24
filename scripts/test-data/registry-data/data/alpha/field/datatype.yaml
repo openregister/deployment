@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: string
+field: datatype
+phase: alpha
+register: datatype
+text: The format of the data held in a field.

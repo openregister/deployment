@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: string
+field: notifiable-animal-disease-confirmation-category
+phase: alpha
+register: notifiable-animal-disease-confirmation-category
+text: Contingency planning confirmation category.

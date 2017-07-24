@@ -1,0 +1,11 @@
+fields:
+- field
+- datatype
+- phase
+- register
+- cardinality
+- text
+phase: alpha
+register: field
+registry: cabinet-office
+text: 'Field names which may appear in a register'

@@ -1,0 +1,6 @@
+cardinality: 'n'
+datatype: string
+field: notifiable-locations
+phase: alpha
+register: ''
+text: Locations where the disease is notifiable.

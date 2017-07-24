@@ -1,0 +1,6 @@
+cardinality: '1'
+datatype: string
+field: cardinality
+phase: alpha
+register: ''
+text: A character (either 1 or n) that explains if a field in a register can contain multiple values. 
