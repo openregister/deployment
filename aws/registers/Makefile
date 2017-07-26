@@ -34,6 +34,9 @@ export TF_VAR_sumologic_key:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass p
 # InfluxCloud
 export TF_VAR_influxdb_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/influxcloud/telegraf | tail -n 1), $(error "Couldn't get InfluxCloud password"))
 
+# Logit
+export TF_VAR_logit_stack_id:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/logit | head -n 1), $(error "Couldn't get Logit stack id"))
+
 # Required minimum to terraform
 defaults:=-var-file=environments/$(vpc).tfvars
 
