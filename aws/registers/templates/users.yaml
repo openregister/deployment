@@ -17,13 +17,6 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
 
-  - name: johnollier
-    groups: users
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDlClyu95kUpGhMrugnkmpNWre1SUW/KjF1wOIHetFY1VTPiJMeZyTjSufVWzk/fSLwgR2v1D194C4J+C55DohB9vEpkYbZvXsPfD/LpUCBX/YT2/X1s8ZrQzs0q7a1JRmGnQ9PZWHhh3jFJgmnUBNCEo/OHD7E4eLnDlsOurBRFzp9ATUKSD9EUv0sPWvHgqZcocXo7kvNN6/6h7OQGn4utQsdrxjius5EvxOgZWodnlDSxeJ88yK/+sQl5Fg+/XGvv09yraD7qBpO3gRIvOJey5/lb+s3YLgbLbDxggWYMFxCACTpldhblFGGiK6PRxYPkXkOWlPMDXHXtgPV4KH1+fXJpsbBAz7MPMrAWdlOAT2tVaG/xLTRsCUEUVOD3QdAoKG5BGX5mcYxON4WrI1aDe/taUozpCufoF5nXLt5Qv/FtdZgHZzKQLGSr1y2vCG/Tc5JoXTX6h7fFDAaVguVEP68ghhJWlLdTzxwH+YUii8fRdTBiokC4UxcFiVI9spAQDsib/5oOQKLkbjQfPITBZQuHqYrXs2iStOOWlLBUNu1rfXScp2337zunvSxU9Md8hC80A1TMJxZPpBP+IR7eVHlCdlEvaw3Z2MYppg1gFWOSI+LfB8W27Xw1L2HNMNCuT+J+dBAfFYaIYUv+9btlT9l2dtveGUxfAA7ioiRAQ== john.ollier@digital.cabinet-office.gov.uk
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    shell: /bin/bash
-
   - name: karlbaker
     groups: users
     ssh-authorized-keys:
