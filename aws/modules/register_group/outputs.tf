@@ -4,3 +4,7 @@ output "load_balancer" {
     zone_id = "${aws_elb.load_balancer.zone_id}"
   }
 }
+
+output "instance_security_group" {
+  value = "${aws_security_group.openregister.id}"
+}

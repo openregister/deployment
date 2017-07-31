@@ -34,5 +34,7 @@ module "configuration" {
   source = "../modules/configuration"
   vpc_name = "${var.vpc_name}"
   sumologic_key = "${var.sumologic_key}"
+  logit_stack_id = "${var.logit_stack_id}"
+  logit_tcp_ssl_port = "${var.logit_tcp_ssl_port}"
   influxdb_configuration = "${merge(var.influxdb_configuration, map("password", var.influxdb_password))}"
 }

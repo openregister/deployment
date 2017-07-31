@@ -10,5 +10,7 @@ data "template_file" "fluentd" {
 
 	vars {
 		sumologic_key = "${var.sumologic_key}"
+		logit_stack_id = "${var.logit_stack_id}"
+		logit_tcp_ssl_port = "${var.logit_tcp_ssl_port}"
 	}
 }

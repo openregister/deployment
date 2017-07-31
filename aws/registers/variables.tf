@@ -95,9 +95,18 @@ variable "sumologic_key" {
   description = "The key fluentd uses to log to Sumo Logic"
 }
 
+variable "logit_stack_id" {
+  description = "The Logit.io stack to push logs to"
+}
+
+variable "logit_tcp_ssl_port" {
+  description = "The Logit.io TCP+SSL port for the stack"
+}
+
 variable "influxdb_password" {
   description = "Password used to connect to influxdb. Defined outside of `influxdb_configuration` due to the way we pass in secrets from `pass` through `TF_VARS_*`."
 }
+
 variable "influxdb_configuration" {
   type = "map"
   description = "Configuration options for InfluxDB"

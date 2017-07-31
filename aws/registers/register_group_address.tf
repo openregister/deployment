@@ -18,3 +18,14 @@ module "address" {
   dns_zone_id = "${module.core.dns_zone_id}"
   certificate_arn = "${var.elb_certificate_arn}"
 }
+
+resource "aws_security_group_rule" "address_outbound_logit" {
+  count = "${signum(lookup(var.group_instance_count, "address", 0))}"
+
+  security_group_id = "${module.address.instance_security_group}"
+  type = "egress"
+  from_port = "${var.logit_tcp_ssl_port}"
+  to_port = "${var.logit_tcp_ssl_port}"
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
