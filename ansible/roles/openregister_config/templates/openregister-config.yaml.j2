@@ -59,9 +59,8 @@ downloadConfigs: true
 server:
   registerDefaultExceptionMappers: false
   requestLog:
-    type: classic
     appenders:
-      - type: logstash-console
+      - type: access-logstash-console
 
 credentials:
   user: {{ app_user }}
