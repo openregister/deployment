@@ -34,6 +34,12 @@ register_settings:
   social-housing-provider:
     custodian_name: Julie Bond
     history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider
+  statistical-geography
+    custodian: Mike Phelps-Cousins
+    history_page_url: https://registers.cloudapps.digital/registers/statistical-geography
+  statistical-geography-unitary-authority-wls
+    custodian: Mike Phelps-Cousins
+    history_page_url: https://registers.cloudapps.digital/registers/statistical-geography-unitary-authority-wls
 
 register_groups:
   basic:
@@ -49,3 +55,5 @@ register_groups:
     - school-eng
     - school-type
     - social-housing-provider
+    - statistical-geography
+    - statistical-geography-unitary-authority-wls
