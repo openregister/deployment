@@ -11,6 +11,8 @@ register_settings:
   field:
     custodian_name: Paul Downey
     enable_register_data_delete: false
+  government-domain:
+    history_page_url: https://registers.cloudapps.digital/registers/government-domain
   industrial-classification:
     custodian_name: Charlie Roth-Smith
     history_page_url: https://registers.cloudapps.digital/registers/industrial-classification
@@ -34,6 +36,10 @@ register_settings:
   social-housing-provider:
     custodian_name: Julie Bond
     history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider
+  social-housing-provider-designation:
+    history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider-designation
+  social-housing-provider-legal-entity:
+    history_page_url: https://registers.cloudapps.digital/registers/social-housing-provider-legal-entity
   statistical-geography:
     custodian: Mike Phelps-Cousins
     history_page_url: https://registers.cloudapps.digital/registers/statistical-geography
@@ -48,6 +54,7 @@ register_groups:
     - field
 
   multi:
+    - government-domain
     - industrial-classification
     - internal-drainage-board
     - occupation
@@ -55,5 +62,7 @@ register_groups:
     - school-eng
     - school-type
     - social-housing-provider
+    - social-housing-provider-designation
+    - social-housing-provider-legal-entity
     - statistical-geography
     - statistical-geography-unitary-authority-wls
