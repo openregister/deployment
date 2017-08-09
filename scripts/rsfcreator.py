@@ -55,7 +55,7 @@ def rsf_for_line(line_dict, key_field, entry_type, key_prefix='', key=None):
     if key is None:
         key = line_dict[key_field]
     timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-    item_str = json.dumps(line_dict, separators=(',', ':'), sort_keys=True)
+    item_str = json.dumps(line_dict, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
     item_hash = hashlib.sha256(item_str.encode("utf-8")).hexdigest()
     item_line = "add-item\t" + item_str
     entry_line = "append-entry\t{0}\t{1}{2}\t{3}\tsha-256:{4}".format(
@@ -86,8 +86,10 @@ def generate_rsf(args):
             custodian_item_line, custodian_entry_line = rsf_for_line({'custodian': args.custodian}, 'custodian', 'system', key='custodian')
             print(custodian_item_line + '\n' + custodian_entry_line)
         for field in fields_by_name.values():
-            field_item_line, field_entry_line = rsf_for_line(field, 'field', 'system', key_prefix='field:')
+            field_tmp = remove_blanks(field)
+            field_item_line, field_entry_line = rsf_for_line(field_tmp, 'field', 'system', key_prefix='field:')
             print(field_item_line + '\n' + field_entry_line)
+        register_def_tmp = remove_blanks(register_def)
         reg_item_line, reg_entry_line = rsf_for_line(register_def, 'register', 'system', key_prefix='register:')
         print(reg_item_line + '\n' + reg_entry_line)
     # user data rsf

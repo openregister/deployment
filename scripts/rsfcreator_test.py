@@ -66,6 +66,12 @@ class TestRsfCreator(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             rsfcreator.generate_rsf(args)
 
+    def test_should_not_encode_special_characters_as_unicode(self):
+        line_map = {'notifiable-animal-disease':'WARBLE', 'name':'Wârble Fly', 'notifiable-locations':'Scôtland','notifiable-animal-disease-investigation-category':'WARBLE','notifiable-animal-disease-confirmation-category':'WARFLY'}
+        item_line, entry_line = rsfcreator.rsf_for_line( line_map, 'notifiable-animal-disease', 'user')
+        expected = 'add-item\t{"name":"Wârble Fly","notifiable-animal-disease":"WARBLE","notifiable-animal-disease-confirmation-category":"WARFLY","notifiable-animal-disease-investigation-category":"WARBLE","notifiable-locations":"Scôtland"}'
+        self.assertEqual(item_line, expected)
+
     def test_should_load_yaml_file(self):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml='test-data/registry-data/data/alpha/field/notifiable-animal-disease.yaml',
