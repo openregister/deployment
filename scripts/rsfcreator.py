@@ -55,7 +55,7 @@ def rsf_for_line(line_dict, key_field, entry_type, key_prefix='', key=None):
     if key is None:
         key = line_dict[key_field]
     timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-    item_str = json.dumps(line_dict, separators=(',', ':'), sort_keys=True)
+    item_str = json.dumps(line_dict, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
     item_hash = hashlib.sha256(item_str.encode("utf-8")).hexdigest()
     item_line = "add-item\t" + item_str
     entry_line = "append-entry\t{0}\t{1}{2}\t{3}\tsha-256:{4}".format(
