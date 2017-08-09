@@ -72,6 +72,7 @@ logging:
   appenders:
     - type: logstash-console
 
+{% if not paas %}
 metrics:
   reporters:
     - type: graphite
@@ -79,6 +80,7 @@ metrics:
       port: 8092
       transport: udp
       frequency: 5 seconds
+{% endif %}
 
 {% if loop.length > 1 %}
 registers:

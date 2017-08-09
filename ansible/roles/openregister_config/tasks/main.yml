@@ -16,7 +16,17 @@
   with_dict: "{{ register_groups }}"
 
 - name: Generate openregister-java configuration files
+  vars:
+    paas: false
   template:
     src="templates/openregister-config.yaml.j2"
     dest="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister/config.yaml"
+  with_dict: "{{ register_groups }}"
+
+- name: Generate openregister-java configuration files (PaaS)
+  vars:
+    paas: true
+  template:
+    src="templates/openregister-config.yaml.j2"
+    dest="{{ workdir }}/{{ vpc }}/{{ item.key }}/openregister/paas-config.yaml"
   with_dict: "{{ register_groups }}"
