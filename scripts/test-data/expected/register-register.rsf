@@ -1,13 +1,13 @@
 add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"alpha","register":"register","text":"The name of a register."}
 append-entry	system	field:register	2000-00-00T00:00:00Z	sha-256:20413e154fc235d323775983f355b33b0e42032d6c7cac98b8681b44110f53b3
-add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"alpha","register":"","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
-append-entry	system	field:phase	2000-00-00T00:00:00Z	sha-256:0acd04e6758fd52761d15f2f308b598c8dd57e33b42652ae9652b0f227afb501
-add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"alpha","register":"","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
-append-entry	system	field:registry	2000-00-00T00:00:00Z	sha-256:4177c67af31f2309c6aef4de9ac0362bf73f07a8ba2c9796f1a113a2d6171a86
-add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"alpha","register":"","text":"The copyright and licensing terms which may apply to the data held in a register."}
-append-entry	system	field:copyright	2000-00-00T00:00:00Z	sha-256:c889a4904c4fd4dc3d405cf892a73d874d8aa2949918c8495e2d96a62f1b13c4
-add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"alpha","register":"","text":"Any additional information about a record in a register."}
-append-entry	system	field:text	2000-00-00T00:00:00Z	sha-256:64130ef564805d87ef8b96408c7074535644709812a9e0dd5067267d54cf4e42
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"alpha","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+append-entry	system	field:phase	2000-00-00T00:00:00Z	sha-256:6b4f1465970264c09e5572824c94301e5c76a310be4dc41e04bd301c9cd723d2
+add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"alpha","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
+append-entry	system	field:registry	2000-00-00T00:00:00Z	sha-256:b58faf5ccd130997fc215f8a47bafdbbd2654490df3932b8189c61fd1108fa97
+add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"alpha","text":"The copyright and licensing terms which may apply to the data held in a register."}
+append-entry	system	field:copyright	2000-00-00T00:00:00Z	sha-256:4a4cd52643043366688f3cff0144d39371ca93c485361b934ccdd60faf4217cf
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"alpha","text":"Any additional information about a record in a register."}
+append-entry	system	field:text	2000-00-00T00:00:00Z	sha-256:2108df725a601f3354242aa1e4e6dfb256a30b5642e367239b176223668fdad6
 add-item	{"cardinality":"n","datatype":"string","field":"fields","phase":"alpha","register":"field","text":"The names of the fields in a register."}
 append-entry	system	field:fields	2000-00-00T00:00:00Z	sha-256:7f8b3fe1eff4540654395e3097d321a240b0931f9a28b4bae7c3099d3efb0370
 add-item	{"fields":["register","text","registry","phase","copyright","fields"],"phase":"alpha","register":"register","registry":"cabinet-office","text":"Registers maintained by the UK government"}
