@@ -27,15 +27,12 @@ register_groups:
 
   multi:
     - clinical-commissioning-group
-    - government-domain
     - green-deal-certification-body
     - jobcentre
     - local-authority-nir
     - local-authority-type
     - place
     - prison
-    - statistical-geography
-    - statistical-geography-unitary-authority-wls
     - street
     - street-custodian
     - uk
