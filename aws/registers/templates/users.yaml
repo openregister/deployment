@@ -31,6 +31,13 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
 
+  - name: ggoldberg
+    groups: users
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDrOespSh7iYzwvvLUNy3+b1U9gTvOhfAQZlxUhN6DOhC5axLHnVls3v8trKoHUFUpq8jxf9PaAX/j2bIc6xFvhPJLm1CnlzhoJ1sQRRgcvKyHf2euVi/p8D8tDH0UK2JSg+KYq+BR7N6nO44XaCMvO78Ksa6C5xw3tjoYeZbOKe+A8rHG4Az4ULlssGvZuctFZNfqUK4X2nD1E2BfbfJAJOABmym0sBo6hX/MAdPWsElqCuOvPtVNb0LEuD5YIT/uCl+WBnMQ4xn1ZlQUUMUNyPa0HbYTX7NNIFOrckyXZA89txVzTw9WeNNDz7wiaNPa7Zk3pSAdQ7KSuD6F+ui05
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+
 packages:
   - awscli
   - docker.io
