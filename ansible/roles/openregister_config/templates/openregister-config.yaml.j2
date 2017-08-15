@@ -9,9 +9,13 @@
 {%- set db_host = groups[rds_instance_name][0] -%}
 database:
   driverClass: org.postgresql.Driver
+  {% if not paas %}
   url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
   user: {{ db_user }}
   password: {{ db_password }}
+  {% else %}
+  url: "substituted-at-runtime-from-environment"
+  {% endif %}
 
   #db connection properties
   initialSize: {{ db_initial_size | default(1) }}
@@ -72,6 +76,7 @@ logging:
   appenders:
     - type: logstash-console
 
+{% if not paas %}
 metrics:
   reporters:
     - type: graphite
@@ -79,6 +84,7 @@ metrics:
       port: 8092
       transport: udp
       frequency: 5 seconds
+{% endif %}
 
 {% if loop.length > 1 %}
 registers:
