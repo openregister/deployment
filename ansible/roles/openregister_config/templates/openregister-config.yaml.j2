@@ -61,6 +61,9 @@ externalConfigDirectory: /tmp
 downloadConfigs: true
 
 server:
+ connector:
+    type: http
+    port: {% if paas %}${PORT}{% else %}8080{% endif %}
   registerDefaultExceptionMappers: false
   requestLog:
     appenders:
