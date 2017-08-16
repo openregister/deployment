@@ -1,51 +1,73 @@
-resource "aws_iam_role" "codepipeline" {
-  name = "codepipeline"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": "sts:AssumeRole",
-    "Principal": {
-      "Service": "codepipeline.amazonaws.com"
-    }
-  }]
-}
-EOF
+module "test_basic" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "test"
+  cloudfoundry_organization = "openregister"
+  environment = "test"
+  register_group = "basic"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
 }
 
-resource "aws_iam_role_policy" "codepipeline" {
-  name = "codepipeline"
-  role = "${aws_iam_role.codepipeline.id}"
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Resource": "arn:aws:s3:::codepipeline*",
-    "Effect": "Allow",
-    "Action": "s3:PutObject"
-  }, {
-    "Resource": "*",
-    "Effect": "Allow",
-    "Action": [
-      "codebuild:BatchGetBuilds",
-      "codebuild:StartBuild",
-      "codedeploy:CreateDeployment",
-      "codedeploy:GetApplicationRevision",
-      "codedeploy:GetDeployment",
-      "codedeploy:GetDeploymentConfig",
-      "codedeploy:RegisterApplicationRevision",
-      "iam:PassRole",
-      "lambda:InvokeFunction",
-      "lambda:ListFunctions",
-      "s3:GetObject",
-      "s3:GetObjectVersion",
-      "s3:GetBucketVersioning"
-    ]
-  }]
+module "test_multi" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "test"
+  cloudfoundry_organization = "openregister"
+  environment = "test"
+  register_group = "multi"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
 }
-EOF
+
+module "discovery_basic" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "discovery"
+  register_group = "basic"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
+}
+
+module "discovery_multi" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "discovery"
+  register_group = "multi"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
+}
+
+module "alpha_basic" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "alpha"
+  register_group = "basic"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
+}
+
+module "alpha_multi" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "alpha"
+  register_group = "multi"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
+}
+
+module "beta_basic" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "beta"
+  register_group = "basic"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
+}
+
+module "beta_multi" {
+  source = "../modules/paas_codebuild_deploy"
+  cloudfoundry_space = "prod"
+  cloudfoundry_organization = "openregister"
+  environment = "beta"
+  register_group = "multi"
+  codebuild_role_arn = "${aws_iam_role.codebuild_role.arn}"
 }
 
 resource "aws_codepipeline" "pipeline" {
@@ -89,6 +111,32 @@ resource "aws_codepipeline" "pipeline" {
       configuration {
         ApplicationName = "openregister-app"
         DeploymentGroupName = "test"
+      }
+    }
+
+    action {
+      name = "deploy-test-basic"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.test_basic.name}"
+      }
+    }
+
+    action {
+      name = "deploy-test-multi"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.test_multi.name}"
       }
     }
   }
@@ -135,6 +183,58 @@ resource "aws_codepipeline" "pipeline" {
         DeploymentGroupName = "alpha"
       }
     }
+
+    action {
+      name = "deploy-discovery-basic"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.discovery_basic.name}"
+      }
+    }
+
+    action {
+      name = "deploy-discovery-multi"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.discovery_multi.name}"
+      }
+    }
+
+    action {
+      name = "deploy-alpha-basic"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.alpha_basic.name}"
+      }
+    }
+
+    action {
+      name = "deploy-alpha-multi"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.alpha_multi.name}"
+      }
+    }
   }
 
   stage {
@@ -163,6 +263,32 @@ resource "aws_codepipeline" "pipeline" {
       configuration {
         ApplicationName = "openregister-app"
         DeploymentGroupName = "beta"
+      }
+    }
+
+    action {
+      name = "deploy-beta-basic"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.beta_basic.name}"
+      }
+    }
+
+    action {
+      name = "deploy-beta-multi"
+      category = "Build"
+      owner = "AWS"
+      provider = "CodeBuild"
+      input_artifacts = ["openregister_package"]
+      version = "1"
+
+      configuration {
+        ProjectName = "${module.beta_multi.name}"
       }
     }
   }

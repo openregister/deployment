@@ -14,3 +14,4 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" { current = true }
+data "aws_kms_alias" "paas_deploy" { name = "alias/paas-deploy" }
