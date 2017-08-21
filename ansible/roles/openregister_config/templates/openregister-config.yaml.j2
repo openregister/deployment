@@ -66,8 +66,14 @@ server:
       port: {% if paas %}${PORT}{% else %}8080{% endif %}
   registerDefaultExceptionMappers: false
   requestLog:
+    {% if paas %}
     appenders:
       - type: access-logstash-console
+    {% else %}
+    type: classic
+    appenders:
+      - type: logstash-console
+    {% endif %}
 
 credentials:
   user: {{ app_user }}
