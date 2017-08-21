@@ -478,6 +478,38 @@ module "prison-estate_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
+module "public-body_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "public-body", false)}"
+
+  name = "public-body"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "public-body-classification_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "public-body-classification", false)}"
+
+  name = "public-body-classification"
+  environment = "${var.vpc_name}"
+  load_balancer = "${module.multi.load_balancer}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
 module "occupation_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "occupation", false)}"
