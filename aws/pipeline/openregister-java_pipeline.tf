@@ -107,6 +107,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeDeploy"
       version = "1"
       input_artifacts = ["openregister_package"]
+      run_order = 1
 
       configuration {
         ApplicationName = "openregister-app"
@@ -121,6 +122,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.test_basic.name}"
@@ -134,6 +136,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.test_multi.name}"
@@ -163,6 +166,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeDeploy"
       version = "1"
       input_artifacts = ["openregister_package"]
+      run_order = 1
 
       configuration {
         ApplicationName = "openregister-app"
@@ -177,6 +181,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeDeploy"
       version = "1"
       input_artifacts = ["openregister_package"]
+      run_order = 1
 
       configuration {
         ApplicationName = "openregister-app"
@@ -191,6 +196,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.discovery_basic.name}"
@@ -204,6 +210,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.discovery_multi.name}"
@@ -217,6 +224,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.alpha_basic.name}"
@@ -230,6 +238,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.alpha_multi.name}"
@@ -259,6 +268,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeDeploy"
       version = "1"
       input_artifacts = ["openregister_package"]
+      run_order = 1
 
       configuration {
         ApplicationName = "openregister-app"
@@ -273,6 +283,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.beta_basic.name}"
@@ -286,6 +297,7 @@ resource "aws_codepipeline" "pipeline" {
       provider = "CodeBuild"
       input_artifacts = ["openregister_package"]
       version = "1"
+      run_order = 2
 
       configuration {
         ProjectName = "${module.beta_multi.name}"
