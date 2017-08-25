@@ -25,7 +25,7 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
         forward = "none"
       }
       query_string = true
-      headers = ["Accept", "Host", "Origin"]
+      headers = ["Accept", "Host", "Origin", "X-Forwarded-Host"]
     }
 
     target_origin_id = "paas"
