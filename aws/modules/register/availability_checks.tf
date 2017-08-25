@@ -1,4 +1,3 @@
-
 resource "pingdom_check" "origin_records" {
   count = "${var.enabled && var.enable_availability_checks ? 1 : 0}"
   type = "http"

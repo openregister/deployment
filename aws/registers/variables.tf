@@ -75,7 +75,8 @@ variable "codedeploy_service_role_arn" {
 
 // https
 variable "elb_certificate_arn" {}
-variable "cloudfront_certificate_arn" {}
+variable "cloudfront_certificate_arn" { default = "" }
+variable "paas_cdn_certificate_arn" {}
 
 // Pingdom
 variable "pingdom_user" {}
@@ -89,6 +90,10 @@ variable "cdn_configuration" {
   default = {
     enabled = false
   }
+}
+
+variable "paas_cdn_configuration" {
+  type = "map"
 }
 
 variable "sumologic_key" {
