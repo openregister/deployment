@@ -36,6 +36,14 @@ variable cdn_dns_zone_id {
   description = "hosted zone for CDN records"
 }
 
+variable paas_cdn_hosted_zone_id {
+  description = "hosted zone for CDN records"
+}
+
+variable paas_cdn_domain_name {
+  description = "CloudFront distribution name"
+}
+
 variable pingdom_contact_ids {
   description = "contacts to send state change notifications to"
 }

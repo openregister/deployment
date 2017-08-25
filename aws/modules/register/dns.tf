@@ -6,8 +6,8 @@ resource "aws_route53_record" "record" {
   zone_id = "${var.dns_zone_id}"
 
   alias {
-    name = "${var.load_balancer["dns_name"]}"
-    zone_id = "${var.load_balancer["zone_id"]}"
+    name = "${var.paas_cdn_domain_name}"
+    zone_id = "${var.paas_cdn_hosted_zone_id}"
     evaluate_target_health = false // we don't have anything to fail over to at the moment
   }
 }
