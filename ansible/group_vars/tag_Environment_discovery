@@ -24,10 +24,8 @@ register_groups:
     - datatype
     - field
 
-  address:
-    - address
-
   multi:
+    - address
     - clinical-commissioning-group
     - green-deal-certification-body
     - jobcentre
