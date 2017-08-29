@@ -4,7 +4,7 @@ module "address_register" {
 
   name = "address"
   environment = "${var.vpc_name}"
-  load_balancer = "${module.address.load_balancer}"
+  load_balancer = "${module.multi.load_balancer}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
