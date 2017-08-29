@@ -15,8 +15,6 @@ register_settings:
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.discovery.config/fields.yaml"
     registers_yaml_location: "s3://openregister.discovery.config/registers.yaml"
-  address:
-    enable_download_resource: false
   vehicle-colour:
     custodian_name: Rohan Gye
 
