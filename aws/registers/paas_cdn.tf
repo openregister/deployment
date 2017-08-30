@@ -13,7 +13,7 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
   }
 
   default_cache_behavior {
-    allowed_methods = ["HEAD", "GET"]
+    allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods = ["HEAD", "GET"]
 
     default_ttl = 86400
