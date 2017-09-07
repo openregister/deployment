@@ -57,6 +57,8 @@ register_groups:
     - internal-drainage-board
     - occupation
     - principal-local-authority
+    - public-body
+    - public-body-classification
     - school-eng
     - school-type
     - social-housing-provider
