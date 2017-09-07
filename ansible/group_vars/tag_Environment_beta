@@ -2,53 +2,39 @@ register_domain: register.gov.uk
 register_settings:
   country:
     custodian_name: Tony Worron
-    history_page_url: https://registers.cloudapps.digital/registers/country
     indexes:
       - current-countries
     similar_registers:
       - territory
   datatype:
     custodian_name: Paul Downey
-    history_page_url: https://registers.cloudapps.digital/registers/datatype
   field:
     custodian_name: Paul Downey
-    history_page_url: https://registers.cloudapps.digital/registers/field
   government-organisation:
     custodian_name: Neil Williams
-    history_page_url: https://registers.cloudapps.digital/registers/government-organisation
   government-service:
     custodian_name: Thomas Moore
-    history_page_url: https://registers.cloudapps.digital/registers/government-service
   internal-drainage-board:
     custodian_name: Killie Mpopo
-    history_page_url: https://registers.cloudapps.digital/registers/internal-drainage-board
   local-authority-eng:
     custodian_name: Stephen McAllister
-    history_page_url: https://registers.cloudapps.digital/registers/local-authority-eng
     indexes:
       - local-authority-by-type
   local-authority-sct:
     custodian_name: Hugh Buchanan
-    history_page_url: https://registers.cloudapps.digital/registers/local-authority-sct
   local-authority-type:
     custodian_name: Stephen McAllister
-    history_page_url: https://registers.cloudapps.digital/registers/local-authority-type
   principal-local-authority:
     custodian_name: Lisa James
-    history_page_url: https://registers.cloudapps.digital/registers/principal-local-authority
   prison-estate:
     custodian_name: Richard Carling
-    history_page_url: https://registers.cloudapps.digital/registers/prison-estate
   register:
     custodian_name: Paul Downey
-    history_page_url: https://registers.cloudapps.digital/registers/register
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
   registration-district:
     custodian_name: Joanne Wilkes-Waterworth
-    history_page_url: https://registers.cloudapps.digital/registers/registration-district
   territory:
-    history_page_url: https://registers.cloudapps.digital/registers/territory
     custodian_name: Tony Worron
     similar_registers:
       - country
