@@ -7,10 +7,6 @@ register_settings:
     enable_register_data_delete: false
   field:
     enable_register_data_delete: false
-  public-body:
-    history_page_url: https://registers.cloudapps.digital/registers/public-body
-  public-body-classification:
-    history_page_url: https://registers.cloudapps.digital/registers/public-body-classification
   register:
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.discovery.config/fields.yaml"
