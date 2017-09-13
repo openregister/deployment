@@ -4,32 +4,13 @@ enable_register_data_delete: true
 
 register_settings:
   datatype:
-    custodian_name: Paul Downey
     enable_register_data_delete: false
   field:
-    custodian_name: Paul Downey
     enable_register_data_delete: false
-  industrial-classification:
-    custodian_name: Charlie Roth-Smith
-  occupation:
-    custodian_name: Charlie Roth-Smith
-  principal-local-authority:
-    custodian_name: Lisa James
   register:
-    custodian_name: Paul Downey
     enable_register_data_delete: false
     fields_yaml_location: "s3://openregister.alpha.config/fields.yaml"
     registers_yaml_location: "s3://openregister.alpha.config/registers.yaml"
-  school-eng:
-    custodian_name: Andrew Thomson
-  school-type:
-    custodian_name: Andrew Thomson
-  social-housing-provider:
-    custodian_name: Julie Bond
-  statistical-geography:
-    custodian: Mike Phelps-Cousins
-  statistical-geography-unitary-authority-wls:
-    custodian: Mike Phelps-Cousins
 
 register_groups:
   basic:
