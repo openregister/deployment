@@ -1,41 +1,17 @@
 register_domain: register.gov.uk
 register_settings:
   country:
-    custodian_name: Tony Worron
     indexes:
       - current-countries
     similar_registers:
       - territory
-  datatype:
-    custodian_name: Paul Downey
-  field:
-    custodian_name: Paul Downey
-  government-organisation:
-    custodian_name: Neil Williams
-  government-service:
-    custodian_name: Thomas Moore
-  internal-drainage-board:
-    custodian_name: Killie Mpopo
   local-authority-eng:
-    custodian_name: Stephen McAllister
     indexes:
       - local-authority-by-type
-  local-authority-sct:
-    custodian_name: Hugh Buchanan
-  local-authority-type:
-    custodian_name: Stephen McAllister
-  principal-local-authority:
-    custodian_name: Lisa James
-  prison-estate:
-    custodian_name: Richard Carling
   register:
-    custodian_name: Paul Downey
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
-  registration-district:
-    custodian_name: Joanne Wilkes-Waterworth
   territory:
-    custodian_name: Tony Worron
     similar_registers:
       - country
 

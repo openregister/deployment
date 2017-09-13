@@ -37,7 +37,6 @@ database:
 trackingId: {{ tracking_id }}
 register: {{ register_name }}
 schema: {{ register_name }}
-{% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 
@@ -102,7 +101,6 @@ registers:
   {{ reg }}:
     trackingId: {{ tracking_id }}
     schema: {{ register_name }}
-    {% if settings.custodian_name is defined %}custodianName: {{ settings.custodian_name }}{% endif %}
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
     {% if settings.history_page_url is defined %}historyPageUrl: {{ settings.history_page_url }}{% endif %}
