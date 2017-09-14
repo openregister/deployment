@@ -28,6 +28,7 @@ register_groups:
     - public-body-classification
     - school-eng
     - school-type
+    - school-type-eng
     - social-housing-provider
     - social-housing-provider-designation
     - social-housing-provider-legal-entity
