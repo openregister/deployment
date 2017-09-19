@@ -1,5 +1,7 @@
 # Getting started
 
+This repository contains terraform code and adhoc ansible tasks for managing aspects of the [registers](https://registers.cloudapps.digital) infrastructure.
+
 ## Prerequisites
 
 ### [awscli](http://aws.amazon.com/cli/) and [ansible](http://www.ansible.com) installed
@@ -18,28 +20,7 @@ On OSX you can install via `brew`, although you'll want to make sure you use the
 
 Install the [terraform-provider-pingdom](https://github.com/russellcardullo/terraform-provider-pingdom) plugin.
 
-# Ad hoc tasks with ansible
-
-The ansible/ directory contains some tasks for performing ad hoc
-tasks.  In order to work with ansible, you'll need to do the
-following:
-
-Set up your ssh config to tunnel through the gateway:
-
-    Host 172.xxx.* *.<vpc-name>.openregister # replace with actual IP range and VPC name
-        ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
-
-To run a single playbook (ping in this example):
-
-    cd ansible
-    ansible-playbook ping.yml -e vpc=<name> -f 1
-
-(the ping command seems to timeout unless you explicitly run it
-serially (`-f 1`))
-
-# Bootstrapping
-
-## Create an AWS access key
+### Create an AWS access key
 
 Log in to the AWS console, go to Identity and Access Management (IAM),
 click on your user, click on "Security Credentials", and create a new
@@ -59,7 +40,7 @@ aws_secret_key = "........."
 This file is .gitignored and should not be checked in as it contains
 secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
-## System variables
+### System variables
 
 * set AWS CLI variables:
 
@@ -70,6 +51,15 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 * or alternatively, you can use an awscli profile instead:
 
 		export AWS_PROFILE=registers
+
+### Set up `registers-pass`
+
+The registers team maintains a [credentials store](https://github.com/openregister/credentials/). 
+You must be able to decrypt and create passwords using the command `registers-pass`. This command
+is used by some of the adhoc ansible commands required to set up register deployments. Follow 
+the [instructions](https://github.com/openregister/credentials/README.md) to set this up.
+
+# Deploying registers infrastructure
 
 ## How to create a register in an existing environment with an existing register group
 
