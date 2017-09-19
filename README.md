@@ -61,18 +61,37 @@ the [instructions](https://github.com/openregister/credentials/README.md) to set
 
 # Deploying registers infrastructure
 
-## How to create a register in an existing environment with an existing register group
+- There are 4 registers environments: `beta`, `alpha`, `discovery` and `test`.
+- In each environment there are 2 register "groups": `basic` and `multi`.
+- The `basic` group contains register, field and datatype registers.
+- The `multi` group contains all other registers in that environment.
+
+## How to create a new register in an existing environment
 
 Step-by-step:
 
-### Add configuration and credentials
+### Add the new register to ansible configuration
 
 Edit the `ansible/group_vars/tag_Environment_<vpc>` file and add the
 register details to the `register_groups` and `register_settings` keys.
 
-Generate credentials using the `ansible/generate_passwords.yml` playbook:
+### Create credentials for the new register
 
+Create a new branch and generate credentials using the `ansible/generate_passwords.yml` playbook:
+
+    cd ansible
+    registers-pass git checkout -b create-new-register
     ansible-playbook generate_passwords.yml -e vpc=<myenv>
+
+Check that the new password has been created and committed to the new branch, then push.
+    
+    registers-pass git log
+    registers-pass git push -u origin create-new-register
+
+Merge this to master then ensure your `registers-pass` is using latest master
+
+    registers-pass git checkout master
+    registers-pass git pull
 
 Follow the steps on [running the registers application](https://github.com/openregister/deployment#running-the-registers-application).
 
