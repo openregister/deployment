@@ -70,12 +70,12 @@ the [instructions](https://github.com/openregister/credentials/README.md) to set
 
 Step-by-step:
 
-### Add the new register to ansible configuration
+### 1. Add the new register to ansible configuration
 
 Edit the `ansible/group_vars/tag_Environment_<vpc>` file and add the
 register details to the `register_groups` and `register_settings` keys.
 
-### Create credentials for the new register
+### 2. Create credentials for the new register
 
 Create a new branch and generate credentials using the `ansible/generate_passwords.yml` playbook:
 
@@ -93,7 +93,7 @@ Merge this to master then ensure your `registers-pass` is using latest master
     registers-pass git checkout master
     registers-pass git pull
 
-### Generate the application `paas-config.yaml`
+### 3. Generate the application `paas-config.yaml`
 
 The `ansible/upload_configs_to_s3.yml` file creates the application
 config files (`pass-config.yaml`) required for each register in each environment.
@@ -106,18 +106,18 @@ If you want to test this script and not upload to S3 you can set `sync: false` i
     cd ansible
     ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
 
-### Add host to PaaS manifest file
+### 4. Add host to PaaS manifest file
 
 Add a new `host` for the new register in the relevant openregister-java [manifest file](https://github.com/openregister/openregister-java/tree/master/deploy/manifests).
 If you are creating a register that is none of register, field, or datatype, you must update the manifests/<myenv>/multi.yml file.
 
-### Deploy application to PaaS
+### 5. Deploy application to PaaS
 
 Deploy the above change to the relevant environment via CodePipeline. Once complete, check you can access the new register.
 
     curl https://cloudapps.digital -H "Host: <myregister>.<myenv>.openregister.org"
 
-### Update terraform config
+### 6. Update terraform config
 
 Fetch the latest `.tfvars` file from S3:
 
@@ -130,19 +130,19 @@ appropriate `register` module resource in `registers.tf` (if it does not already
 to the `load_balancer` argument which specifies which register group the
 register is part of.
 
-### Execute a terraform plan
+### 7. Execute a terraform plan
 
 You should expect terrafrom to plan to create a new Route 53 DNS record and a new Pingdom availability check.
 
         cd aws/registers
         make plan -e vpc=<myenv>
 
-### Apply terraform changes
+### 8. Apply terraform changes
 
         cd aws/registers
         make apply -e vpc=<myenv>
 
-### Push local changes to terraform config
+### 9. Push local changes to terraform config
 
 The terraform config file for each environment is not stored in Git but is
 stored in S3. Any local changes made and applied should be pushed back to S3.
@@ -155,7 +155,7 @@ And then push if the previous task reports that the files are identical:
 
         make push-config -e vpc=<name>
 
-## Extra steps for beta
+### 10. Extra steps for beta
 
 If you are creating a register in beta, you must follow [these additional steps](#Extra steps for creating a new Beta register).
 
