@@ -108,7 +108,7 @@ If you want to test this script and not upload to S3 you can set `sync: false` i
 
 ### Add host to PaaS manifest file
 
-Add a new `host` for the new register in the relevant openregister-java [mainfest file](https://github.com/openregister/openregister-java/tree/master/deploy/manifests).
+Add a new `host` for the new register in the relevant openregister-java [manifest file](https://github.com/openregister/openregister-java/tree/master/deploy/manifests).
 If you are creating a register that is none of register, field, or datatype, you must update the manifests/<myenv>/multi.yml file.
 
 ### Deploy application to PaaS
@@ -155,33 +155,26 @@ And then push if the previous task reports that the files are identical:
 
         make push-config -e vpc=<name>
 
+## Extra steps for beta
+
+If you are creating a register in beta, you must follow [these additional steps](#Extra steps for creating a new Beta register).
+
 ## How to create a register group in an existing environment
 
-- Duplicate an existing `register_group_*.tf` configuration and edit appropriately.
-- Specify the `group_instance_count` in `environments/<myenv>.tfvars`.
+Edit `ansible/group_vars/tag_Environment_<myenv>` and add the new group to `register_groups`, 
+including the register names that are part of this group.
 
-Additionally, by creating a new register group, you will need to create a new 
-database and user, per environment. To do this:
-- Update application config files by running `ansible/upload_configs_to_s3.yml` playbook.
-- Create a new database using `ansible/create_databases.yml` playbook.
-- Generate credentials via the `ansible/generate_passwords.yml` playbook
+Follow steps 2-3 above.
 
-Then [plan and apply your terraform](#terraforming) code.
+Create a new manifest file for [openregister-java](https://github.com/openregister/openregister-java)
+at `deploy/manifests/<myenv>/<mygroup>.yml`. Add `hosts` for the registers in the new group.
+
+Follow steps 4-9 above.
 
 ## How to create a new environment
 
-Step by step:
-
-### Add configuration and credentials
-
 Create a new `ansible/group_vars/tag_Environment_<vpc>` file and
 customize it for the new environment.
-
-Generate credentials using the `ansible/generate_passwords.yml` playbook:
-
-    ansible-playbook generate_passwords.yml -e vpc=<myenv>
-    
-### Set up and run terraform
 
 Create a new `.tfvars` file for the environment:
 
@@ -198,6 +191,8 @@ Once approved, the ARN for the new certificate must then be added to the existin
 	elb_certificate_arn = "arn:aws:acm:eu-west-1:022990953738:certificate/<abcde>"
 
 Then [plan and apply your terraform](#execute-a-terraform-plan) changes.
+
+Then follow steps 1-9 above.
 
 # Extra steps for creating a new Beta register
 
