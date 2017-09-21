@@ -160,7 +160,7 @@ If this is a beta register you will not see it at https://myregister.register.go
 
 ### 10. Extra steps for beta
 
-If you are creating a register in beta, you must follow [these additional steps](#Extra steps for creating a new Beta register).
+If you are creating a register in beta, you must follow [these additional steps](#extra-steps-for-creating-a-new-beta-register).
 
 ## How to create a register group in an existing environment
 
