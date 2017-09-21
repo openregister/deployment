@@ -155,7 +155,8 @@ And then push if the previous task reports that the files are identical:
 
         make push-config -e vpc=<name>
 
-You should now see the register at https://<myregister>.<myenv>.openregister.org.
+You should now see the register at https://myregister.myenv.openregister.org.
+If this is a beta register you will not see it at https://myregister.register.gov.uk until you follow step 10.
 
 ### 10. Extra steps for beta
 
