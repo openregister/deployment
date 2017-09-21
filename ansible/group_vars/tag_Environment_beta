@@ -23,6 +23,7 @@ register_groups:
 
   multi:
     - country
+    - government-domain
     - government-organisation
     - government-service
     - internal-drainage-board
@@ -32,4 +33,6 @@ register_groups:
     - principal-local-authority
     - prison-estate
     - registration-district
+    - statistical-geography
+    - statistical-geography-unitary-authority-wls
     - territory
