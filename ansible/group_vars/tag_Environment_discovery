@@ -33,3 +33,4 @@ register_groups:
     - street-custodian
     - uk
     - vehicle-colour
+    - statistical-geography-council-area-sct
