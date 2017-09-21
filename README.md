@@ -155,6 +155,8 @@ And then push if the previous task reports that the files are identical:
 
         make push-config -e vpc=<name>
 
+You should now see the register at https://<myregister>.<myenv>.openregister.org.
+
 ### 10. Extra steps for beta
 
 If you are creating a register in beta, you must follow [these additional steps](#Extra steps for creating a new Beta register).
