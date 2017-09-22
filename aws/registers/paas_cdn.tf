@@ -16,8 +16,8 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
     allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods = ["HEAD", "GET"]
 
-    default_ttl = 60
-    max_ttl = 31536000
+    default_ttl = 0
+    max_ttl = 0
     min_ttl = 0
 
     forwarded_values {
