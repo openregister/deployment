@@ -1,5 +1,7 @@
 # Getting started
 
+This repository contains terraform code and adhoc ansible tasks for managing aspects of the [registers](https://registers.cloudapps.digital) infrastructure.
+
 ## Prerequisites
 
 ### [awscli](http://aws.amazon.com/cli/) and [ansible](http://www.ansible.com) installed
@@ -18,28 +20,7 @@ On OSX you can install via `brew`, although you'll want to make sure you use the
 
 Install the [terraform-provider-pingdom](https://github.com/russellcardullo/terraform-provider-pingdom) plugin.
 
-# Ad hoc tasks with ansible
-
-The ansible/ directory contains some tasks for performing ad hoc
-tasks.  In order to work with ansible, you'll need to do the
-following:
-
-Set up your ssh config to tunnel through the gateway:
-
-    Host 172.xxx.* *.<vpc-name>.openregister # replace with actual IP range and VPC name
-        ProxyCommand ssh gateway.<vpc-name>.openregister.org -W %h:%p
-
-To run a single playbook (ping in this example):
-
-    cd ansible
-    ansible-playbook ping.yml -e vpc=<name> -f 1
-
-(the ping command seems to timeout unless you explicitly run it
-serially (`-f 1`))
-
-# Bootstrapping
-
-## Create an AWS access key
+### Create an AWS access key
 
 Log in to the AWS console, go to Identity and Access Management (IAM),
 click on your user, click on "Security Credentials", and create a new
@@ -59,7 +40,7 @@ aws_secret_key = "........."
 This file is .gitignored and should not be checked in as it contains
 secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
-## System variables
+### System variables
 
 * set AWS CLI variables:
 
@@ -71,22 +52,72 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 		export AWS_PROFILE=registers
 
-## How to create a register in an existing environment with an existing register group
+### Set up `registers-pass`
+
+The registers team maintains a [credentials store](https://github.com/openregister/credentials/). 
+You must be able to decrypt and create passwords using the command `registers-pass`. This command
+is used by some of the adhoc ansible commands required to set up register deployments. Follow 
+the [instructions](https://github.com/openregister/credentials/README.md) to set this up.
+
+# Deploying registers infrastructure
+
+- There are 4 registers environments: `beta`, `alpha`, `discovery` and `test`.
+- In each environment there are 2 register "groups": `basic` and `multi`.
+- The `basic` group contains register, field and datatype registers.
+- The `multi` group contains all other registers in that environment.
+
+## How to create a new register in an existing environment
 
 Step-by-step:
 
-### Add configuration and credentials
+### 1. Add the new register to ansible configuration
 
 Edit the `ansible/group_vars/tag_Environment_<vpc>` file and add the
 register details to the `register_groups` and `register_settings` keys.
 
-Generate credentials using the `ansible/generate_passwords.yml` playbook:
+### 2. Create credentials for the new register
 
+Create a new branch and generate credentials using the `ansible/generate_passwords.yml` playbook:
+
+    cd ansible
+    registers-pass git checkout -b create-new-register
     ansible-playbook generate_passwords.yml -e vpc=<myenv>
 
-Follow the steps on [running the registers application](https://github.com/openregister/deployment#running-the-registers-application).
+Check that the new password has been created and committed to the new branch, then push.
+    
+    registers-pass git log
+    registers-pass git push -u origin create-new-register
 
-### Update terraform
+Merge this to master then ensure your `registers-pass` is using latest master
+
+    registers-pass git checkout master
+    registers-pass git pull
+
+### 3. Generate the application `paas-config.yaml`
+
+The `ansible/upload_configs_to_s3.yml` file creates the application
+config files (`pass-config.yaml`) required for each register in each environment.
+The config files are written locally to `ansible/config/<myenv>` and
+uploaded to S3 buckets. This ansible script consumes credentials via `registers-pass` and adds any 
+new registers to the list of registers to be run by the application. When the application runs
+it will pull the relevant `paas-config.yaml` file from S3.
+If you want to test this script and not upload to S3 you can set `sync: false` in `upload_configs_to_s3.yml`. 
+
+    cd ansible
+    ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
+
+### 4. Add host to PaaS manifest file
+
+Add a new `host` for the new register in the relevant openregister-java [manifest file](https://github.com/openregister/openregister-java/tree/master/deploy/manifests).
+If you are creating a register that is none of register, field, or datatype, you must update the manifests/<myenv>/multi.yml file.
+
+### 5. Deploy application to PaaS
+
+Deploy the above change to the relevant environment via CodePipeline. Once complete, check you can access the new register.
+
+    curl https://cloudapps.digital -H "Host: <myregister>.<myenv>.openregister.org"
+
+### 6. Update terraform config
 
 Fetch the latest `.tfvars` file from S3:
 
@@ -95,39 +126,58 @@ Fetch the latest `.tfvars` file from S3:
 
 Enable the register in the environment by adding the register to the
 `enabled_registers` list in `environments/<myenv>.tfvars` and add an
-appropriate `register` module resource in `registers.tf`. Pay close attention
+appropriate `register` module resource in `registers.tf` (if it does not already exist). Pay close attention
 to the `load_balancer` argument which specifies which register group the
 register is part of.
 
-Then [plan and apply your terraform](#terraforming) code.
+### 7. Execute a terraform plan
+
+You should expect terrafrom to plan to create a new Route 53 DNS record and a new Pingdom availability check.
+
+        cd aws/registers
+        make plan -e vpc=<myenv>
+
+### 8. Apply terraform changes
+
+        cd aws/registers
+        make apply -e vpc=<myenv>
+
+### 9. Push local changes to terraform config
+
+The terraform config file for each environment is not stored in Git but is
+stored in S3. Any local changes made and applied should be pushed back to S3.
+First check that the config hasn't changed since you last pulled:
+
+        cd aws/registers
+        make diff-config -e vpc=<name>
+
+And then push if the previous task reports that the files are identical:
+
+        make push-config -e vpc=<name>
+
+You should now see the register at https://myregister.myenv.openregister.org.
+If this is a beta register you will not see it at https://myregister.register.gov.uk until you follow step 10.
+
+### 10. Extra steps for beta
+
+If you are creating a register in beta, you must follow [these additional steps](#extra-steps-for-creating-a-new-beta-register).
 
 ## How to create a register group in an existing environment
 
-- Duplicate an existing `register_group_*.tf` configuration and edit appropriately.
-- Specify the `group_instance_count` in `environments/<myenv>.tfvars`.
+Edit `ansible/group_vars/tag_Environment_<myenv>` and add the new group to `register_groups`, 
+including the register names that are part of this group.
 
-Additionally, by creating a new register group, you will need to create a new 
-database and user, per environment. To do this:
-- Update application config files by running `ansible/upload_configs_to_s3.yml` playbook.
-- Create a new database using `ansible/create_databases.yml` playbook.
-- Generate credentials via the `ansible/generate_passwords.yml` playbook
+Follow steps 2-3 above.
 
-Then [plan and apply your terraform](#terraforming) code.
+Create a new manifest file for [openregister-java](https://github.com/openregister/openregister-java)
+at `deploy/manifests/<myenv>/<mygroup>.yml`. Add `hosts` for the registers in the new group.
+
+Follow steps 4-9 above.
 
 ## How to create a new environment
 
-Step by step:
-
-### Add configuration and credentials
-
 Create a new `ansible/group_vars/tag_Environment_<vpc>` file and
 customize it for the new environment.
-
-Generate credentials using the `ansible/generate_passwords.yml` playbook:
-
-    ansible-playbook generate_passwords.yml -e vpc=<myenv>
-    
-### Set up and run terraform
 
 Create a new `.tfvars` file for the environment:
 
@@ -143,73 +193,9 @@ Once approved, the ARN for the new certificate must then be added to the existin
 
 	elb_certificate_arn = "arn:aws:acm:eu-west-1:022990953738:certificate/<abcde>"
 
-Then run terraform (see next section).
+Then [plan and apply your terraform](#execute-a-terraform-plan) changes.
 
-## Terraforming
-
-### Executing a plan
-
-	cd aws/registers
-	make plan -e vpc=<myenv>
-
-### Applying changes
-
-	cd aws/registers
-	make apply -e vpc=<myenv>
-
-### Pushing local changes to terraform config
-
-The terraform config file for each environment is not stored in Git but is
-stored in S3. Any local changes made and applied should be pushed back to S3.
-First check that the config hasn't changed since you last pulled:
-
-	cd aws/registers
-	make diff-config -e vpc=<name>
-
-And then push if the previous task reports that the files are identical:
-
-	make push-config -e vpc=<name>
-
-# Running the registers application
-
-## Start the registers application
-
-### Generate application config
-
-#### config.yaml
-
-The `ansible/upload_configs_to_s3.yml` file creates the application 
-config files required for each register in each environment.
-The config files are written locally to `ansible/config/<myenv>` and
-uploaded to S3 buckets.
-
-	cd ansible
-	ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
-
-#### registers and fields configuration
-
-There are files `registers.yaml` and `fields.yaml` which need to be
-created/updated for each environment in the S3 bucket for that
-environment.  Make any required changes to the
-[registry-data](https://github.com/openregister/registry-data)
-repository, load this data into the register register and field
-register for that environment, and use this ansible command to
-create/update the config files from the registers:
-
-	cd ansible
-	ansible-playbook refresh_register_field_config_in_s3.yml -e vpc=<myenv>
-
-### Create databases
-
-The `ansible/create_databases.yml` file creates the database, creates users and grants permissions 
-to users for any register group in an environment that does not have the database set up.
-
-	cd ansible
-	ansible-playbook create_databases.yml -e vpc=<myenv>
-
-### Deploy registers application
-
-Deploy the registers application using CodeDeploy.
+Then follow steps 1-9 above.
 
 # Extra steps for creating a new Beta register
 
