@@ -101,21 +101,6 @@ resource "aws_codepipeline" "pipeline" {
     name = "DeployToTest"
 
     action {
-      name = "deploy"
-      category = "Deploy"
-      owner = "AWS"
-      provider = "CodeDeploy"
-      version = "1"
-      input_artifacts = ["openregister_package"]
-      run_order = 1
-
-      configuration {
-        ApplicationName = "openregister-app"
-        DeploymentGroupName = "test"
-      }
-    }
-
-    action {
       name = "deploy-test-basic"
       category = "Build"
       owner = "AWS"
@@ -158,36 +143,6 @@ resource "aws_codepipeline" "pipeline" {
 
   stage {
     name = "DeployToAlphaAndDiscovery"
-
-    action {
-      name = "discovery"
-      category = "Deploy"
-      owner = "AWS"
-      provider = "CodeDeploy"
-      version = "1"
-      input_artifacts = ["openregister_package"]
-      run_order = 1
-
-      configuration {
-        ApplicationName = "openregister-app"
-        DeploymentGroupName = "discovery"
-      }
-    }
-
-    action {
-      name = "alpha"
-      category = "Deploy"
-      owner = "AWS"
-      provider = "CodeDeploy"
-      version = "1"
-      input_artifacts = ["openregister_package"]
-      run_order = 1
-
-      configuration {
-        ApplicationName = "openregister-app"
-        DeploymentGroupName = "alpha"
-      }
-    }
 
     action {
       name = "deploy-discovery-basic"
@@ -260,21 +215,6 @@ resource "aws_codepipeline" "pipeline" {
 
   stage {
     name = "DeployToBeta"
-
-    action {
-      name = "beta"
-      category = "Deploy"
-      owner = "AWS"
-      provider = "CodeDeploy"
-      version = "1"
-      input_artifacts = ["openregister_package"]
-      run_order = 1
-
-      configuration {
-        ApplicationName = "openregister-app"
-        DeploymentGroupName = "beta"
-      }
-    }
 
     action {
       name = "deploy-beta-basic"
