@@ -19,7 +19,6 @@ register_groups:
     - field
 
   multi:
-    - government-domain
     - industrial-classification
     - internal-drainage-board
     - occupation
@@ -27,10 +26,7 @@ register_groups:
     - public-body
     - public-body-classification
     - school-eng
-    - school-type
     - school-type-eng
     - social-housing-provider
     - social-housing-provider-designation
     - social-housing-provider-legal-entity
-    - statistical-geography
-    - statistical-geography-unitary-authority-wls
