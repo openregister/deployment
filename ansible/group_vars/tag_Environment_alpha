@@ -28,5 +28,8 @@ register_groups:
     - school-eng
     - school-type-eng
     - social-housing-provider
+    - social-housing-provider-eng
     - social-housing-provider-designation
+    - social-housing-provider-designation-eng
     - social-housing-provider-legal-entity
+    - social-housing-provider-legal-entity-eng
