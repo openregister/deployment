@@ -27,16 +27,6 @@ variable "user_data" {
   description = "User data for initializing instances"
 }
 
-variable "subnet_ids" {
-  description = "list of subnets to attach EC2 instances to"
-  type = "list"
-}
-
-variable "public_subnet_ids" {
-  description = "list of subnets to attach ELBs to"
-  type = "list"
-}
-
 variable "private_dns_zone_id" {
   description = "Route 53 hosted zone id for DNS records for EC2 instances (ie private records)"
 }

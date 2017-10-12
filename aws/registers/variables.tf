@@ -48,15 +48,7 @@ variable "openregister_database_multi_az" { default = false }
 variable "openregister_database_master_password" {}
 variable "openregister_database_apply_immediately" { default = false }
 
-variable "group_instance_count" {
-  type = "map"
-  default = {}
-}
 
-variable "group_instance_type" {
-  type = "map"
-  default = {}
-}
 
 variable "enabled_redirects" {
   type = "map"

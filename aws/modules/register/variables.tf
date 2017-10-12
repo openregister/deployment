@@ -14,11 +14,6 @@ variable dns_zone_id {
   description = "the Route 53 DNS zone to create these records in"
 }
 
-variable load_balancer {
-  type = "map"
-  description = "output from the register_group module"
-}
-
 variable enable_availability_checks {
   description = "should availability checks be enabled for this register?"
 }
