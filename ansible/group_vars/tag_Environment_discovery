@@ -27,8 +27,6 @@ register_groups:
     - local-authority-type
     - place
     - prison
-    - public-body
-    - public-body-classification
     - street
     - street-custodian
     - uk
