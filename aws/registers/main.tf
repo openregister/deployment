@@ -21,15 +21,13 @@ data "aws_ami" "ubuntu-hvm-ebs-ssd" {
 
 module "core" {
   source = "../modules/core"
-  vpc_name = "${var.vpc_name}"
-  vpc_cidr_block = "${var.vpc_cidr_block}"
-  public_cidr_blocks = "${var.public_cidr_blocks}"
+  environment_name = "${var.environment_name}"
   cdn_configuration = "${var.cdn_configuration}"
 }
 
 module "configuration" {
   source = "../modules/configuration"
-  vpc_name = "${var.vpc_name}"
+  environment_name = "${var.environment_name}"
   sumologic_key = "${var.sumologic_key}"
   logit_stack_id = "${var.logit_stack_id}"
   logit_tcp_ssl_port = "${var.logit_tcp_ssl_port}"

@@ -3,7 +3,7 @@ module "address_register" {
   enabled = "${lookup(var.enabled_registers, "address", false)}"
 
   name = "address"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -20,7 +20,7 @@ module "academy-school-eng_register" {
   enabled = "${lookup(var.enabled_registers, "academy-school-eng", false)}"
 
   name = "academy-school-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -37,7 +37,7 @@ module "clinical-commissioning-group_register" {
   enabled = "${lookup(var.enabled_registers, "clinical-commissioning-group", false)}"
 
   name = "clinical-commissioning-group"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -54,7 +54,7 @@ module "company_register" {
   enabled = "${lookup(var.enabled_registers, "company", false)}"
 
   name = "company"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -71,7 +71,7 @@ module "country_register" {
   enabled = "${lookup(var.enabled_registers, "country", false)}"
 
   name = "country"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -88,7 +88,7 @@ module "datatype_register" {
   enabled = "${lookup(var.enabled_registers, "datatype", false)}"
 
   name = "datatype"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -105,7 +105,7 @@ module "diocese_register" {
   enabled = "${lookup(var.enabled_registers, "diocese", false)}"
 
   name = "diocese"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -122,7 +122,7 @@ module "field_register" {
   enabled = "${lookup(var.enabled_registers, "field", false)}"
 
   name = "field"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -139,7 +139,7 @@ module "food-authority_register" {
   enabled = "${lookup(var.enabled_registers, "food-authority", false)}"
 
   name = "food-authority"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -156,7 +156,7 @@ module "food-premises_register" {
   enabled = "${lookup(var.enabled_registers, "food-premises", false)}"
 
   name = "food-premises"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -173,7 +173,7 @@ module "food-premises-rating_register" {
   enabled = "${lookup(var.enabled_registers, "food-premises-rating", false)}"
 
   name = "food-premises-rating"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -190,7 +190,7 @@ module "food-premises-type_register" {
   enabled = "${lookup(var.enabled_registers, "food-premises-type", false)}"
 
   name = "food-premises-type"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -207,7 +207,7 @@ module "green-deal-certification-body_register" {
   enabled = "${lookup(var.enabled_registers, "green-deal-certification-body", false)}"
 
   name = "green-deal-certification-body"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -224,7 +224,7 @@ module "government-domain_register" {
   enabled = "${lookup(var.enabled_registers, "government-domain", false)}"
 
   name = "government-domain"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -241,7 +241,7 @@ module "government-organisation_register" {
   enabled = "${lookup(var.enabled_registers, "government-organisation", false)}"
 
   name = "government-organisation"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -258,7 +258,7 @@ module "government-service_register" {
   enabled = "${lookup(var.enabled_registers, "government-service", false)}"
 
   name = "government-service"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -275,7 +275,7 @@ module "industrial-classification_register" {
   enabled = "${lookup(var.enabled_registers, "industrial-classification", false)}"
 
   name = "industrial-classification"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -292,7 +292,7 @@ module "internal-drainage-board_register" {
   enabled = "${lookup(var.enabled_registers, "internal-drainage-board", false)}"
 
   name = "internal-drainage-board"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -309,7 +309,7 @@ module "jobcentre_register" {
   enabled = "${lookup(var.enabled_registers, "jobcentre", false)}"
 
   name = "jobcentre"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -326,7 +326,7 @@ module "la-maintained-school-eng_register" {
   enabled = "${lookup(var.enabled_registers, "la-maintained-school-eng", false)}"
 
   name = "la-maintained-school-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -343,7 +343,7 @@ module "local-authority-eng_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-eng", false)}"
 
   name = "local-authority-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -360,7 +360,7 @@ module "local-authority-nir_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-nir", false)}"
 
   name = "local-authority-nir"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -377,7 +377,7 @@ module "local-authority-sct_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-sct", false)}"
 
   name = "local-authority-sct"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -394,7 +394,7 @@ module "local-authority-type_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-type", false)}"
 
   name = "local-authority-type"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -411,7 +411,7 @@ module "local-authority-wls_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-wls", false)}"
 
   name = "local-authority-wls"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -428,7 +428,7 @@ module "place_register" {
   enabled = "${lookup(var.enabled_registers, "place", false)}"
 
   name = "place"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -445,7 +445,7 @@ module "premises_register" {
   enabled = "${lookup(var.enabled_registers, "premises", false)}"
 
   name = "premises"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -462,7 +462,7 @@ module "principal-local-authority_register" {
   enabled = "${lookup(var.enabled_registers, "principal-local-authority", false)}"
 
   name = "principal-local-authority"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -479,7 +479,7 @@ module "prison_register" {
   enabled = "${lookup(var.enabled_registers, "prison", false)}"
 
   name = "prison"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -496,7 +496,7 @@ module "prison-estate_register" {
   enabled = "${lookup(var.enabled_registers, "prison-estate", false)}"
 
   name = "prison-estate"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -513,7 +513,7 @@ module "public-body_register" {
   enabled = "${lookup(var.enabled_registers, "public-body", false)}"
 
   name = "public-body"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -530,7 +530,7 @@ module "public-body-classification_register" {
   enabled = "${lookup(var.enabled_registers, "public-body-classification", false)}"
 
   name = "public-body-classification"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -547,7 +547,7 @@ module "occupation_register" {
   enabled = "${lookup(var.enabled_registers, "occupation", false)}"
 
   name = "occupation"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -564,7 +564,7 @@ module "register_register" {
   enabled = "${lookup(var.enabled_registers, "register", false)}"
 
   name = "register"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -581,7 +581,7 @@ module "registration-district_register" {
   enabled = "${lookup(var.enabled_registers, "registration-district", false)}"
 
   name = "registration-district"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -598,7 +598,7 @@ module "religious-character_register" {
   enabled = "${lookup(var.enabled_registers, "religious-character", false)}"
 
   name = "religious-character"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -615,7 +615,7 @@ module "school-admissions-policy_register" {
   enabled = "${lookup(var.enabled_registers, "school-admissions-policy", false)}"
 
   name = "school-admissions-policy"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -632,7 +632,7 @@ module "school-authority-eng_register" {
   enabled = "${lookup(var.enabled_registers, "school-authority-eng", false)}"
 
   name = "school-authority-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -649,7 +649,7 @@ module "school-eng_register" {
   enabled = "${lookup(var.enabled_registers, "school-eng", false)}"
 
   name = "school-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -666,7 +666,7 @@ module "school-gender_register" {
   enabled = "${lookup(var.enabled_registers, "school-gender", false)}"
 
   name = "school-gender"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -683,7 +683,7 @@ module "school-phase_register" {
   enabled = "${lookup(var.enabled_registers, "school-phase", false)}"
 
   name = "school-phase"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -700,7 +700,7 @@ module "school-tag_register" {
   enabled = "${lookup(var.enabled_registers, "school-tag", false)}"
 
   name = "school-tag"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -717,7 +717,7 @@ module "school-trust_register" {
   enabled = "${lookup(var.enabled_registers, "school-trust", false)}"
 
   name = "school-trust"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -734,7 +734,7 @@ module "school-type-eng_register" {
   enabled = "${lookup(var.enabled_registers, "school-type-eng", false)}"
 
   name = "school-type-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -751,7 +751,7 @@ module "social-housing-provider_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider", false)}"
 
   name = "social-housing-provider"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -768,7 +768,7 @@ module "social-housing-provider-eng_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider-eng", false)}"
 
   name = "social-housing-provider-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -785,7 +785,7 @@ module "social-housing-provider-designation_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider-designation", false)}"
 
   name = "social-housing-provider-designation"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -802,7 +802,7 @@ module "social-housing-provider-designation-eng_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider-designation-eng", false)}"
 
   name = "social-housing-provider-designation-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -819,7 +819,7 @@ module "social-housing-provider-legal-entity_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider-legal-entity", false)}"
 
   name = "social-housing-provider-legal-entity"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -836,7 +836,7 @@ module "social-housing-provider-legal-entity-eng_register" {
   enabled = "${lookup(var.enabled_registers, "social-housing-provider-legal-entity-eng", false)}"
 
   name = "social-housing-provider-legal-entity-eng"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -853,7 +853,7 @@ module "statistical-geography_register" {
   enabled = "${lookup(var.enabled_registers, "statistical-geography", false)}"
 
   name = "statistical-geography"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -870,7 +870,7 @@ module "statistical-geography-council-area-sct_register" {
   enabled = "${lookup(var.enabled_registers, "statistical-geography-council-area-sct", false)}"
 
   name = "statistical-geography-council-area-sct"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -887,7 +887,7 @@ module "statistical-geography-unitary-authority-wls_register" {
   enabled = "${lookup(var.enabled_registers, "statistical-geography-unitary-authority-wls", false)}"
 
   name = "statistical-geography-unitary-authority-wls"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -904,7 +904,7 @@ module "street_register" {
   enabled = "${lookup(var.enabled_registers, "street", false)}"
 
   name = "street"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -921,7 +921,7 @@ module "street-custodian_register" {
   enabled = "${lookup(var.enabled_registers, "street-custodian", false)}"
 
   name = "street-custodian"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -938,7 +938,7 @@ module "territory_register" {
   enabled = "${lookup(var.enabled_registers, "territory", false)}"
 
   name = "territory"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -955,7 +955,7 @@ module "uk_register" {
   enabled = "${lookup(var.enabled_registers, "uk", false)}"
 
   name = "uk"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"
@@ -972,7 +972,7 @@ module "vehicle-colour_register" {
   enabled = "${lookup(var.enabled_registers, "vehicle-colour", false)}"
 
   name = "vehicle-colour"
-  environment = "${var.vpc_name}"
+  environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
   enable_availability_checks = "${var.enable_availability_checks}"

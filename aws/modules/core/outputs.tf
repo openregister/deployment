@@ -1,13 +1,10 @@
 /*
  * main.tf exports
 */
-output "vpc_id" {
-  value = "${aws_vpc.registers.id}"
-}
 
 // just pipeliing original value so can be re-used by other modules
-output "vpc_name" {
-  value = "${var.vpc_name}"
+output "environment_name" {
+  value = "${var.environment_name}"
 }
 
 /*
@@ -22,25 +19,10 @@ output "s3_bucket_name" {
 }
 
 /*
- * subnets.tf exports
-*/
-output "public_route_table_id" {
-  value = "${aws_route_table.public.id}"
-}
-
-output "public_subnet_ids" {
-  value = ["${aws_subnet.public.*.id}"]
-}
-
-/*
  * route53.tf exports
 */
 output "dns_zone_id" {
   value = "${aws_route53_zone.core.zone_id}"
-}
-
-output "private_dns_zone_id" {
-  value = "${aws_route53_zone.private.zone_id}"
 }
 
 output "cdn_dns_zone_id" {

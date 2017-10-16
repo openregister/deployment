@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "paas_cdn" {
   count = 1
 
-  aliases = ["*.${var.vpc_name}.openregister.org"]
+  aliases = ["*.${var.environment_name}.openregister.org"]
   enabled = true
   http_version = "http2"
   price_class = "PriceClass_100"
@@ -51,6 +51,6 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
 
   logging_config {
     bucket = "${var.paas_cdn_configuration["logging_bucket"]}.s3.amazonaws.com"
-    prefix = "paas-${var.vpc_name}"
+    prefix = "paas-${var.environment_name}"
   }
 }

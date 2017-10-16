@@ -2,51 +2,9 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-// VPC Configuration
-
-variable "vpc_name" {
-  description = "VPC name"
+variable "environment_name" {
+  description = "environment name"
 }
-
-variable "vpc_cidr_block" {
-  description = "The CIDR block for the VPC"
-}
-
-variable "read_api_rds_username" {
-  default = "postgres"
-}
-
-/*
- * Subnets
-*/
-
-// Public network used by ELBs and NAT instance
-variable "public_cidr_blocks" { type = "list" }
-
-// RDS Configuration
-variable "rds_allocated_storage" {
-  default = {
-    "openregister" = 5
-  }
-}
-
-variable "rds_storage_type" {
-  default = "gp2"
-}
-
-variable "rds_maintenance_window" {}
-
-// openregister app
-variable "openregister_cidr_blocks" { type = "list" }
-variable "openregister_database_cidr_blocks" { type = "list" }
-variable "openregister_database_class_instance" {
-  default = "db.t2.micro"
-}
-variable "openregister_database_multi_az" { default = false }
-variable "openregister_database_master_password" {}
-variable "openregister_database_apply_immediately" { default = false }
-
-
 
 variable "enabled_redirects" {
   type = "map"
@@ -64,7 +22,6 @@ variable "codedeploy_service_role_arn" {
 }
 
 // https
-variable "elb_certificate_arn" {}
 variable "cloudfront_certificate_arn" { default = "" }
 variable "paas_cdn_certificate_arn" {}
 

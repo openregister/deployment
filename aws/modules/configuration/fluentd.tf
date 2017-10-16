@@ -1,5 +1,5 @@
 resource "aws_s3_bucket_object" "fluentd_conf" {
-	bucket = "openregister.${var.vpc_name}.config"
+	bucket = "openregister.${var.environment_name}.config"
 	key = "fluentd.conf"
 	content = "${data.template_file.fluentd.rendered}"
 	etag = "${md5(data.template_file.fluentd.rendered)}"

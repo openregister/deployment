@@ -1,5 +1,5 @@
 resource "aws_s3_bucket_object" "telegraf_conf" {
-  bucket = "openregister.${var.vpc_name}.config"
+  bucket = "openregister.${var.environment_name}.config"
   key = "telegraf.conf"
   content = "${data.template_file.telegraf.rendered}"
   etag = "${md5(data.template_file.telegraf.rendered)}"
@@ -13,6 +13,6 @@ data "template_file" "telegraf" {
     influxdb_password = "${var.influxdb_configuration["password"]}"
     influxdb_database = "${var.influxdb_configuration["database"]}"
     influxdb_username = "${var.influxdb_configuration["username"]}"
-    environment = "${var.vpc_name}"
+    environment = "${var.environment_name}"
   }
 }

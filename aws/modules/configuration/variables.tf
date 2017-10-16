@@ -1,4 +1,4 @@
-variable "vpc_name" {}
+variable "environment_name" {}
 
 variable "sumologic_key" {}
 
