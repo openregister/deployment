@@ -10,21 +10,6 @@ variable "zones" {
   }
 }
 
-/*
- * Bastion Instance
-*/
-
-variable "bastion_instance_ami" {
-  default = "ami-98ecb7fe"
-}
-
-variable "bastion_instance_type" {
-  default = "t2.micro"
-}
-
-variable "bastion_user_data" {}
-
-variable "admin_ips" { type = "list" }
 
 /*
  * route53.tf

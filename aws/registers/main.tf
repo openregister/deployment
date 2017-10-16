@@ -24,9 +24,6 @@ module "core" {
   vpc_name = "${var.vpc_name}"
   vpc_cidr_block = "${var.vpc_cidr_block}"
   public_cidr_blocks = "${var.public_cidr_blocks}"
-  bastion_instance_ami = "${data.aws_ami.ubuntu-hvm-ebs-ssd.image_id}"
-  bastion_user_data = "${file("templates/users.yaml")}"
-  admin_ips = "${var.admin_ips}"
   cdn_configuration = "${var.cdn_configuration}"
 }
 

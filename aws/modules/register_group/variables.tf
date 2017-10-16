@@ -52,7 +52,3 @@ variable "certificate_arn" {
 variable "database_security_group_id" {
   description = "security group of the database to allow register application egress access to"
 }
-
-variable "bastion_security_group_id" {
-  description = "security group of the bastion box to allow ingress access to register application instances from"
-}

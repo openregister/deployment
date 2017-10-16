@@ -11,13 +11,6 @@ output "vpc_name" {
 }
 
 /*
- * bastion.tf exports
-*/
-output "bastion_security_group_id" {
-  value = "${aws_security_group.bastionsg.id}"
-}
-
-/*
  * s3.tf exports
 */
 output "s3_bucket_id" {
