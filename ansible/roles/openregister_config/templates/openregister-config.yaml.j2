@@ -1,21 +1,7 @@
 #jinja2: trim_blocks: False
-
-{%- set rds_instance_name = vpc + "-openregister-db" -%}
-{%- set password_store_key = vpc + "/rds/openregister/" + item.key -%}
-{%- set db_name = item.key -%}
-{%- set db_user = item.key + "_openregister" -%}
-{%- set db_password = lookup("pass", "{{ vpc }}/rds/openregister/" + item.key).decode('utf-8') -%}
-
-{%- set db_host = groups[rds_instance_name][0] -%}
 database:
   driverClass: org.postgresql.Driver
-  {% if not paas %}
-  url: jdbc:postgresql://{{ db_host }}:{{ db_port | default(5432) }}/{{ db_name }}
-  user: {{ db_user }}
-  password: {{ db_password }}
-  {% else %}
   url: "substituted-at-runtime-from-environment"
-  {% endif %}
 
   #db connection properties
   initialSize: {{ db_initial_size | default(1) }}
