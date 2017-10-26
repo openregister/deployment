@@ -20,6 +20,8 @@ register_groups:
 
   multi:
     - address
+    - charity
+    - charity-class
     - clinical-commissioning-group
     - green-deal-certification-body
     - jobcentre
