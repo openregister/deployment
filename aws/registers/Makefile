@@ -20,9 +20,6 @@ endif
 # Default AWS region
 export AWS_DEFAULT_REGION:=eu-west-1
 
-# RDS master passwords
-export TF_VAR_openregister_database_master_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass $(vpc)/rds/openregister/master), $(error "Couldn't get RDS master password from pass"))
-
 # Pingdom
 export TF_VAR_pingdom_user:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n 1), $(error "Couldn't get Pingdom username"))
 export TF_VAR_pingdom_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n 1), $(error "Couldn't get Pingdom password"))
@@ -42,11 +39,6 @@ defaults:=-var-file=environments/$(vpc).tfvars
 
 # Default terraform plan -module-depth= value
 module_depth:=-1
-
-# TODO should also reject defined-but-blank variable
-ifndef TF_VAR_openregister_database_master_password
-  $(error TF_VAR_openregister_database_master_password variable is required)
-endif
 
 purge-remote-state-cache:
 	rm -f backend.tf
