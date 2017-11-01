@@ -33,4 +33,8 @@ register_groups:
     - street-custodian
     - uk
     - vehicle-colour
+    - qualification-asssessment-method
+    - qualification-level
+    - qualification-subject
+    - qualification-type
     - statistical-geography-council-area-sct
