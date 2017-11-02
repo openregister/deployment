@@ -130,7 +130,7 @@ appropriate `register` module resource in `registers.tf` (if it does not already
 
 ### 7. Execute a terraform plan
 
-You should expect terrafrom to plan to create a new Route 53 DNS record and a new Pingdom availability check.
+You should expect terrafrom to plan to create a new Route 53 DNS record. For non-discovery registers it should also plan to create a new Pingdom availability check.
 
         cd aws/registers
         make plan -e vpc=<myenv>
