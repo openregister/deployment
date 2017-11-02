@@ -126,9 +126,7 @@ Fetch the latest `.tfvars` file from S3:
 
 Enable the register in the environment by adding the register to the
 `enabled_registers` list in `environments/<myenv>.tfvars` and add an
-appropriate `register` module resource in `registers.tf` (if it does not already exist). Pay close attention
-to the `load_balancer` argument which specifies which register group the
-register is part of.
+appropriate `register` module resource in `registers.tf` (if it does not already exist).
 
 ### 7. Execute a terraform plan
 
