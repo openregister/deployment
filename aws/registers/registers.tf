@@ -593,11 +593,11 @@ module "occupation_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
-module "qualification-asssessment-method_register" {
+module "qualification-assessment-method_register" {
   source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "qualification-asssessment-method", false)}"
+  enabled = "${lookup(var.enabled_registers, "qualification-assessment-method", false)}"
 
-  name = "qualification-asssessment-method"
+  name = "qualification-assessment-method"
   environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 

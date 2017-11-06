@@ -33,7 +33,7 @@ register_groups:
     - street-custodian
     - uk
     - vehicle-colour
-    - qualification-asssessment-method
+    - qualification-assessment-method
     - qualification-level
     - qualification-subject
     - qualification-type
