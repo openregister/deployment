@@ -32,6 +32,40 @@ module "academy-school-eng_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
+module "allergen_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "allergen", false)}"
+
+  name = "allergen"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "approved-meat-establishment_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "approved-meat-establishment", false)}"
+
+  name = "approved-meat-establishment"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
 module "charity" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "charity", false)}"
@@ -445,6 +479,57 @@ module "local-authority-wls_register" {
   enabled = "${lookup(var.enabled_registers, "local-authority-wls", false)}"
 
   name = "local-authority-wls"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "meat-establishment-operation_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "meat-establishment-operation", false)}"
+
+  name = "meat-establishment-operation"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "meat-establishment-outcome_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "meat-establishment-outcome", false)}"
+
+  name = "meat-establishment-outcome"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "meat-establishment-type_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "meat-establishment-type", false)}"
+
+  name = "meat-establishment-type"
   environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
