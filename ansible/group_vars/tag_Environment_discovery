@@ -20,6 +20,8 @@ register_groups:
 
   multi:
     - address
+    - allergen
+    - approved-meat-establishment
     - charity
     - charity-class
     - clinical-commissioning-group
@@ -27,6 +29,9 @@ register_groups:
     - jobcentre
     - local-authority-nir
     - local-authority-type
+    - meat-establishment-operation
+    - meat-establishment-outcome
+    - meat-establishment-type
     - place
     - prison
     - street
