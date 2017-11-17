@@ -21,6 +21,7 @@ register_groups:
   multi:
     - industrial-classification
     - internal-drainage-board
+    - local-authority-nir
     - occupation
     - principal-local-authority
     - public-body
