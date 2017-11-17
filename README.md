@@ -8,7 +8,7 @@ This repository contains terraform code and adhoc ansible tasks for managing asp
 
 On OSX you can install via `virtualenv` and `pip`:
 
-    virtualenv .venv
+    virtualenv -p /usr/bin/python2.7 .venv
     source .venv/bin/activate
     pip install -r ansible/requirements.txt
 
