@@ -44,5 +44,4 @@ register_groups:
     - qualification-level
     - qualification-subject
     - qualification-type
-    - statistical-geography-council-area-sct
     - westminster-parliamentary-constituency
