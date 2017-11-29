@@ -19,6 +19,7 @@ register_groups:
     - field
 
   multi:
+    - allergen
     - industrial-classification
     - local-authority-nir
     - occupation
