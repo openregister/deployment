@@ -20,7 +20,6 @@ register_groups:
 
   multi:
     - address
-    - allergen
     - approved-meat-establishment
     - charity
     - charity-class
