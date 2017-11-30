@@ -11,16 +11,20 @@ EXPECTED_PAYLOAD = [{
     "_timestamp": "2017-05-08T10:00:00+00:00",
     "service": "govuk-registers",
     "check": "govuk-registers-beta-register-name-cdn",
+    "location": "cdn",
     "period": "hour",
     "downtime": 20,
-    "uptime": 3580
+    "uptime": 3580,
+    "responsetime": 331
 }, {
     "_timestamp": "2017-05-08T10:00:00+00:00",
     "service": "govuk-registers",
     "check": "govuk-registers-beta-register-name-origin",
+    "location": "origin",
     "period": "hour",
     "downtime": 10,
-    "uptime": 3590
+    "uptime": 3590,
+    "responsetime": 718
 }]
 
 FAKE_PINGDOM_CHECKS_RESPONSE = {
@@ -63,6 +67,9 @@ FAKE_PINGDOM_CHECKS_RESPONSE = {
 
 FAKE_CDN_PERFORMANCE_RESPONSE = {
   "summary": {
+    "responsetime": {
+      "avgresponse": 331
+    },
     "status": {
       "totaldown": 20,
       "totalunknown": 0,
@@ -73,6 +80,9 @@ FAKE_CDN_PERFORMANCE_RESPONSE = {
 
 FAKE_ORIGIN_PERFORMANCE_RESPONSE = {
   "summary": {
+    "responsetime": {
+      "avgresponse": 718
+    },
     "status": {
       "totaldown": 10,
       "totalunknown": 0,

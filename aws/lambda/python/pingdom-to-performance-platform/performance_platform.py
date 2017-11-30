@@ -98,16 +98,18 @@ def build_payload(pingdom, tag):
         timestamp = start_of_previous_hour.strftime("%Y-%m-%dT%H:00:00+00:00")
         uptime = summary["summary"]["status"]["totalup"]
         downtime = summary["summary"]["status"]["totaldown"]
+        responsetime = summary["summary"]["responsetime"]["avgresponse"]
         payload.append({
             "_timestamp": timestamp,
             "service": "govuk-registers",
             "check": "govuk-registers-{}-{}-{}".format(phase, register, location),
+            "location": location,
             "period": "hour",
             "downtime": downtime,
-            "uptime": uptime
+            "uptime": uptime,
+            "responsetime": responsetime
             })
-
-        print("{}\t{}\t{}\t{}\t{}\t{}".format(timestamp, phase, register, location, downtime, uptime))
+        print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(timestamp, phase, register, location, downtime, uptime, responsetime))
 
     return payload
 
