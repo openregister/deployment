@@ -272,3 +272,6 @@ example:
 These last two scripts look for the yaml configuration of the register or field
 in the `registry-data` repository.
 
+## Licence
+
+Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
