@@ -226,11 +226,18 @@ to delete the old certificate from IAM.
 
 ### Rotate SSL certificate for API Gateway
 
-Use the AWS API Gateway console to rotate the SSL certificate. 
-The AWS Console for API Gateway has changed recently and it is only possible to use certificates stored 
-in AWS Certificate Manager in the US East (N. Virginia) `us-east-1` for a Custom Domain Name. Using
-the Certificate Manager console (in the US East (N. Virginia) region) reimport the certificate with domain
-name `register.gov.uk`. 
+Use the AWS CLI to rotate the SSL certificate.
+
+Get the Certificate ARN by running. 
+`aws acm list-certificates --region us-east-1`
+and copy the ARN for `register.gov.uk`
+
+Go to the root of `deployment` and run:
+```
+aws acm import-certificate --certificate file://${PWD}/tls-certs/beta/certificates/register.gov.uk.pem_00  --certificate-chain file://${PWD}//tls-certs/beta/certificates/register.gov.uk.pem_01 --private-key file://${PWD}/tls-certs/beta/certificates/register.gov.uk.key --certificate-arn arn:some-value --region us-east-1
+```
+replacing `arn:some-value` with the ARN from the previous step.
+
 
 # Data loading via HTTP
 
