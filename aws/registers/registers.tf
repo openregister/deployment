@@ -661,11 +661,11 @@ module "prison-estate_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
-module "public-body_register" {
+module "public-body-account_register" {
   source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "public-body", false)}"
+  enabled = "${lookup(var.enabled_registers, "public-body-account", false)}"
 
-  name = "public-body"
+  name = "public-body-account"
   environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
@@ -678,11 +678,11 @@ module "public-body_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
-module "public-body-classification_register" {
+module "public-body-account-classification_register" {
   source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "public-body-classification", false)}"
+  enabled = "${lookup(var.enabled_registers, "public-body-account-classification", false)}"
 
-  name = "public-body-classification"
+  name = "public-body-account-classification"
   environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 
