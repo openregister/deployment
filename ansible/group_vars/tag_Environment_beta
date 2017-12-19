@@ -22,6 +22,7 @@ register_groups:
     - field
 
   multi:
+    - allergen
     - country
     - government-domain
     - government-organisation
