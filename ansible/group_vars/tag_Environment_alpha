@@ -19,7 +19,6 @@ register_groups:
     - field
 
   multi:
-    - allergen
     - industrial-classification
     - jobcentre
     - jobcentre-district
