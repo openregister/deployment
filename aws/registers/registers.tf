@@ -389,6 +389,40 @@ module "jobcentre_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
+module "jobcentre-district_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "jobcentre-district", false)}"
+
+  name = "jobcentre-district"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
+module "jobcentre-group_register" {
+  source = "../modules/register"
+  enabled = "${lookup(var.enabled_registers, "jobcentre-group", false)}"
+
+  name = "jobcentre-group"
+  environment = "${var.environment_name}"
+  dns_zone_id = "${module.core.dns_zone_id}"
+
+  enable_availability_checks = "${var.enable_availability_checks}"
+  cdn_configuration = "${var.cdn_configuration}"
+  cdn_s3_origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  cdn_dns_zone_id = "${module.core.cdn_dns_zone_id}"
+  paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
+  paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
+  pingdom_contact_ids = "${var.pingdom_contact_ids}"
+}
+
 module "la-maintained-school-eng_register" {
   source = "../modules/register"
   enabled = "${lookup(var.enabled_registers, "la-maintained-school-eng", false)}"
@@ -746,11 +780,11 @@ module "qualification-level_register" {
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
 }
 
-module "qualification-subject_register" {
+module "qualification-sector-subject-area_register" {
   source = "../modules/register"
-  enabled = "${lookup(var.enabled_registers, "qualification-subject", false)}"
+  enabled = "${lookup(var.enabled_registers, "qualification-sector-subject-area", false)}"
 
-  name = "qualification-subject"
+  name = "qualification-sector-subject-area"
   environment = "${var.environment_name}"
   dns_zone_id = "${module.core.dns_zone_id}"
 

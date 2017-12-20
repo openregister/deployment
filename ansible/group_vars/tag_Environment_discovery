@@ -25,7 +25,6 @@ register_groups:
     - charity-class
     - clinical-commissioning-group
     - green-deal-certification-body
-    - jobcentre
     - meat-establishment-operation
     - meat-establishment-outcome
     - meat-establishment-type
@@ -37,8 +36,4 @@ register_groups:
     - street-custodian
     - uk
     - vehicle-colour
-    - qualification-assessment-method
-    - qualification-level
-    - qualification-subject
-    - qualification-type
     - westminster-parliamentary-constituency
