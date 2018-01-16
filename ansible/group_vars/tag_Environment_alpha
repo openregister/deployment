@@ -36,3 +36,4 @@ register_groups:
     - social-housing-provider-designation-eng
     - social-housing-provider-legal-entity-eng
     - statistical-geography-council-area-sct
+    - statistical-geography-local-government-district-nir
