@@ -20,14 +20,9 @@ register_groups:
 
   multi:
     - address
-    - approved-meat-establishment
     - charity
     - charity-class
     - clinical-commissioning-group
-    - green-deal-certification-body
-    - meat-establishment-operation
-    - meat-establishment-outcome
-    - meat-establishment-type
     - place
     - police-force
     - police-neighbourhood
@@ -35,5 +30,4 @@ register_groups:
     - street
     - street-custodian
     - uk
-    - vehicle-colour
     - westminster-parliamentary-constituency
