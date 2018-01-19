@@ -20,7 +20,6 @@ database:
 {%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
 
 {%- if loop.first -%}
-trackingId: {{ tracking_id }}
 register: {{ register_name }}
 schema: {{ register_name }}
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
@@ -85,7 +84,6 @@ registers:
 {% endif %}
 {% else %}
   {{ reg }}:
-    trackingId: {{ tracking_id }}
     schema: {{ register_name }}
     enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
     enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
