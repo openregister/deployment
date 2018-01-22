@@ -98,7 +98,7 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
-    name = "DeployToTest"
+    name = "DeployToTestAndDiscovery"
 
     action {
       name = "deploy-test-basic"
@@ -127,22 +127,6 @@ resource "aws_codepipeline" "pipeline" {
         ProjectName = "${module.test_multi.name}"
       }
     }
-  }
-
-  stage {
-    name = "AlphaAndDiscoveryApproval"
-
-    action {
-      name = "DeployToAlphaAndDiscoveryProduction"
-      category = "Approval"
-      owner = "AWS"
-      provider = "Manual"
-      version = "1"
-    }
-  }
-
-  stage {
-    name = "DeployToAlphaAndDiscovery"
 
     action {
       name = "deploy-discovery-basic"
@@ -171,6 +155,22 @@ resource "aws_codepipeline" "pipeline" {
         ProjectName = "${module.discovery_multi.name}"
       }
     }
+  }
+
+  stage {
+    name = "AlphaApproval"
+
+    action {
+      name = "DeployToAlphaProduction"
+      category = "Approval"
+      owner = "AWS"
+      provider = "Manual"
+      version = "1"
+    }
+  }
+
+  stage {
+    name = "DeployToAlpha"
 
     action {
       name = "deploy-alpha-basic"
