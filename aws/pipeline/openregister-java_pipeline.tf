@@ -18,7 +18,7 @@ module "test_multi" {
 
 module "discovery_basic" {
   source = "../modules/paas_codebuild_deploy"
-  cloudfoundry_space = "prod"
+  cloudfoundry_space = "discovery"
   cloudfoundry_organization = "openregister"
   environment = "discovery"
   register_group = "basic"
@@ -27,7 +27,7 @@ module "discovery_basic" {
 
 module "discovery_multi" {
   source = "../modules/paas_codebuild_deploy"
-  cloudfoundry_space = "prod"
+  cloudfoundry_space = "discovery"
   cloudfoundry_organization = "openregister"
   environment = "discovery"
   register_group = "multi"
