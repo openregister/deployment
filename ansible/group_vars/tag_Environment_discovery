@@ -1,4 +1,4 @@
-register_domain: discovery.openregister.org
+register_domain: cloudapps.digital
 
 enable_register_data_delete: true
 
