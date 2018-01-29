@@ -27,8 +27,6 @@ register_groups:
     - charity-class
     - clinical-commissioning-group
     - place
-    - police-force
-    - police-neighbourhood
     - prison
     - street
     - street-custodian
