@@ -71,8 +71,14 @@ first.
 
 It will take everything down for a minute or so.
 
-If the name has already been created, then the `cf map-route` step will fail,
-but you should have seen it in `cf routes` first anyway.
+If the name has already been created, then the `cf map-route` step will fail.
+Usually you should have seen it in `cf routes` first anyway, but it will also
+fail if the that route exists anywhere else in the whole of PaaS. i.e. it will
+fail if https://meat-cuts.cloudapps.digital has been claimed by any other user
+of PaaS. So you won't necessarily be able to see it from cf routes as this only
+shows routes for the current space/organisation.  We think this is unlikely to
+happen, but if it does speak to a developer and they can help by giving it a
+different domain via AWS.
 
 Browse to https://meat-cuts.cloudapps.digital/.  If everything has worked,
 you'll see the message `Register undefined`.
