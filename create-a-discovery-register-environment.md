@@ -29,7 +29,7 @@ Edit the file.  Copy the last register at the bottom, e.g.
       password: duirVTX1Se
 ```
 
-Rename the `schema` to the name of the new register you want to create, and set
+Rename the key and the `schema` to the name of the new register you want to create, and set
 a new password you have created by following the [registers-pass
 instructions](https://github.com/openregister/credentials/#updating-repo-adding-passwords-etc),
 change the step `registers-pass generate -n os/dev/test 16` to `registers-pass
@@ -41,7 +41,7 @@ to show the new password.  Put it into the `paas-config.yaml` file that you are
 still editing.
 
 ```yaml
-  fire-authority:
+  meat-cuts:
     schema: meat-cuts
     enableDownloadResource: True
     enableRegisterDataDelete: True
