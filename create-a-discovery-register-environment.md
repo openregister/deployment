@@ -2,22 +2,20 @@
 
 In these instructions, the new register to be created is called `meat-cuts`
 
+## Prerequisites
+
+- A GOV.UK PaaS account and access to the `openregister` organisation and `discovery` space as `SpaceDeveloper`.
+- Access to the AWS console and [awscli](https://aws.amazon.com/cli/) installed (you will need to create and use an API key).
+
 ## 1. AWS: edit the config file
 
 Tell everyone you're creating a new register, so that you don't both do it at
 the same time.
 
-Log into AWS https://openregister.signin.aws.amazon.com/console
+Download the latest config file from S3, which is used by the application to
+know all the metadata about the register, using `./scripts/download-s3-config.sh`.
 
-Go to the [S3 bucket](https://s3.console.aws.amazon.com/s3/buckets/openregister.discovery.config/?region=us-east-2&tab=overview)
-or browse to `Services > Storage > S3 > openregister.discovery.config`
-
-Download this
-[file](https://s3.console.aws.amazon.com/s3/object/openregister.discovery.config/multi/openregister/paas-config.yaml?region=us-east-2&tab=overview)
-(`/multi/openregister/paas-config.yaml`), which is used by the application to
-know all the metadata about the register.
-
-Edit the file.  Copy the last register at the bottom, e.g.
+Edit your local copy of the file `vi scripts/config/paas-config.yaml`.  Copy the last register at the bottom, e.g.
 
 ```yaml
   fire-authority:
@@ -50,9 +48,7 @@ still editing.
       password: asdfl2349s
 ```
 
-Save the file with the same name `paas-config.yaml`
-
-Upload the file to AWS to replace the original.
+Upload the file to S3 to replace the original using `./scripts/upload-s3-config.sh`.
 
 ## 2. Cloudfoundry: add a route meat-cuts.cloudapps.digital
 
