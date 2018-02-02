@@ -5,7 +5,6 @@ echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
 
 source "$OPENREGISTER_BASE/deployment/scripts/includes/set-vars.sh"
 source "$OPENREGISTER_BASE/deployment/scripts/includes/git-update.sh"
-source "$OPENREGISTER_BASE/deployment/scripts/includes/slack-notify.sh"
 source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
