@@ -7,6 +7,12 @@ import argparse
 import hashlib
 import requests
 
+def get_register_url(register, phase):
+    if phase in ['beta', 'alpha', 'test']:
+        return 'https://{0}.{1}.openregister.org'.format(register, phase)
+    elif phase == 'discovery':
+        return 'https://{0}.cloudapps.digital'.format(register)
+
 def remove_blanks(dic):
     return {k: v for k, v in dic.items() if v }
 
@@ -38,11 +44,11 @@ def read_item_from_local(file_name):
     return dic
 
 def read_register_from_register(phase, register_name):
-    register_url= 'http://register.{0}.openregister.org/record/{1}.json'.format(phase, register_name)
+    register_url= '{0}/record/{1}.json'.format(get_register_url('register', phase), register_name)
     return read_item_from_register(register_url, register_name)
 
 def read_field_from_register(phase, field_name):
-    field_url= 'http://field.{0}.openregister.org/record/{1}.json'.format(phase, field_name)
+    field_url= '{0}/record/{1}.json'.format(get_register_url('field', phase), field_name)
     return read_item_from_register(field_url, field_name)
 
 def read_item_from_register(url, field_name):
