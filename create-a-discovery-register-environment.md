@@ -6,6 +6,7 @@ In these instructions, the new register to be created is called `meat-cuts`
 
 - A GOV.UK PaaS account and access to the `openregister` organisation and `discovery` space as `SpaceDeveloper`.
 - Access to the AWS console and [awscli](https://aws.amazon.com/cli/) installed (you will need to create and use an API key).
+- Complete the bit at the bottom of [this section](https://github.com/openregister/credentials/#cloning-the-repo-and-setting-paths) where it says "Finally, import and validate the keys".  You might need to do this again if someone has joined or left the team.
 
 ## 1. AWS: edit the config file
 
