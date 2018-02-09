@@ -82,5 +82,5 @@ you'll see the message `Register undefined`.
 
 ## Deployment scripts
 
-TBC -- they need to be changed to point to `cloudapps.digital` instead of
-`discovery.openregister.org`.
+Use the scripts [here](https://github.com/openregister/deployment/tree/master/scripts) to load data into your new register.
+You will need to update the register, field and datatype registers before loading your new register for the first time.
