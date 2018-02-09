@@ -38,22 +38,23 @@ However the naming of the files is not completely consistent.
     pip3 install -r requirements.txt
 
 
-### Loading the data for a new register
+### Loading or updating the data for a register
 
-Running the script **load-register-tsv.sh** will create an RSF file for the specified register including metadata, delete the existing
+Running the script **load-register-tsv.sh** will create an RSF file for the specified register, of either system, user or all data, optionally delete the existing
 register from ORJ in the specified **phase** and load the RSF into the application.
 
 Arguments:
 - register name
 - phase
 - TSV file path (relative to $OPENREGISTER_ROOT)
+- `system`, `user` or `all`, depending on the type of data to be loaded
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
 - the custodian name (if more than one word then this must be in quotes)
 - data directory (relative to $OPENREGISTER_ROOT) if data is not in $REGISTER-data [optional].
 
 Examples:
 
-    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv local "Jo Doe"
+    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv all local "Jo Doe"
 
 ### Loading a new field or register
 
@@ -70,42 +71,27 @@ Examples:
     ./update-metadata-yaml.sh field alpha registry-data/data/discovery/field/clinical-commissioning-group.yaml local
     ./update-metadata-yaml.sh register alpha registry-data/data/discovery/register/clinical-commissioning-group.yaml local
 
-### Updating a register
 
-Running the script **update-register-tsv.sh** will create an update RSF (**without** metadata entries) file to update the register and load the RSF into the application.
+### Loading or updating the Register Register or Field Register
 
-Arguments:
-- register name
-- phase
-- TSV file path (relative to $OPENREGISTER_ROOT)
-- local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
-- data directory (relative to $OPENREGISTER_ROOT) if data is not in $REGISTER-data [optional].
-
-Examples:
-
-    ./update-register-tsv.sh local-authority-eng discovery local-authority-data/data/local-authority-eng/local-authority-eng.tsv remote local-authority-data
-
-
-### Reloading the whole Register Register or Fields Register
-
-Running the script **reload-metadata-yaml.sh** will create an RSF file for the Register Register or Fields Register including metadata, delete the existing register from ORJ in the specified **phase** and load the RSF into the application.
+Running the script **load-metadata-yaml.sh** will create an RSF file for the Register Register or Fields Register, of either system, user or all data, optionally delete the existing register from ORJ in the specified **phase** and load the RSF into the application.
 
 Arguments:
 - 'register' or 'field'
 - phase
+- `system`, `user` or `all`, depending on the type of data to be loaded
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service
 - the custodian name (if more than one word then this must be in quotes)
 
 Examples:
 
-    ./reload-metadata-yaml.sh field alpha local "Jo Doe"
+    ./load-metadata-yaml.sh field alpha all local "Jo Doe"
 
     #### Warning
 
     Instances of ORJ serving the Field and Register Registers read files containing fields and registers YAML from S3 on startup.
 
-    There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after
-    reloading the metadata RSF.
+    There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after reloading the metadata RSF.
     
 ### Python tests
 

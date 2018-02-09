@@ -31,9 +31,9 @@ update_data_repo 'registry-data'
 echo "converting $YAML to RSF"
 if [ "$METADATA_SOURCE" = 'local' ]
 then
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml $YAML --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml $YAML --include_user_data --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
 else
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml $YAML > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml $YAML --include_user_data > $OPENREGISTER_BASE/tmp.rsf
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`

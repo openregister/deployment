@@ -99,27 +99,28 @@ def generate_rsf(args):
         reg_item_line, reg_entry_line = rsf_for_line(register_def, 'register', 'system', key_prefix='register:')
         print(reg_item_line + '\n' + reg_entry_line)
     # user data rsf
-    if args.tsv:
-        with open(args.tsv) as csvfile:
-            reader = csv.DictReader(csvfile, delimiter='\t')
-            for row in reader:
-                item_tmp = canonicalize(row, fields_by_name)
-                item_line, entry_line = rsf_for_line(item_tmp, args.register_name, 'user')
-                print(item_line + '\n' + entry_line)
-    elif args.yaml:
-        with open(args.yaml) as yamlfile:
-            item = yaml.load(yamlfile)
-            item_tmp = canonicalize(item, fields_by_name)
-            item_line, entry_line = rsf_for_line(item_tmp, args.register_name, 'user')
-            print(item_line + '\n' + entry_line)
-    else:
-        yaml_files = [name for name in os.listdir(args.yaml_dir) if name.endswith('.yaml')]
-        for yaml_file in yaml_files:
-            with open(os.path.join(args.yaml_dir, yaml_file)) as yamlfile:
+    if args.include_user_data:
+        if args.tsv:
+            with open(args.tsv) as csvfile:
+                reader = csv.DictReader(csvfile, delimiter='\t')
+                for row in reader:
+                    item_tmp = canonicalize(row, fields_by_name)
+                    item_line, entry_line = rsf_for_line(item_tmp, args.register_name, 'user')
+                    print(item_line + '\n' + entry_line)
+        elif args.yaml:
+            with open(args.yaml) as yamlfile:
                 item = yaml.load(yamlfile)
                 item_tmp = canonicalize(item, fields_by_name)
                 item_line, entry_line = rsf_for_line(item_tmp, args.register_name, 'user')
                 print(item_line + '\n' + entry_line)
+        else:
+            yaml_files = [name for name in os.listdir(args.yaml_dir) if name.endswith('.yaml')]
+            for yaml_file in yaml_files:
+                with open(os.path.join(args.yaml_dir, yaml_file)) as yamlfile:
+                    item = yaml.load(yamlfile)
+                    item_tmp = canonicalize(item, fields_by_name)
+                    item_line, entry_line = rsf_for_line(item_tmp, args.register_name, 'user')
+                    print(item_line + '\n' + entry_line)
 
 
 if __name__ == '__main__':
@@ -130,6 +131,7 @@ if __name__ == '__main__':
     parser.add_argument("--yaml", help="yaml file containing field or register data to be loaded")
     parser.add_argument("--yaml_dir", help="directory containing register data in seperate yaml files")
     parser.add_argument("--prepend_metadata", help="prepend field and register definitions", action="store_true")
+    parser.add_argument("--include_user_data", help="include user data in the RSF", action="store_true")
     parser.add_argument("--register_data_root", help="the directory where register data is checked out")
     parser.add_argument("--custodian", help="the name of the custodian if any")
     args = parser.parse_args()
