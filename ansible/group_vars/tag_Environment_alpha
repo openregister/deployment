@@ -19,7 +19,6 @@ register_groups:
     - field
 
   multi:
-    - industrial-classification
     - jobcentre
     - jobcentre-district
     - jobcentre-group
