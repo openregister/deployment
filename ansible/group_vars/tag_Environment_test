@@ -8,8 +8,6 @@ register_settings:
     fields_yaml_location: "s3://openregister.test.config/fields.yaml"
     registers_yaml_location: "s3://openregister.test.config/registers.yaml"
   country:
-    similar_registers:
-      - territory
     indexes:
       - current-countries
 

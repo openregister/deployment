@@ -33,11 +33,6 @@ registersYamlLocation: {{ settings.registers_yaml_location | default(default_reg
     - {{ index }}
   {% endfor %}
 {% endif %}
-{% if settings.similar_registers is defined %}similarRegisters:
-  {% for register in settings.similar_registers -%}
-    - {{ register }}
-  {% endfor %}
-{% endif %}
 
 registerDomain: {{ register_domain }}
 externalConfigDirectory: /tmp
@@ -89,11 +84,6 @@ registers:
     {% if settings.indexes is defined %}indexes:
       {% for index in settings.indexes -%}
         - {{ index }}
-      {% endfor %}
-    {% endif %}
-    {% if settings.similar_registers is defined %}similarRegisters:
-      {% for register in settings.similar_registers -%}
-        - {{ register }}
       {% endfor %}
     {% endif %}
 

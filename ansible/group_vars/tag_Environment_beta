@@ -3,17 +3,12 @@ register_settings:
   country:
     indexes:
       - current-countries
-    similar_registers:
-      - territory
   local-authority-eng:
     indexes:
       - local-authority-by-type
   register:
     fields_yaml_location: "s3://openregister.beta.config/fields.yaml"
     registers_yaml_location: "s3://openregister.beta.config/registers.yaml"
-  territory:
-    similar_registers:
-      - country
 
 register_groups:
   basic:
