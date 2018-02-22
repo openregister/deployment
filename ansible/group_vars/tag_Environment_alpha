@@ -19,9 +19,6 @@ register_groups:
     - field
 
   multi:
-    - jobcentre
-    - jobcentre-district
-    - jobcentre-group
     - occupation
     - public-body-account
     - public-body-account-classification
@@ -35,4 +32,3 @@ register_groups:
     - social-housing-provider-designation-eng
     - social-housing-provider-legal-entity-eng
     - statistical-geography-council-area-sct
-    - statistical-geography-local-government-district-nir
