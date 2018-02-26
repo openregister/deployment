@@ -62,7 +62,7 @@ class TestRsfCreator(unittest.TestCase):
     def test_should_handle_commas_quotes(self):
         "to understand the python cvs parser"
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/commas-quotes.tsv', 
-                register_data_root='test-data', prepend_metadata=False, phase='alpha')
+                register_data_root='test-data', include_user_data=True, prepend_metadata=False, phase='alpha')
         with patch('sys.stdout', new=StringIO()) as fake_out:
             rsfcreator.generate_rsf(args)
 
@@ -75,7 +75,7 @@ class TestRsfCreator(unittest.TestCase):
     def test_should_load_yaml_file(self):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml='test-data/registry-data/data/alpha/field/notifiable-animal-disease.yaml',
-                register_data_root='test-data', prepend_metadata=False,
+                register_data_root='test-data', prepend_metadata=False, include_user_data=True,
                 phase='alpha', custodian='Foo Bar')
         with open('test-data/expected/register-update.rsf','r') as rsf_file:
             expected_rsf = rsf_file.read()
@@ -89,7 +89,7 @@ class TestRsfCreator(unittest.TestCase):
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/register',
                 register_data_root='test-data', prepend_metadata=True,
-                phase='alpha', custodian=None)
+                include_user_data=True, phase='alpha', custodian=None)
         with open('test-data/expected/register-register.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -103,7 +103,7 @@ class TestRsfCreator(unittest.TestCase):
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/field',
                 register_data_root='test-data', prepend_metadata=True,
-                phase='alpha', custodian=None)
+                include_user_data=True, phase='alpha', custodian=None)
         with open('test-data/expected/field-register.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -116,7 +116,7 @@ class TestRsfCreator(unittest.TestCase):
         args = types.SimpleNamespace(register_name='notifiable-animal-disease',
                 tsv='test-data/notifiable-animal-disease.tsv',
                 register_data_root='test-data', prepend_metadata=True,
-                phase='alpha', custodian='Foo Bar')
+                include_user_data=True, phase='alpha', custodian='Foo Bar')
         with open('test-data/expected/animal-diseases.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
