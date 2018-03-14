@@ -61,7 +61,7 @@ Examples:
 Running the script **update-metadata-yaml.sh** will create an RSF file for the specified new field or register and load the RSF into the application.
 
 Arguments:
-- register/field name
+- register/field
 - phase
 - YAML file path (relative to $OPENREGISTER_ROOT)
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
