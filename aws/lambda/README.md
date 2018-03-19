@@ -1,14 +1,14 @@
-# Terraform configuration for Sumo Logic forwarders
+# Terraform configuration for Registers Lambdas
 
 ## Prerequisites
 
-You'll need [Node.js](https://nodejs.org/) and [Terraform](https://www.terraform.io/). You should install Terraform using the method described [here](https://github.com/openregister/deployment/blob/master/README.md#prerequisites). You can install Node.js with Homebrew:
+* [Node.js](https://nodejs.org/) v7.1.0 (note if you have a different Node version, you can use [nvm](https://github.com/creationix/nvm) to use this version for this directory)
+* [Terraform](https://www.terraform.io/). You should install Terraform using the method described [here](https://github.com/openregister/deployment/blob/master/README.md#prerequisites)
+* `gsed` you can install this via Homebrew: `brew install gnu-sed`
+* `python3` you can install this via Homebrew: `brew install python3`
+* `virtualenv` you can install this via pip3: `pip3 install virtualenv`
 
-```
-brew install node
-```
-
-Sets up a Lambda task which monitors the S3 bucket that Cloudfront puts access logs in. It then anonymizes these logs and sends them to Sumo Logic.
+## Using
 
 Run a plan:
 
