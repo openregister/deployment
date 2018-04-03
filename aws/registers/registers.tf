@@ -13,6 +13,7 @@ module "allergen_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "country_register" {
@@ -30,6 +31,7 @@ module "country_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "datatype_register" {
@@ -47,6 +49,7 @@ module "datatype_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "field_register" {
@@ -64,6 +67,7 @@ module "field_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "fire-authority_register" {
@@ -81,6 +85,7 @@ module "fire-authority_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "government-domain_register" {
@@ -98,6 +103,7 @@ module "government-domain_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "government-organisation_register" {
@@ -115,6 +121,7 @@ module "government-organisation_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "government-service_register" {
@@ -132,6 +139,7 @@ module "government-service_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "internal-drainage-board_register" {
@@ -149,6 +157,7 @@ module "internal-drainage-board_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "jobcentre_register" {
@@ -166,6 +175,7 @@ module "jobcentre_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "jobcentre-district_register" {
@@ -183,6 +193,7 @@ module "jobcentre-district_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "jobcentre-group_register" {
@@ -200,6 +211,7 @@ module "jobcentre-group_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "local-authority-eng_register" {
@@ -217,6 +229,7 @@ module "local-authority-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "local-authority-nir_register" {
@@ -234,6 +247,7 @@ module "local-authority-nir_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "local-authority-sct_register" {
@@ -251,6 +265,7 @@ module "local-authority-sct_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "local-authority-type_register" {
@@ -268,6 +283,7 @@ module "local-authority-type_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "principal-local-authority_register" {
@@ -285,6 +301,7 @@ module "principal-local-authority_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "prison-estate_register" {
@@ -302,6 +319,7 @@ module "prison-estate_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "public-body-account_register" {
@@ -319,6 +337,7 @@ module "public-body-account_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "public-body-account-classification_register" {
@@ -336,6 +355,7 @@ module "public-body-account-classification_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "occupation_register" {
@@ -353,6 +373,7 @@ module "occupation_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "qualification-assessment-method_register" {
@@ -370,6 +391,7 @@ module "qualification-assessment-method_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "qualification-level_register" {
@@ -387,6 +409,7 @@ module "qualification-level_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "qualification-sector-subject-area_register" {
@@ -404,6 +427,7 @@ module "qualification-sector-subject-area_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "qualification-type_register" {
@@ -421,6 +445,7 @@ module "qualification-type_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "register_register" {
@@ -438,6 +463,7 @@ module "register_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "registration-district_register" {
@@ -455,6 +481,7 @@ module "registration-district_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "school-eng_register" {
@@ -472,6 +499,7 @@ module "school-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "school-type-eng_register" {
@@ -489,6 +517,7 @@ module "school-type-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "social-housing-provider-eng_register" {
@@ -506,6 +535,7 @@ module "social-housing-provider-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "social-housing-provider-designation-eng_register" {
@@ -523,6 +553,7 @@ module "social-housing-provider-designation-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "social-housing-provider-legal-entity-eng_register" {
@@ -540,6 +571,7 @@ module "social-housing-provider-legal-entity-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography_register" {
@@ -557,6 +589,7 @@ module "statistical-geography_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-council-area-sct_register" {
@@ -574,6 +607,7 @@ module "statistical-geography-council-area-sct_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-county-eng_register" {
@@ -591,6 +625,7 @@ module "statistical-geography-county-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-local-government-district-nir_register" {
@@ -608,6 +643,7 @@ module "statistical-geography-local-government-district-nir_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-london-borough-eng_register" {
@@ -625,6 +661,7 @@ module "statistical-geography-london-borough-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-metropolitan-district-eng_register" {
@@ -642,6 +679,7 @@ module "statistical-geography-metropolitan-district-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-registration-district-eng_register" {
@@ -659,6 +697,7 @@ module "statistical-geography-registration-district-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-registration-district-wls_register" {
@@ -676,6 +715,7 @@ module "statistical-geography-registration-district-wls_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-non-metropolitan-district-eng_register" {
@@ -693,6 +733,7 @@ module "statistical-geography-non-metropolitan-district-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-unitary-authority-eng_register" {
@@ -710,6 +751,7 @@ module "statistical-geography-unitary-authority-eng_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "statistical-geography-unitary-authority-wls_register" {
@@ -727,6 +769,7 @@ module "statistical-geography-unitary-authority-wls_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }
 
 module "territory_register" {
@@ -744,4 +787,5 @@ module "territory_register" {
   paas_cdn_domain_name = "${aws_cloudfront_distribution.paas_cdn.domain_name}"
   paas_cdn_hosted_zone_id = "${aws_cloudfront_distribution.paas_cdn.hosted_zone_id}"
   pingdom_contact_ids = "${var.pingdom_contact_ids}"
+  api_key_to_cloudfront_logs_version_number = "${var.api_key_to_cloudfront_logs_version_number}"
 }

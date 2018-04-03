@@ -34,6 +34,9 @@ export TF_VAR_influxdb_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pa
 # Logit
 export TF_VAR_logit_stack_id:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/logit | head -n 1), $(error "Couldn't get Logit stack id"))
 
+# Lambda@Edge version number
+export TF_VAR_api_key_to_cloudfront_logs_version_number:=$(or $(shell (cd ../lambda/ && terraform output api_key_to_cloudfront_logs_version_number) | sed 1q), $(error "Couldn't get Lambda@Edge version number"))
+
 # Required minimum to terraform
 defaults:=-var-file=environments/$(vpc).tfvars
 

@@ -1,3 +1,7 @@
+data "aws_caller_identity" "current" {}
+
+variable "api_key_to_cloudfront_logs_version_number" {}
+
 resource "aws_cloudfront_distribution" "distribution" {
   count = "${var.enabled && var.cdn_configuration["enabled"] ? 1 : 0}"
 
@@ -26,6 +30,11 @@ resource "aws_cloudfront_distribution" "distribution" {
       }
       query_string = true
       headers = ["Accept", "Host", "Origin"]
+    }
+
+    lambda_function_association {
+      event_type = "viewer-request"
+      lambda_arn = "arn:aws:lambda:us-east-1:${data.aws_caller_identity.current.account_id}:function:log-api-key-to-cloudwatch:${var.api_key_to_cloudfront_logs_version_number}"
     }
 
     target_origin_id = "${var.environment}-${var.name}-elb"

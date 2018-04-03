@@ -64,6 +64,12 @@ node/cloudfront-s3-logs-to-sumologic/lambda.js: node/cloudfront-s3-logs-to-sumol
 node/cloudtrail-s3-logs-to-sumologic/lambda.js: node/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
 	sed -e 's/<XXXX>/$(sumologic_cloudtrail_key)/' $< > $@
 
+node/cloudfront-logs-api-key-to-google-analytics/lambda.js: node/cloudfront-logs-api-key-to-google-analytics/cloudwatchlogs.js
+	cp $< $@
+
+node/log-api-key-to-cloudwatch/lambda.js: node/log-api-key-to-cloudwatch/log-api-key-to-cloudwatch.js
+	cp $< $@
+
 python/pingdom-to-performance-platform/lambda.py: python/pingdom-to-performance-platform/performance_platform.py
 	cp $< $@
 	gsed -i 's/dummy_bearer/$(performance_platform_bearer_token)/' $@
