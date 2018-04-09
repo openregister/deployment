@@ -243,6 +243,12 @@ replacing `arn:some-value` with the ARN from the previous step.
 Get the credentials from `registers-pass`
 `registers-pass show beta/app/mint/$register-name`
 
+Ensure you have the `RAILS_MASTER_KEY` environment variable set:
+```
+export RAILS_MASTER_KEY=`registers-pass show registers/app/manager/store`
+```
+
+
 From your `managing-registers` checkout directory run:
 `rails secrets:edit`
 
