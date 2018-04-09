@@ -238,6 +238,19 @@ aws acm import-certificate --certificate file://${PWD}/tls-certs/beta/certificat
 ```
 replacing `arn:some-value` with the ARN from the previous step.
 
+## Add credentials to managing-registers
+
+Get the credentials from `registers-pass`
+`registers-pass show beta/app/mint/$register-name`
+
+From your `managing-registers` checkout directory run:
+`rails secrets:edit`
+
+Add credentials for new register
+
+Commit changes to `config/secrets.yml.enc` to a branch
+
+Raise a PR and merge to `master`
 
 # Data loading via HTTP
 
