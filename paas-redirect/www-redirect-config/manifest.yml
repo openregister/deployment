@@ -1,0 +1,9 @@
+---
+applications:
+- name: www-registers-service-redirect
+  memory: 64M
+  root: ../app
+  buildpack: staticfile_buildpack
+  routes:
+  - route: registers.cloudapps.digital
+  - route: registers.service.gov.uk

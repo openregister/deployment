@@ -1,0 +1,8 @@
+---
+applications:
+- name: docs-registers-service-redirect
+  memory: 64M
+  root: ../app
+  buildpack: staticfile_buildpack
+  routes:
+  - route: registers-docs.cloudapps.digital
