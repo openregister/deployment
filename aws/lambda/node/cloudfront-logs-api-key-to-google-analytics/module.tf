@@ -28,7 +28,6 @@ resource "aws_lambda_function" "cloudfront-logs-api-key-to-google-analytics" {
 
   environment {
     variables = {
-      CID = "745b065b-3cef-49be-a2b1-d0f28965a958"
       TID = "UA-86101042-1"
     }
   }
