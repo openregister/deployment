@@ -19,6 +19,8 @@ register_groups:
     - field
 
   multi:
+    - approved-open-standard
+    - approved-open-standard-guidance
     - occupation
     - public-body-account
     - public-body-account-classification
