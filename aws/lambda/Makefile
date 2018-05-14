@@ -16,8 +16,6 @@ endif
 python_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard python/*)))
 node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard node/*)))
 
-sumologic_cloudtrail_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/sumologic/cloudtrail-logs)
-
 pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
 pingdom_password:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n1)
 pingdom_key:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom/api | head -n1)
@@ -56,9 +54,6 @@ build/python/%.zip: python/%/lambda.py
 	$(dir $<)venv/bin/pip install -r $(dir $<)requirements.txt
 	cd $(dir $<); zip ../../$@ $(notdir $<)
 	cd $(dir $<)venv/lib/python3.6/site-packages; zip -r ../../../../../../$@ ./
-
-node/cloudtrail-s3-logs-to-sumologic/lambda.js: node/cloudtrail-s3-logs-to-sumologic/cloudtrail.js
-	sed -e 's/<XXXX>/$(sumologic_cloudtrail_key)/' $< > $@
 
 node/cloudfront-logs-api-key-to-google-analytics/lambda.js: node/cloudfront-logs-api-key-to-google-analytics/cloudwatchlogs.js
 	cp $< $@
