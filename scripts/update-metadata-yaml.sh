@@ -38,7 +38,7 @@ else
 fi
 
 if [ -n "$NON_BASIC_REGISTER" ]; then
-  ruby system_field_text_update.rb $OPENREGISTER_BASE/tmp.rsf
+  python3 system_field_text_update.py $OPENREGISTER_BASE/tmp.rsf
   PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$NON_BASIC_REGISTER`
   load_rsf $NON_BASIC_REGISTER $PHASE $PASSWORD
 else
