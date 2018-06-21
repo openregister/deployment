@@ -7,7 +7,7 @@ usage()
 }
 
 # validation check number of args but other validation is done in python script
-if [ $# -lt 5 ]; then
+if [ $# -lt 3 ]; then
   echo "error: not enough arguments"
   usage
   exit 1
