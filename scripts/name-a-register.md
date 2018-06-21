@@ -17,5 +17,5 @@ Be in the directory `deployment/scripts`.
 Run in the shell:
 
 ```
-echo -e 'add-item\t{"register-name":"Schools in England"}\nappend-entry\tsystem\tregister-name\t2018-04-24T15:48:52Z\tsha-256:0a07dc71614c3aeee29557e22c97e53b2390e79c6976e468c7e4292d984ba28a' | ../rsf-load.sh https://school-eng.cloudapps.digital openregister as897sdf98sdf987
+echo -e 'add-item\t{"register-name":"Schools in England"}\nappend-entry\tsystem\tregister-name\t2018-04-24T15:48:52Z\tsha-256:0a07dc71614c3aeee29557e22c97e53b2390e79c6976e468c7e4292d984ba28a' | ./rsf-load.sh https://school-eng.cloudapps.digital openregister as897sdf98sdf987
 ```
