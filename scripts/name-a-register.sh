@@ -24,9 +24,6 @@ OPENREGISTER_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
 source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
-URL=$(get_register_url $register $phase)
-echo "URL - $URL"
-
 TIME=`date +%Y-%m-%dT%H:%M:%SZ`
 JSON="{\"register-name\":\"$DESCRIPTION\"}"
 SHA256=`echo -n $JSON | shasum -a 256 | head -c 64`
