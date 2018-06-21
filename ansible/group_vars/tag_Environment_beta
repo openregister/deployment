@@ -18,6 +18,8 @@ register_groups:
 
   multi:
     - allergen
+    - approved-open-standard
+    - approved-open-standard-guidance
     - country
     - government-domain
     - government-organisation
