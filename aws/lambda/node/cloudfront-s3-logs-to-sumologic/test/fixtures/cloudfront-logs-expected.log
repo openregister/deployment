@@ -1,3 +1,0 @@
-2016-02-09	12:31:48	SEA32	398	10.0.123.0	HEAD	fake-distribution.cloudfront.net	/	200	-	USERAGENT	-	-	Hit	MRVMF7KydIvxMWfJIglgwHQwZsbG2IhRJ07sn9AkKUFSHS9EXAMPLE==	www.example.com	https	369	0.002	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit
-2016-02-09	12:31:48	SEA32	398	10.0.123.0	HEAD	fake-distribution.cloudfront.net	/something	200	-	USERAGENT	-	-	Hit	MRVMF7KydIvxMWfJIglgwHQwZsbG2IhRJ07sn9AkKUFSHS9EXAMPLE==	www.example.com	https	369	0.002	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit
-2016-02-09	12:31:48	SEA32	398	-	HEAD	fake-distribution.cloudfront.net	/something	200	-	USERAGENT	-	-	Hit	MRVMF7KydIvxMWfJIglgwHQwZsbG2IhRJ07sn9AkKUFSHS9EXAMPLE==	www.example.com	https	369	0.002	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit

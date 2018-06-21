@@ -9,7 +9,7 @@ source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
 {
-  echo "usage: ./update-metadata-yaml.sh [register|field|datatype] [phase] [yaml file relative to root] [local|remote]" 
+  echo "usage: ./update-metadata-yaml.sh [register|field|datatype] [phase] [yaml file relative to root] [local|remote] [non-basic register]" 
 }
 
 # validation check number of args but other validation is done in python script
@@ -23,6 +23,7 @@ REGISTER=$1
 PHASE=$2
 YAML="$OPENREGISTER_BASE/$3"
 METADATA_SOURCE=$4
+NON_BASIC_REGISTER=$5
 
 update_registers_pass
 
@@ -36,8 +37,13 @@ else
   python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml $YAML --include_user_data > $OPENREGISTER_BASE/tmp.rsf
 fi
 
-PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
-
-load_rsf $REGISTER $PHASE $PASSWORD
+if [ -n "$NON_BASIC_REGISTER" ]; then
+  python3 system_field_text_update.py $OPENREGISTER_BASE/tmp.rsf
+  PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$NON_BASIC_REGISTER`
+  load_rsf $NON_BASIC_REGISTER $PHASE $PASSWORD
+else
+  PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
+  load_rsf $REGISTER $PHASE $PASSWORD
+fi
 
 rm $OPENREGISTER_BASE/tmp.rsf
