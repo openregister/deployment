@@ -92,7 +92,17 @@ Examples:
     Instances of ORJ serving the Field and Register Registers read files containing fields and registers YAML from S3 on startup.
 
     There is an Ansible task in the deployment repo to generate the files in S3 from the application. You will need to run this after reloading the metadata RSF.
-    
+
+### Naming a register with a human-friendly name
+
+The name of a register is immutable because it is its unique ID.  But the
+register can also have a human-readable name, or 'register-name'.  To set/change
+it, use the `scripts/name-a-register.sh` script.
+
+```sh
+./name-a-register.sh alpha country "A list of countries recognised by the UK"
+```
+
 ### Python tests
 
 There are some unit tests for the python script and some test data. To run them:
