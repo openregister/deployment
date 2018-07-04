@@ -46,7 +46,7 @@ class TestRsfCreator(unittest.TestCase):
         fields_by_name = {'a': field_a, 'c': field_c}
         converted = rsfcreator.replace_for_cardinality(line_map, fields_by_name)
         self.assertEqual(converted, expected)
-    
+
     def test_should_fail_if_column_headings_wrong(self):
         args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/wrong-headings.tsv',
                 register_data_root='test-data', prepend_metadata=False, phase='alpha')
@@ -54,14 +54,14 @@ class TestRsfCreator(unittest.TestCase):
             rsfcreator.generate_rsf(args)
 
     def test_should_fail_if_column_headings_missing(self):
-        args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/headings-missing.tsv', 
+        args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/headings-missing.tsv',
                 register_data_root='test-data', prepend_metadata=False, phase='alpha')
         with self.assertRaises(SystemExit):
             rsfcreator.generate_rsf(args)
 
     def test_should_handle_commas_quotes(self):
         "to understand the python cvs parser"
-        args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/commas-quotes.tsv', 
+        args = types.SimpleNamespace(register_name='notifiable-animal-disease', tsv='test-data/commas-quotes.tsv',
                 register_data_root='test-data', include_user_data=True, prepend_metadata=False, phase='alpha')
         with patch('sys.stdout', new=StringIO()) as fake_out:
             rsfcreator.generate_rsf(args)
@@ -118,6 +118,19 @@ class TestRsfCreator(unittest.TestCase):
                 register_data_root='test-data', prepend_metadata=True,
                 include_user_data=True, phase='alpha', custodian='Foo Bar')
         with open('test-data/expected/animal-diseases.rsf','r') as rsf_file:
+            expected_rsf = rsf_file.readlines()
+        with patch('sys.stdout', new=StringIO()) as patched_out:
+            rsfcreator.generate_rsf(args)
+            rsf_no_date  = strip_date(patched_out.getvalue())
+            for line in expected_rsf:
+                 self.assertIn(line, rsf_no_date, msg=line + ' was not in rsf')
+
+    def test_should_customise_field_descriptions(self):
+        args = types.SimpleNamespace(register_name='custom-field-description',
+                tsv='test-data/custom-field-description.tsv',
+                register_data_root='test-data', prepend_metadata=True,
+                include_user_data=True, phase='alpha', custodian='Foo Bar')
+        with open('test-data/expected/custom-field-descriptions.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
             rsfcreator.generate_rsf(args)

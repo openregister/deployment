@@ -33,15 +33,31 @@ def read_register_from_local(phase, register_name, root_dir):
     file_name = file_template.format(phase, register_name)
     return read_item_from_local(file_name)
 
-def read_field_from_local(phase, field_name, root_dir):
+def read_global_field_from_local(phase, field_name, root_dir):
     field_file_template = root_dir + '/registry-data/data/{0}/field/{1}.yaml'
     file_name = field_file_template.format(phase, field_name)
     return read_item_from_local(file_name)
 
+def read_custom_field_from_local(phase, register_name, field_name, root_dir):
+    field_file_template = root_dir + '/registry-data/data/{0}/{1}/field/{2}.yaml'
+    file_name = field_file_template.format(phase, register_name, field_name)
+    return read_item_from_local(file_name)
+
+def read_field_from_local(phase, register_name, field_name, root_dir):
+    global_field = read_global_field_from_local(phase, field_name, root_dir)
+    custom_field = read_custom_field_from_local(phase, register_name, field_name, root_dir)
+    if custom_field is not None:
+        field = {**global_field, **custom_field}
+    else:
+        field = global_field
+    return field
+
 def read_item_from_local(file_name):
-    with open(file_name) as yaml_file:
-        dic =  yaml.load(yaml_file)
-    return dic
+    try:
+        with open(file_name) as yaml_file:
+            return yaml.load(yaml_file)
+    except FileNotFoundError:
+        return None
 
 def read_register_from_register(phase, register_name):
     register_url= '{0}/record/{1}.json'.format(get_register_url('register', phase), register_name)
@@ -72,7 +88,7 @@ def generate_rsf(args):
     if args.register_data_root:
         register_def = read_register_from_local(args.phase, args.register_name, args.register_data_root)
         field_names = register_def['fields']
-        fields_by_name = {fn: read_field_from_local(args.phase, fn, args.register_data_root) for fn in field_names}
+        fields_by_name = {fn: read_field_from_local(args.phase, args.register_name, fn, args.register_data_root) for fn in field_names}
     else:
         register_def = read_register_from_register(args.phase, args.register_name)
         field_names = register_def['fields']
