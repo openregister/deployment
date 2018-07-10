@@ -9,7 +9,7 @@ source "$OPENREGISTER_BASE/deployment/scripts/includes/set-vars.sh"
 
 usage()
 {
-  echo "usage: ./load-register-tsv.sh [register] [phase] [tsvfile relative to root] [system|user|all] [local|remote] [custodian] [optional data dir relative to root if not REGISTER-data]"
+  echo "usage: ./load-register-tsv.sh [register] [phase] [tsvfile relative to root] [system|user|all] [local|remote] [optional data dir relative to root if not REGISTER-data]"
 }
 
 # validation check number of args but other validation is done in python script
@@ -24,7 +24,6 @@ PHASE=$2
 TSV="$OPENREGISTER_BASE/$3"
 DATA_TO_INCLUDE=$4
 METADATA_SOURCE=$5
-CUSTODIAN=$6
 DATA_DIR=${7:-"$1-data"}
 
 update_registers_pass
@@ -50,9 +49,9 @@ fi
 echo "converting $TSV to RSF"
 if [ "$METADATA_SOURCE" = 'local' ]
 then
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV $PREPEND_METADATA $INCLUDE_USER_DATA --custodian "${CUSTODIAN}" --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV $PREPEND_METADATA $INCLUDE_USER_DATA --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
 else
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV $PREPEND_METADATA $INCLUDE_USER_DATA --custodian "${CUSTODIAN}" > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --tsv $TSV $PREPEND_METADATA $INCLUDE_USER_DATA > $OPENREGISTER_BASE/tmp.rsf
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`

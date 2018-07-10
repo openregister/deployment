@@ -49,7 +49,6 @@ Arguments:
 - TSV file path (relative to $OPENREGISTER_ROOT)
 - `system`, `user` or `all`, depending on the type of data to be loaded
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
-- the custodian name (if more than one word then this must be in quotes)
 - data directory (relative to $OPENREGISTER_ROOT) if data is not in $REGISTER-data [optional].
 
 Examples:
@@ -81,7 +80,6 @@ Arguments:
 - phase
 - `system`, `user` or `all`, depending on the type of data to be loaded
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service
-- the custodian name (if more than one word then this must be in quotes)
 
 Examples:
 
@@ -96,8 +94,9 @@ Examples:
 ### Naming a register with a human-friendly name
 
 The name of a register is immutable because it is its unique ID.  But the
-register can also have a human-readable name, or 'register-name'.  To set/change
-it, use the `scripts/name-a-register.sh` script.
+register can also have a human-readable name, or 'register-name' defined in
+`registry-data/data/{phase}/{register}/meta.yaml`.  You can also set/change it
+with the `scripts/name-a-register.sh` script.
 
 ```sh
 ./name-a-register.sh alpha country "A list of countries recognised by the UK"

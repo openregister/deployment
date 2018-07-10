@@ -76,7 +76,7 @@ class TestRsfCreator(unittest.TestCase):
         args = types.SimpleNamespace(register_name='field',
                 tsv=None, yaml='test-data/registry-data/data/alpha/field/notifiable-animal-disease.yaml',
                 register_data_root='test-data', prepend_metadata=False, include_user_data=True,
-                phase='alpha', custodian='Foo Bar')
+                phase='alpha')
         with open('test-data/expected/register-update.rsf','r') as rsf_file:
             expected_rsf = rsf_file.read()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -89,7 +89,7 @@ class TestRsfCreator(unittest.TestCase):
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/register',
                 register_data_root='test-data', prepend_metadata=True,
-                include_user_data=True, phase='alpha', custodian=None)
+                include_user_data=True, phase='alpha')
         with open('test-data/expected/register-register.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
@@ -103,21 +103,8 @@ class TestRsfCreator(unittest.TestCase):
                 tsv=None, yaml=None,
                 yaml_dir='test-data/registry-data/data/alpha/field',
                 register_data_root='test-data', prepend_metadata=True,
-                include_user_data=True, phase='alpha', custodian=None)
+                include_user_data=True, phase='alpha')
         with open('test-data/expected/field-register.rsf','r') as rsf_file:
-            expected_rsf = rsf_file.readlines()
-        with patch('sys.stdout', new=StringIO()) as patched_out:
-            rsfcreator.generate_rsf(args)
-            rsf_no_date  = strip_date(patched_out.getvalue())
-            for line in expected_rsf:
-                 self.assertIn(line, rsf_no_date, msg=line + ' was not in rsf')
-
-    def test_should_include_name_custodian(self):
-        args = types.SimpleNamespace(register_name='notifiable-animal-disease',
-                tsv='test-data/notifiable-animal-disease.tsv',
-                register_data_root='test-data', prepend_metadata=True,
-                include_user_data=True, phase='alpha', custodian='Foo Bar')
-        with open('test-data/expected/animal-diseases.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:
             rsfcreator.generate_rsf(args)
@@ -129,7 +116,20 @@ class TestRsfCreator(unittest.TestCase):
         args = types.SimpleNamespace(register_name='custom-field-description',
                 tsv='test-data/custom-field-description.tsv',
                 register_data_root='test-data', prepend_metadata=True,
-                include_user_data=True, phase='alpha', custodian='Foo Bar')
+                include_user_data=True, phase='alpha')
+        with open('test-data/expected/custom-field-descriptions.rsf','r') as rsf_file:
+            expected_rsf = rsf_file.readlines()
+        with patch('sys.stdout', new=StringIO()) as patched_out:
+            rsfcreator.generate_rsf(args)
+            rsf_no_date  = strip_date(patched_out.getvalue())
+            for line in expected_rsf:
+                 self.assertIn(line, rsf_no_date, msg=line + ' was not in rsf')
+
+    def test_should_include_yaml_metadata(self):
+        args = types.SimpleNamespace(register_name='custom-field-description',
+                tsv='test-data/custom-field-description.tsv',
+                register_data_root='test-data', prepend_metadata=True,
+                include_user_data=True, phase='alpha')
         with open('test-data/expected/custom-field-descriptions.rsf','r') as rsf_file:
             expected_rsf = rsf_file.readlines()
         with patch('sys.stdout', new=StringIO()) as patched_out:

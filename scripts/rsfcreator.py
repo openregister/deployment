@@ -43,6 +43,11 @@ def read_custom_field_from_local(phase, register_name, field_name, root_dir):
     file_name = field_file_template.format(phase, register_name, field_name)
     return read_item_from_local(file_name)
 
+def read_metadata_from_local(phase, register_name, root_dir):
+    meta_file_template = root_dir + '/registry-data/data/{0}/{1}/meta.yaml'
+    file_name = meta_file_template.format(phase, register_name)
+    return read_item_from_local(file_name)
+
 def read_field_from_local(phase, register_name, field_name, root_dir):
     global_field = read_global_field_from_local(phase, field_name, root_dir)
     custom_field = read_custom_field_from_local(phase, register_name, field_name, root_dir)
@@ -104,16 +109,18 @@ def generate_rsf(args):
     if args.prepend_metadata:
         name_item_line, name_entry_line = rsf_for_line({'name': args.register_name}, 'name', 'system', key='name')
         print(name_item_line + '\n' + name_entry_line)
-        if args.custodian:
-            custodian_item_line, custodian_entry_line = rsf_for_line({'custodian': args.custodian}, 'custodian', 'system', key='custodian')
-            print(custodian_item_line + '\n' + custodian_entry_line)
         for field in fields_by_name.values():
             field_tmp = remove_blanks(field)
             field_item_line, field_entry_line = rsf_for_line(field_tmp, 'field', 'system', key_prefix='field:')
             print(field_item_line + '\n' + field_entry_line)
         register_def_tmp = remove_blanks(register_def)
-        reg_item_line, reg_entry_line = rsf_for_line(register_def, 'register', 'system', key_prefix='register:')
+        reg_item_line, reg_entry_line = rsf_for_line(register_def_tmp, 'register', 'system', key_prefix='register:')
         print(reg_item_line + '\n' + reg_entry_line)
+        meta_by_name = read_metadata_from_local(args.phase, args.register_name, args.register_data_root)
+        if meta_by_name is not None:
+            for meta_key, meta_value in meta_by_name.items():
+                meta_item_line, meta_entry_line = rsf_for_line({meta_key: meta_value}, None, 'system', key = meta_key)
+                print(meta_item_line + '\n' + meta_entry_line)
     # user data rsf
     if args.include_user_data:
         if args.tsv:
@@ -149,7 +156,6 @@ if __name__ == '__main__':
     parser.add_argument("--prepend_metadata", help="prepend field and register definitions", action="store_true")
     parser.add_argument("--include_user_data", help="include user data in the RSF", action="store_true")
     parser.add_argument("--register_data_root", help="the directory where register data is checked out")
-    parser.add_argument("--custodian", help="the name of the custodian if any")
     args = parser.parse_args()
 
     generate_rsf(args)

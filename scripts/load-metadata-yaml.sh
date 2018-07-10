@@ -9,7 +9,7 @@ source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
 {
-  echo "usage: ./reload-metadata-yaml.sh [field|register|datatype] [phase] [system|user|all] [local|remote] [custodian]"
+  echo "usage: ./reload-metadata-yaml.sh [field|register|datatype] [phase] [system|user|all] [local|remote]"
 }
 
 # validation check number of args but other validation is done in python script
@@ -23,7 +23,6 @@ REGISTER=$1
 PHASE=$2
 DATA_TO_INCLUDE=$3
 METADATA_SOURCE=$4
-CUSTODIAN=$5
 YAML="$OPENREGISTER_BASE/registry-data/data/$PHASE/$1"
 
 update_registers_pass
@@ -47,9 +46,9 @@ fi
 echo "converting $YAML to RSF"
 if [ "$METADATA_SOURCE" = 'local' ]
 then
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml_dir $YAML $PREPEND_METADATA $INCLUDE_USER_DATA --custodian "${CUSTODIAN}" --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml_dir $YAML $PREPEND_METADATA $INCLUDE_USER_DATA --register_data_root $OPENREGISTER_BASE > $OPENREGISTER_BASE/tmp.rsf
 else
-  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml_dir $YAML $PREPEND_METADATA $INCLUDE_USER_DATA --custodian "${CUSTODIAN}" > $OPENREGISTER_BASE/tmp.rsf
+  python3 $OPENREGISTER_BASE/deployment/scripts/rsfcreator.py $REGISTER $PHASE --yaml_dir $YAML $PREPEND_METADATA $INCLUDE_USER_DATA > $OPENREGISTER_BASE/tmp.rsf
 fi
 
 PASSWORD=`PASSWORD_STORE_DIR=~/.registers-pass pass $PHASE/app/mint/$REGISTER`
