@@ -300,6 +300,28 @@ example:
 These last two scripts look for the yaml configuration of the register or field
 in the `registry-data` repository.
 
+## Changing descriptions of an existing register
+
+There is a script in `scripts/update_descriptions.py` to generate RSF to change the description of a register that is currently in beta.
+
+Run this using:
+
+```
+register=jobcentre-district
+old_description='bla bla bla'
+new_description='bla bla bla bla bla bla'
+
+python update_descriptions.py $register $old_description $new_description > ${register}_update.rsf
+```
+
+Then load the RSF using:
+
+```
+./rsf-load.sh "https://${register}.beta.openregister.org" openregister `register-pass beta/app/mint/$register` < ${register}_update.rsf
+```
+
+This will update the API explorer, but registers frontend won't automatically pick up the description at the moment, because system entries are not included in incremental updates.
+
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
