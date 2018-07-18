@@ -4,44 +4,107 @@ import hashlib
 import re
 import json
 import datetime
+from enum import Enum
 
-def sha256(value):
-    m = hashlib.sha256()
-    m.update(value)
-    return m.hexdigest()
+
+ITEM_REGEX = re.compile(r'^add-item\t({[^}]+})$')
+ENTRY_REGEX = re.compile(r'^append-entry\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)$')
+
+
+class RsfCommand(Enum):
+    ADD_ITEM = 'add-item'
+    APPEND_ENTRY = 'append-entry'
+
+
+def parse_rsf_line(line):
+    match = ITEM_REGEX.match(line)
+    if match:
+        item = match.group(1)
+        item = json.loads(item)
+        return RsfAddItem(item)
+
+    match = ENTRY_REGEX.match(line)
+    if match:
+        entry_type = match.group(1)
+        key = match.group(2)
+        timestamp = match.group(3)
+        item_hash = match.group(4)
+        return RsfAppendEntry(key=key, item_hash=item_hash, timestamp=timestamp, entry_type=entry_type)
+
+    return None
+
+
+def find_register_item(register_name, lines):
+    """
+    Find an item with key register:{register_name}
+    """
+    items = {}
+    most_recent_item = None
+
+    for line in lines:
+        rsf = parse_rsf_line(line.decode('utf8'))
+        if not rsf:
+            continue
+
+        if rsf.command == RsfCommand.ADD_ITEM:
+            items[rsf.item_hash()] = rsf
+
+        elif rsf.command == RsfCommand.APPEND_ENTRY and rsf.key == f'register:{register_name}':
+            most_recent_item = rsf.item_hash
+
+    if most_recent_item:
+         return items[most_recent_item]
+
+    return None
+
+
+class RsfAddItem:
+    def __init__(self, item):
+        self.item = item
+        self.command = RsfCommand.ADD_ITEM
+
+    def item_hash(self):
+        m = hashlib.sha256()
+        m.update(self.item_json().encode('utf8'))
+        return f'sha-256:{m.hexdigest()}'
+
+    def item_json(self):
+        return json.dumps(self.item, separators=(',', ':'))
+
+    def __str__(self):
+        return f'add-item\t{self.item_json()}'
+
+
+class RsfAppendEntry:
+    def __init__(self, key, item_hash, timestamp=None, entry_type='system'):
+        self.entry_type = entry_type
+
+        # example: '2018-02-01T13:30:23Z'
+        self.timestamp = timestamp or datetime.datetime.utcnow().isoformat(timespec='seconds')
+        self.key = key
+        self.item_hash = item_hash
+        self.command = RsfCommand.APPEND_ENTRY
+
+    def __str__(self):
+        return f'append-entry\t{self.entry_type}\t{self.key}\t{self.timestamp}Z\t{self.item_hash}'
+
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print('Usage: ... <register> <old_description> <new_description>', file=sys.stderr)
+    if len(sys.argv) != 3:
+        print('Usage: ... <register> <new_description>', file=sys.stderr)
         sys.exit(1)
     register = sys.argv[1]
-    old_desc = sys.argv[2]
-    new_desc = sys.argv[3]
-    print(f'<{register}> change "{old_desc}" -> "{new_desc}"', file=sys.stderr)
+    new_desc = sys.argv[2]
 
     response = requests.get(f'https://{register}.beta.openregister.org/download-rsf')
 
-    old_item = None
-    old_hash = None
-    old_add_entry = None
-    for line in response.iter_lines():
-        match = re.match(rf'^add-item\t(.*{old_desc}.*)'.encode('utf8'), line)
-        if match:
-            old_item = match.group(1)
-
-            old_hash = sha256(old_item)
-            old_item = json.loads(old_item)
-
-    if not old_item:
+    item = find_register_item(register, response.iter_lines())
+    if not item:
         print('Failed to find the old item', file=sys.stderr)
         sys.exit(1)
 
-    new_item = old_item.copy()
-    new_item['text'] = new_desc
-    new_item = json.dumps(new_item, separators=(',', ':'))
-    new_hash = sha256(new_item.encode('utf8'))
-    print(f'add-item\t{new_item}')
+    item.item['text'] = new_desc
+    print(item)
 
-    # example: '2018-02-01T13:30:23Z'
-    timestamp = datetime.datetime.utcnow().isoformat(timespec='seconds')
-    print(f'append-entry\tsystem\tregister:{register}\t{timestamp}Z\tsha-256:{new_hash}')
+    new_entry = RsfAppendEntry(key=f'register:{register}', item_hash=item.item_hash())
+    print(new_entry)
