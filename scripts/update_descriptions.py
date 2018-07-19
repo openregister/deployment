@@ -7,7 +7,7 @@ import datetime
 from enum import Enum
 
 
-ITEM_REGEX = re.compile(r'^add-item\t({[^}]+})$')
+ITEM_REGEX = re.compile(r'^add-item\t({[^\t]*})$')
 ENTRY_REGEX = re.compile(r'^append-entry\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)$')
 
 
@@ -80,13 +80,13 @@ class RsfAppendEntry:
         self.entry_type = entry_type
 
         # example: '2018-02-01T13:30:23Z'
-        self.timestamp = timestamp or datetime.datetime.utcnow().isoformat(timespec='seconds')
+        self.timestamp = timestamp or datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z'
         self.key = key
         self.item_hash = item_hash
         self.command = RsfCommand.APPEND_ENTRY
 
     def __str__(self):
-        return f'append-entry\t{self.entry_type}\t{self.key}\t{self.timestamp}Z\t{self.item_hash}'
+        return f'append-entry\t{self.entry_type}\t{self.key}\t{self.timestamp}\t{self.item_hash}'
 
 
 if __name__ == '__main__':
