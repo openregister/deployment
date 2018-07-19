@@ -54,9 +54,9 @@ secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 ### Set up `registers-pass`
 
-The registers team maintains a [credentials store](https://github.com/openregister/credentials/). 
+The registers team maintains a [credentials store](https://github.com/openregister/credentials/).
 You must be able to decrypt and create passwords using the command `registers-pass`. This command
-is used by some of the adhoc ansible commands required to set up register deployments. Follow 
+is used by some of the adhoc ansible commands required to set up register deployments. Follow
 the [instructions](https://github.com/openregister/credentials/README.md) to set this up.
 
 # Deploying registers infrastructure
@@ -84,7 +84,7 @@ Create a new branch and generate credentials using the `ansible/generate_passwor
     ansible-playbook generate_passwords.yml -e vpc=<myenv>
 
 Check that the new password has been created and committed to the new branch, then push.
-    
+
     registers-pass git log
     registers-pass git push -u origin create-new-register
 
@@ -98,10 +98,10 @@ Merge this to master then ensure your `registers-pass` is using latest master
 The `ansible/upload_configs_to_s3.yml` file creates the application
 config files (`pass-config.yaml`) required for each register in each environment.
 The config files are written locally to `ansible/config/<myenv>` and
-uploaded to S3 buckets. This ansible script consumes credentials via `registers-pass` and adds any 
+uploaded to S3 buckets. This ansible script consumes credentials via `registers-pass` and adds any
 new registers to the list of registers to be run by the application. When the application runs
 it will pull the relevant `paas-config.yaml` file from S3.
-If you want to test this script and not upload to S3 you can set `sync: false` in `upload_configs_to_s3.yml`. 
+If you want to test this script and not upload to S3 you can set `sync: false` in `upload_configs_to_s3.yml`.
 
     cd ansible
     ansible-playbook upload_configs_to_s3.yml -e vpc=<myenv>
@@ -162,7 +162,7 @@ If you are creating a register in beta, you must follow [these additional steps]
 
 ## How to create a register group in an existing environment
 
-Edit `ansible/group_vars/tag_Environment_<myenv>` and add the new group to `register_groups`, 
+Edit `ansible/group_vars/tag_Environment_<myenv>` and add the new group to `register_groups`,
 including the register names that are part of this group.
 
 Follow steps 2-3 above.
@@ -181,8 +181,8 @@ Create a new `.tfvars` file for the environment:
 
     ansible-playbook configure_terraform.yml -e vpc=<myenv>
 
-You must also request a new SSL certificate in AWS Certficate Manager for the new environment. 
-This certificate will require approval before it can be used. Bear in mind that only certain people 
+You must also request a new SSL certificate in AWS Certficate Manager for the new environment.
+This certificate will require approval before it can be used. Bear in mind that only certain people
 can approve the creation of new certificates when creating a new environment.
 
 Once approved, the ARN for the new certificate must then be added to the existing terraform configuration file as below.
@@ -212,7 +212,7 @@ Upload the new certificate to IAM using terraform. Follow the instructions [here
 
 ### Rotate SSL certificate for CloudFront distributions
 
-Each Beta register has a CloudFront distribution. These will be using the old certificate (without the `<myregister>.register.gov.uk` 
+Each Beta register has a CloudFront distribution. These will be using the old certificate (without the `<myregister>.register.gov.uk`
 alternative domain). You need to update the certificate for each of the CloudFront distributions. Do this by updating `cdn_configuration.certificate_id` in `aws/registers/environments/beta.tfvars`. Then apply the changes using terraform.
 
 	cd aws/registers
@@ -221,14 +221,14 @@ alternative domain). You need to update the certificate for each of the CloudFro
 
 ### Delete the old certificate
 
-Rerun `make apply` at `aws/tls-certs` (as mentioned in the instructions [here](aws/tls-certs/README.md)) 
+Rerun `make apply` at `aws/tls-certs` (as mentioned in the instructions [here](aws/tls-certs/README.md))
 to delete the old certificate from IAM.
 
 ### Rotate SSL certificate for API Gateway
 
 Use the AWS CLI to rotate the SSL certificate.
 
-Get the Certificate ARN by running. 
+Get the Certificate ARN by running.
 `aws acm list-certificates --region us-east-1`
 and copy the ARN for `register.gov.uk`
 
@@ -299,28 +299,6 @@ example:
 
 These last two scripts look for the yaml configuration of the register or field
 in the `registry-data` repository.
-
-## Changing descriptions of an existing register
-
-There is a script in `scripts/update_descriptions.py` to generate RSF to change the description of a register that is currently in beta.
-
-Run this using:
-
-```
-register=jobcentre-district
-old_description='bla bla bla'
-new_description='bla bla bla bla bla bla'
-
-python update_descriptions.py $register $old_description $new_description > ${register}_update.rsf
-```
-
-Then load the RSF using:
-
-```
-./rsf-load.sh "https://${register}.beta.openregister.org" openregister `register-pass beta/app/mint/$register` < ${register}_update.rsf
-```
-
-This will update the API explorer, but registers frontend won't automatically pick up the description at the moment, because system entries are not included in incremental updates.
 
 ## Licence
 
