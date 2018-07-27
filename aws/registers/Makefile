@@ -25,9 +25,6 @@ export TF_VAR_pingdom_user:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pa
 export TF_VAR_pingdom_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n 1), $(error "Couldn't get Pingdom password"))
 export TF_VAR_pingdom_api_key:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom/api | head -n 1), $(error "Couldn't get Pingdom API key"))
 
-# InfluxCloud
-export TF_VAR_influxdb_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/influxcloud/telegraf | tail -n 1), $(error "Couldn't get InfluxCloud password"))
-
 # Lambda@Edge version number
 export TF_VAR_api_key_to_cloudfront_logs_version_number:=$(or $(shell (cd ../lambda/ && terraform output api_key_to_cloudfront_logs_version_number) | sed 1q), $(error "Couldn't get Lambda@Edge version number"))
 
