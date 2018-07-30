@@ -24,9 +24,3 @@ module "core" {
   environment_name = "${var.environment_name}"
   cdn_configuration = "${var.cdn_configuration}"
 }
-
-module "configuration" {
-  source = "../modules/configuration"
-  environment_name = "${var.environment_name}"
-  influxdb_configuration = "${merge(var.influxdb_configuration, map("password", var.influxdb_password))}"
-}
