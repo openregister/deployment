@@ -104,7 +104,7 @@ with the `scripts/name-a-register.sh` script.
 
 ### Changing the description of a register
 
-There is a script in `scripts/update_descriptions.py` to generate RSF to change the description of a register. This currently assumes that the register is in beta.
+There is a script in `scripts/update_descriptions.py` to generate RSF to change the description of a register.
 
 Run this using:
 
@@ -120,6 +120,8 @@ Then load the RSF using:
 ```
 ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `register-pass beta/app/mint/$register` < ${register}_update.rsf
 ```
+
+This example assumes that the register is in beta.
 
 This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates.
 
