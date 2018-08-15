@@ -11,7 +11,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   price_class = "PriceClass_100"
 
   viewer_certificate {
-    iam_certificate_id = "${var.cdn_configuration["certificate_id"]}"
+    acm_certificate_arn = "${var.cdn_configuration["certificate_arn"]}"
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1"
   }
