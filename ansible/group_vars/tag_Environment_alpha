@@ -19,6 +19,7 @@ register_groups:
     - field
 
   multi:
+    - clinical-commissioning-group
     - occupation
     - public-body-account
     - public-body-account-classification
