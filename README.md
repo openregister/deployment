@@ -199,45 +199,6 @@ Then follow steps 1-9 above.
 
 Ignore these if you are creating a register in an environment other than Beta.
 
-## SSL certificates
-
-### Create the certificate
-
-Create a new SSL certificate using LetsEncrypt that includes <myregister>.register.gov.uk as an alternative domain.
-Create the new certificate using the `ansible/letsencrypt.yml` using the [instructions](ansible/README.md)
-
-### Upload the new certificate to IAM
-
-Upload the new certificate to IAM using terraform. Follow the instructions [here](aws/tls-certs/README.md).
-
-### Rotate SSL certificate for CloudFront distributions
-
-Each Beta register has a CloudFront distribution. These will be using the old certificate (without the `<myregister>.register.gov.uk` 
-alternative domain). You need to update the certificate for each of the CloudFront distributions. Do this by updating `cdn_configuration.certificate_id` in `aws/registers/environments/beta.tfvars`. Then apply the changes using terraform.
-
-	cd aws/registers
-	make plan -e vpc=beta
-	make apply -e vpc=beta
-
-### Delete the old certificate
-
-Rerun `make apply` at `aws/tls-certs` (as mentioned in the instructions [here](aws/tls-certs/README.md)) 
-to delete the old certificate from IAM.
-
-### Rotate SSL certificate for API Gateway
-
-Use the AWS CLI to rotate the SSL certificate.
-
-Get the Certificate ARN by running. 
-`aws acm list-certificates --region us-east-1`
-and copy the ARN for `register.gov.uk`
-
-Go to the root of `deployment` and run:
-```
-aws acm import-certificate --certificate file://${PWD}/tls-certs/beta/certificates/register.gov.uk.pem_00  --certificate-chain file://${PWD}//tls-certs/beta/certificates/register.gov.uk.pem_01 --private-key file://${PWD}/tls-certs/beta/certificates/register.gov.uk.key --certificate-arn arn:some-value --region us-east-1
-```
-replacing `arn:some-value` with the ARN from the previous step.
-
 ## Add credentials to managing-registers
 
 Get the credentials from registers-pass:
