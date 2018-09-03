@@ -13,7 +13,6 @@ ifneq ($(expected_node_version), $(actual_node_version))
 	$(error Expected node version $(expected_node_version), but saw $(actual_node_version))
 endif
 
-python_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard python/*)))
 node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard node/*)))
 
 pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
@@ -31,13 +30,13 @@ purge-remote-state-cache:
 configure-state: purge-remote-state-cache
 	terraform init
 
-plan: configure-state $(python_lambda_functions) $(node_lambda_functions)
+plan: configure-state $(node_lambda_functions)
 	terraform plan -module-depth=$(module_depth)
 
 plan-destroy: configure-state
 	terraform plan -destroy -module-depth=$(module_depth)
 
-apply: configure-state $(python_lambda_functions) $(node_lambda_functions)
+apply: configure-state $(node_lambda_functions)
 	terraform apply
 
 destroy: configure-state
@@ -48,25 +47,11 @@ build/node/%.zip: node/%/lambda.js node/%/package.json
 	npm install --production --prefix $(dir $<)
 	cd $(dir $<); zip -r ../../$@ $(notdir $<) node_modules/
 
-build/python/%.zip: python/%/lambda.py
-	mkdir -p $(dir $@)
-	virtualenv --python=python3 $(dir $<)venv
-	$(dir $<)venv/bin/pip install -r $(dir $<)requirements.txt
-	cd $(dir $<); zip ../../$@ $(notdir $<)
-	cd $(dir $<)venv/lib/python3.6/site-packages; zip -r ../../../../../../$@ ./
-
 node/cloudfront-logs-api-key-to-google-analytics/lambda.js: node/cloudfront-logs-api-key-to-google-analytics/cloudwatchlogs.js
 	cp $< $@
 
 node/log-api-key-to-cloudwatch/lambda.js: node/log-api-key-to-cloudwatch/log-api-key-to-cloudwatch.js
 	cp $< $@
-
-python/pingdom-to-performance-platform/lambda.py: python/pingdom-to-performance-platform/performance_platform.py
-	cp $< $@
-	gsed -i 's/dummy_bearer/$(performance_platform_bearer_token)/' $@
-	gsed -i 's/dummy_username/$(pingdom_user)/' $@
-	gsed -i 's/dummy_password/$(pingdom_password)/' $@
-	gsed -i 's/dummy_key/$(pingdom_key)/' $@
 
 clean:
 	rm -rf build/
