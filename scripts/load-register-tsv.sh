@@ -24,7 +24,7 @@ PHASE=$2
 TSV="$OPENREGISTER_BASE/$3"
 DATA_TO_INCLUDE=$4
 METADATA_SOURCE=$5
-DATA_DIR=${7:-"$1-data"}
+DATA_DIR=${6:-"$1-data"}
 
 update_registers_pass
 
