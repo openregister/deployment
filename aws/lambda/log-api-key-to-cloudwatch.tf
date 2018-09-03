@@ -65,10 +65,16 @@ resource "aws_iam_role_policy" "lambda-edge-policy" {
 EOF
 }
 
+data "archive_file" "api-key-to-cloudfront-logs-archive" {
+  type = "zip"
+  output_path = "build/node/api-key-to-cloudfront-logs.zip"
+  source_file = "node/log-api-key-to-cloudwatch/lambda.js"
+}
+
 resource "aws_lambda_function" "api-key-to-cloudfront-logs" {
   function_name    = "log-api-key-to-cloudwatch"
-  filename         = "build/node/log-api-key-to-cloudwatch.zip"
-  source_code_hash = "${base64sha256(file("build/node/log-api-key-to-cloudwatch.zip"))}"
+  filename         = "build/node/api-key-to-cloudfront-logs.zip"
+  source_code_hash = "${data.archive_file.api-key-to-cloudfront-logs-archive.output_base64sha256}"
   handler          = "lambda.handler"
   role             = "${aws_iam_role.lambda-edge-role.arn}"
   memory_size      = "128"

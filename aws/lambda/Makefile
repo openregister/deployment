@@ -13,7 +13,7 @@ ifneq ($(expected_node_version), $(actual_node_version))
 	$(error Expected node version $(expected_node_version), but saw $(actual_node_version))
 endif
 
-node_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard node/*)))
+node_lambda_functions:=$(addprefix build/,$($(wildcard node/*)))
 
 pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
 pingdom_password:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n1)
@@ -42,20 +42,10 @@ apply: configure-state $(node_lambda_functions)
 destroy: configure-state
 	terraform destroy
 
-build/node/%.zip: node/%/lambda.js node/%/package.json
+build/node/%: node/%/lambda.js node/%/package.json
 	mkdir -p $(dir $@)
 	npm install --production --prefix $(dir $<)
-	cd $(dir $<); zip -r ../../$@ $(notdir $<) node_modules/
-
-node/cloudfront-logs-api-key-to-google-analytics/lambda.js: node/cloudfront-logs-api-key-to-google-analytics/cloudwatchlogs.js
-	cp $< $@
-
-node/log-api-key-to-cloudwatch/lambda.js: node/log-api-key-to-cloudwatch/log-api-key-to-cloudwatch.js
-	cp $< $@
 
 clean:
 	rm -rf build/
 	rm -rf node/*/node_modules/
-	rm -rf node/*/lambda.js
-	rm -rf python/*/venv
-	rm -rf python/*/lambda.py

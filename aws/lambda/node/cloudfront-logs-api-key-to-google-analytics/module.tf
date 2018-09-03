@@ -11,14 +11,18 @@ data "aws_iam_role" "cloudwatch_logs_lambda_role" {
   role_name = "lambda"
 }
 
-# data "aws_iam_role" "lambda-edge-role-test" {
-#   role_name = "lambda"
-# }
+data "archive_file" "cloudfront-logs-api-key-to-google-analytics-archive" {
+  output_path = "build/node/cloudfront-logs-api-key-to-google-analytics.zip"
+  type = "zip"
+  source_file = "node/cloudfront-logs-api-key-to-google-analytics/lambda.js"
+}
+
+
 
 resource "aws_lambda_function" "cloudfront-logs-api-key-to-google-analytics" {
   function_name    = "cloudfront-logs-api-key-to-google-analytics"
   filename         = "build/node/cloudfront-logs-api-key-to-google-analytics.zip"
-  source_code_hash = "${base64sha256(file("build/node/cloudfront-logs-api-key-to-google-analytics.zip"))}"
+  source_code_hash = "${data.archive_file.cloudfront-logs-api-key-to-google-analytics-archive.output_base64sha256}"
   handler          = "lambda.handler"
   role             = "${data.aws_iam_role.cloudwatch_logs_lambda_role.arn}"
   memory_size      = "128"
