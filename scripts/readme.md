@@ -110,20 +110,38 @@ Run this using:
 
 ```
 register=jobcentre-district
-new_description='bla bla bla bla bla bla'
+desc='bla bla bla bla bla bla'
 
-python update_descriptions.py $register $new_description > ${register}_update.rsf
+python update_descriptions.py $register $desc
 ```
 
-Then load the RSF using:
+Then check that the RSF looks correct.
+
+To actually load the RSF, pipe the output to `rsf-load.sh`:
 
 ```
-./rsf-load.sh "https://${register}.beta.openregister.org" openregister `register-pass beta/app/mint/$register` < ${register}_update.rsf
+python update_descriptions.py $register $desc | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register` < ${register}_update.rsf
 ```
 
 This example assumes that the register is in beta.
 
-This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates.
+This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates. To do this, follow the [instructions for redownloading a register in registers frontend](https://github.com/openregister/registers-frontend#populating-the-database-with-register-data-on-paas).
+
+### Changing both the register name and description
+
+You can change the name and description of a register in one step:
+
+```
+register=country
+name="Country register"
+desc="British English names of all countries currently recognised by the UK government"
+
+# Preview the generated RSF
+python update_titles_and_descriptions.py "$register" "$name" "$desc"
+
+# Load the RSF
+python update_titles_and_descriptions.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
+```
 
 ### Python tests
 
