@@ -23,7 +23,7 @@ class RsfAddItem:
         return f'sha-256:{m.hexdigest()}'
 
     def item_json(self):
-        return json.dumps(self.item, separators=(',', ':'))
+        return json.dumps(self.item, separators=(',', ':'), sort_keys=True)
 
     def __str__(self):
         return f'add-item\t{self.item_json()}'
