@@ -1,12 +1,12 @@
 """
 The registry-data github repository is the source of data stored in the
 "register" register.
-This repository also contains additional metadata such as friendly register names, which
+That repository also contains additional metadata such as friendly register names, which
 get stored as system entries in the individual registers.
 
 This script ensures that this data actually reflects whats stored in the registers themselves
 
-Specify a personal access token for the github API using the OAUTH_TOKEN environment variable.
+Usage: OAUTH_TOKEN=<github personal access token> python validate_metadata.py
 """
 import requests
 import yaml
@@ -87,13 +87,14 @@ if __name__ == '__main__':
             friendly_name = meta['friendly-name']
 
         if register_rsf.register_record != register_record:
-            result.fail(register=register_rsf.register_record, github=register_record)
-        elif register_rsf.register_record is None and register_record is None:
+            # Ensure register register is consistent with the register
             result.fail(register=register_rsf.register_record, github=register_record)
 
         if register_rsf.friendly_name != friendly_name:
+            # Ensure friendly name metadata is consistent with the register
             result.fail(register=register_rsf.friendly_name, github=friendly_name)
         elif register_rsf.friendly_name is None and friendly_name is None:
+            # Ensure a friendly name is set
             result.fail(register=register_rsf.friendly_name, github=friendly_name)
 
         result.report()

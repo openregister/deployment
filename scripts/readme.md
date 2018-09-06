@@ -18,6 +18,18 @@ where $PHASE is test, discovery, alpha or beta
 
 Within those directories the definitions of individual fields or registers are in separate YAML files.
 
+This repo also contains files like
+
+    $ROOT/openregister/registry-data/data/$PHASE/$REGISTER/meta.yaml
+
+These contain additional metadata about the register. Each key corresponds to system entries stored in the register, for example "friendly-name".
+
+We intend to keep this github repository in sync with the actual registers until we have a way to archive register data. You can check that the data matches up by running
+
+    OAUTH_TOKEN=<github personal access token> python validate_metadata.py
+
+(the github token is used to avoid rate limits)
+
 ### Register data
 
 Mostly the register data can be found in a file at this location:
@@ -25,6 +37,7 @@ Mostly the register data can be found in a file at this location:
     $ROOT/openregister/$REGISTER-data/data/$PHASE/$REG.tsv
 
 However the naming of the files is not completely consistent.
+
 
 ### Prerequisites
 
@@ -127,7 +140,7 @@ This example assumes that the register is in beta.
 
 This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates. To do this, follow the [instructions for redownloading a register in registers frontend](https://github.com/openregister/registers-frontend#populating-the-database-with-register-data-on-paas).
 
-### Changing both the register name and description
+#### Changing both the register name and description
 
 You can change the name and description of a register in one step:
 
