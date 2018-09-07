@@ -38,7 +38,6 @@ Mostly the register data can be found in a file at this location:
 
 However the naming of the files is not completely consistent.
 
-
 ### Prerequisites
 
 - the **pass** application must be installed and you must have the required GPG key to access
