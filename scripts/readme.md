@@ -18,6 +18,18 @@ where $PHASE is test, discovery, alpha or beta
 
 Within those directories the definitions of individual fields or registers are in separate YAML files.
 
+This repo also contains files like
+
+    $ROOT/openregister/registry-data/data/$PHASE/$REGISTER/meta.yaml
+
+These contain additional metadata about the register. Each key corresponds to system entries stored in the register, for example "register-name".
+
+We intend to keep this github repository in sync with the actual registers until we have a way to archive register data. You can check that the data matches up by running
+
+    GITHUB_OAUTH_TOKEN=<github personal access token> python3 validate_metadata.py
+
+(the github token is used to avoid rate limits)
+
 ### Register data
 
 Mostly the register data can be found in a file at this location:
@@ -110,20 +122,38 @@ Run this using:
 
 ```
 register=jobcentre-district
-new_description='bla bla bla bla bla bla'
+desc='bla bla bla bla bla bla'
 
-python update_descriptions.py $register $new_description > ${register}_update.rsf
+python3 update_descriptions.py $register $desc
 ```
 
-Then load the RSF using:
+Then check that the RSF looks correct.
+
+To actually load the RSF, pipe the output to `rsf-load.sh`:
 
 ```
-./rsf-load.sh "https://${register}.beta.openregister.org" openregister `register-pass beta/app/mint/$register` < ${register}_update.rsf
+python3 update_descriptions.py $register $desc | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register` < ${register}_update.rsf
 ```
 
 This example assumes that the register is in beta.
 
-This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates.
+This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates. To do this, follow the [instructions for redownloading a register in registers frontend](https://github.com/openregister/registers-frontend#populating-the-database-with-register-data-on-paas).
+
+#### Changing both the register name and description
+
+You can change the name and description of a register in one step:
+
+```
+register=country
+name="Country register"
+desc="British English names of all countries currently recognised by the UK government"
+
+# Preview the generated RSF
+python3 update_name_and_description.py "$register" "$name" "$desc"
+
+# Load the RSF
+python3 update_name_and_description.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
+```
 
 ### Python tests
 
