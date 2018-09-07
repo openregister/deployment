@@ -22,11 +22,11 @@ This repo also contains files like
 
     $ROOT/openregister/registry-data/data/$PHASE/$REGISTER/meta.yaml
 
-These contain additional metadata about the register. Each key corresponds to system entries stored in the register, for example "friendly-name".
+These contain additional metadata about the register. Each key corresponds to system entries stored in the register, for example "register-name".
 
 We intend to keep this github repository in sync with the actual registers until we have a way to archive register data. You can check that the data matches up by running
 
-    OAUTH_TOKEN=<github personal access token> python validate_metadata.py
+    GITHUB_OAUTH_TOKEN=<github personal access token> python3 validate_metadata.py
 
 (the github token is used to avoid rate limits)
 
@@ -124,7 +124,7 @@ Run this using:
 register=jobcentre-district
 desc='bla bla bla bla bla bla'
 
-python update_descriptions.py $register $desc
+python3 update_descriptions.py $register $desc
 ```
 
 Then check that the RSF looks correct.
@@ -132,7 +132,7 @@ Then check that the RSF looks correct.
 To actually load the RSF, pipe the output to `rsf-load.sh`:
 
 ```
-python update_descriptions.py $register $desc | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register` < ${register}_update.rsf
+python3 update_descriptions.py $register $desc | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register` < ${register}_update.rsf
 ```
 
 This example assumes that the register is in beta.
@@ -149,10 +149,10 @@ name="Country register"
 desc="British English names of all countries currently recognised by the UK government"
 
 # Preview the generated RSF
-python update_titles_and_descriptions.py "$register" "$name" "$desc"
+python3 update_name_and_description.py "$register" "$name" "$desc"
 
 # Load the RSF
-python update_titles_and_descriptions.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
+python3 update_name_and_description.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
 ```
 
 ### Python tests

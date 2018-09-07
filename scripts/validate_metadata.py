@@ -6,7 +6,7 @@ get stored as system entries in the individual registers.
 
 This script ensures that this data actually reflects whats stored in the registers themselves
 
-Usage: OAUTH_TOKEN=<github personal access token> python validate_metadata.py
+Usage: GITHUB_OAUTH_TOKEN=<github personal access token> python validate_metadata.py
 """
 import requests
 import yaml
@@ -15,7 +15,7 @@ from base64 import b64decode
 from rsflib.remote import fetch
 from os import environ
 
-OAUTH_TOKEN = environ.get('OAUTH_TOKEN')
+OAUTH_TOKEN = environ.get('GITHUB_OAUTH_TOKEN')
 
 headers = {
     'User-Agent': 'openregister/deployment',

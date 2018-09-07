@@ -16,7 +16,7 @@ class RsfFile:
         """
         Parse an RSF file into commands.
         register_name is the internal ID of the register.
-        lines should contain binary strings.
+        lines should contain byte strings.
         """
         self.lines = lines
         self.commands = []
