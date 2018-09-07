@@ -9,7 +9,15 @@ ENTRY_REGEX = re.compile(r'^append-entry\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)
 
 
 class RsfFile:
+    """
+    A parsed RSF file
+    """
     def __init__(self, register_name, lines):
+        """
+        Parse an RSF file into commands.
+        register_name is the internal ID of the register.
+        lines should contain binary strings.
+        """
         self.lines = lines
         self.commands = []
         self.register_name = register_name
@@ -73,7 +81,7 @@ def find_register_item(register_name, lines):
     """
     Find an item with key register:{register_name}
     """
-    warnings.warn("deprecated - use RsfFile class instead", DeprecationWarning)
+    warnings.warn("Please use the RsfFile class instead of find_register_item", DeprecationWarning)
 
     items = {}
     most_recent_item = None
