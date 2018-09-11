@@ -60,6 +60,9 @@ if __name__ == '__main__':
 
     for item in registers.json():
         name = item['name'].replace('.yaml', '')
+        if name == 'meta':
+            continue
+
         path = item['path']
         result = Result(name)
 
