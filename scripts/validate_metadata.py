@@ -41,7 +41,7 @@ class Result():
                 print(f'Register has {register}')
                 print(f'Github has {github}')
         else:
-            print(f'{name} ✔️')
+            print(f'{name} ✅')
 
         print('-'*10)
         print()
@@ -74,8 +74,9 @@ if __name__ == '__main__':
             print(response)
             sys.exit(1)
 
-        response = requests.get(CONTENT_ENDPOINT + f'/beta/{name}/meta.yaml', headers=headers)
+        response = requests.get(CONTENT_ENDPOINT + f'/data/beta/{name}/meta.yaml', headers=headers)
         if response.status_code == 404:
+            print(f'404 for data/beta/{name}/meta.yaml')
             friendly_name = None
         else:
             try:
@@ -84,7 +85,11 @@ if __name__ == '__main__':
                 print('Unable to load meta')
                 print(response)
 
-            friendly_name = meta['friendly-name']
+            try:
+                friendly_name = meta['register-name']
+            except Exception:
+                print(f'Unable to parse meta file: {response.json()}')
+                friendly_name = None
 
         if register_rsf.register_record != register_record:
             # Ensure register register is consistent with the register
