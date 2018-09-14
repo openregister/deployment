@@ -1,6 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 variable "api_key_to_cloudfront_logs_version_number" {}
+variable "cloudfront_post_logger_version_number" {}
 
 resource "aws_cloudfront_distribution" "paas_cdn" {
   count = 1
@@ -39,6 +40,38 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
     }
 
     target_origin_id       = "paas"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  cache_behavior {
+    allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods = ["HEAD", "GET"]
+
+    path_pattern = "/load-rsf"
+
+    default_ttl = 0
+    max_ttl = 0
+    min_ttl = 0
+
+    forwarded_values {
+      cookies {
+        forward = "none"
+      }
+      query_string = false
+      headers = ["Accept", "Host", "Origin", "X-Forwarded-Host"]
+    }
+
+    lambda_function_association {
+      event_type = "viewer-request"
+      lambda_arn = "arn:aws:lambda:us-east-1:${data.aws_caller_identity.current.account_id}:function:log-api-key-to-cloudwatch:${var.api_key_to_cloudfront_logs_version_number}"
+    }
+
+    lambda_function_association {
+      event_type = "origin-request"
+      lambda_arn = "arn:aws:lambda:us-east-1:${data.aws_caller_identity.current.account_id}:function:cloudfront-post-logger:${var.cloudfront_post_logger_version_number}"
+    }
+
+    target_origin_id = "paas"
     viewer_protocol_policy = "redirect-to-https"
   }
 

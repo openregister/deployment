@@ -91,6 +91,15 @@ module "cloudfront_logs_api_key_to_google_analytics_sa_east_1" {
   region = "sa-east-1"
 }
 
+module "cache_invalidator_eu_west_1" {
+  source = "node/cache-invalidator"
+  region = "eu-west-1"
+}
+module "cache_invalidator_eu_west_2" {
+  source = "node/cache-invalidator"
+  region = "eu-west-2"
+}
+
 resource "aws_iam_role_policy" "s3_logs_lambda" {
   name = "s3_logs_lambda"
   role = "${aws_iam_role.lambda.id}"

@@ -1,0 +1,89 @@
+{
+    "Records": [
+        {
+            "cf": {
+                "config": {
+                    "distributionDomainName": "d3rc60sn8go5r7.cloudfront.net",
+                    "distributionId": "EXTJYVM2DAM9O",
+                    "eventType": "origin-request"
+                },
+                "request": {
+                    "body": {
+                        "action": "read-only",
+                        "data": "YWRkLWl0ZW0gICAgeyJjb3VudHJ5IjoiQ0FDSEUtVEVTVC05In0KYXBwZW5kLWVudHJ5ICAgIHVzZXIgICAgQ0FDSEUtVEVTVC05ICAgIDIwMTctMTAtMjVUMDk6NTI6NTJaICAgIHNoYS0yNTY6ZDg3ZjU5YjI0NjczZWU4ZDdlNWY2OTIxOTE0ZmFlY2NiZWVlYjZlYjBmMDkxOWUyMjlkY2JjZGU2MWQzNmMxMwo=",
+                        "encoding": "base64",
+                        "inputTruncated": false
+                    },
+                    "clientIp": "213.86.153.236",
+                    "headers": {
+                        "accept": [
+                            {
+                                "key": "Accept",
+                                "value": "*/*"
+                            }
+                        ],
+                        "authorization": [
+                            {
+                                "key": "Authorization",
+                                "value": "bla bla bla"
+                            }
+                        ],
+                        "content-length": [
+                            {
+                                "key": "Content-Length",
+                                "value": "176"
+                            }
+                        ],
+                        "content-type": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/uk-gov-rsf"
+                            }
+                        ],
+                        "host": [
+                            {
+                                "key": "Host",
+                                "value": "country.test.openregister.org"
+                            }
+                        ],
+                        "user-agent": [
+                            {
+                                "key": "User-Agent",
+                                "value": "Amazon CloudFront"
+                            }
+                        ],
+                        "via": [
+                            {
+                                "key": "Via",
+                                "value": "1.1 60f51b01691645e46c7a7ea5ed682f00.cloudfront.net (CloudFront)"
+                            }
+                        ],
+                        "x-forwarded-for": [
+                            {
+                                "key": "X-Forwarded-For",
+                                "value": "213.86.153.236"
+                            }
+                        ]
+                    },
+                    "method": "POST",
+                    "origin": {
+                        "custom": {
+                            "customHeaders": {},
+                            "domainName": "cloudapps.digital",
+                            "keepaliveTimeout": 5,
+                            "path": "",
+                            "port": 443,
+                            "protocol": "https",
+                            "readTimeout": 30,
+                            "sslProtocols": [
+                                "TLSv1.2"
+                            ]
+                        }
+                    },
+                    "querystring": "",
+                    "uri": "/load-rsf"
+                }
+            }
+        }
+    ]
+}

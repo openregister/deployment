@@ -84,6 +84,28 @@ resource "aws_lambda_function" "api-key-to-cloudfront-logs" {
   publish          = true
 }
 
+data "archive_file" "cloudfront-post-logger-archive" {
+  type = "zip"
+  output_path = "build/node/cloudfront-post-logger.zip"
+  source_file = "node/cloudfront-post-logger/lambda.js"
+}
+resource "aws_lambda_function" "cloudfront-post-logger" {
+  function_name    = "cloudfront-post-logger"
+  filename         = "build/node/cloudfront-post-logger.zip"
+  source_code_hash = "${data.archive_file.cloudfront-post-logger-archive.output_base64sha256}"
+  handler          = "lambda.handler"
+  role             = "${aws_iam_role.lambda-edge-role.arn}"
+  memory_size      = "128"
+  runtime          = "nodejs8.10"
+  timeout          = "2"
+  provider         = "aws.us-east-1"
+  publish          = true
+}
+
+
 output "api_key_to_cloudfront_logs_version_number" {
   value = "${aws_lambda_function.api-key-to-cloudfront-logs.version}"
+}
+output "cloudfront_post_logger_version_number" {
+  value = "${aws_lambda_function.cloudfront-post-logger.version}"
 }
