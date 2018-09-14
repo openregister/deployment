@@ -99,6 +99,10 @@ module "cache_invalidator_eu_west_2" {
   source = "node/cache-invalidator"
   region = "eu-west-2"
 }
+module "cache_invalidator_eu_central_1" {
+  source = "node/cache-invalidator"
+  region = "eu-central-1"
+}
 
 resource "aws_iam_role_policy" "s3_logs_lambda" {
   name = "s3_logs_lambda"
