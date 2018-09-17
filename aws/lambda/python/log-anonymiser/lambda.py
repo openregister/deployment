@@ -143,7 +143,7 @@ def handler(event, context):
     source_key = unquote_plus(record_s3['object']['key'])
 
     if not source_key.endswith('.gz'):
-        logging.info('File is not gzipped, aborting')
+        logger.info('File is not gzipped, aborting')
         return
 
     cleaner = CompressedLogCleaner(source_key)
