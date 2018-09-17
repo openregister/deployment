@@ -14,7 +14,7 @@ ifneq ($(expected_node_version), $(actual_node_version))
 endif
 
 node_lambda_functions:=$(addprefix build/,$($(wildcard node/*)))
-python_lambda_functions:=$(addprefix build/,$(addsuffix .zip,$(wildcard python/*)))
+python_lambda_functions:=$(addprefix build/,$($(wildcard python/*)))
 
 pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
 pingdom_password:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n1)
@@ -47,12 +47,12 @@ build/node/%: node/%/lambda.js node/%/package.json
 	mkdir -p $(dir $@)
 	npm install --production --prefix $(dir $<)
 
-build/python/%.zip: python/%/lambda.py
+build/python/%: python/%/lambda.py
 	mkdir -p $(dir $@)
+	cp $< $@
 	virtualenv --python=python3 $(dir $<)venv
 	$(dir $<)venv/bin/pip install -r $(dir $<)requirements.txt
-	cd $(dir $<); zip ../../$@ $(notdir $<)
-	cd $(dir $<)venv/lib/python3.6/site-packages; zip -r ../../../../../../$@ ./
+	cp -r $(dir $<)venv/lib/python3.6/site-packages/* $(dir $@)
 
 clean:
 	rm -rf build/
