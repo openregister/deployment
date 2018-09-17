@@ -13,8 +13,8 @@ ifneq ($(expected_node_version), $(actual_node_version))
 	$(error Expected node version $(expected_node_version), but saw $(actual_node_version))
 endif
 
-node_lambda_functions:=$(addprefix build/,$($(wildcard node/*)))
-python_lambda_functions:=$(addprefix build/,$($(wildcard python/*)))
+node_lambda_functions:=$(addprefix build/,$(sort $(dir $(wildcard node/*))))
+python_lambda_functions:=$(addprefix build/,$(sort $(dir $(wildcard python/*))))
 
 pingdom_user:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n1)
 pingdom_password:=$(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n1)
