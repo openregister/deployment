@@ -38,7 +38,8 @@ exports.handler = function (input, context, callback) {
         	ni: 1,
         	dl: requestData.endpoint,
         	cd2: requestData.apikey,
-        	cd5: requestData.hittype
+					cd5: requestData.hittype,
+					ua: requestData.useragent
         });
 
         const options = {

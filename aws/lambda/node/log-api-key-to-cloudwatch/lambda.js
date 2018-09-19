@@ -32,11 +32,13 @@ exports.handler = (event, context, callback) => {
 	const hittype = request.headers['user-agent'] && request.headers['user-agent'][0].value == 'CL' ? 'Client Library' : 'API';
 	const queryParams = (request.querystring === '') ? '' : '?' + request.querystring;
 	const endpoint = 'https://' + host + request.uri + queryParams;
+	const useragent = request.headers['user-agent'][0].value;
 
 	const data = {
 		apikey,
 		endpoint,
-		hittype
+		hittype,
+		useragent
 	};
 
 	// This comment is to write to CloudWatch logs for events to be sent to GA.
