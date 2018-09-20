@@ -104,6 +104,11 @@ module "cache_invalidator_eu_central_1" {
   region = "eu-central-1"
 }
 
+module "log-anonymiser" {
+  source = "python/log-anonymiser"
+  region = "eu-west-1"
+}
+
 resource "aws_iam_role_policy" "s3_logs_lambda" {
   name = "s3_logs_lambda"
   role = "${aws_iam_role.lambda.id}"
