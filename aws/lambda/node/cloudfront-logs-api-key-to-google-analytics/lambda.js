@@ -39,6 +39,7 @@ exports.handler = function (input, context, callback) {
 					dl: requestData.endpoint,
 					cd2: requestData.apikey,
 					cd5: requestData.hittype,
+					cd6: requestData.useragent,
 					ua: requestData.useragent
 				});
 
