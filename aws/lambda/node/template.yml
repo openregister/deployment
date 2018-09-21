@@ -40,3 +40,6 @@ Resources:
             CodeUri: cloudfront-logs-api-key-to-google-analytics/
             Handler: lambda.handler
             Runtime: nodejs6.10
+            Environment:
+                Variables:
+                    TID: UA-86101042-1
