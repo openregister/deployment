@@ -39,7 +39,7 @@ exports.handler = function (input, context, callback) {
 					dl: requestData.endpoint,
 					cd2: requestData.apikey,
 					cd5: requestData.hittype,
-					cd6: requestData.useragent,
+					cd6: requestData.useragent.substring(0,150), // Max length: 150 bytes
 					ua: requestData.useragent
 				});
 
