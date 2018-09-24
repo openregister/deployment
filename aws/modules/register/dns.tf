@@ -1,4 +1,5 @@
 resource "aws_route53_record" "record" {
+  allow_overwrite = "false"
   count = "${var.enabled ? 1 : 0}"
 
   name = "${var.name}"
