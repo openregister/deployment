@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 0.9.0"
+  required_version = "~> 0.11.8"
   backend "s3" {
     bucket  = "registers-terraform-state"
     key = "pipeline.tfstate"
@@ -9,9 +9,10 @@ terraform {
 }
 
 provider "aws" {
+  version = "~> 1.37"
   region = "eu-west-1"
 }
 
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" { current = true }
+data "aws_region" "current" {}
 data "aws_kms_alias" "paas_deploy" { name = "alias/paas-deploy" }

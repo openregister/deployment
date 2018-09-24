@@ -41,7 +41,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
-  cache_behavior {
+  ordered_cache_behavior {
     allowed_methods = ["HEAD", "GET"]
     cached_methods = ["HEAD", "GET"]
 

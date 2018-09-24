@@ -2,7 +2,7 @@
  * main.tf exports
 */
 
-// just pipeliing original value so can be re-used by other modules
+// just pipelining original value so can be re-used by other modules
 output "environment_name" {
   value = "${var.environment_name}"
 }
@@ -14,8 +14,8 @@ output "s3_bucket_id" {
   value = "${aws_s3_bucket.register.id}"
 }
 
-output "s3_bucket_name" {
-  value = "${aws_s3_bucket.register.name}"
+output "s3_bucket_arn" {
+  value = "${aws_s3_bucket.register.arn}"
 }
 
 /*
@@ -25,6 +25,7 @@ output "dns_zone_id" {
   value = "${aws_route53_zone.core.zone_id}"
 }
 
+// See https://www.terraform.io/upgrade-guides/0-11.html#referencing-attributes-from-resources-with-count-0
 output "cdn_dns_zone_id" {
-  value = "${aws_route53_zone.cdn.zone_id}"
+  value = "${element(concat(aws_route53_zone.cdn.*.zone_id, list("")),0)}"
 }

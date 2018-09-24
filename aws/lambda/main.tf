@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 0.9.0"
+  required_version = "~> 0.11.8"
 
   backend "s3" {
     bucket  = "registers-cloudfront-terraform-state"
@@ -79,12 +79,10 @@ module "cloudfront_logs_api_key_to_google_analytics_eu_west_2" {
   region = "eu-west-2"
 }
 
-# TODO: This region is not supported by the provider version we are using. Update provider to a version which supports this
-
-# module "cloudfront_logs_api_key_to_google_analytics_eu_west_3" {
-#   source = "node/cloudfront-logs-api-key-to-google-analytics"
-#   region = "eu-west-3"
-# }
+module "cloudfront_logs_api_key_to_google_analytics_eu_west_3" {
+  source = "node/cloudfront-logs-api-key-to-google-analytics"
+  region = "eu-west-3"
+}
 
 module "cloudfront_logs_api_key_to_google_analytics_sa_east_1" {
   source = "node/cloudfront-logs-api-key-to-google-analytics"
@@ -106,7 +104,6 @@ module "cache_invalidator_eu_central_1" {
 
 module "log-anonymiser" {
   source = "python/log-anonymiser"
-  region = "eu-west-1"
 }
 
 resource "aws_iam_role_policy" "s3_logs_lambda" {

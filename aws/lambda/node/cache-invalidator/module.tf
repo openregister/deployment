@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 data "aws_iam_role" "cache_invalidator_role" {
-  role_name = "lambda-cloudfront-invalidator"
+  name = "lambda-cloudfront-invalidator"
 }
 
 data "archive_file" "cache-invalidator-archive" {

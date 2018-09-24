@@ -1,5 +1,5 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" { current = true }
+data "aws_region" "current" {}
 
 resource "aws_codebuild_project" "deploy_to_paas" {
   name = "${var.environment}-${var.register_group}-deploy"

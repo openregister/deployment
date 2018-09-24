@@ -8,6 +8,7 @@ resource "aws_route53_record" "zone_delegation" {
   type = "NS"
   ttl = "${var.dns_ttl}"
   records = [ "${aws_route53_zone.core.name_servers}" ]
+  allow_overwrite = false
 }
 
 resource "aws_route53_record" "soa" {
@@ -16,6 +17,7 @@ resource "aws_route53_record" "soa" {
   type = "SOA"
   ttl = "900"
   records = [ "${aws_route53_zone.core.name_servers.0}. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 ${var.soa_negative_cache_ttl}" ]
+  allow_overwrite = false
 }
 
 resource "aws_route53_zone" "cdn" {

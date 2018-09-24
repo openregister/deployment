@@ -7,7 +7,6 @@
 	destroy \
 	plan \
 	plan-destroy \
-	purge-remote-state-cache \
 	pull-config \
 	push-config \
 	diff-config \
@@ -37,17 +36,9 @@ defaults:=-var-file=environments/$(vpc).tfvars
 # Default terraform plan -module-depth= value
 module_depth:=-1
 
-purge-remote-state-cache:
-	rm -f backend.tf
-	rm -f .terraform/terraform.tfstate
-
-configure-state: purge-remote-state-cache
-	# Hack to make 0.8->0.9 upgrade easy. We should move to using Terraform State
-	# Environments(?).
-	#
-	# https://www.terraform.io/docs/state/environments.html
-	sed -e 's/{{environment}}/$(vpc)/' backend.tf.tmpl > backend.tf
+configure-state:
 	terraform init
+	terraform workspace select $(vpc)
 
 pull-config:
 	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars
@@ -60,6 +51,9 @@ diff-config:
 
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)
+
+validate: 
+	terraform validate $(defaults) 
 
 plan-destroy: configure-state
 	terraform plan -destroy $(defaults) -module-depth=$(module_depth)

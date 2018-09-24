@@ -43,7 +43,7 @@ resource "aws_cloudfront_distribution" "paas_cdn" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
-  cache_behavior {
+  ordered_cache_behavior {
     allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods = ["HEAD", "GET"]
 

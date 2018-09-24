@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 data "aws_iam_role" "cloudwatch_logs_lambda_role" {
-  role_name = "lambda"
+  name = "lambda"
 }
 
 data "archive_file" "cloudfront-logs-api-key-to-google-analytics-archive" {

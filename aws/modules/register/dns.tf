@@ -13,6 +13,7 @@ resource "aws_route53_record" "record" {
 }
 
 resource "aws_route53_record" "cdn_record" {
+  allow_overwrite = false
   count = "${var.enabled && var.cdn_configuration["enabled"] ? 1 : 0}"
 
   name = "${var.name}.${var.cdn_configuration["domain"]}"
