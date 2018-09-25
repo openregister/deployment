@@ -29,7 +29,7 @@ exports.handler = function (input, context, callback) {
 
 				const envTid = process.env.TID;
 
-				const data = querystring.stringify({
+				const queryParams = {
 					v: 1,
 					t: 'pageview',
 					tid: envTid,
@@ -38,10 +38,15 @@ exports.handler = function (input, context, callback) {
 					ni: 1,
 					dl: requestData.endpoint,
 					cd2: requestData.apikey,
-					cd5: requestData.hittype,
-					cd6: requestData.useragent.substring(0,150), // Max length: 150 bytes
-					ua: requestData.useragent
-				});
+					cd5: requestData.hittype
+				}
+
+				if (requestData.userAgent !== undefined) {
+					queryParams.cd6 = requestData.useragent.substring(0,150); // Max length: 150 bytes
+					queryParams.ua = requestData.useragent;
+				}
+
+				const data = querystring.stringify(queryParams);
 
 				const options = {
 					host: 'www.google-analytics.com',
