@@ -48,18 +48,16 @@ exports.handler = async event => {
 		InvalidationBatch: { /* Required */
 			CallerReference: callerReference, /* Required */
 			Paths: { /* Required */
-				Quantity: 11, /* Required */
+				Quantity: 9, /* Required */
 				Items: [
 					'/download-register',
 					'/',
 					'/records',
+					'/records*',
 					'/register*',
-					'/records?*',
-					'/records/*',
 					'/entries',
+					'/entries*',
 					'/download-rsf*',
-					'/entries/?*',
-					'/entries?*',
 					'/proof/register/merkle:sha-256'
 				]
 			}
