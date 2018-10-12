@@ -36,19 +36,32 @@ pip install -r requirements.txt
 The lambdas are defined in `template.yml` files in the `node` and `python` subdirectories.
 
 ### Node lambdas
-From `deployment/aws/lambda/node` directory:
+Run these commands from the `deployment/aws/lambda/node` directory.
 
+Cloudfront POST request logger:
 ```
 sam local invoke "CloudfrontPostLoggerFunction" --event ./cloudfront-post-logger/example_request.json
 ```
 
+Cache invalidator:
 ```
 sam local invoke "CacheInvalidatorFunction" --event ./cache-invalidator/example_event.json
 ```
 
-### Python lambdas
-From `deployment/aws/lambda/python` directory:
+API key request logger:
+```
+sam local invoke CloudfrontLogAPIKeyFunction -e log-api-key-to-cloudwatch/example.json
+```
 
+Send API key to Google Analytics:
+```
+sam local invoke StoreAPIUsageFunction -e cloudfront-logs-api-key-to-google-analytics/examples/logs-no-key.json
+```
+
+### Python lambdas
+Run these commands from the `deployment/aws/lambda/python` directory:
+
+Request log anonymiser:
 ```
 TARGET_BUCKET=target-bucket-name sam local invoke LogAnonymiser -e log-anonymiser/put-bucket-event.json
 ```
