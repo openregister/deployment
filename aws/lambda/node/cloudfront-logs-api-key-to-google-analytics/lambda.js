@@ -41,7 +41,7 @@ exports.handler = function (input, context, callback) {
 					cd5: requestData.hittype
 				}
 
-				if (requestData.userAgent !== undefined) {
+				if (requestData.useragent !== undefined) {
 					queryParams.cd6 = requestData.useragent.substring(0,150); // Max length: 150 bytes
 					queryParams.ua = requestData.useragent;
 				}
