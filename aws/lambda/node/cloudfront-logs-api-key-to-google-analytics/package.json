@@ -1,11 +1,8 @@
 {
-	"scripts": {
-		"test": "xo"
-	},
-	"xo": {
-		"space": "true"
-	},
-	"devDependencies": {
-		"xo": "^0.20.3"
-	}
+  "devDependencies": {
+    "standard": "*"
+  },
+  "scripts": {
+    "test": "standard"
+  }
 }
