@@ -235,31 +235,11 @@ However, new field and register register data must be loaded from github using t
 
 ## Loading data to registers in existing phases from github
 
-To reload data into existing register via HTTP, you can run this script passing
-the register name and the phase name, you will be prompted if you want to delete
-data and if you want to load data, eg:
+See [Loading or updating the data for a register](./scripts/readme.md#loading-or-updating-the-data-for-a-register).
 
-    ./scripts/data-load.sh prison discovery
+# Updating the Register and Field registers
 
-The script looks in parent directory for a data repo, changes it to master
-branch, and git pulls to ensure master data is used. Script assumes data is in
-../[register]-data/data/[phase]/[register].tsv file. For example:
-../prison-data/data/discovery/prison.tsv
-
-To load a register entry into the `register` register, you can run this script
-passing the register name, you will be prompted if you want to load data. For
-example:
-
-    ./scripts/register-load.sh prison discovery
-
-To load a field entry into the `field` register, you can run this script
-passing the field name, you will be prompted if you want to load data. For
-example:
-
-    ./scripts/field-load.sh start-date discovery
-
-These last two scripts look for the yaml configuration of the register or field
-in the `registry-data` repository.
+See [Loading a new field or register](./scripts/readme.md#loading-a-new-field-or-register).
 
 ## Licence
 
