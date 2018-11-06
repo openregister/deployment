@@ -65,14 +65,14 @@ Arguments:
 
 Examples:
 
-    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv all local "Jo Doe"
+    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv all local
 
-### Loading a new field or register
+### Loading a new field, register or datatype
 
 Running the script **update-metadata-yaml.sh** will create an RSF file for the specified new field or register and load the RSF into the application.
 
 Arguments:
-- register/field
+- basic register to be updated one of `field`, `datatype` or `register`
 - phase
 - YAML file path (relative to $OPENREGISTER_ROOT)
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service.
@@ -83,19 +83,19 @@ Examples:
     ./update-metadata-yaml.sh register alpha registry-data/data/discovery/register/clinical-commissioning-group.yaml local
 
 
-### Loading or updating the Register Register or Field Register
+### Re-loading the field, register and datatype registers
 
-Running the script **load-metadata-yaml.sh** will create an RSF file for the Register Register or Fields Register, of either system, user or all data, optionally delete the existing register from ORJ in the specified **phase** and load the RSF into the application.
+Running the script **load-metadata-yaml.sh** will create an RSF file for the field, register or datatype register, of either system, user or all data, optionally delete the existing register from ORJ in the specified **phase** and load the RSF into the application.
 
 Arguments:
-- 'register' or 'field'
+- `register`, `field` or `datatype` depending on the register to be updated
 - phase
 - `system`, `user` or `all`, depending on the type of data to be loaded
 - local or remote depending on whether register and field definitions is to be read from the local file system or a remote ORJ service
 
 Examples:
 
-    ./load-metadata-yaml.sh field alpha all local "Jo Doe"
+    ./load-metadata-yaml.sh field alpha all local 
 
     #### Warning
 
