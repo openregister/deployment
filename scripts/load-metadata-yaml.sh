@@ -9,7 +9,7 @@ source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 
 usage()
 {
-  echo "usage: ./reload-metadata-yaml.sh [field|register|datatype] [phase] [system|user|all] [local|remote]"
+  echo "usage: ./load-metadata-yaml.sh [field|register|datatype] [phase] [system|user|all] [local|remote]"
 }
 
 # validation check number of args but other validation is done in python script
