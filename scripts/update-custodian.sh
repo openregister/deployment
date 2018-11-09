@@ -4,7 +4,7 @@ set -o pipefail
 
 usage()
 {
-  echo -e "usage: ./name-a-register.sh phase register description\ne.g. ./name-a-register.sh alpha country \"Countries recognised by the UK\""
+  echo -e "usage: ./update-custodian.sh phase register custodian\ne.g. ./update-custodian.sh alpha country \"Jane Doe\""
 }
 
 # validation check number of args but other validation is done in python script
@@ -16,10 +16,10 @@ fi
 
 PHASE=$1
 REGISTER=$2
-DESCRIPTION=$3
+CUSTODIAN=$3
 echo "PHASE - $PHASE"
 echo "REGISTER - $REGISTER"
-echo "DESCRIPTION - $DESCRIPTION"
+echo "CUSTODIAN - $CUSTODIAN"
 
 OPENREGISTER_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 echo "OPENREGISTER_BASE - $OPENREGISTER_BASE"
@@ -27,7 +27,7 @@ source "$OPENREGISTER_BASE/deployment/scripts/includes/register-actions.sh"
 PASSWORD_STORE_DIR=${PASSWORD_STORE_DIR:-~/.registers-pass}
 PASSWORD=`pass $PHASE/app/mint/$REGISTER`
 
-RSF=`python3 generate-system-key-rsf.py register-name "$DESCRIPTION"`
+RSF=`python3 generate-system-key-rsf.py custodian "$CUSTODIAN"`
 echo "RSF - $RSF"
 
 echo -ne "$RSF" > $OPENREGISTER_BASE/tmp.rsf
