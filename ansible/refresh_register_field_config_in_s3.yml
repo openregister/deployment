@@ -18,7 +18,7 @@
         - 'group_vars/tag_Environment_{{ vpc }}'
 
     - name: synchronize register register
-      shell: "curl -s 'https://register.{{ register_domain }}/records.yaml?page-size=5000' | aws s3 cp - s3://openregister.{{ vpc }}.config/registers.yaml"
+      shell: "curl -s 'https://register.{{ register_domain }}/records.json?page-size=5000' | aws s3 cp - s3://openregister.{{ vpc }}.config/registers.json"
 
     - name: synchronize field register
-      shell: "curl -s 'https://field.{{ register_domain }}/records.yaml?page-size=5000' | aws s3 cp - s3://openregister.{{ vpc }}.config/fields.yaml"
+      shell: "curl -s 'https://field.{{ register_domain }}/records.json?page-size=5000' | aws s3 cp - s3://openregister.{{ vpc }}.config/fields.json"
