@@ -154,11 +154,13 @@ And then push if the previous task reports that the files are identical:
         make push-config -e vpc=<name>
 
 You should now see the register at https://myregister.myenv.openregister.org.
-If this is a beta register you will not see it at https://myregister.register.gov.uk until you follow step 10.
+If this is a beta register you should additionally be able to see it at https://myregister.register.gov.uk
 
 ### 10. Extra steps for beta
 
-If you are creating a register in beta, you must follow [these additional steps](#extra-steps-for-creating-a-new-beta-register).
+If you are creating a register in beta, you must follow [these additional steps](./docs/extra-steps-beta.md).
+
+---
 
 ## How to create a register group in an existing environment
 
@@ -195,43 +197,7 @@ Then [plan and apply your terraform](#execute-a-terraform-plan) changes.
 
 Then follow steps 1-9 above.
 
-# Extra steps for creating a new Beta register
-
-Ignore these if you are creating a register in an environment other than Beta.
-
-## Add credentials to managing-registers
-
-Get the credentials from registers-pass:
-
-`registers-pass show beta/app/mint/$register-name`
-
-Ensure you have the `RAILS_MASTER_KEY` environment variable set:
-```
-export RAILS_MASTER_KEY=`registers-pass show registers/app/manager/store`
-```
-
-
-From your `managing-registers` checkout directory run:
-
-`rails secrets:edit`
-
-Add credentials for new register and save file
-
-Commit changes to `config/secrets.yml.enc` to a branch
-
-Raise a PR and merge to `master`
-
-# Data loading via HTTP
-
-## When promoting a register from alpha -> beta (or discovery -> alpha)
-
-When promoting a register to a new phase we must make sure we copy the exact data
-that was approved in the previous phase. I.e. if promoting from alpha to beta, we must
-copy the data via RSF from the alpha register to the new beta register.
-
-	curl https://{register}.alpha.openregister.org/download-rsf | curl -X POST @- -u user:pswd https://{register}.alpha.openregister.org/load-rsf --header "Content-Type:application/uk-gov-rsf"
-
-However, new field and register register data must be loaded from github using the scripts below.
+---
 
 ## Loading data to registers in existing phases from github
 
