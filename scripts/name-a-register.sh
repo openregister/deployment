@@ -4,12 +4,12 @@ set -o pipefail
 
 usage()
 {
-  echo -e "usage: ./name-a-register.sh phase register description\ne.g. ./name-a-register.sh alpha country \"Countries recognised by the UK\""
+  printf "usage: ./name-a-register.sh phase register description\ne.g. ./name-a-register.sh alpha country \"Countries recognised by the UK\""
 }
 
 # validation check number of args but other validation is done in python script
-if [ $# -lt 3 ]; then
-  echo "error: not enough arguments"
+if [ $# -ne 2 ]; then
+  echo "error: incorrect number of arguments"
   usage
   exit 1
 fi
