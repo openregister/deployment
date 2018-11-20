@@ -109,7 +109,7 @@ If you want to test this script and not upload to S3 you can set `sync: false` i
 ### 4. Add host to PaaS manifest file
 
 Add a new `host` for the new register in the relevant openregister-java [manifest file](https://github.com/openregister/openregister-java/tree/master/deploy/manifests).
-If you are creating a register that is none of register, field, or datatype, you must update the manifests/<myenv>/multi.yml file.
+If you are creating a register that is none of register, field, or datatype, you must update the `deploy/manifests/<myenv>/multi.yml` file.
 
 ### 5. Deploy application to PaaS
 
