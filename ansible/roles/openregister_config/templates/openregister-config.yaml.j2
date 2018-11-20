@@ -16,8 +16,8 @@ database:
 {%- set app_user = "openregister" -%}
 {%- set app_password = lookup("pass", "{{ vpc }}/app/mint/" + reg).decode('utf-8') -%}
 {%- set settings = register_settings[reg] | default({}) -%}
-{%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
-{%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.yaml?page-size=5000"  -%}
+{%- set default_field_register_url = "https://field." + vpc + ".openregister.org/records.json?page-size=5000"  -%}
+{%- set default_register_register_url = "https://register." + vpc + ".openregister.org/records.json?page-size=5000"  -%}
 
 {%- if loop.first -%}
 register: {{ register_name }}
@@ -25,8 +25,8 @@ schema: {{ register_name }}
 enableDownloadResource: {{ settings.enable_download_resource | default(true) }}
 enableRegisterDataDelete: {{ settings.enable_register_data_delete | default(enable_register_data_delete) | default(false) }}
 
-fieldsYamlLocation: {{ settings.fields_yaml_location | default(default_field_register_url) }}
-registersYamlLocation: {{ settings.registers_yaml_location | default(default_register_register_url) }}
+fieldsJsonLocation: {{ settings.fields_json_location | default(default_field_register_url) }}
+registersJsonLocation: {{ settings.registers_json_location | default(default_register_register_url) }}
 
 {% if settings.indexes is defined %}indexes:
   {% for index in settings.indexes -%}
