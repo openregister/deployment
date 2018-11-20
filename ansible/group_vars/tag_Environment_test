@@ -5,8 +5,8 @@ enable_register_data_delete: true
 register_settings:
   register:
     enable_register_data_delete: false
-    fields_yaml_location: "s3://openregister.test.config/fields.yaml"
-    registers_yaml_location: "s3://openregister.test.config/registers.yaml"
+    fields_json_location: "s3://openregister.test.config/fields.json"
+    registers_json_location: "s3://openregister.test.config/registers.json"
   country:
     indexes:
       - current-countries
