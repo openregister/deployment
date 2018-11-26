@@ -1,7 +1,7 @@
 # Extra Steps For Loading Beta Register checklist
 
 ## Prerequisites
-This document assumes you have followed the instructions in the main README for [How to create a new register in an existing environment](../README.md#how-to-create-a-new-register-in-an-existing-environment) so that at this point going to https://register-name.register.gov.uk/ shows `Register undefined`.
+This document assumes you have followed the instructions in the main README for [How to create a new register in an existing environment](../README.md#how-to-create-a-new-register-in-an-existing-environment) so that at this point going to `https://register-name.register.gov.uk/` shows `Register undefined`.
 
 ## Steps
 
@@ -32,7 +32,7 @@ Create a pull-request in `registry-data` moving all register data associated wit
 
 ### 3. Load new records into basic registers
 
-Follow the instructions in [Loading a new field or register](./scripts/readme.md#loading-a-new-field-or-register) and run the script for each new field associated with the register, the register itself and any new datatypes.
+Follow the instructions in [Loading a new field or register](../scripts/readme.md#loading-a-new-field-or-register) and run the script for each new field associated with the register, the register itself and any new datatypes.
 
 ### 4. Run Ansible Task
 
@@ -46,7 +46,7 @@ From the CodePipeline console click *Release Change* to re-deploy the current `m
 
 ### 6. Load data for new register
 
-Make sure you have checked out the `.tsv` file containing the user entries to be loaded. Follow the steps in [Loading or updating the data for a register](./scripts/readme.md#loading-or-updating-the-data-for-a-register) making sure to enter *no* when prompted if you want to delete the existing register.
+Make sure you have checked out the `.tsv` file containing the user entries to be loaded. Follow the steps in [Loading or updating the data for a register](../scripts/readme.md#loading-or-updating-the-data-for-a-register) making sure to enter *no* when prompted if you want to delete the existing register.
 
 
 
