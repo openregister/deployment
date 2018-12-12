@@ -29,6 +29,8 @@ register_groups:
     - ddat-profession-capability-framework-skill
     - ddat-profession-capability-framework-skill-level
     - ddat-profession-capability-framework-skill-type
+    - further-education-college-region-uk
+    - further-education-college-uk
     - government-domain
     - government-organisation
     - government-service
@@ -50,6 +52,7 @@ register_groups:
     - qualification-sector-subject-area
     - qualification-type
     - registration-district
+    - school-type-eng
     - statistical-geography
     - statistical-geography-county-eng
     - statistical-geography-london-borough-eng

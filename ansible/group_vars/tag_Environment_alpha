@@ -20,13 +20,10 @@ register_groups:
 
   multi:
     - clinical-commissioning-group
-    - further-education-college-region-uk
-    - further-education-college-uk
     - occupation
     - public-body-account
     - public-body-account-classification
     - school-eng
-    - school-type-eng
     - social-housing-provider-eng
     - social-housing-provider-designation-eng
     - social-housing-provider-legal-entity-eng
