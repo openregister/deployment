@@ -28,7 +28,7 @@ Raise a PR and merge to `master`
 ### 2. Ensure `registry-data` respository matches data to be loaded into Beta
 
 *Note: this step may be done by a Data Analyst or a Developer. All other steps can only be done by a Developer.*
-Create a pull-request in `registry-data` moving all register data associated with the register to be promoted into the `/beta` directory. This should include any new fields added to the `/field` subdirectory, a new file in the `/register` subdirectory as well as a new subdirectory for the new register itself. Merge this into `master`.
+Create a pull-request ([example](https://github.com/openregister/registry-data/commit/045d7502869b9a19632f85115a90c0cfe6762b39)) in `registry-data` moving all register data associated with the register to be promoted into the `/beta` directory. This should include any new fields added to the `/field` subdirectory, a new file in the `/register` subdirectory as well as a new subdirectory for the new register itself. Merge this into `master`.
 
 ### 3. Load new records into basic registers
 
