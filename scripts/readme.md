@@ -155,6 +155,14 @@ python3 update_name_and_description.py "$register" "$name" "$desc"
 python3 update_name_and_description.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
 ```
 
+#### Adding new user entries to a Beta register
+* Prepare a TSV file containing only user entries to be added
+* Assuming the TSV file is called `update.tsv` and is in `$OPENREGISTER_ROOT` and register to be updated is `country` run:  
+```
+./load-register-tsv.sh country beta update.tsv user local .
+```
+* When prompted if you want to *Delete existing register data* enter `n`
+
 ### Python tests
 
 There are some unit tests for the python script and some test data. To run them:
