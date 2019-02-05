@@ -179,9 +179,7 @@ Follow steps 4-9 above.
 Create a new `ansible/group_vars/tag_Environment_<vpc>` file and
 customize it for the new environment.
 
-Create a new `.tfvars` file for the environment:
-
-    ansible-playbook configure_terraform.yml -e vpc=<myenv>
+Create a new `.tfvars` file for the environment at `aws/register/environments/<myenv>.tfvars`
 
 You must also request a new SSL certificate in AWS Certficate Manager for the new environment. 
 This certificate will require approval before it can be used. Bear in mind that only certain people 
@@ -191,7 +189,9 @@ Once approved, the ARN for the new certificate must then be added to the existin
 
 `vi aws/register/environments/<myenv>.tfvars`
 
-	elb_certificate_arn = "arn:aws:acm:eu-west-1:022990953738:certificate/<abcde>"
+e.g.
+
+    paas_cdn_certificate_arn = "arn:aws:acm:us-east-1:123456789:certificate/2f56a14e-4e61-4f03-b488-8e88d02d2146"
 
 Then [plan and apply your terraform](#execute-a-terraform-plan) changes.
 
