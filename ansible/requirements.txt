@@ -1,4 +1,4 @@
-ansible==2.2.1.0
+ansible==2.3.1.0
 boto==2.45.0
 cffi==1.9.1
 cryptography==1.7.1
@@ -11,6 +11,5 @@ netaddr==0.7.19
 paramiko>=2.1.6
 pyasn1==0.1.9
 pycparser==2.17
-pycrypto==2.6.1
-PyYAML==3.12
+PyYAML==4.2b2 # Using beta version as no non-beta version contains security fix
 six==1.10.0
