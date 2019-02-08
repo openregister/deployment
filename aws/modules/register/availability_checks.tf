@@ -6,10 +6,8 @@ resource "pingdom_check" "origin_records" {
   host = "${aws_route53_record.record.fqdn}"
   url = "/records"
   resolution = 1
-  sendtoemail = true
   sendnotificationwhendown = 2
   notifywhenbackup = true
-  contactids = ["${var.pingdom_contact_ids}"]
   tags = "${var.environment},origin"
 }
 
@@ -21,9 +19,7 @@ resource "pingdom_check" "cdn_records" {
   host = "${var.name}.${var.cdn_configuration["domain"]}"
   url = "/records"
   resolution = 1
-  sendtoemail = true
   sendnotificationwhendown = 2
   notifywhenbackup = true
-  contactids = ["${var.pingdom_contact_ids}"]
   tags = "${var.environment},cdn"
 }
