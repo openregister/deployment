@@ -38,7 +38,7 @@ module_depth:=-1
 
 configure-state:
 	terraform init
-	terraform workspace select $(vpc) || terraform workspace new $(vpc)
+	terraform workspace list && terraform workspace select $(vpc)
 
 pull-config:
 	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars
