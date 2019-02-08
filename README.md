@@ -133,7 +133,7 @@ appropriate `register` module resource in `registers.tf` (if it does not already
 You should expect terrafrom to plan to create a new Route 53 DNS record. For non-discovery registers it should also plan to create a new Pingdom availability check.
 
         cd aws/registers
-        make plan -e vpc=<myenv>
+        (cd ../lambda/; terraform init) && make plan -e vpc=<myenv>
 
 ### 8. Apply terraform changes
 
