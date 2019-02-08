@@ -14,7 +14,7 @@ On OSX you can install via `virtualenv` and `pip`:
 
 ### [terraform](https://www.terraform.io) installed
 
-On OSX you can install via `brew`, although you'll want to make sure you use the version defined in `aws/registers/Makefile`.
+On OSX you can install via `brew`, although you'll want to make sure you use the major version defined in `aws/registers/backend.tf.tmpl`.
 
 #### Terraform plugins
 
@@ -149,11 +149,11 @@ First check that the config hasn't changed since you last pulled:
         cd aws/registers
         make diff-config -e vpc=<name>
 
-And then push if the previous task reports that the files are identical:
+And then push if the previous task reports that the files contain only the changes you have made:
 
         make push-config -e vpc=<name>
 
-You should now see the register at https://myregister.myenv.openregister.org.
+You should now see the register respond with `Register undefined` at https://myregister.myenv.openregister.org.
 If this is a beta register you should additionally be able to see it at https://myregister.register.gov.uk
 
 ### 10. Extra steps for beta

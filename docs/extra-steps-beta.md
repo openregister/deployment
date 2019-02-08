@@ -47,6 +47,3 @@ From the CodePipeline console click *Release Change* to re-deploy the current `m
 ### 6. Load data for new register
 
 Make sure you have checked out the `.tsv` file containing the user entries to be loaded. Follow the steps in [Loading or updating the data for a register](../scripts/readme.md#loading-or-updating-the-data-for-a-register) making sure to enter *no* when prompted if you want to delete the existing register.
-
-
-
