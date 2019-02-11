@@ -65,7 +65,7 @@ Arguments:
 
 Examples:
 
-    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv all local
+    ./load-register-tsv.sh country alpha country-data/data/country/country.tsv all local .
 
 ### Loading a new field, register or datatype
 
@@ -79,8 +79,8 @@ Arguments:
 
 Examples:
 
-    ./update-metadata-yaml.sh field alpha registry-data/data/discovery/field/clinical-commissioning-group.yaml local
-    ./update-metadata-yaml.sh register alpha registry-data/data/discovery/register/clinical-commissioning-group.yaml local
+    ./update-metadata-yaml.sh field beta registry-data/data/beta/field/clinical-commissioning-group.yaml local
+    ./update-metadata-yaml.sh register beta registry-data/data/beta/register/clinical-commissioning-group.yaml local
 
 
 ### Re-loading the field, register and datatype registers
