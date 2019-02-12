@@ -16,5 +16,6 @@
     - { role: s3_sync,
         when: sync,
         src: "{{ workdir }}/{{ vpc }}",
-        dest: "s3://{{ s3_bucket_prefix }}.{{ vpc }}.{{ s3_bucket_suffix }}"
+        dest: "s3://{{ s3_bucket_prefix }}.{{ vpc }}.{{ s3_bucket_suffix }}",
+        profile: "registers"
       }

@@ -16,9 +16,6 @@ ifndef vpc
   $(error You must pass -e vpc=<name> switch)
 endif
 
-# Default AWS region
-export AWS_DEFAULT_REGION:=eu-west-1
-
 # Pingdom
 export TF_VAR_pingdom_user:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | tail -n 1), $(error "Couldn't get Pingdom username"))
 export TF_VAR_pingdom_password:=$(or $(shell PASSWORD_STORE_DIR=~/.registers-pass pass services/pingdom | head -n 1), $(error "Couldn't get Pingdom password"))
@@ -41,13 +38,13 @@ configure-state:
 	terraform workspace list && terraform workspace select $(vpc)
 
 pull-config:
-	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars
+	aws s3 cp s3://registers-terraform-config/$(vpc).tfvars environments/$(vpc).tfvars --profile registers
 
 push-config:
-	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config
+	aws s3 cp environments/$(vpc).tfvars s3://registers-terraform-config --profile registers
 
 diff-config:
-	bash -c "diff --unified --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars -); exit 0"
+	bash -c "diff --unified --report-identical-files environments/$(vpc).tfvars <(aws s3 cp s3://registers-terraform-config/$(vpc).tfvars --profile registers -); exit 0"
 
 plan: configure-state
 	terraform plan $(defaults) -module-depth=$(module_depth)

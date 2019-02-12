@@ -30,27 +30,23 @@ Run `aws configure` and save your access key and secret access key.
 For default region, choose `eu-west-1`.  Now the aws cli will use your
 access key for operations.
 
-Create a file `aws/registers/terraform.tfvars` with the following content:
-
-```
-aws_access_key = "AKIA....."
-aws_secret_key = "........."
-```
-
 This file is .gitignored and should not be checked in as it contains
 secrets.  You may want to `chmod 600 terraform.tfvars` for safety too.
 
 ### System variables
 
-* set AWS CLI variables:
+If you don't already have one, create a file at `~/.aws/credentials`
+Add your AWS credentials in a profile called `[registers]` e.g. 
 
-		export AWS_REGION=eu-west-1
-		export AWS_SECRET_KEY_ID=xxx
-		export AWS_SECRET_ACCESS_KEY_ID=xxx
+```
+[registers]
+aws_access_key_id = YOUR-ACCESS-KEY
+aws_secret_access_key = YOUR-SECRET-KEY
+region = eu-west-1
+```
+In your `~/.bash_profile` add:
+`export AWS_PROFILE=registers`
 
-* or alternatively, you can use an awscli profile instead:
-
-		export AWS_PROFILE=registers
 
 ### Set up `registers-pass`
 

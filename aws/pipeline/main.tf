@@ -9,8 +9,8 @@ terraform {
 }
 
 provider "aws" {
+  profile = "registers"
   version = "~> 1.37"
-  region = "eu-west-1"
 }
 
 data "aws_caller_identity" "current" {}
