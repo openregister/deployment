@@ -114,6 +114,8 @@ with the `scripts/name-a-register.sh` script.
 ./name-a-register.sh alpha country "A list of countries recognised by the UK"
 ```
 
+Note: in order to get this change to appear on the frontend you will need to [update register metadata on registers-frontend](https://github.com/openregister/registers-frontend#updating-register-metadata) 
+
 ### Changing the description of a register
 
 There is a script in `scripts/update_descriptions.py` to generate RSF to change the description of a register.
@@ -137,7 +139,7 @@ python3 update_descriptions.py $register $desc | ./rsf-load.sh "https://${regist
 
 This example assumes that the register is in beta.
 
-This will update the API explorer, but at the time of writing, registers frontend won't automatically pick up the description, because system entries are not included in incremental updates. To do this, follow the [instructions for redownloading a register in registers frontend](https://github.com/openregister/registers-frontend#populating-the-database-with-register-data-on-paas).
+Note: in order to get this change to appear on the frontend you will need to [update register metadata on registers-frontend](https://github.com/openregister/registers-frontend#updating-register-metadata) 
 
 #### Changing both the register name and description
 
@@ -154,6 +156,8 @@ python3 update_name_and_description.py "$register" "$name" "$desc"
 # Load the RSF
 python3 update_name_and_description.py "$register" "$name" "$desc" | ./rsf-load.sh "https://${register}.beta.openregister.org" openregister `registers-pass beta/app/mint/$register`
 ```
+
+Note: in order to get this change to appear on the frontend you will need to [update register metadata on registers-frontend](https://github.com/openregister/registers-frontend#updating-register-metadata) 
 
 #### Adding new user entries to a Beta register
 * Prepare a TSV file containing only user entries to be added
