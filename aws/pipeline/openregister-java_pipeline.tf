@@ -158,10 +158,10 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
-    name = "AlphaApproval"
+    name = "AlphaAndBetaApproval"
 
     action {
-      name = "DeployToAlphaProduction"
+      name = "DeployToAlphaAndBetaProduction"
       category = "Approval"
       owner = "AWS"
       provider = "Manual"
@@ -170,7 +170,7 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
-    name = "DeployToAlpha"
+    name = "DeployToAlphaAndBetaProduction"
 
     action {
       name = "deploy-alpha-basic"
@@ -199,22 +199,6 @@ resource "aws_codepipeline" "pipeline" {
         ProjectName = "${module.alpha_multi.name}"
       }
     }
-  }
-
-  stage {
-    name = "BetaApproval"
-
-    action {
-      name = "DeployToBeta"
-      category = "Approval"
-      owner = "AWS"
-      provider = "Manual"
-      version = "1"
-    }
-  }
-
-  stage {
-    name = "DeployToBeta"
 
     action {
       name = "deploy-beta-basic"
