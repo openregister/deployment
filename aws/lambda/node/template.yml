@@ -32,14 +32,14 @@ Resources:
         Properties:
             CodeUri: log-api-key-to-cloudwatch/
             Handler: lambda.handler
-            Runtime: nodejs6.10
+            Runtime: nodejs8.10
 
-    StoreAPIUsageFunction:
+    CloudfrontLogsApiKeyToGoogleAnalyticsFunction:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
             CodeUri: cloudfront-logs-api-key-to-google-analytics/
             Handler: lambda.handler
-            Runtime: nodejs6.10
+            Runtime: nodejs8.10
             Environment:
                 Variables:
                     TID: UA-86101042-1

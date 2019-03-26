@@ -26,7 +26,7 @@ resource "aws_lambda_function" "cloudfront-logs-api-key-to-google-analytics" {
   handler          = "lambda.handler"
   role             = "${data.aws_iam_role.cloudwatch_logs_lambda_role.arn}"
   memory_size      = "128"
-  runtime          = "nodejs6.10"
+  runtime          = "nodejs8.10"
   timeout          = "5"
   provider         = "aws.${var.region}"
 
