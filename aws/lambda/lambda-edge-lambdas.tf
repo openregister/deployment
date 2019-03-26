@@ -78,7 +78,7 @@ resource "aws_lambda_function" "api-key-to-cloudfront-logs" {
   handler          = "lambda.handler"
   role             = "${aws_iam_role.lambda-edge-role.arn}"
   memory_size      = "128"
-  runtime          = "nodejs6.10"
+  runtime          = "nodejs8.10"
   timeout          = "5"
   provider         = "aws.us-east-1"
   publish          = true

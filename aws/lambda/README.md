@@ -55,7 +55,7 @@ sam local invoke CloudfrontLogAPIKeyFunction -e log-api-key-to-cloudwatch/exampl
 
 Send API key to Google Analytics:
 ```
-sam local invoke StoreAPIUsageFunction -e cloudfront-logs-api-key-to-google-analytics/examples/logs-no-key.json
+sam local invoke CloudfrontLogsApiKeyToGoogleAnalyticsFunction -e cloudfront-logs-api-key-to-google-analytics/examples/logs-no-key.json
 ```
 
 ### Python lambdas
