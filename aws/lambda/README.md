@@ -22,6 +22,8 @@ Review and apply changes:
 make apply
 ```
 
+If you updated the Lambda@Edge functions (`cloudfront-post-logger` or `log-api-key-to-cloudwatch`) you must apply the Registers Terraform to associate  the new Lambda versions with the Registers CloudFront distributions. Perform [Update terraform config (steps 6 - 8)](../../README.md#6-update-terraform-config)
+
 ## Running Lambdas Locally
 
 ### Setup
