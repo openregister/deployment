@@ -1,6 +1,0 @@
-cardinality: '1'
-datatype: datetime
-field: end-date
-phase: alpha
-register: ''
-text: The date a record stopped being applicable. 

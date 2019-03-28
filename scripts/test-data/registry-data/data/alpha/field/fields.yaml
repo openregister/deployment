@@ -1,6 +1,0 @@
-cardinality: 'n'
-datatype: string
-field: fields
-phase: alpha
-register: field
-text: The names of the fields in a register.
