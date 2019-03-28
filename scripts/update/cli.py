@@ -282,6 +282,8 @@ def orj_url(uid: str, phase: str) -> str:
     if phase == "discovery":
         return f"https://{uid}.cloudapps.digital"
 
+    raise RegistersException("Unexpected phase")
+
 
 def push_patch(patch: Patch, url: str, path: str):
     """
