@@ -60,8 +60,8 @@ pipenv run update --help
 
 ## Update operations
 
-Note that in order to get any metadata change appear on the frontend you will
-need to [update register metadata on
+Note that in order to get any metadata change to appear on the frontend you
+will need to [update register metadata on
 registers-frontend](https://github.com/openregister/registers-frontend#updating-register-metadata).
 
 
