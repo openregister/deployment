@@ -154,13 +154,12 @@ pipenv run update init --phase=test ./web-colour.rsf
 
 ## The Field and Register registers
 
-
 Instances of ORJ serving the Field and Register Registers read yaml files
 containing fields and registers from S3 on startup.
 
-There is an Ansible task in the deployment repo to generate the files in S3
-from the application. You will need to run this after reloading the metadata
-RSF.
+Follow [steps from step 4](../docs/extra-steps-beta.md#4-run-ansible-task)
+to generate the files in S3 from the application and redeploying ORJ.
+You will need to run this after reloading the metadata RSF.
 
 
 ## Development
