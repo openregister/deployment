@@ -173,5 +173,5 @@ registers is in the `registers` python package part of the Registers CLI (See
 https://github.com/openregister/registers-cli).
 
 
-If you need to change how the update CLI handles pass, orj or the CLI itself,
-start by familiarising yourself with `update/cli.py`.
+If you need to change how the `update` CLI handles the `pass` CLI, ORJ or the
+CLI itself, start by familiarising yourself with `update/cli.py`.
