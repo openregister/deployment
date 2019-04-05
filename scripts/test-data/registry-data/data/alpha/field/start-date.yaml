@@ -1,6 +1,0 @@
-cardinality: '1'
-datatype: datetime
-field: start-date
-phase: alpha
-register: ''
-text: The date a record first became relevant to a register.

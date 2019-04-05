@@ -1,6 +1,0 @@
-cardinality: '1'
-datatype: string
-field: custom-field-description
-phase: alpha
-register: custom-field-description
-text: Notifiable animal disease code.

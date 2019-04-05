@@ -1,6 +1,0 @@
-cardinality: '1'
-datatype: string
-field: registry
-phase: alpha
-register: ''
-text: The organisation responsible for the data in a register. The custodian is usually from the registry.

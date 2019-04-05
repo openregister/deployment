@@ -189,13 +189,11 @@ Then follow steps 1-9 above.
 
 ---
 
-## Loading data to registers in existing phases from github
 
-See [Loading or updating the data for a register](./scripts/readme.md#loading-or-updating-the-data-for-a-register).
+## Add data to a register
 
-# Updating the Register and Field registers
+See [deployment scripts](./scripts/README.md).
 
-See [Loading a new field or register](./scripts/readme.md#loading-a-new-field-or-register).
 
 ## Licence
 

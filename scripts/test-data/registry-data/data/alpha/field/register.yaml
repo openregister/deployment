@@ -1,6 +1,0 @@
-cardinality: '1'
-datatype: string
-field: register
-phase: alpha
-register: register
-text: The name of a register.

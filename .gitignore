@@ -15,3 +15,4 @@ tls-certs/*
 !aws/tls-certs/terraform.tfstate.backup
 !aws/tls-certs/terraform.tfvars
 .venv
+.mypy_cache
