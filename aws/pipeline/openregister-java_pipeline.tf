@@ -158,18 +158,6 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
-    name = "AlphaAndBetaApproval"
-
-    action {
-      name = "DeployToAlphaAndBetaProduction"
-      category = "Approval"
-      owner = "AWS"
-      provider = "Manual"
-      version = "1"
-    }
-  }
-
-  stage {
     name = "DeployToAlphaAndBetaProduction"
 
     action {
