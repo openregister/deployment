@@ -3,6 +3,7 @@ applications:
 - name: www-registers-service-redirect
   memory: 64M
   root: ../app
+  stack: cflinuxfs3
   buildpack: staticfile_buildpack
   routes:
   - route: registers.cloudapps.digital
